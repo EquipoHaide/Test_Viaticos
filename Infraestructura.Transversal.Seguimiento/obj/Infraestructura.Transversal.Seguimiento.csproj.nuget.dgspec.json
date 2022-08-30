@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/Infraestructura.Transversal.Seguimiento.csproj": {}
+  },
+  "projects": {
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/Infraestructura.Transversal.Seguimiento.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/Infraestructura.Transversal.Seguimiento.csproj",
+        "projectName": "Infraestructura.Transversal.Seguimiento",
+        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/Infraestructura.Transversal.Seguimiento.csproj",
+        "packagesPath": "/Users/haidehaaz/.nuget/packages/",
+        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/haidehaaz/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "http://nugetserver.finanzas:50300/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

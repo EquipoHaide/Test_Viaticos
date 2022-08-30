@@ -1,0 +1,13 @@
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/bin/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.deps.json
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/bin/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/bin/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/bin/Debug/netcoreapp3.1/Dominio.Nucleo.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/bin/Debug/netcoreapp3.1/Dominio.Nucleo.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.csproj.AssemblyReference.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.GeneratedMSBuildEditorConfig.editorconfig
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.AssemblyInfoInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.AssemblyInfo.cs
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.csproj.CoreCompileInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.csproj.CopyComplete
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.pdb

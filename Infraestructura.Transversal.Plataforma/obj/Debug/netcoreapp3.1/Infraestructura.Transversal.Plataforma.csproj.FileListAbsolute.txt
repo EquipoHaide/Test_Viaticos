@@ -1,0 +1,9 @@
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.deps.json
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.GeneratedMSBuildEditorConfig.editorconfig
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.AssemblyInfoInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.AssemblyInfo.cs
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.csproj.CoreCompileInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.pdb

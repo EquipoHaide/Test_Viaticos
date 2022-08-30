@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="MicroServices.Platform.Repository" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MicroServices.Platform.Repository" Version="1.3.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dominio.Nucleo.Repositorios\Dominio.Nucleo.Repositorios.csproj" />
+    <ProjectReference Include="..\Infraestructura.Transversal.Plataforma\Infraestructura.Transversal.Plataforma.csproj" />
+  </ItemGroup>
+</Project>

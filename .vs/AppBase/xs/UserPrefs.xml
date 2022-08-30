@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{1256A886-B25E-4ABE-B907-9F2643B40C9F}|Default">
+  <MonoDevelop.Ide.ItemProperties.Presentacion.Presentacion.WebApi PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Presentacion.WebApi/Program.cs">
+    <Files>
+      <File FileName="Presentacion.WebApi/Program.cs" Line="16" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="AppBase" expanded="True" selected="True">
+            <Node name="Presentacion" expanded="True">
+              <Node name="Presentacion.WebApi" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,15 @@
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.deps.json
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/bin/Debug/netcoreapp3.1/Dominio.Nucleo.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/bin/Debug/netcoreapp3.1/Dominio.Nucleo.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.csproj.AssemblyReference.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.GeneratedMSBuildEditorConfig.editorconfig
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.AssemblyInfoInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.AssemblyInfo.cs
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.csproj.CoreCompileInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.csproj.CopyComplete
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.ServiciosExternos.pdb

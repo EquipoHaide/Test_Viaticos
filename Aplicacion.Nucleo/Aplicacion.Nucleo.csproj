@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infraestructura.Transversal.Perfiles\Infraestructura.Transversal.Perfiles.csproj" />
+    <ProjectReference Include="..\Infraestructura.Transversal.Seguimiento\Infraestructura.Transversal.Seguimiento.csproj" />
+    <ProjectReference Include="..\Infraestructura.Transversal.Autenticacion\Infraestructura.Transversal.Autenticacion.csproj" />
+    <ProjectReference Include="..\Dominio.Nucleo\Dominio.Nucleo.csproj" />
+    <ProjectReference Include="..\Infraestructura.Transversal.Plataforma\Infraestructura.Transversal.Plataforma.csproj" />
+    <ProjectReference Include="..\Dominio.Nucleo.Servicios\Dominio.Nucleo.Servicios.csproj" />
+    <ProjectReference Include="..\Dominio.Nucleo.Entidades\Dominio.Nucleo.Entidades.csproj" />
+    <ProjectReference Include="..\Dominio.Nucleo.Repositorios\Dominio.Nucleo.Repositorios.csproj" />
+  </ItemGroup>
+</Project>

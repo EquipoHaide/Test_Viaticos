@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <None Remove="Aplicacion\" />
+    <None Remove="AppCircuitBreaker\" />
+    <None Remove="HealthCheck\" />
+    <None Remove="Logs\" />
+    <None Remove="IdentityModel" />
+    <None Remove="Serilog.Sinks.Async" />
+    <None Remove="Seguridad\" />
+    <None Remove="System.IdentityModel.Tokens.Jwt" />
+    <None Remove="IdentityServer4.AccessTokenValidation" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Aplicacion\" />
+    <Folder Include="AppCircuitBreaker\" />
+    <Folder Include="HealthCheck\" />
+    <Folder Include="Logs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aplicacion.Seguridad.Servicios\Aplicacion.Seguridad.Servicios.csproj" />
+    <ProjectReference Include="..\Infraestructura.Datos.Seguridad\Infraestructura.Datos.Seguridad.csproj" />
+    <ProjectReference Include="..\Infraestructura.Transversal.Plataforma\Infraestructura.Transversal.Plataforma.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Infraestructura.Transversal.Seguimiento\Infraestructura.Transversal.Seguimiento.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Aplicacion.Nucleo\Aplicacion.Nucleo.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Dominio.Nucleo\Dominio.Nucleo.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Infraestructura.Transversal.ServiciosExternos\Infraestructura.Transversal.ServiciosExternos.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="4.1.1" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.19.0" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+  </ItemGroup>
+</Project>

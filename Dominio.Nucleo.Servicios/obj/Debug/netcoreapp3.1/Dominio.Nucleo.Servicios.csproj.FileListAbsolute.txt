@@ -1,0 +1,17 @@
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.deps.json
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Dominio.Nucleo.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Dominio.Nucleo.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Dominio.Nucleo.Entidades.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Plataforma.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.csproj.AssemblyReference.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.GeneratedMSBuildEditorConfig.editorconfig
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.AssemblyInfoInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.AssemblyInfo.cs
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.csproj.CoreCompileInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.csproj.CopyComplete
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/Debug/netcoreapp3.1/Dominio.Nucleo.Servicios.pdb

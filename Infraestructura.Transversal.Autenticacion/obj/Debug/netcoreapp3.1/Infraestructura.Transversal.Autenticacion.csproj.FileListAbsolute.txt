@@ -1,0 +1,9 @@
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.deps.json
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.pdb
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.GeneratedMSBuildEditorConfig.editorconfig
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.AssemblyInfoInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.AssemblyInfo.cs
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.csproj.CoreCompileInputs.cache
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.dll
+/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Autenticacion/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Autenticacion.pdb
