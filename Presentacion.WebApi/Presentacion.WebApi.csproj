@@ -39,6 +39,9 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
     <ProjectReference Include="..\Infraestructura.Transversal.ServiciosExternos\Infraestructura.Transversal.ServiciosExternos.csproj" />
+    <ProjectReference Include="..\Aplicacion.Viaticos.Servicios\Aplicacion.Viaticos.Servicios.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="4.1.1" />
