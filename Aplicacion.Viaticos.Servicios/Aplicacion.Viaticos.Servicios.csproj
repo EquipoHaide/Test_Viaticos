@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Flujos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Flujos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aplicacion.Nucleo\Aplicacion.Nucleo.csproj" />
+    <ProjectReference Include="..\Dominio.Viaticos.Servicios\Dominio.Viaticos.Servicios.csproj" />
+  </ItemGroup>
 </Project>

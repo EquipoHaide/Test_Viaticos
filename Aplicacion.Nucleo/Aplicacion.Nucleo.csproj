@@ -14,4 +14,10 @@
     <ProjectReference Include="..\Dominio.Nucleo.Entidades\Dominio.Nucleo.Entidades.csproj" />
     <ProjectReference Include="..\Dominio.Nucleo.Repositorios\Dominio.Nucleo.Repositorios.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="ConfiguracionFlujos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ConfiguracionFlujos\" />
+  </ItemGroup>
 </Project>

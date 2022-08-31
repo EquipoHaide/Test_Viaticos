@@ -4,14 +4,134 @@
     "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/Dominio.Viaticos.Servicios.csproj": {}
   },
   "projects": {
-    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/Dominio.Viaticos.Servicios.csproj": {
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/Dominio.Nucleo.Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/Dominio.Viaticos.Servicios.csproj",
-        "projectName": "Dominio.Viaticos.Servicios",
-        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/Dominio.Viaticos.Servicios.csproj",
+        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/Dominio.Nucleo.Entidades.csproj",
+        "projectName": "Dominio.Nucleo.Entidades",
+        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/Dominio.Nucleo.Entidades.csproj",
         "packagesPath": "/Users/haidehaaz/.nuget/packages/",
-        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/obj/",
+        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/haidehaaz/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "http://nugetserver.finanzas:50300/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj": {
+                "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/Dominio.Nucleo.Servicios.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/Dominio.Nucleo.Servicios.csproj",
+        "projectName": "Dominio.Nucleo.Servicios",
+        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/Dominio.Nucleo.Servicios.csproj",
+        "packagesPath": "/Users/haidehaaz/.nuget/packages/",
+        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/haidehaaz/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "http://nugetserver.finanzas:50300/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/Dominio.Nucleo.Entidades.csproj": {
+                "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Entidades/Dominio.Nucleo.Entidades.csproj"
+              },
+              "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj": {
+                "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj"
+              },
+              "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Infraestructura.Transversal.Plataforma.csproj": {
+                "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Infraestructura.Transversal.Plataforma.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj",
+        "projectName": "Dominio.Nucleo",
+        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj",
+        "packagesPath": "/Users/haidehaaz/.nuget/packages/",
+        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/haidehaaz/.config/NuGet/NuGet.Config"
@@ -38,6 +158,252 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Entidades/Dominio.Viaticos.Entidades.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Entidades/Dominio.Viaticos.Entidades.csproj",
+        "projectName": "Dominio.Viaticos.Entidades",
+        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Entidades/Dominio.Viaticos.Entidades.csproj",
+        "packagesPath": "/Users/haidehaaz/.nuget/packages/",
+        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Entidades/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/haidehaaz/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "http://nugetserver.finanzas:50300/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Nucleo/Dominio.Viaticos.Nucleo.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Nucleo/Dominio.Viaticos.Nucleo.csproj",
+        "projectName": "Dominio.Viaticos.Nucleo",
+        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Nucleo/Dominio.Viaticos.Nucleo.csproj",
+        "packagesPath": "/Users/haidehaaz/.nuget/packages/",
+        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Nucleo/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/haidehaaz/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "http://nugetserver.finanzas:50300/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/Dominio.Viaticos.Servicios.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/Dominio.Viaticos.Servicios.csproj",
+        "projectName": "Dominio.Viaticos.Servicios",
+        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/Dominio.Viaticos.Servicios.csproj",
+        "packagesPath": "/Users/haidehaaz/.nuget/packages/",
+        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Servicios/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/haidehaaz/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "http://nugetserver.finanzas:50300/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/Dominio.Nucleo.Servicios.csproj": {
+                "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo.Servicios/Dominio.Nucleo.Servicios.csproj"
+              },
+              "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Entidades/Dominio.Viaticos.Entidades.csproj": {
+                "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Entidades/Dominio.Viaticos.Entidades.csproj"
+              },
+              "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Nucleo/Dominio.Viaticos.Nucleo.csproj": {
+                "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Viaticos.Nucleo/Dominio.Viaticos.Nucleo.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Infraestructura.Transversal.Plataforma.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Infraestructura.Transversal.Plataforma.csproj",
+        "projectName": "Infraestructura.Transversal.Plataforma",
+        "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Infraestructura.Transversal.Plataforma.csproj",
+        "packagesPath": "/Users/haidehaaz/.nuget/packages/",
+        "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/haidehaaz/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "http://nugetserver.finanzas:50300/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "MicroServices.Platform.Extensions": {
+              "target": "Package",
+              "version": "[0.1.2.4, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.20, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

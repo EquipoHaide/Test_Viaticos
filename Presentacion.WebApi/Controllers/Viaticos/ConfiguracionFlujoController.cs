@@ -27,6 +27,9 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         [HttpGet(Name = "ConsultarConfigFlujos")]
         public object Consultar([FromQuery] ConsultaRol filtro)
         {
+
+
+
             return null;
         }
 

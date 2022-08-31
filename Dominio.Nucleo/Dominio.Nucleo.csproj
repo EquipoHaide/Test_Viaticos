@@ -7,8 +7,12 @@
   <ItemGroup>
     <None Remove="AutoMapper" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="ConfiguracionFlujos\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ConfiguracionFlujos\" />
   </ItemGroup>
 </Project>

@@ -7,4 +7,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Dominio.Nucleo\Dominio.Nucleo.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="ConfiguracionFlujos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ConfiguracionFlujos\" />
+  </ItemGroup>
 </Project>
