@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Nucleo;
+using Aplicacion.Viaticos.Servicios.Flujos;
 using Dominio.Seguridad.Modelos;
 using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
@@ -19,6 +20,10 @@ namespace Presentacion.WebApi.Controllers.Viaticos
 
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
 
+
+        IServicioFlujos servicio;
+        IServicioFlujos Servicio => App.Inject(ref servicio);
+
         public ConfiguracionFlujoController(IAplicacion app)
         {
             this.App = app;
@@ -29,6 +34,8 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         public Object Consultar(ConsultaConfiguracionFlujo filtro)
         {
 
+           var respuesta =  Servicio.Consultar(filtro, "");
+            
             Console.WriteLine("TEST---");
 
 

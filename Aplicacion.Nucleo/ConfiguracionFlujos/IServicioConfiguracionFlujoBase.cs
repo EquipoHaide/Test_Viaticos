@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Dominio.Nucleo;
 using Infraestructura.Transversal.Plataforma;
 
-namespace Aplicacion.Nucleo.ConfiguracionFlujos
+namespace Aplicacion.Nucleo
 {
     public interface IServicioConfiguracionFlujoBase
     {

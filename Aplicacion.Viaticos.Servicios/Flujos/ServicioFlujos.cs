@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Aplicacion.Nucleo;
 using Dominio.Nucleo;
 using Infraestructura.Transversal.Plataforma;
 
@@ -7,7 +8,7 @@ using DominioFlujo = Dominio.Viaticos.Servicios;
 
 namespace Aplicacion.Viaticos.Servicios.Flujos
 {
-    public class ServicioFlujos : IServicioFlujos
+    public class ServicioFlujos : ServicioConfiguracionFlujoBase, IServicioFlujos
     {
 
         const string TAG = "Aplicacion.Seguridad.Servicios.Grupos.ServicioGrupos";
@@ -21,26 +22,49 @@ namespace Aplicacion.Viaticos.Servicios.Flujos
             App = app;
         }
 
-     
-        public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
+        public override Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
+        {
+
+
+            Servicio.Consultar(parametros, subjectId);
+            throw new NotImplementedException();
+        }
+
+        public override Respuesta<List<IFlujo>> Crear(List<IFlujo> flujos, string subjectId)
         {
             throw new NotImplementedException();
         }
 
-        public Respuesta<List<IFlujo>> Crear(List<IFlujo> flujos, string subjectId)
-        {
-            Servicio.Crear(flujos, subjectId);
-            throw new NotImplementedException();
-        }
-
-        public void Eliminar(IFlujo flujo, string subjectId)
+        public override void Eliminar(IFlujo flujo, string subjectId)
         {
             throw new NotImplementedException();
         }
 
-        public void Modificar(IFlujo flujo, string subjectId)
+        public override void Modificar(IFlujo flujo, string subjectId)
         {
             throw new NotImplementedException();
         }
+
+
+        //public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Respuesta<List<IFlujo>> Crear(List<IFlujo> flujos, string subjectId)
+        //{
+        //    Servicio.Crear(flujos, subjectId);
+        //    throw new NotImplementedException();
+        //}
+
+        //public void Eliminar(IFlujo flujo, string subjectId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void Modificar(IFlujo flujo, string subjectId)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

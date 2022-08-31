@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Dominio.Nucleo
 {
-    public interface IConsultaSolicitud
+    public interface IConsultaSolicitud : IConsulta
     {
        
     }

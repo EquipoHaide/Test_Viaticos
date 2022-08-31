@@ -3,32 +3,18 @@ using System.Collections.Generic;
 using Dominio.Nucleo;
 using Infraestructura.Transversal.Plataforma;
 
-namespace Aplicacion.Nucleo.ConfiguracionFlujos
+namespace Aplicacion.Nucleo
 {
-    public class ServicioConfiguracionFlujoBase : IServicioConfiguracionFlujoBase
+     public abstract class ServicioConfiguracionFlujoBase : IServicioConfiguracionFlujoBase
     {
-        const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujoBase";
+      
+        public abstract Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId);
 
-        public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract Respuesta<List<IFlujo>> Crear(List<IFlujo> flujos, string subjectId);
 
-        public Respuesta<List<IFlujo>> Crear(List<IFlujo> flujos, string subjectId)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Eliminar(IFlujo flujo, string subjectId);
 
-        public void Eliminar(IFlujo flujo, string subjectId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Modificar(IFlujo flujo, string subjectId)
-        {
-            throw new NotImplementedException();
-        }
-
+        public abstract void Modificar(IFlujo flujo, string subjectId);
 
     }
 }
