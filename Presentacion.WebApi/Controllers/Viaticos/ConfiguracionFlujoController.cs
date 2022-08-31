@@ -39,6 +39,22 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         }
 
 
-     
+
+
+        [HttpGet("{id:int}")]
+        public Object Obtener(int id)
+        {
+
+            Console.WriteLine("TEST---");
+
+
+
+
+
+            return null;
+        }
+
+
+
     }
 }
