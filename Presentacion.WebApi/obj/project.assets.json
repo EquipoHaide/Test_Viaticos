@@ -2768,6 +2768,16 @@
           "bin/placeholder/Dominio.Seguridad.Servicios.dll": {}
         }
       },
+      "Dominio.Viaticos.Modelos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Dominio.Viaticos.Modelos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dominio.Viaticos.Modelos.dll": {}
+        }
+      },
       "Infraestructura.Datos.Nucleo/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -8885,6 +8895,11 @@
       "path": "../Dominio.Seguridad.Servicios/Dominio.Seguridad.Servicios.csproj",
       "msbuildProject": "../Dominio.Seguridad.Servicios/Dominio.Seguridad.Servicios.csproj"
     },
+    "Dominio.Viaticos.Modelos/1.0.0": {
+      "type": "project",
+      "path": "../Dominio.Viaticos.Modelos/Dominio.Viaticos.Modelos.csproj",
+      "msbuildProject": "../Dominio.Viaticos.Modelos/Dominio.Viaticos.Modelos.csproj"
+    },
     "Infraestructura.Datos.Nucleo/1.0.0": {
       "type": "project",
       "path": "../Infraestructura.Datos.Nucleo/Infraestructura.Datos.Nucleo.csproj",
@@ -8926,6 +8941,7 @@
       "Aplicacion.Nucleo >= 1.0.0",
       "Aplicacion.Seguridad.Servicios >= 1.0.0",
       "Dominio.Nucleo >= 1.0.0",
+      "Dominio.Viaticos.Modelos >= 1.0.0",
       "IdentityModel >= 4.1.1",
       "IdentityServer4.AccessTokenValidation >= 3.0.1",
       "Infraestructura.Datos.Seguridad >= 1.0.0",
@@ -8937,24 +8953,34 @@
     ]
   },
   "packageFolders": {
-    "/Users/haidehaaz/.nuget/packages/": {}
+    "C:\\Users\\Israel\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/Presentacion.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Presentacion.WebApi\\Presentacion.WebApi.csproj",
       "projectName": "Presentacion.WebApi",
-      "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/Presentacion.WebApi.csproj",
-      "packagesPath": "/Users/haidehaaz/.nuget/packages/",
-      "outputPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/obj/",
+      "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Presentacion.WebApi\\Presentacion.WebApi.csproj",
+      "packagesPath": "C:\\Users\\Israel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Presentacion.WebApi\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "/Users/haidehaaz/.config/NuGet/NuGet.Config"
+        "C:\\Users\\Israel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "http://nugetserver.finanzas:50300/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -8962,26 +8988,29 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/Aplicacion.Nucleo.csproj": {
-              "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/Aplicacion.Nucleo.csproj"
+            "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Aplicacion.Nucleo\\Aplicacion.Nucleo.csproj": {
+              "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Aplicacion.Nucleo\\Aplicacion.Nucleo.csproj"
             },
-            "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Seguridad.Servicios/Aplicacion.Seguridad.Servicios.csproj": {
-              "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Seguridad.Servicios/Aplicacion.Seguridad.Servicios.csproj"
+            "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Aplicacion.Seguridad.Servicios\\Aplicacion.Seguridad.Servicios.csproj": {
+              "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Aplicacion.Seguridad.Servicios\\Aplicacion.Seguridad.Servicios.csproj"
             },
-            "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj": {
-              "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Dominio.Nucleo/Dominio.Nucleo.csproj"
+            "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Dominio.Nucleo\\Dominio.Nucleo.csproj": {
+              "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Dominio.Nucleo\\Dominio.Nucleo.csproj"
             },
-            "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Datos.Seguridad/Infraestructura.Datos.Seguridad.csproj": {
-              "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Datos.Seguridad/Infraestructura.Datos.Seguridad.csproj"
+            "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Dominio.Viaticos.Modelos\\Dominio.Viaticos.Modelos.csproj": {
+              "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Dominio.Viaticos.Modelos\\Dominio.Viaticos.Modelos.csproj"
             },
-            "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Infraestructura.Transversal.Plataforma.csproj": {
-              "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Infraestructura.Transversal.Plataforma.csproj"
+            "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Infraestructura.Datos.Seguridad\\Infraestructura.Datos.Seguridad.csproj": {
+              "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Infraestructura.Datos.Seguridad\\Infraestructura.Datos.Seguridad.csproj"
             },
-            "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/Infraestructura.Transversal.Seguimiento.csproj": {
-              "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/Infraestructura.Transversal.Seguimiento.csproj"
+            "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Infraestructura.Transversal.Plataforma\\Infraestructura.Transversal.Plataforma.csproj": {
+              "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Infraestructura.Transversal.Plataforma\\Infraestructura.Transversal.Plataforma.csproj"
             },
-            "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/Infraestructura.Transversal.ServiciosExternos.csproj": {
-              "projectPath": "/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.ServiciosExternos/Infraestructura.Transversal.ServiciosExternos.csproj"
+            "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Infraestructura.Transversal.Seguimiento\\Infraestructura.Transversal.Seguimiento.csproj": {
+              "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Infraestructura.Transversal.Seguimiento\\Infraestructura.Transversal.Seguimiento.csproj"
+            },
+            "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Infraestructura.Transversal.ServiciosExternos\\Infraestructura.Transversal.ServiciosExternos.csproj": {
+              "projectPath": "C:\\Users\\Israel\\Documents\\DEV\\NET_TFS\\APPS\\FLUJOS DE AUTORIZACION\\TestViaticos_2\\Test_Viaticos\\Infraestructura.Transversal.ServiciosExternos\\Infraestructura.Transversal.ServiciosExternos.csproj"
             }
           }
         }
@@ -9023,6 +9052,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.18, 3.1.18]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -9031,7 +9066,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
       }
     }
   }
