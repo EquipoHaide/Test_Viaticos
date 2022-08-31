@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Nucleo;
 using Dominio.Seguridad.Modelos;
+using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ using System.Linq;
 
 namespace Presentacion.WebApi.Controllers.Viaticos
 {
-    [Route("[controller]")]
-    [Authorize]
-    public class ConfiguracionFlujoController 
+    [Route("api/[controller]")]
+    //[Authorize]
+    public class ConfiguracionFlujoController : ControllerBase
     {
 
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
@@ -24,9 +25,10 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         }
 
 
-        [HttpGet(Name = "ConsultarConfigFlujos")]
-        public object Consultar([FromQuery] ConsultaRol filtro)
+        [HttpGet()]
+        public Object Consultar(ConsultaConfiguracionFlujo filtro)
         {
+            Console.WriteLine("TEST---");
             return null;
         }
 
