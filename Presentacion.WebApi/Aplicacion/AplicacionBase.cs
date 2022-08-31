@@ -16,6 +16,9 @@ using SeguridadDominio = Dominio.Seguridad.Servicios;
 using Infraestructura.Transversal.ServiciosExternos;
 using Infraestructura.Transversal.Perfiles;
 
+
+using ViaticosAplicacion = Aplicacion.Viaticos.Servicios;
+using ViaticosDominio = Dominio.Viaticos.Servicios;
 namespace Presentacion.WebApi.App
 {
     public class AplicacionBase : AplicacionNucleo.IAplicacion
@@ -175,6 +178,9 @@ namespace Presentacion.WebApi.App
             new SeguridadAplicacion.SeguridadMapperServices().Maping(this);
             new SeguridadRepositorio.SeguridadMapperServices().Maping(this);
             new SeguridadDominio.SeguridadMapperServices().Maping(this);
+
+            new ViaticosAplicacion.ViaticosMapperServices().Maping(this);
+            new ViaticosDominio.ViaticosMapperServices().Maping(this);
 
             new ServiciosExternosMapperServices().Maping(this);
         }

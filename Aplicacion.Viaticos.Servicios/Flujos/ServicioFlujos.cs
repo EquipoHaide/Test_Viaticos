@@ -6,7 +6,7 @@ using Infraestructura.Transversal.Plataforma;
 
 using DominioFlujo = Dominio.Viaticos.Servicios;
 
-namespace Aplicacion.Viaticos.Servicios.Flujos
+namespace Aplicacion.Viaticos.Servicios
 {
     public class ServicioFlujos : ServicioConfiguracionFlujoBase, IServicioFlujos
     {
@@ -24,8 +24,6 @@ namespace Aplicacion.Viaticos.Servicios.Flujos
 
         public override Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
         {
-
-
             Servicio.Consultar(parametros, subjectId);
             throw new NotImplementedException();
         }
