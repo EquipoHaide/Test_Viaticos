@@ -28,7 +28,13 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         [HttpGet()]
         public Object Consultar(ConsultaConfiguracionFlujo filtro)
         {
+
             Console.WriteLine("TEST---");
+
+
+
+
+
             return null;
         }
 

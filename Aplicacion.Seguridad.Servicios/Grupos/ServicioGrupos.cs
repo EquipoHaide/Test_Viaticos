@@ -43,6 +43,7 @@ namespace Aplicacion.Seguridad.Servicios
         public ServicioGrupos(Nucleo.IAplicacion app)
         {
             App = app;
+            
         }
 
         /// <summary>

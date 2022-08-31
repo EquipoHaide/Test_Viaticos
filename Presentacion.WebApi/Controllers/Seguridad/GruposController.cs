@@ -37,7 +37,7 @@ namespace Presentacion.WebApi.Controllers.Seguridad
             try
             {
                 var consulta = ServicioGrupos.Consultar(filtro, this.GetSubjectId());
-
+              
                 if (consulta.EsError)
                 {
                     if (consulta.Estado == EstadoProceso.Fatal)
