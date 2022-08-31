@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32519.379
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicacion", "Aplicacion", "{B255C7A0-0452-4ED4-A9B4-F28D378B9F4D}"
 EndProject
@@ -63,21 +63,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacion.Seguridad.Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacion.Seguridad.Servicios.Core", "Aplicacion.Seguridad.Servicios.Core\Aplicacion.Seguridad.Servicios.Core.csproj", "{97BCD95B-10CD-4BD6-A91C-F6394C24A2EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructura.Transversal.Perfiles", "Infraestructura.Transversal.Perfiles\Infraestructura.Transversal.Perfiles.csproj", "{19704078-B634-4DDA-A30D-4D5F09A9105A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infraestructura.Transversal.Perfiles", "Infraestructura.Transversal.Perfiles\Infraestructura.Transversal.Perfiles.csproj", "{19704078-B634-4DDA-A30D-4D5F09A9105A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Viaticos", "Viaticos", "{7D504E3F-DC79-4650-AB7F-C6DC6F2E9429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacion.Viaticos.Core", "Aplicacion.Viaticos.Core\Aplicacion.Viaticos.Core.csproj", "{7AF5707F-434D-4A97-BE9C-3A0E2116A4CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacion.Viaticos.Core", "Aplicacion.Viaticos.Core\Aplicacion.Viaticos.Core.csproj", "{7AF5707F-434D-4A97-BE9C-3A0E2116A4CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacion.Viaticos.Servicios", "Aplicacion.Viaticos.Servicios\Aplicacion.Viaticos.Servicios.csproj", "{861278A8-02AB-4814-93C4-DA4D6E39F430}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacion.Viaticos.Servicios", "Aplicacion.Viaticos.Servicios\Aplicacion.Viaticos.Servicios.csproj", "{861278A8-02AB-4814-93C4-DA4D6E39F430}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacion.Viaticos.Nucleo", "Aplicacion.Viaticos.Nucleo\Aplicacion.Viaticos.Nucleo.csproj", "{D0245197-1D4E-407E-B4E8-FB16694BB0DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacion.Viaticos.Nucleo", "Aplicacion.Viaticos.Nucleo\Aplicacion.Viaticos.Nucleo.csproj", "{D0245197-1D4E-407E-B4E8-FB16694BB0DA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Viaticos", "Viaticos", "{2619A59F-E9F8-44C6-86CE-F3DF05DDFEBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio.Viaticos.Entidades", "Dominio.Viaticos.Entidades\Dominio.Viaticos.Entidades.csproj", "{77AFA5A6-2F7D-425C-8756-07A6B80CA4AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio.Viaticos.Entidades", "Dominio.Viaticos.Entidades\Dominio.Viaticos.Entidades.csproj", "{77AFA5A6-2F7D-425C-8756-07A6B80CA4AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio.Viaticos.Servicios", "Dominio.Viaticos.Servicios\Dominio.Viaticos.Servicios.csproj", "{19044EA7-4843-4904-8291-773DB08022D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio.Viaticos.Servicios", "Dominio.Viaticos.Servicios\Dominio.Viaticos.Servicios.csproj", "{19044EA7-4843-4904-8291-773DB08022D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio.Viaticos.Modelos", "Dominio.Viaticos.Modelos\Dominio.Viaticos.Modelos.csproj", "{B860AF36-F789-404D-B8C6-439E1B1566EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +183,10 @@ Global
 		{19044EA7-4843-4904-8291-773DB08022D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19044EA7-4843-4904-8291-773DB08022D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19044EA7-4843-4904-8291-773DB08022D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B860AF36-F789-404D-B8C6-439E1B1566EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B860AF36-F789-404D-B8C6-439E1B1566EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B860AF36-F789-404D-B8C6-439E1B1566EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B860AF36-F789-404D-B8C6-439E1B1566EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,6 +226,7 @@ Global
 		{2619A59F-E9F8-44C6-86CE-F3DF05DDFEBD} = {AA60DE3C-98E5-405D-A9B7-013BDAEFCAEA}
 		{77AFA5A6-2F7D-425C-8756-07A6B80CA4AE} = {2619A59F-E9F8-44C6-86CE-F3DF05DDFEBD}
 		{19044EA7-4843-4904-8291-773DB08022D9} = {2619A59F-E9F8-44C6-86CE-F3DF05DDFEBD}
+		{B860AF36-F789-404D-B8C6-439E1B1566EF} = {2619A59F-E9F8-44C6-86CE-F3DF05DDFEBD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F273894-30BF-43B8-BCA2-A6FEE4AC0576}

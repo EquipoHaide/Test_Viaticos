@@ -1,9 +1,0 @@
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.deps.json
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.dll
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/bin/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.pdb
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.GeneratedMSBuildEditorConfig.editorconfig
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.AssemblyInfoInputs.cache
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.AssemblyInfo.cs
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.csproj.CoreCompileInputs.cache
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.dll
-/Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Seguimiento/obj/Debug/netcoreapp3.1/Infraestructura.Transversal.Seguimiento.pdb
