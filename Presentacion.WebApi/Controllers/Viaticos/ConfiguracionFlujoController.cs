@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Nucleo;
 using Aplicacion.Viaticos.Servicios;
+using Dominio.Nucleo;
 using Dominio.Seguridad.Modelos;
 using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
@@ -24,7 +25,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         IServicioFlujos servicio;
         IServicioFlujos Servicio => App.Inject(ref servicio);
 
-        public ConfiguracionFlujoController(IAplicacion app)
+        public ConfiguracionFlujoController(Aplicacion.Nucleo.IAplicacion app)
         {
             this.App = app;
         }
@@ -34,7 +35,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         public Object Consultar(ConsultaConfiguracionFlujo filtro)
         {
 
-           var respuesta =  Servicio.Consultar(filtro, "");
+            var respuesta = Servicio.Consultar(filtro,"");
             
             Console.WriteLine("TEST---");
 
@@ -45,10 +46,20 @@ namespace Presentacion.WebApi.Controllers.Viaticos
             return null;
         }
 
+        [HttpPost(Name = "CrearFlujos")]
+        public object Crear([FromBody] List<IFlujo> flujos)
+        {
+            List<IFlujo> listaFlujos = new List<IFlujo>();
+            flujos.ForEach(f => {
+                listaFlujos.Add(f);
+            });
+
+            var respuesta = Servicio.Crear(flujos, "");
+            return null;
+        }
 
 
-
-        [HttpGet("{id:int}")]
+            [HttpGet("{id:int}")]
         public Object Obtener(int id)
         {
 

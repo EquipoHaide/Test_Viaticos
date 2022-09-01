@@ -14,5 +14,6 @@
     <ProjectReference Include="..\Dominio.Nucleo.Servicios\Dominio.Nucleo.Servicios.csproj" />
     <ProjectReference Include="..\Dominio.Viaticos.Nucleo\Dominio.Viaticos.Nucleo.csproj" />
     <ProjectReference Include="..\Dominio.Viaticos.Entidades\Dominio.Viaticos.Entidades.csproj" />
+    <ProjectReference Include="..\Dominio.Viaticos.Modelos\Dominio.Viaticos.Modelos.csproj" />
   </ItemGroup>
 </Project>

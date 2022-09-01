@@ -5,7 +5,7 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Aplicacion.Nucleo
 {
-     public abstract class ServicioConfiguracionFlujoBase : IServicioConfiguracionFlujoBase
+     public abstract class ServicioConfiguracionFlujoBase: IServicioConfiguracionFlujoBase
     {
       
         public abstract Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId);
