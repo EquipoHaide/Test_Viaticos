@@ -22,7 +22,7 @@ namespace Dominio.Viaticos.Servicios
         {
             //flujo.Pasos.Cast<IPaso>().ToList()
             //var flujo = flujos.Cast<Dominio.Nucleo.IFlujo>().ToList();
-            var respuesta = ValidarFlujo(flujos.Cast<Dominio.Nucleo.IFlujo>().ToList());
+           // var respuesta = ValidarFlujo(flujos.Cast<Dominio.Nucleo.IFlujo>().ToList());
 
             throw new NotImplementedException();
         }

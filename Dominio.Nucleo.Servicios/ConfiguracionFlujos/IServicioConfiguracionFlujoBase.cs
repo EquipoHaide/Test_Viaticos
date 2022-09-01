@@ -4,11 +4,11 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Nucleo.Servicios
 {
-    public interface IServicioConfiguracionFlujoBase
+    public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso>
     {
-        Respuesta<bool> ValidarFlujo(List<IFlujo> flujos);
+        Respuesta<bool> ValidarFlujo(List<TFlujo> flujos);
 
-        Respuesta<bool> ValidarPaso(IPaso paso);
+        Respuesta<bool> ValidarPaso(TPaso paso);
 
     }
 }

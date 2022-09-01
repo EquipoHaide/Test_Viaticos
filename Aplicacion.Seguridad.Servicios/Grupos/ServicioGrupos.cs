@@ -51,6 +51,7 @@ namespace Aplicacion.Seguridad.Servicios
         /// </summary>
         public Respuesta<Modelos.Grupo> Crear(Modelos.Grupo grupo, string subjectId)
         {
+            
             if (grupo == null)
                 return new Respuesta<Modelos.Grupo>(R.strings.GrupoInvalido, TAG);
 

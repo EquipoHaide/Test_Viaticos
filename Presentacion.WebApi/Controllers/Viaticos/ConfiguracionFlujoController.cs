@@ -35,7 +35,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         public Object Consultar(ConsultaConfiguracionFlujo filtro)
         {
 
-            var respuesta = Servicio.Consultar(filtro,"");
+            //var respuesta = Servicio.Consultar(filtro,"");
             
             Console.WriteLine("TEST---");
 
@@ -47,14 +47,14 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         }
 
         [HttpPost(Name = "CrearFlujos")]
-        public object Crear([FromBody] List<IFlujo> flujos)
+        public object Crear([FromBody] List<Flujo> flujos)
         {
-            List<IFlujo> listaFlujos = new List<IFlujo>();
-            flujos.ForEach(f => {
-                listaFlujos.Add(f);
-            });
+            //List<IFlujo> listaFlujos = new List<IFlujo>();
+            //flujos.ForEach(f => {
+            //    listaFlujos.Add(f);
+            //});
 
-            var respuesta = Servicio.Crear(flujos, "");
+           // var respuesta = Servicio.Crear(flujos, "");
             return null;
         }
 
