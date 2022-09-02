@@ -6,13 +6,14 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Nucleo.Servicios
 {
-    public class ServicioConfiguracionFlujoBase : IServicioConfiguracionFlujoBase<Flujo, Paso>
+    public class ServicioConfiguracionFlujoBase : IServicioConfiguracionFlujoBase<IFlujo, IPaso>
     {
 
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
-        public Respuesta<bool> ValidarFlujo(List<Flujo> flujos)
+        public Respuesta<bool> ValidarFlujo(List<IFlujo> flujos)
         {
+
             //Valida que el objeto no este vacio
             if (flujos == null || flujos.Count < 1)
                 return new Respuesta<bool>("Es requerido al menos un flujo de autorizacion ", TAG);

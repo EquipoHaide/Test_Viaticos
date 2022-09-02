@@ -4,9 +4,9 @@ using Dominio.Viaticos.Modelos;
 
 namespace Aplicacion.Viaticos.Servicios
 {
-    public interface IServicioFlujos : IServicioConfiguracionFlujoBase
+    public interface IServicioFlujos : IServicioConfiguracionFlujoBase<Flujo, ConsultaConfiguracionFlujo, Paso>
     {
-
+        void MetodoExtra();
     }
     
 }
