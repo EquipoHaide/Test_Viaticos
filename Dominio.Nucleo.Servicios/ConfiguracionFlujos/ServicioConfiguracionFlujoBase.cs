@@ -6,12 +6,14 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Nucleo.Servicios
 {
-    public class ServicioConfiguracionFlujoBase : IServicioConfiguracionFlujoBase<IFlujo, IPaso>
+    public class ServicioConfiguracionFlujoBase<TFlujo,TPaso> : IServicioConfiguracionFlujoBase<TFlujo, TPaso>
+        where TFlujo : IFlujo
+        where TPaso  : IPaso
     {
 
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
-        public Respuesta<bool> ValidarFlujo(List<IFlujo> flujos)
+        public Respuesta<bool> ValidarFlujo(List<TFlujo> flujos)
         {
 
             //Valida que el objeto no este vacio
@@ -95,9 +97,9 @@ namespace Dominio.Nucleo.Servicios
             return true;
         }
 
-        public Respuesta<bool> ValidarPaso(Paso paso)
-        {
-            throw new NotImplementedException();
-        }
+        //public Respuesta<bool> ValidarPaso(Paso paso)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

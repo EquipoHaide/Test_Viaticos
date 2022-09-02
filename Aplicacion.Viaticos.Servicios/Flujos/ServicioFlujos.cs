@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using Aplicacion.Nucleo;
 using Dominio.Nucleo;
+using Dominio.Nucleo.Servicios;
 using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 
-using DominioFlujo = Dominio.Viaticos.Servicios;
+using ServiciosDominio = Dominio.Viaticos.Servicios;
 
 namespace Aplicacion.Viaticos.Servicios
 {
@@ -15,8 +16,10 @@ namespace Aplicacion.Viaticos.Servicios
         const string TAG = "Aplicacion.Seguridad.Servicios.Grupos.ServicioGrupos";
 
         Nucleo.IAplicacion App { get; set; }
-        DominioFlujo.IServicioFlujos servicio;
-        DominioFlujo.IServicioFlujos Servicio => App.Inject(ref servicio);
+
+        ServiciosDominio.IServicioFlujos servicio;
+        ServiciosDominio.IServicioFlujos Servicio => App.Inject(ref servicio);
+        public override IServicioConfiguracionFlujoBase<Flujo, Paso> ServicioDominio => this.Servicio;
 
 
         public ServicioFlujos(Nucleo.IAplicacion app)
@@ -26,13 +29,23 @@ namespace Aplicacion.Viaticos.Servicios
 
         public override Respuesta<ConsultaPaginada<ConsultaConfiguracionFlujo>> Consultar(ConsultaConfiguracionFlujo parametros, string subjectId)
         {
+
+          
             throw new NotImplementedException();
         }
 
         public override Respuesta<List<Flujo>> Crear(List<Flujo> flujos, string subjectId)
         {
 
-            var respuesta = this.ValidarFlujo(flujos);
+            //foreach (var item in flujos)
+            //{
+            //    if (item.IsValid())
+            //    {
+            //        return new Respuesta<List< Flujo >> ("", "");
+            //    }
+            //}
+
+            var respuesta = ServicioDominio.ValidarFlujo(flujos);
             if(respuesta.EsError)
                 return new Respuesta<List<Flujo>>("","");
 

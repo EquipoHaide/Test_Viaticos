@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Dominio.Nucleo;
 using Dominio.Viaticos.Modelos;
-
+using Dominio.Nucleo.Servicios;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public interface IServicioFlujos
+    public interface IServicioFlujos : IServicioConfiguracionFlujoBase<Flujo,Paso>
     {
         void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId);
 
