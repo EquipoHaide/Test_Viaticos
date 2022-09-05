@@ -9,8 +9,8 @@ using Presentacion.WebApi.Seguridad;
 namespace Presentacion.WebApi.Controllers.Seguridad
 {
     [Route("[controller]")]
-    [Authorize]
-    [Authorization(true, "ConsultarRecursosAccion", "AdministrarRecursosAccion")]
+    //[Authorize]
+    //[Authorization(true, "ConsultarRecursosAccion", "AdministrarRecursosAccion")]
     [ApiController]
     public class AccionesController : RecursoProtegidoController<RecursoDeAccion, ConsultaRecursoAccionModelo>
     {

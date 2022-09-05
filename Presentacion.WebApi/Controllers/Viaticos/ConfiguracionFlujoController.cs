@@ -24,7 +24,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
 
         IServicioFlujos servicio;
         IServicioFlujos Servicio => App.Inject(ref servicio);
-        public virtual IServicioRecursoBase servicioRecursos { get; }
+     
 
 
 

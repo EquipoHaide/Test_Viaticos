@@ -111,7 +111,6 @@ namespace Aplicacion.Seguridad.Servicios
 
         public Respuesta<List<Dominio.Seguridad.Modelos.Acceso>> AdministrarAccesos(IEnumerable<Dominio.Seguridad.Modelos.Acceso> accesos, string subjectId)
         {
-
             if (accesos == null || !accesos.Any() || accesos.Any(a => a == null))
                 return new Respuesta<List<Dominio.Seguridad.Modelos.Acceso>>(R.strings.AccionesInvalidas, TAG);
 
