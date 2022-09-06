@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Dominio.Nucleo
 {
-    public abstract class FlujoBase 
+    public abstract class FlujoBase : IFlujoNew
     {
-        public int TipoEntePublico { get; set; }
-        public double NivelEmpleado { get; set; }
+        public ITipoEntePublico TipoEntePublico { get; set; }
+        public INivelEmpleado NivelEmpleado { get; set; }
         public List<IPaso> Pasos { get; set; }
         public int TipoFlujo { get; set; }
 

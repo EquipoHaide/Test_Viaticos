@@ -16,19 +16,19 @@ namespace Presentacion.WebApi.Controllers.Viaticos
 {
     [Route("api/new/[controller]")]
     //[Authorize]
-    public class ConfiguracionFlujoNewController 
+    public class ConfiguracionFlujoNewController : FlujoAutorizacionController<FlujoViaticos, ConsultaConfiguracionFlujo>
     {
 
-        //IServicioFlujosNew servicio;
-        //IServicioFlujosNew Servicio => App.Inject(ref servicio);
+        IServicioFlujosNew servicio;
+        IServicioFlujosNew Servicio => App.Inject(ref servicio);
 
         
-        ////public override IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo => Servicio;
+        public override IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo => Servicio;
 
-        //public ConfiguracionFlujoNewController(Aplicacion.Nucleo.IAplicacion app)
-        //{
-        //    this.App = app;
-        //}
+        public ConfiguracionFlujoNewController(Aplicacion.Nucleo.IAplicacion app)
+        {
+            this.App = app;
+        }
 
         
     }
