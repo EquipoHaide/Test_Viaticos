@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 
 namespace Dominio.Nucleo
 {
     public interface IFlujoNew
     {
+
 
         int TipoEntePublico { get; set; }
 
@@ -15,5 +18,8 @@ namespace Dominio.Nucleo
         int TipoFlujo { get; set; }
 
         bool IsValid();
+
+
+       
     }
 }

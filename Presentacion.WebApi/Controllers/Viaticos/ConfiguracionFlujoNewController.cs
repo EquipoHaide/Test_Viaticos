@@ -16,7 +16,9 @@ namespace Presentacion.WebApi.Controllers.Viaticos
 {
     [Route("api/new/[controller]")]
     //[Authorize]
+
     public class ConfiguracionFlujoNewController 
+
     {
 
         //IServicioFlujosNew servicio;
