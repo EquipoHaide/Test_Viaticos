@@ -17,9 +17,6 @@ namespace Aplicacion.Viaticos.Servicios
 
         Nucleo.IAplicacion App { get; set; }
 
-        
-
-
         public ServicioFlujosNew(Nucleo.IAplicacion app)
         {
             App = app;
@@ -32,5 +29,13 @@ namespace Aplicacion.Viaticos.Servicios
             //De momento lo dejare asi
             return new Respuesta<ConsultaPaginada<IFlujoNew>>("");
         }
+
+        public void CrearViaticos(List<IFlujoNew> flujos)
+        {
+            var respuesta = this.Crear(flujos, "");
+
+            //Agregar codi
+        }
+
     }
 }

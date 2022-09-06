@@ -5,7 +5,7 @@ using Infraestructura.Transversal.Plataforma;
 namespace Dominio.Nucleo.Servicios
 {
     public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso>
-        where TFlujo : IFlujo
+        where TFlujo : IFlujo<TPaso>
         where TPaso  : IPaso
        
     {

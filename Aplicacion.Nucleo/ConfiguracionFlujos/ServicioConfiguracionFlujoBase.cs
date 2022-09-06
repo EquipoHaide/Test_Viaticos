@@ -7,7 +7,7 @@ using Dominio.Nucleo.Servicios;
 namespace Aplicacion.Nucleo
 {
     public abstract class ServicioConfiguracionFlujoBase<TFlujo, TConsulta,TPaso> : IServicioConfiguracionFlujoBase<TFlujo,TConsulta,TPaso>
-        where TFlujo : IFlujo
+        where TFlujo : IFlujo<TPaso>
         where TConsulta : IConsulta
         where TPaso : IPaso
     {

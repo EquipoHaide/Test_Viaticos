@@ -8,7 +8,7 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public class ServicioFlujos : ServicioConfiguracionFlujoBase<Flujo,Paso>, IServicioFlujos
+    public class ServicioFlujos : ServicioConfiguracionFlujoBase<Flujo, Dominio.Viaticos.Modelos.Paso>, IServicioFlujos
     {
         private new const string TAG = "Dominio.Seguridad.Servicios.ServicioFlujos";
 

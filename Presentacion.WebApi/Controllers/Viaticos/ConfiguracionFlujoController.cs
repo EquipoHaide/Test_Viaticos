@@ -1,16 +1,13 @@
-﻿using Aplicacion.Nucleo;
+﻿
 using Aplicacion.Viaticos.Servicios;
-using Dominio.Nucleo;
-using Dominio.Seguridad.Modelos;
 using Dominio.Viaticos.Modelos;
-using Infraestructura.Transversal.Plataforma;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Presentacion.WebApi.RecursosProtegidos;
-using Presentacion.WebApi.Seguridad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using Nancy;
+using System.Text.Json;
 
 namespace Presentacion.WebApi.Controllers.Viaticos
 {
@@ -49,15 +46,37 @@ namespace Presentacion.WebApi.Controllers.Viaticos
             return null;
         }
 
-        [HttpPost(Name = "CrearFlujos")]
-        public object Crear(List<Flujo> flujos)
+        //[HttpPost(Name = "CrearFlujos")]
+        public object Crear([FromBody]List<FlujoViaticos> flujos)
         {
+
+            var respuesta = 0;
             //List<IFlujo> listaFlujos = new List<IFlujo>();
             //flujos.ForEach(f => {
             //    listaFlujos.Add(f);
             //});
 
-            var respuesta = Servicio.Crear(flujos, "");
+            // var respuesta = Servicio.Crear(flujos, "");
+            return null;
+        }
+
+        [HttpPost()]
+        public object Create([FromBody] List<Flujo> flujo)
+        {
+            try {
+
+                var lista = new List<Flujo>();
+                //lista.Add(flujo);
+                var respuesta = Servicio.Crear(flujo, "");
+
+            }
+            catch(Exception e) {
+
+            }
+           
+            //var respuesta = JsonSerializer.Deserialize(flujo, d);
+            //WeatherForecast? weatherForecast =
+            // JsonSerializer.Deserialize<WeatherForecast>(jsonString);
             return null;
         }
 
@@ -75,7 +94,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
             return null;
         }
 
-
+     
 
     }
 }

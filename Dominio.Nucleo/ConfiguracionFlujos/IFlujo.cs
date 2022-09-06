@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Dominio.Nucleo
 {
-    public interface IFlujo
+    public interface IFlujo<T> where T : IPaso
     {
 
-        ITipoEntePublico TipoEntePublico { get; set; }
+        //ITipoEntePublico TipoEntePublico { get; set; }
 
-        INivelEmpleado NivelEmpleado { get; set; }
+        //INivelEmpleado NivelEmpleado { get; set; }
 
-        List<IPaso> Pasos { get; set; }
+        List<T> Pasos { get; set; }
 
         int TipoFlujo { get; set; }
 

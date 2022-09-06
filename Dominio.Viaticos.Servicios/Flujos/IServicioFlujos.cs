@@ -6,7 +6,7 @@ using Dominio.Nucleo.Servicios;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public interface IServicioFlujos : IServicioConfiguracionFlujoBase<Flujo,Paso>
+    public interface IServicioFlujos : IServicioConfiguracionFlujoBase<Flujo,Dominio.Viaticos.Modelos.Paso>
     {
         void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId);
 

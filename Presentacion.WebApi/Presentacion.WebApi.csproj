@@ -15,6 +15,7 @@
     <None Remove="Seguridad\" />
     <None Remove="System.IdentityModel.Tokens.Jwt" />
     <None Remove="IdentityServer4.AccessTokenValidation" />
+    <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aplicacion\" />

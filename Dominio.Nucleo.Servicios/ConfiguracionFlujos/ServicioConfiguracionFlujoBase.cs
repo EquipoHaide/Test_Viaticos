@@ -7,7 +7,7 @@ using Infraestructura.Transversal.Plataforma;
 namespace Dominio.Nucleo.Servicios
 {
     public class ServicioConfiguracionFlujoBase<TFlujo,TPaso> : IServicioConfiguracionFlujoBase<TFlujo, TPaso>
-        where TFlujo : IFlujo
+        where TFlujo : IFlujo<TPaso>
         where TPaso  : IPaso
     {
 
@@ -26,14 +26,14 @@ namespace Dominio.Nucleo.Servicios
 
             foreach (var flujo in flujos)
             {
-                if (flujo.TipoEntePublico == null)
-                    return new Respuesta<bool>("El tipo ente publico es requerido", "TAG");
+                //if (flujo.TipoEntePublico == null)
+                //    return new Respuesta<bool>("El tipo ente publico es requerido", "TAG");
 
-                if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
-                {
-                    if (flujo.NivelEmpleado == null)
-                        return new Respuesta<bool>("El nivel del empleado es requerido para un flujo particular.", "TAG");
-                }
+                //if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
+                //{
+                //    if (flujo.NivelEmpleado == null)
+                //        return new Respuesta<bool>("El nivel del empleado es requerido para un flujo particular.", "TAG");
+                //}
 
                 //Aplicamos la validacion con respecto a los pasos.
                 if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
@@ -97,9 +97,5 @@ namespace Dominio.Nucleo.Servicios
             return true;
         }
 
-        //public Respuesta<bool> ValidarPaso(Paso paso)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
