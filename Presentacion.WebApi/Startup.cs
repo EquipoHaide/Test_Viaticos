@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Presentacion.WebApi.AppCircuitBreaker;
 using Presentacion.WebApi.HealthCheck;
 using Presentacion.WebApi.Seguridad;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.WebApi
 {
@@ -52,6 +53,8 @@ namespace Presentacion.WebApi
             {
                 options.Filters.Add<CircuitBreakerResourceFilter>();
             });
+
+            
 
             //health check
             services.AddHealthChecks().AddTypeActivatedCheck<AppHealthCheck>("health", args: new object[] { circuitBreaker });
