@@ -7,6 +7,7 @@ using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 
 using ServiciosDominio = Dominio.Viaticos.Servicios;
+using TipoEntePublico = Dominio.Viaticos.Modelos.TipoEntePublico;
 
 namespace Aplicacion.Viaticos.Servicios
 {
@@ -35,9 +36,20 @@ namespace Aplicacion.Viaticos.Servicios
 
             //var ff = (List<FlujoBase>)flujos;
             //creamos el maperr para que transforme el modelo particular de viaticos a un FlujoBase
+            //var flujosComponente = MainMapper.Instance.Mapper.Map<IFlujoNew>(flujos[0]);
+            // Model2 model = this.Mapper.Map<Model2>(new Model1());
+            //FlujoTemp flujosComponente = MainMapper.Instance.Mapper.Map<FlujoTemp>(flujos[0]);
+
+
+            var entePublico = new TipoEntePublico() {
+                Descripcion = "djsfhjshfj"
+            };
+
+            var ente = MainMapper.Instance.Mapper.Map<Dominio.Nucleo.TipoEntePublico>(entePublico);
 
             var respuesta = this.Crear(null, "");
 
+            
             Console.WriteLine("VALIDACION DE REGLAS PARTICULARS DE VIATICOS");
 
             Console.WriteLine("INVOCACION DE REPOSITORIO PARA EL GUARDADO DE LA CONFIGURACION");
