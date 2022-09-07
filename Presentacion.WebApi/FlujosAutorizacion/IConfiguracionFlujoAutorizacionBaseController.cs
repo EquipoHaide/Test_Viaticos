@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Presentacion.WebApi.RecursosProtegidos
 {
-    public interface IFlujoAutorizacionController<TFlujo, TConsulta>        
+    public interface IConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta>        
         where TConsulta : IConsulta
         where TFlujo : IFlujoNew
     {        

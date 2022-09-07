@@ -5,11 +5,11 @@ namespace Dominio.Nucleo
     public interface IFlujoNew
     {
 
-        ITipoEntePublico TipoEntePublico { get; set; }
+        TipoEntePublico TipoEntePublico { get; set; }
       
-        INivelEmpleado NivelEmpleado { get; set; }
+        //INivelEmpleado NivelEmpleado { get; set; }
 
-        List<IPaso> Pasos { get; set; }
+        List<Paso> Pasos { get; set; }
 
         int TipoFlujo { get; set; }
 

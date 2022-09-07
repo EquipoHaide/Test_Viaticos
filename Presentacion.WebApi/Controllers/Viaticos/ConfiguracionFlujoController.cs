@@ -65,7 +65,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         {
             try {
 
-                var lista = new List<Flujo>();
+                //var lista = new List<Flujo>();
                 //lista.Add(flujo);
                 var respuesta = Servicio.Crear(flujo, "");
 

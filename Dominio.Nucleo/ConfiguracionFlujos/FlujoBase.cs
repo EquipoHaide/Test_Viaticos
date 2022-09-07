@@ -7,13 +7,18 @@ using System.Text.Json.Serialization;
 namespace Dominio.Nucleo
 {
 
-    public abstract class FlujoBase : IFlujoNew
+    public class FlujoBase : IFlujoNew
     {
-        public ITipoEntePublico TipoEntePublico { get; set; }
-        public INivelEmpleado NivelEmpleado { get; set; }
-        public List<IPaso> Pasos { get; set; }
+        public TipoEntePublico TipoEntePublico { get; set; }
+        //public INivelEmpleado NivelEmpleado { get; set; }
+        public List<Paso> Pasos { get; set; }
+        public FlujoBase() {
+
+            //this.TipoEntePublico = new TipoEntePublico();
+        }
 
         public int TipoFlujo { get; set; }
+        //public ITipoEntePublico TipoEntePublico { get; set; }
 
         public bool IsValid()
         {

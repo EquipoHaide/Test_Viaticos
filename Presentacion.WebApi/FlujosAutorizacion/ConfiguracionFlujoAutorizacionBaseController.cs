@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Presentacion.WebApi.RecursosProtegidos
 {
-    public class FlujoAutorizacionController<TFlujo, TConsulta> : ControllerBase, IFlujoAutorizacionController<TFlujo, TConsulta>
+    public class ConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta>
          where TConsulta : IConsulta
          where TFlujo : IFlujoNew
     {
@@ -30,10 +30,14 @@ namespace Presentacion.WebApi.RecursosProtegidos
         [HttpPost("recursos")]
         public object Crear([FromBody] List<TFlujo> flujos)   
         {
-            //ServicioConfiguracionFlujo.Crear(flujos, "");
+            
 
-            //·······  >>  PENDIENTE PARA EL LUNES PREGUNTAR A ROBERTO COMO SE HACE PARA QUE EN EL CONTROLADOR 
-            //              SE PUEDA RESOLVER UNA INTERFACE, QUE ESTA COMO PROPIEDAD DE OTRA INTERFACE
+            List<Dominio.Nucleo.IFlujoNew> f = new List<IFlujoNew>();
+            flujos.ForEach(s => { f.Add((IFlujoNew)s); });
+
+            ServicioConfiguracionFlujo.Crear(f, "");
+
+       
             Console.WriteLine("TEST");
             return null;
 

@@ -14,9 +14,9 @@ using System.Linq;
 
 namespace Presentacion.WebApi.Controllers.Viaticos
 {
-    [Route("api/new/[controller]")]
+    [Route("api/[controller]")]
     //[Authorize]
-    public class ConfiguracionFlujoNewController : FlujoAutorizacionController<FlujoViaticos, ConsultaConfiguracionFlujo>
+    public class ConfiguracionFlujoViaticosController : ConfiguracionFlujoAutorizacionBaseController<FlujoViaticos, ConsultaConfiguracionFlujo>
     {
 
         IServicioFlujosNew servicio;
@@ -25,7 +25,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         
         public override IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo => Servicio;
 
-        public ConfiguracionFlujoNewController(Aplicacion.Nucleo.IAplicacion app)
+        public ConfiguracionFlujoViaticosController(Aplicacion.Nucleo.IAplicacion app)
         {
             this.App = app;
         }
