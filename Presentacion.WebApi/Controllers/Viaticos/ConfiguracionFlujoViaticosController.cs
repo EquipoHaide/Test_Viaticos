@@ -19,8 +19,8 @@ namespace Presentacion.WebApi.Controllers.Viaticos
     public class ConfiguracionFlujoViaticosController : ConfiguracionFlujoAutorizacionBaseController<FlujoViaticos, ConsultaConfiguracionFlujo>
     {
 
-        IServicioFlujosNew servicio;
-        IServicioFlujosNew Servicio => App.Inject(ref servicio);
+        IServicioFlujosNew<FlujoViaticos> servicio;
+        IServicioFlujosNew<FlujoViaticos> Servicio => App.Inject(ref servicio);
 
         
         public override IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo => Servicio;

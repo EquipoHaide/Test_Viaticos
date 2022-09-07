@@ -10,7 +10,7 @@ using ServiciosDominio = Dominio.Viaticos.Servicios;
 
 namespace Aplicacion.Viaticos.Servicios
 {
-    public class ServicioFlujosNew: ServicioConfiguracionFlujoBaseNew , IServicioFlujosNew
+    public class ServicioFlujosNew: ServicioConfiguracionFlujoBaseNew , IServicioFlujosNew<FlujoViaticos>
     {
 
         const string TAG = "Aplicacion.Seguridad.Servicios.Grupos.ServicioGrupos";
@@ -30,11 +30,17 @@ namespace Aplicacion.Viaticos.Servicios
             return new Respuesta<ConsultaPaginada<IFlujoNew>>("");
         }
 
-        public void CrearViaticos(List<IFlujoNew> flujos)
+        public void CrearViaticos(List<FlujoViaticos> flujos)
         {
-            var respuesta = this.Crear(flujos, "");
 
-            //Agregar codi
+            //var ff = (List<FlujoBase>)flujos;
+            //creamos el maperr para que transforme el modelo particular de viaticos a un FlujoBase
+
+            var respuesta = this.Crear(null, "");
+
+            Console.WriteLine("VALIDACION DE REGLAS PARTICULARS DE VIATICOS");
+
+            Console.WriteLine("INVOCACION DE REPOSITORIO PARA EL GUARDADO DE LA CONFIGURACION");
         }
 
     }

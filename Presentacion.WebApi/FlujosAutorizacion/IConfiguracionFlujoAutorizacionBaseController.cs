@@ -5,7 +5,7 @@ namespace Presentacion.WebApi.RecursosProtegidos
 {
     public interface IConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta>        
         where TConsulta : IConsulta
-        where TFlujo : IFlujoNew
+        //where TFlujo : IFlujoNew
     {        
         object ConsultarConfiguracionFlujo(TConsulta filtro);
 

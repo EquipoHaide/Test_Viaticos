@@ -11,15 +11,10 @@ namespace Dominio.Nucleo
     {
         public TipoEntePublico TipoEntePublico { get; set; }
         //public INivelEmpleado NivelEmpleado { get; set; }
-        public List<Paso> Pasos { get; set; }
-        public FlujoBase() {
-
-            //this.TipoEntePublico = new TipoEntePublico();
-        }
+        public List<Paso> Pasos { get; set; }       
 
         public int TipoFlujo { get; set; }
-        //public ITipoEntePublico TipoEntePublico { get; set; }
-
+        
         public bool IsValid()
         {
             return true;
