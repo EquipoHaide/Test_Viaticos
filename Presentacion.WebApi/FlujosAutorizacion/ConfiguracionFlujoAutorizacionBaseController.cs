@@ -39,7 +39,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
                 var flujos = new List<IFlujo<TPaso>>();
                 config.Flujos.ForEach(f => { flujos.Add(f); });
 
-                var flujosConvertidos = config.Flujos as List<IFlujo<PasoViatico>>;
+                //var flujosConvertidos = config.Flujos as List<IFlujo<PasoViatico>>;
                 var respuesta = ServicioConfiguracionFlujoBase.Crear(flujos/*config.Flujos as List<IFlujo<TPaso>>*/);
 
             } catch (Exception ex) {
