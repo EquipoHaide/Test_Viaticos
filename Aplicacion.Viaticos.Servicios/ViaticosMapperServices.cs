@@ -1,4 +1,5 @@
 ﻿using System;
+using Aplicacion.Viaticos.Servicios.ConfiguracionFlujos;
 using Dominio.Nucleo;
 using Dominio.Viaticos.Modelos;
 
@@ -8,9 +9,9 @@ namespace Aplicacion.Viaticos.Servicios
     {
         public override void Maping(IAplicacion app)
         {
-            app.Register<IServicioFlujos<IPaso>, ServicioFlujos<IPaso>>();
+            app.Register<IServicioFlujos, ServicioFlujos>();
             app.Register<IServicioFlujosNew<FlujoViaticos>, ServicioFlujosNew>();
-            app.Register<ConfiguracionFlujos.IServicioFlujo<IPaso>, ConfiguracionFlujos.ServicioFlujo<IPaso>>();
+            app.Register<IServicioFlujo<PasoViatico>, ServicioFlujo<PasoViatico>>();
         }
     }
 }

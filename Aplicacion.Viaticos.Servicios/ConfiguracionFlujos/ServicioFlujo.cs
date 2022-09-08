@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
 using Dominio.Nucleo;
+using Dominio.Viaticos.Modelos;
 
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {

@@ -17,18 +17,25 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public abstract bool ValidarPasos(List<IFlujo<TPaso>> flujos);
 
         public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos)
-        {   
-            if (this.ValidarPasos(flujos))
-            {
-                //Todo: Aqui todo lo que sigue
+        {
+            try {
 
-                var respuesta  = ServicioDominio.Crear(flujos);
+                if (this.ValidarPasos(flujos))
+                {
+                    //Todo: Aqui todo lo que sigue
+
+                    var respuesta = ServicioDominio.Crear(flujos);
 
 
-                //Repositorio.Guardar();
+                    //Repositorio.Guardar();
 
+
+                }
+            }
+            catch(Exception e) {
 
             }
+        
 
             return new Respuesta<bool>(true);
 
