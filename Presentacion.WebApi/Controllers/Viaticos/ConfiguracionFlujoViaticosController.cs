@@ -6,7 +6,7 @@ using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Presentacion.WebApi.RecursosProtegidos;
+using Presentacion.WebApi.FlujosAutorizacion;
 using Presentacion.WebApi.Seguridad;
 using System;
 using System.Collections.Generic;

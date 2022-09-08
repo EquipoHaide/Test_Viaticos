@@ -34,19 +34,9 @@ namespace Aplicacion.Viaticos.Servicios
         public void CrearViaticos(List<FlujoViaticos> flujos)
         {
 
-            //var ff = (List<FlujoBase>)flujos;
-            //creamos el maperr para que transforme el modelo particular de viaticos a un FlujoBase
-            //var flujosComponente = MainMapper.Instance.Mapper.Map<IFlujoNew>(flujos[0]);
-            // Model2 model = this.Mapper.Map<Model2>(new Model1());
-            //FlujoTemp flujosComponente = MainMapper.Instance.Mapper.Map<FlujoTemp>(flujos[0]);
-
-
-            var entePublico = new TipoEntePublico() {
-                Descripcion = "djsfhjshfj"
-            };
-
-            var ente = MainMapper.Instance.Mapper.Map<Dominio.Nucleo.TipoEntePublico>(entePublico);
-
+            
+            //convertir flujoViaticos a IFlujoNew
+            //metodo de la nuestra clase base
             var respuesta = this.Crear(null, "");
 
             

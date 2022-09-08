@@ -1,7 +1,7 @@
 ﻿using Dominio.Nucleo;
 using System.Collections.Generic;
 
-namespace Presentacion.WebApi.RecursosProtegidos
+namespace Presentacion.WebApi.FlujosAutorizacion
 {
     public interface IConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta>        
         where TConsulta : IConsulta

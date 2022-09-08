@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Presentacion.WebApi.RecursosProtegidos
+namespace Presentacion.WebApi.FlujosAutorizacion
 {
     public class ConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta>
          where TConsulta : IConsulta
@@ -22,7 +22,7 @@ namespace Presentacion.WebApi.RecursosProtegidos
         public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro) 
         {
            
-            ServicioConfiguracionFlujo.Consultar(filtro, "");
+            var respuesta = ServicioConfiguracionFlujo.Consultar(filtro, "");
 
             Console.WriteLine("TEST");
             return null;
@@ -32,15 +32,8 @@ namespace Presentacion.WebApi.RecursosProtegidos
         public object Crear([FromBody] List<TFlujo> flujos)   
         {
             
-
-            //List<Dominio.Nucleo.IFlujoNew> f = new List<IFlujoNew>();
-
-            //flujos.ForEach(s => { f.Add((IFlujoNew)s); });
-                       
-
             ((IServicioFlujosNew<TFlujo>)ServicioConfiguracionFlujo).CrearViaticos(flujos);
-
-       
+     
             Console.WriteLine("TEST");
             return null;
 

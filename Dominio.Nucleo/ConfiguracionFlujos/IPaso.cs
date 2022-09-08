@@ -6,19 +6,11 @@ namespace Dominio.Nucleo
    
     public interface IPaso 
     {
-        [JsonPropertyName("Id")]
-        int Id { get; set; }
 
-        [JsonPropertyName("Orden")]
-        int Orden { get; set; }
-        
-        [JsonPropertyName("Rol")]
+        int Id { get; set; }       
+        int Orden { get; set; }    
         int Rol { get; set; }
-
-        [JsonPropertyName("TipoRol")]
-        int TipoRol { get; set; }
-
-        [JsonPropertyName("EsFirma")]
+        int TipoRol { get; set; }   
         bool EsFirma { get; set; }
 
         public bool IsValid();
