@@ -18,6 +18,8 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
         public virtual IServicioRecursoBase ServicioRecursos { get; }
         public virtual IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo { get; }
+        public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioConfiguracionFlujoBase { get; }
+
 
         [HttpGet("recursos")]
         public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro) 
@@ -32,9 +34,14 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         [HttpPost("recursos")]
         public object Crear([FromBody] ModeloConfiguracionFlujo<TPaso> config)   
         {
-            
-           // ((IServicioFlujosNew<TFlujo>)ServicioConfiguracionFlujo).CrearViaticos(flujos);
-     
+            try {
+
+                var respuesta = ServicioConfiguracionFlujoBase.Crear(config.Flujos as List<IFlujo<TPaso>>);
+
+            } catch (Exception ex) {
+
+            }
+
             Console.WriteLine("TEST");
             return null;
 

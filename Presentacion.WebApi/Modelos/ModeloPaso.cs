@@ -13,6 +13,8 @@ namespace Presentacion.WebApi.Modelos
         public int Rol { get; set; }
         public int TipoRol { get; set; }
         public bool EsFirma { get; set; }
+        public bool Activo { get; set; }
+
 
         public bool IsValid()
         {

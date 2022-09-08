@@ -10,6 +10,7 @@ namespace Aplicacion.Viaticos.Servicios
         {
             app.Register<IServicioFlujos, ServicioFlujos>();
             app.Register<IServicioFlujosNew<FlujoViaticos>, ServicioFlujosNew>();
+            app.Register<ConfiguracionFlujos.IServicioFlujo, ConfiguracionFlujos.ServicioFlujo<IPaso>>();
         }
     }
 }

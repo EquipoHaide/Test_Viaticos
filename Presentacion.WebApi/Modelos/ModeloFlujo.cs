@@ -13,10 +13,14 @@ namespace Presentacion.WebApi.Modelos
         public NivelEmpleado NivelEmpleado { get; set; }
         public List<TPaso> Pasos { get ;set ;}
         public int TipoFlujo { get; set; }
+        public string Descripcion { get; set; }
 
         public bool IsValid()
         {
-            throw new NotImplementedException();
+            if (this.Descripcion == null)
+                return true;
+
+            return false;
         }
     }
 }

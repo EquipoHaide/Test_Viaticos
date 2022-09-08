@@ -14,11 +14,11 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         //Dominio.IRepositorioFlujos repositorio;
  
 
-        public abstract bool ValidarPasos();
+        public abstract bool ValidarPasos(List<IFlujo<TPaso>> flujos);
 
         public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos)
         {   
-            if (this.ValidarPasos())
+            if (this.ValidarPasos(flujos))
             {
                 //Todo: Aqui todo lo que sigue
 
@@ -34,5 +34,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         }
 
+       
     }
 }
