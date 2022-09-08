@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Nucleo;
 using Aplicacion.Viaticos.Servicios;
 using Dominio.Nucleo;
+using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Mvc;
 using Presentacion.WebApi.Modelos;
@@ -35,8 +36,11 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         public object Crear([FromBody] ModeloConfiguracionFlujo<TPaso> config)   
         {
             try {
+                var flujos = new List<IFlujo<TPaso>>();
+                config.Flujos.ForEach(f => { flujos.Add(f); });
 
-                var respuesta = ServicioConfiguracionFlujoBase.Crear(config.Flujos as List<IFlujo<TPaso>>);
+                var flujosConvertidos = config.Flujos as List<IFlujo<PasoViatico>>;
+                var respuesta = ServicioConfiguracionFlujoBase.Crear(flujos/*config.Flujos as List<IFlujo<TPaso>>*/);
 
             } catch (Exception ex) {
 
