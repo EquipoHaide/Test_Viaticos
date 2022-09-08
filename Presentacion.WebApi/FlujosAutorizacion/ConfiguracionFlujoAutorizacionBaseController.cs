@@ -3,6 +3,7 @@ using Aplicacion.Viaticos.Servicios;
 using Dominio.Nucleo;
 using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Mvc;
+using Presentacion.WebApi.Modelos;
 using Presentacion.WebApi.Seguridad;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ using System.Linq;
 
 namespace Presentacion.WebApi.FlujosAutorizacion
 {
-    public class ConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TFlujo, TConsulta>
+    public class ConfiguracionFlujoAutorizacionBaseController<TPaso, TConsulta> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TPaso, TConsulta>
          where TConsulta : IConsulta
-         //where TFlujo : IFlujoNew
+         where TPaso : IPaso
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
         public virtual IServicioRecursoBase ServicioRecursos { get; }
@@ -29,10 +30,10 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         }
 
         [HttpPost("recursos")]
-        public object Crear([FromBody] List<TFlujo> flujos)   
+        public object Crear([FromBody] ModeloConfiguracionFlujo<TPaso> config)   
         {
             
-            ((IServicioFlujosNew<TFlujo>)ServicioConfiguracionFlujo).CrearViaticos(flujos);
+           // ((IServicioFlujosNew<TFlujo>)ServicioConfiguracionFlujo).CrearViaticos(flujos);
      
             Console.WriteLine("TEST");
             return null;
