@@ -5,9 +5,18 @@ using Dominio.Nucleo;
 
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
-    public class ServicioFlujo<TPaso> : ServicioConfiguracionFlujoBase<TPaso>, IServicioFlujo
+    public class ServicioFlujo<TPaso> : ServicioConfiguracionFlujoBase<TPaso>, IServicioFlujo<TPaso>
         where TPaso : IPaso
     {
+        const string TAG = "Aplicacion.Viaticos.Servicios.ConfiguracionFlujos";
+
+        Nucleo.IAplicacion App { get; set; }
+
+        public ServicioFlujo(Nucleo.IAplicacion app)
+        {
+            App = app;
+        }
+
         public override bool ValidarPasos(List<IFlujo<TPaso>> flujos)
         {
 

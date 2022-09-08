@@ -22,21 +22,22 @@ namespace Presentacion.WebApi.Controllers.Viaticos
     public class ConfiguracionFlujoViaticosController : ConfiguracionFlujoAutorizacionBaseController<ModeloPaso, ConsultaConfiguracionFlujo>
     {
 
-        //IServicioFlujosNew<FlujoViaticos> servicio;
-        //IServicioFlujosNew<FlujoViaticos> Servicio => App.Inject(ref servicio);
+        IServicioFlujos<ModeloPaso> servicio;
+        IServicioFlujos<ModeloPaso> Servicio => App.Inject(ref servicio);
 
-        AplicacionViaticos.IServicioFlujo servicioViaticos;
-        AplicacionViaticos.IServicioFlujo ServicioViaticos => App.Inject(ref servicioViaticos);
+        AplicacionViaticos.IServicioFlujo<ModeloPaso> servicioViaticos;
+        AplicacionViaticos.IServicioFlujo<ModeloPaso> ServicioViaticos => App.Inject(ref servicioViaticos);
 
         //public override IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo => Servicio;
 
-        public override IServicioConfiguracionFlujoBase<ModeloPaso> ServicioConfiguracionFlujoBase => (IServicioConfiguracionFlujoBase<ModeloPaso>)this.ServicioViaticos;
+        public override IServicioConfiguracionFlujoBase<ModeloPaso> ServicioConfiguracionFlujoBase => this.Servicio;
 
 
         public ConfiguracionFlujoViaticosController(Aplicacion.Nucleo.IAplicacion app)
         {
             this.App = app;
-            
+
+            //ServicioConfiguracionFlujoBase.Crear(null);
         }
 
         

@@ -16,7 +16,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
          where TPaso : IPaso
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
-        public virtual IServicioRecursoBase ServicioRecursos { get; }
+        //public virtual IServicioRecursoBase ServicioRecursos { get; }
         public virtual IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo { get; }
         public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioConfiguracionFlujoBase { get; }
 

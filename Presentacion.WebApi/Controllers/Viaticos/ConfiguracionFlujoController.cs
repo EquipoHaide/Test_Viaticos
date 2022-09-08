@@ -19,8 +19,8 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
 
 
-        IServicioFlujos servicio;
-        IServicioFlujos Servicio => App.Inject(ref servicio);
+        //IServicioFlujos servicio;
+        //IServicioFlujos Servicio => App.Inject(ref servicio);
      
 
 
@@ -35,7 +35,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         public Object Consultar(ConsultaConfiguracionFlujo filtro)
         {
 
-            var respuesta = Servicio.Consultar(filtro,"");
+            //var respuesta = Servicio.Consultar(filtro,"");
             
             Console.WriteLine("TEST---");
 
@@ -67,7 +67,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
 
                 //var lista = new List<Flujo>();
                 //lista.Add(flujo);
-                var respuesta = Servicio.Crear(flujo, "");
+                //var respuesta = Servicio.Crear(flujo, "");
 
             }
             catch(Exception e) {
