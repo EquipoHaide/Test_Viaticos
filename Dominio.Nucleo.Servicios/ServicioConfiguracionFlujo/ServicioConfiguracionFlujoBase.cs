@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Infraestructura.Transversal.Plataforma;
+using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 {
@@ -12,36 +13,29 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos)
         {
-            //Valida que el objeto no este vacio
-            if (flujos == null || flujos.Count < 1)
-                return new Respuesta<bool>("Es requerido al menos un flujo de autorizacion ", TAG);
 
             if (flujos.Count(f => f.TipoFlujo == (int)TipoFlujo.Predeterminado) > 1)
                 return new Respuesta<bool>("Solo se permite un flujo predeterminado ", TAG);
 
-
             foreach (var flujo in flujos)
             {
-                if (flujo.TipoEntePublico == null)
-                    return new Respuesta<bool>("El tipo ente publico es requerido", TAG);
+                if (flujo.TipoEntePublico.Descripcion == null)
+                    return new Respuesta<bool>("La descripcion del ente publico es requerido", TAG);
 
                 if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
                 {
-                    if (flujo.NivelEmpleado == null)
+                    if (flujo.NivelEmpleado.Nivel.ToString().IsNullOrEmptyOrWhiteSpace())
                         return new Respuesta<bool>("El nivel del empleado es requerido para un flujo particular.", TAG);
                 }
 
                 //Aplicamos la validacion con respecto a los pasos.
-                if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
-                    return new Respuesta<bool>("La lista de pasos es requerida.", TAG);
-
-
+                
                 foreach (var item in flujo.Pasos)
                 {
                     var respuestaPaso = this.ValidarPaso(item);
 
                     if (!respuestaPaso.Contenido)
-                        return new Respuesta<bool>("La información de los pasos esta incompleta", TAG);
+                        return new Respuesta<bool>(respuestaPaso.Mensaje, TAG);
                 }
 
                 if (this.EsRepetido(flujo.Pasos))

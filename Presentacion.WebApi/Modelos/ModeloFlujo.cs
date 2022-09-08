@@ -17,10 +17,15 @@ namespace Presentacion.WebApi.Modelos
 
         public bool IsValid()
         {
-            if (this.Descripcion == null)
-                return true;
+            if (!string.IsNullOrEmpty(Descripcion) && Descripcion.Length > 100) return false;
 
-            return false;
+            if (TipoFlujo < 0) return false;
+
+            if (TipoEntePublico == null) return false;
+
+            if (NivelEmpleado == null) return false;
+
+            return true;
         }
     }
 }
