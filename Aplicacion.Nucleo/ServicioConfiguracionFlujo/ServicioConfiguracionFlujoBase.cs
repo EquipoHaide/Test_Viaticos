@@ -5,12 +5,15 @@ using Dominio.Nucleo;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
 using Infraestructura.Transversal.Plataforma;
+using System.Linq;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
     public abstract class ServicioConfiguracionFlujoBase<TPaso> : IServicioConfiguracionFlujoBase<TPaso>
          where TPaso : IPaso
     {
+        const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
+
         Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioDominio;
         //Dominio.IRepositorioFlujos repositorio;
 
@@ -25,8 +28,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos)
         {
-            //try {
-
                 //Valida que el objeto no este vacio
                 if (flujos == null || !flujos.Any())
                     return new Respuesta<bool>("Es requerido al menos un flujo de autorizacion ", TAG);
