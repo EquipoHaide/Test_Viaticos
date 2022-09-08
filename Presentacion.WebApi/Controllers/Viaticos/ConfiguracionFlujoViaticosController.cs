@@ -7,6 +7,7 @@ using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentacion.WebApi.FlujosAutorizacion;
+using Presentacion.WebApi.Modelos;
 using Presentacion.WebApi.Seguridad;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
 {
     [Route("api/[controller]")]
     //[Authorize]
-    public class ConfiguracionFlujoViaticosController : ConfiguracionFlujoAutorizacionBaseController<FlujoViaticos, ConsultaConfiguracionFlujo>
+    public class ConfiguracionFlujoViaticosController : ConfiguracionFlujoAutorizacionBaseController<ModeloPaso, ConsultaConfiguracionFlujo>
     {
 
         IServicioFlujosNew<FlujoViaticos> servicio;

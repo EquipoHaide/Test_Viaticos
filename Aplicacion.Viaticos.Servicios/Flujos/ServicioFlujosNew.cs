@@ -7,7 +7,7 @@ using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 
 using ServiciosDominio = Dominio.Viaticos.Servicios;
-using TipoEntePublico = Dominio.Viaticos.Modelos.TipoEntePublico;
+//using TipoEntePublico = Dominio.Viaticos.Modelos.TipoEntePublico;
 
 namespace Aplicacion.Viaticos.Servicios
 {
