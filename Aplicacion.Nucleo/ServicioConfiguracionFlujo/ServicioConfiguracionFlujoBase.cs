@@ -53,6 +53,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 if (flujo.NivelEmpleado.Nivel.ToString().IsNullOrEmptyOrWhiteSpace())
                     return new Respuesta("El nivel del empleado es requerido para un flujo particular.", TAG);
             }
+
             //CONSULTA AL REPOSITORIO
             //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO 
             //            

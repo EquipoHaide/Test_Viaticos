@@ -36,11 +36,9 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         public object Crear([FromBody] ModeloConfiguracionFlujo<TPaso> config)   
         {
             try {
-                //var flujos = new List<IFlujo<TPaso>>();
-                //config.Flujos.ForEach(f => { flujos.Add(f); });
-
-                //var flujosConvertidos = config.Flujos as List<IFlujo<PasoViatico>>;
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo/*config.Flujos as List<IFlujo<TPaso>>*/, null);
+                
+                //Falta pasarle el repositorio especifico que usara viaticos
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, null);
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)
