@@ -38,7 +38,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
             try {
                 
                 //Falta pasarle el repositorio especifico que usara viaticos
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, null);
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, null, this.GetSubjectId());
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)
@@ -47,7 +47,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
                     return this.ApiResult(resultado.Mensaje);
                 }
 
-                return this.ApiResult(new { resultado.Contenido});
+                return this.ApiResult(new { resultado});
             }
              catch (Exception e)
             {
