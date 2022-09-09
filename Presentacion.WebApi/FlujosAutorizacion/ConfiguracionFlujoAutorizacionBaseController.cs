@@ -40,7 +40,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
                 //config.Flujos.ForEach(f => { flujos.Add(f); });
 
                 //var flujosConvertidos = config.Flujos as List<IFlujo<PasoViatico>>;
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo/*config.Flujos as List<IFlujo<TPaso>>*/);
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo/*config.Flujos as List<IFlujo<TPaso>>*/, null);
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)

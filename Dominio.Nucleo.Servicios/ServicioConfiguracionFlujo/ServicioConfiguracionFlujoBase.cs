@@ -11,11 +11,15 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
-        public Respuesta<IFlujo<TPaso>> Crear(IFlujo<TPaso> flujo, bool esPredeterminado)
+        public Respuesta<IFlujo<TPaso>> Crear(IFlujo<TPaso> flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
         {
             ///VALIDAR QUE SOLO EXISTA UN FLUJO PREDETERMINADO 
             if (esPredeterminado)
                 return new Respuesta<IFlujo<TPaso>>("Solo se permite un flujo predeterminado ", TAG);
+
+            ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
+            if (esNivelRepetido)
+                return new Respuesta<IFlujo<TPaso>>("No se permite flujos con el mismo nivel de empleado", TAG);
 
             if (flujo.TipoEntePublico == null)
                 return new Respuesta<IFlujo<TPaso>>("El tipo ente publico es requerida", TAG);
@@ -23,21 +27,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (flujo.TipoEntePublico.Descripcion == null)
                 return new Respuesta<IFlujo<TPaso>>("La descripcion del ente publico es requerido", TAG);
 
-            if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
-                return new Respuesta<IFlujo<TPaso>>("La lista de pasos es requerida.", TAG);
-
-            if (flujo.TipoFlujo.ToString() == null)
-                return new Respuesta<IFlujo<TPaso>>("El tipo de flujo es requerido", TAG);
-
-            if (flujo.NivelEmpleado == null)
-                return new Respuesta<IFlujo<TPaso>>("El nivel de empleado es requerido", TAG);
-
-            if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
-            {
-                if (flujo.NivelEmpleado.Nivel.ToString().IsNullOrEmptyOrWhiteSpace())
-                    return new Respuesta<IFlujo<TPaso>>("El nivel del empleado es requerido para un flujo particular.", TAG);
-            }
-
+           
             //Aplicamos la validacion con respecto a los pasos.
             foreach (var item in flujo.Pasos)
             {
@@ -52,6 +42,10 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             if (!this.EsConsecutivo(flujo.Pasos))
                 return new Respuesta<IFlujo<TPaso>>("La lista de pasos del flujo debe ser consecutivo.", TAG);
+
+            ////AQUI VA IR LA TRANSFORMACION A ENTITY
+            /////EL MODELO A REGRESAR DEBE SER LA ENTITIDA BASE 
+
 
             return new Respuesta<IFlujo<TPaso>>(flujo);
         }
