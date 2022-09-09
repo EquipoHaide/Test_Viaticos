@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Infraestructura.Datos.Nucleo\Infraestructura.Datos.Nucleo.csproj" />
     <ProjectReference Include="..\Infraestructura.Transversal.Perfiles\Infraestructura.Transversal.Perfiles.csproj" />
     <ProjectReference Include="..\Infraestructura.Transversal.Seguimiento\Infraestructura.Transversal.Seguimiento.csproj" />
     <ProjectReference Include="..\Infraestructura.Transversal.Autenticacion\Infraestructura.Transversal.Autenticacion.csproj" />

@@ -5,6 +5,7 @@ using Dominio.Nucleo;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
 using Infraestructura.Transversal.Plataforma;
+using Infraestructura.Datos.Nucleo;
 using System.Linq;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
@@ -17,7 +18,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioDominio;
         //Dominio.IRepositorioFlujos repositorio;
 
-        public const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
+        //public const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 
         /// <summary>
         /// PENDIENTE :
@@ -26,13 +27,14 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         /// <returns></returns>
         public abstract bool ValidarPasos(List<IFlujo<TPaso>> flujos); 
 
-        public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos)
+        public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos, RepositorioConfiguracionFlujo<Flujo> repositorioConfiguracionFlujo)
         {
                 //Valida que el objeto no este vacio
                 if (flujos == null || !flujos.Any())
                     return new Respuesta<bool>("Es requerido al menos un flujo de autorizacion ", TAG);
+            
 
-               
+
                 foreach (var flujo in flujos)
                 {
                     if (!flujo.IsValid())
@@ -58,13 +60,14 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 {
                     if (this.ValidarPasos(flujos))
                     {
-                        //Todo: Aqui todo lo que sigue 
+                    //Todo: Aqui todo lo que sigue 
 
 
 
 
-                        //Repositorio.Guardar();
+                    //Repositorio.Guardar();
 
+                    repositorioConfiguracionFlujo.Save();
                     }
                 }
 
@@ -107,6 +110,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             return new Respuesta<bool>("");
         }
 
-       
+        public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos, IRepositorioConfiguracionFlujo<Flujo> repositorioConfiguracionFlujo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

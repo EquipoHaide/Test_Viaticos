@@ -14,6 +14,9 @@ namespace Presentacion.WebApi.Modelos
         public List<TPaso> Pasos { get ;set ;}
         public int TipoFlujo { get; set; }
         public string Descripcion { get; set; }
+        public string NombreFlujo { get; set; }
+        public string OtroCampo { get; set; }
+        public string NuevoCampo { get; set; }
 
         public bool IsValid()
         {
