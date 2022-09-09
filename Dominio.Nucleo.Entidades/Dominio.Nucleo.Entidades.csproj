@@ -10,7 +10,4 @@
   <ItemGroup>
     <None Remove="ConfiguracionFlujos\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ConfiguracionFlujos\" />
-  </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ using System.Text;
 namespace Infraestructura.Datos.Nucleo
 {
     public abstract class RepositorioConfiguracionFlujo<TEntidad> : Repository<TEntidad>, IRepositorioConfiguracionFlujo<TEntidad>
-        where TEntidad : class
+        where TEntidad : FlujoBase
         //where TFlujo : Flujo
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }

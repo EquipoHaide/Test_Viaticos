@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Dominio.Nucleo;
 using Dominio.Viaticos.Modelos;
 using Dominio.Nucleo.Servicios;
+using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public interface IServicioFlujos : IServicioConfiguracionFlujoBase<Flujo,Dominio.Viaticos.Modelos.Paso>
+    public interface IServicioFlujos<TPaso> : IServicioConfiguracionFlujoBase<TPaso>
+        where TPaso: IPaso
     {
         void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId);
 

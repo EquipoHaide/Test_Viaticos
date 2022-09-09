@@ -2,7 +2,7 @@
 
 namespace Dominio.Nucleo.Entidades
 {
-    public class Paso : IPaso
+    public class Paso : IEntity, IPaso
     {
         public int Id       { get; set ; }
         public int Orden    { get; set ; }

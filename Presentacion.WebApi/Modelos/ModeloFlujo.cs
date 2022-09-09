@@ -13,10 +13,12 @@ namespace Presentacion.WebApi.Modelos
         public NivelEmpleado NivelEmpleado { get; set; }
         public List<TPaso> Pasos { get ;set ;}
         public int TipoFlujo { get; set; }
+
+
         public string Descripcion { get; set; }
-        public string NombreFlujo { get; set; }
-        public string OtroCampo { get; set; }
-        public string NuevoCampo { get; set; }
+
+        public bool Activo { get; set; }
+
 
         public bool IsValid()
         {
@@ -24,9 +26,7 @@ namespace Presentacion.WebApi.Modelos
 
             if (TipoFlujo < 0) return false;
 
-            if (TipoEntePublico == null) return false;
-
-            if (NivelEmpleado == null) return false;
+            
 
             return true;
         }

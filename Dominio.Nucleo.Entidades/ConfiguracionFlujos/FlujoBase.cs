@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dominio.Nucleo.Entidades
 {
-    public class Flujo : IEntity
+    public class FlujoBase : IFlujo
     {
         [Required]
         public int Id { get; set; }
@@ -18,5 +18,6 @@ namespace Dominio.Nucleo.Entidades
         public int IdNivelEmpleado { get; set; }
 
 
+       
     }
 }

@@ -36,18 +36,25 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         public object Crear([FromBody] ModeloConfiguracionFlujo<TPaso> config)   
         {
             try {
-                var flujos = new List<IFlujo<TPaso>>();
-                config.Flujos.ForEach(f => { flujos.Add(f); });
+                //var flujos = new List<IFlujo<TPaso>>();
+                //config.Flujos.ForEach(f => { flujos.Add(f); });
 
                 //var flujosConvertidos = config.Flujos as List<IFlujo<PasoViatico>>;
-                var respuesta = ServicioConfiguracionFlujoBase.Crear(flujos/*config.Flujos as List<IFlujo<TPaso>>*/);
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo/*config.Flujos as List<IFlujo<TPaso>>*/);
+                if (resultado.EsError)
+                {
+                    if (resultado.Estado == EstadoProceso.Fatal)
+                        return this.ApiResult(resultado.ExcepcionInterna, App.GetLogger());
 
-            } catch (Exception ex) {
+                    return this.ApiResult(resultado.Mensaje);
+                }
 
+                return this.ApiResult(new { resultado.Contenido});
             }
-
-            Console.WriteLine("TEST");
-            return null;
+             catch (Exception e)
+            {
+                return this.ApiResult(e, App.GetLogger());
+            }
 
         }
     }

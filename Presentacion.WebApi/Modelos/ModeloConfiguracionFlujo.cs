@@ -9,6 +9,6 @@ namespace Presentacion.WebApi.Modelos
     public class ModeloConfiguracionFlujo<TPaso>
         where TPaso:IPaso
     {
-        public List<ModeloFlujo<TPaso>> Flujos { get; set; }
+        public ModeloFlujo<TPaso> Flujo { get; set; }
     }
 }

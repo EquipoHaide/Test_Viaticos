@@ -17,8 +17,8 @@ namespace Aplicacion.Viaticos.Servicios
 
         Nucleo.IAplicacion App { get; set; }
 
-        ServiciosDominio.IServicioFlujos servicio;
-        ServiciosDominio.IServicioFlujos Servicio => App.Inject(ref servicio);
+       // ServiciosDominio.IServicioFlujos servicio;
+        //ServiciosDominio.IServicioFlujos Servicio => App.Inject(ref servicio);
         //public override IServicioConfiguracionFlujoBase<Flujo, Paso> ServicioDominio => this.Servicio;
 
 
@@ -45,9 +45,9 @@ namespace Aplicacion.Viaticos.Servicios
                 }
             }
 
-            var respuesta = Servicio.ValidarFlujo(flujos);
-            if(respuesta.EsError)
-                return new Respuesta<List<Flujo>>(respuesta.Mensaje,TAG);
+            //var respuesta = Servicio.ValidarFlujo(flujos);
+            //if(respuesta.EsError)
+            //    return new Respuesta<List<Flujo>>(respuesta.Mensaje,TAG);
             ///
             ///OTRAS VALIDACIONES DE LOS PROGRAMADORES
             ///
