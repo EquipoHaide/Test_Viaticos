@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Dominio.Nucleo;
 using Dominio.Nucleo.Servicios;
+using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public class ServicioFlujos : ServicioConfiguracionFlujoBase<Flujo, Dominio.Viaticos.Modelos.Paso>, IServicioFlujos
+    public class ServicioFlujos : ServicioConfiguracionFlujoBase<PasoViatico>, IServicioFlujos<PasoViatico>
     {
         private new const string TAG = "Dominio.Seguridad.Servicios.ServicioFlujos";
 

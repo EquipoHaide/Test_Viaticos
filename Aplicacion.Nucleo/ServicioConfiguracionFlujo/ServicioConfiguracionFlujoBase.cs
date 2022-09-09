@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dominio.Nucleo;
-using Dominio.Nucleo.Entidades;
-using Dominio.Nucleo.Repositorios;
 using Infraestructura.Transversal.Plataforma;
-using System.Linq;
+
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
@@ -14,99 +12,52 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 
-        Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioDominio;
-        //Dominio.IRepositorioFlujos repositorio;
+        public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioDominio { get; }
 
-        public const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
+        //Dominio.IRepositorioFlujos repositorio;
 
         /// <summary>
         /// PENDIENTE :
         /// </summary>
         /// <param name="flujos"></param>
         /// <returns></returns>
-        public abstract bool ValidarPasos(List<IFlujo<TPaso>> flujos); 
+        public abstract bool ValidarPasos(IFlujo<TPaso> flujos); 
 
-        public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos)
+        public Respuesta<IFlujo<TPaso>> Crear(IFlujo<TPaso> flujo)
         {
-                //Valida que el objeto no este vacio
-                if (flujos == null || !flujos.Any())
-                    return new Respuesta<bool>("Es requerido al menos un flujo de autorizacion ", TAG);
+            //Valida que el objeto no este vacio
+            if (flujo == null)
+                return new Respuesta<IFlujo<TPaso>>("Es requerido un flujo de autorizacion ", TAG);
 
-               
-                foreach (var flujo in flujos)
-                {
-                    if (!flujo.IsValid())
-                        return new Respuesta<bool>(true);
+            if (!flujo.IsValid())
+                return new Respuesta<IFlujo<TPaso>>("El Flujo es invalido",TAG);
 
-                    if (flujo.TipoEntePublico == null)
-                        return new Respuesta<bool>("El tipo ente publico es requerida",TAG);
+            //CONSULTA AL REPOSITORIO
+            //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO 
+            //            
+            var esPredertiminado = false;
 
-                    if (flujo.NivelEmpleado == null)
-                        return new Respuesta<bool>("El nivel de empleado es requerido",TAG);
+            var respuesta = ServicioDominio.Crear(flujo, esPredertiminado);
 
-                    if (flujo.TipoFlujo.ToString() == null)
-                        return new Respuesta<bool>("El tipo de flujo es requerido",TAG);
-
-                    if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
-                        return new Respuesta<bool>("La lista de pasos es requerida.", TAG);
-
-                }
-
-                var respuesta = ServicioDominio.Crear(flujos);
-
-                if (respuesta.EsExito)
-                {
-                    if (this.ValidarPasos(flujos))
-                    {
-                        //Todo: Aqui todo lo que sigue 
-
-
-
-
-                        //Repositorio.Guardar();
-
-                    }
-                }
-
-            //}
-            //catch(Exception e) {
-
-            //}
-        
-
-                return new Respuesta<bool>(respuesta.Mensaje,TAG);
-
-        }
-
-
-
-        private Respuesta<bool> ValidarFlujo(IFlujo<TPaso> flujo)
-        {
-            if (flujo.TipoEntePublico == null)
-                return new Respuesta<bool>("El tipo ente publico es requerido", TAG);
-
-            if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
+            if (respuesta.EsExito)
             {
-                if (flujo.NivelEmpleado == null)
-                    return new Respuesta<bool>("El nivel del empleado es requerido para un flujo particular.", TAG);
+                if (this.ValidarPasos(flujo))
+                {
+                    //Todo: Aqui todo lo que sigue 
+
+
+
+
+                    //Repositorio.Guardar();
+
+                }
+
+                return new Respuesta<IFlujo<TPaso>>(respuesta.Contenido);
             }
 
-            //Aplicamos la validacion con respecto a los pasos.
-            if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
-                return new Respuesta<bool>("La lista de pasos es requerida.", TAG);
+            return new Respuesta<IFlujo<TPaso>>(respuesta.Mensaje,TAG);
 
-
-            //foreach (var item in flujo.Pasos)
-            //{
-            //    var respuestaPaso = ServicioDominio.Crear(item);
-
-            //    if (!respuestaPaso.Contenido)
-            //        return new Respuesta<bool>("La información de los pasos esta incompleta", TAG);
-            //}
-
-            return new Respuesta<bool>("");
         }
-
        
     }
 }

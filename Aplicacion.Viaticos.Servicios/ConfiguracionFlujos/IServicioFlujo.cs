@@ -8,6 +8,6 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
     public interface IServicioFlujo<TPaso> : IServicioConfiguracionFlujoBase<TPaso>
         where TPaso : IPaso
     {
-
+       
     }
 }

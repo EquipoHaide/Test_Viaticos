@@ -1,5 +1,6 @@
 ﻿using System;
 using Dominio.Nucleo;
+using Dominio.Viaticos.Modelos;
 
 namespace Dominio.Viaticos.Servicios
 {
@@ -7,7 +8,7 @@ namespace Dominio.Viaticos.Servicios
     {
         public override void Maping(IAplicacion app)
         {
-            app.Register<IServicioFlujos, ServicioFlujos>();
+            app.Register<IServicioFlujos<PasoViatico>, ServicioFlujos>();
             
         }
     }

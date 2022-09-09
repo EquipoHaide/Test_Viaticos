@@ -9,6 +9,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
     where TPaso : IPaso
     {
         //bool ValidarPasos();
-        public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos);
+        public Respuesta<IFlujo<TPaso>> Crear(IFlujo<TPaso> flujos);
     }
 }
