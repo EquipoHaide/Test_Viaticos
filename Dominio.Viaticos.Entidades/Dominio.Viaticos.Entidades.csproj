@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dominio.Nucleo.Entidades\Dominio.Nucleo.Entidades.csproj" />
+    <ProjectReference Include="..\Dominio.Nucleo.Repositorios\Dominio.Nucleo.Repositorios.csproj" />
     <ProjectReference Include="..\Dominio.Nucleo\Dominio.Nucleo.csproj" />
   </ItemGroup>
 </Project>
