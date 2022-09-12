@@ -75,7 +75,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
                 //Hasta aqui llega bien la inyeccion, asi como lo hace con recursos.
                 var repo = RepositorioConfiguracionFlujoViaticos;
                 //Falta pasarle el repositorio especifico que usara viaticos
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, null, this.GetSubjectId()); ;
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, this.GetSubjectId()); ;
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)
@@ -99,7 +99,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         {
             try
             {
-                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujo, null, this.GetSubjectId());
+                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujo, this.GetSubjectId());
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)

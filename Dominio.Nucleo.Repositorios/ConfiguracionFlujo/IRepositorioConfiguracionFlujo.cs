@@ -14,9 +14,9 @@ namespace Dominio.Nucleo.Repositorios
     {
         //Agregar los metodos particulares que se requieren para realizar el guardado general
 
-        bool ExisteFlujoPredeterminado();
+        bool ExisteFlujoPredeterminado(int idTipoEntePublico);
 
-        bool ExisteNivelRepetido();
+        bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
        
         IEnumerable<TEntidad> ObtenerFlujos(IEnumerable<TEntidad> flujo, string subjectId);
     }

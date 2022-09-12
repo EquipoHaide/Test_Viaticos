@@ -14,10 +14,10 @@ namespace Infraestructura.Datos.Nucleo
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        public abstract bool ExisteFlujoPredeterminado();
+        public abstract bool ExisteFlujoPredeterminado(int idTipoEntePublico);
 
 
-        public abstract bool ExisteNivelRepetido();
+        public abstract bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
 
 
         public abstract IEnumerable<TEntidad> ObtenerFlujos(IEnumerable<TEntidad> flujo, string subjectId);

@@ -14,11 +14,12 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         public Respuesta<IFlujo<TPaso>> Crear(IFlujo<TPaso> flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
         {
             ///VALIDAR QUE SOLO EXISTA UN FLUJO PREDETERMINADO 
-            if (esPredeterminado)
+            if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
                 return new Respuesta<IFlujo<TPaso>>("Solo se permite un flujo predeterminado ", TAG);
 
+
             ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
-            if (esNivelRepetido)
+            if (esNivelRepetido && flujo.TipoFlujo == (int)TipoFlujo.Particular)
                 return new Respuesta<IFlujo<TPaso>>("No se permite flujos con el mismo nivel de empleado", TAG);
 
             if (flujo.TipoEntePublico == null)

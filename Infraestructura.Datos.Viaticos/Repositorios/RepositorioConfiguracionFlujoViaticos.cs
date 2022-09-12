@@ -12,12 +12,12 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-        public bool ExisteFlujoPredeterminado()
+        public bool ExisteFlujoPredeterminado(int idTipoEntePublico)
         {
             return true;
         }
 
-        public bool ExisteNivelRepetido()
+        public bool ExisteNivelRepetido(int idTipoEntePublico, string nivel)
         {
             return false;
         }

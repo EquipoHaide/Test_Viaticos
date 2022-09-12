@@ -38,7 +38,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             return new Respuesta();
         }
 
-        public Respuesta Crear(IFlujo<TPaso> flujo, IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
+        public Respuesta Crear(IFlujo<TPaso> flujo, string subjectId)
         {
             //Valida que el objeto no este vacio
             if (flujo == null)
@@ -65,7 +65,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             //CONSULTA AL REPOSITORIO
             //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO ANTES QUE UN FLUJO PARTICULAR 
             //            
-            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado());
+            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo.TipoEntePublico.Id));
 
 
             if (esPredertiminado.EsError)
@@ -73,10 +73,11 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return esPredertiminado.ErrorBaseDatos(TAG);
             }
 
+
             //CONSULTA AL REPOSITORIO 
             //BUSCA SI EXITE ALGUN FLUJO PARTICULAR CON EL MISMO NIVEL 
             //
-            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido());
+            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo.TipoEntePublico.Id, flujo.NivelEmpleado.Nivel));
 
 
             if (esNivelRepetido.EsError)
@@ -98,7 +99,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                     var flujoBase = new Dominio.Nucleo.Entidades.FlujoBase();
                     //Repositorio.Add(flujoBase);
 
-                    var save = repositorioConfiguracion.Try(r => r.Save());
+                    var save = Repositorio.Try(r => r.Save());
 
                     if (save.EsError)
                     {
@@ -118,7 +119,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         }
 
 
-        public Respuesta Modificar(IFlujo<TPaso> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
+        public Respuesta Modificar(IFlujo<TPaso> flujo,  string subjectId)
         {
             //Valida que el objeto no este vacio
             if (flujo == null)
