@@ -7,7 +7,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
     public interface IServicioConfiguracionFlujoBase<TPaso> where TPaso : IPaso
     {
 
-        public Respuesta<IFlujo<TPaso>> Crear(IFlujo<TPaso> flujos, bool esPredeterminado);
+        public Respuesta<IFlujo<TPaso>> Crear(IFlujo<TPaso> flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);
 
     }
 }

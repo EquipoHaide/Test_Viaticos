@@ -5,7 +5,7 @@ using Dominio.Nucleo;
 using Infraestructura.Transversal.Plataforma;
 
 using Infraestructura.Datos.Nucleo;
-using System.Linq;
+
 using Dominio.Nucleo.Repositorios;
 using Dominio.Nucleo.Entidades;
 using Infraestructura.Transversal.Plataforma.Extensiones;

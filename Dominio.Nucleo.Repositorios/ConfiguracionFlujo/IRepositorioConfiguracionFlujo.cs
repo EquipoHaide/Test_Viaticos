@@ -13,5 +13,9 @@ namespace Dominio.Nucleo.Repositorios
         where TEntidad : Entidades.FlujoBase 
     {
         //Agregar los metodos particulares que se requieren para realizar el guardado general
+
+        bool ExisteFlujoPredeterminado();
+
+        bool ExisteNivelRepetido();
     }
 }

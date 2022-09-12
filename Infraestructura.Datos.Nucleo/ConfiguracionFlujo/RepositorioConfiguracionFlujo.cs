@@ -13,6 +13,16 @@ namespace Infraestructura.Datos.Nucleo
         //where TFlujo : Flujo
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+
+        //public bool ExisteFlujoPredeterminado()
+        //{
+        //    return false;
+        //}
+
+        //public bool ExisteNivelRepetido()
+        //{
+        //    return false;
+        //}
         //Agregar los metodos particulares que se requieren para realizar el guardado general
     }
 }
