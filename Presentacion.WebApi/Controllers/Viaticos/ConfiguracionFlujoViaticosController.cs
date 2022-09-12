@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
 using AplicacionViaticos = Aplicacion.Viaticos.Servicios.ConfiguracionFlujos;
+using Dominio.Viaticos.Repositorios;
 
 namespace Presentacion.WebApi.Controllers.Viaticos
 {
@@ -26,6 +27,10 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         AplicacionViaticos.IServicioFlujo<PasoViatico> ServicioViaticos => App.Inject(ref servicioViaticos);
 
         //public override IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo => Servicio;
+
+        IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
+        IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
+
 
         public override IServicioConfiguracionFlujoBase<PasoViatico> ServicioConfiguracionFlujoBase => this.ServicioViaticos;
 

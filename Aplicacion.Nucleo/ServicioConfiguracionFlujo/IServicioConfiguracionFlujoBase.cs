@@ -20,7 +20,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         //bool ValidarPasos();
         public Respuesta Consultar(IConsulta query, string subjectId);
 
-        public Respuesta Crear(IFlujo<TPaso> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId);
+        public Respuesta Crear(IFlujo<TPaso> flujo, IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId);
 
         public Respuesta Modificar(IFlujo<TPaso> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId);
 

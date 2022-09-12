@@ -12,15 +12,17 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
-    public abstract class ServicioConfiguracionFlujoBase<TPaso> : IServicioConfiguracionFlujoBase<TPaso>
+    public abstract class ServicioConfiguracionFlujoBase<TPaso, TFlujo> : IServicioConfiguracionFlujoBase<TPaso>
          where TPaso : IPaso
+        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 
         public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioDominio { get; }
 
 
-        public virtual IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> Repositorio { get; }
+        public virtual IRepositorioConfiguracionFlujo<TFlujo> Repositorio { get; }
+       
 
         /// <summary>
         /// PENDIENTE :
@@ -36,7 +38,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             return new Respuesta();
         }
 
-        public Respuesta Crear(IFlujo<TPaso> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
+        public Respuesta Crear(IFlujo<TPaso> flujo, IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
         {
             //Valida que el objeto no este vacio
             if (flujo == null)
@@ -94,7 +96,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                     //---------------PENDIENTE------------------
                     /*Temporal ------->  */
                     var flujoBase = new Dominio.Nucleo.Entidades.FlujoBase();
-                    Repositorio.Add(flujoBase);
+                    //Repositorio.Add(flujoBase);
 
                     var save = repositorioConfiguracion.Try(r => r.Save());
 
@@ -171,10 +173,10 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public Respuesta Eliminar(List<IFlujo<TPaso>> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
         {
             IEnumerable<Dominio.Nucleo.Entidades.FlujoBase> lista = null;
-            var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos(lista, subjectId));
+           // var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos(lista, subjectId));
  
-            if (flujosOriginales.EsError)
-                return flujosOriginales.ErrorBaseDatos();
+            //if (flujosOriginales.EsError)
+            //    return flujosOriginales.ErrorBaseDatos();
 
            
             var respuesta = ServicioDominio.Eliminar(null, subjectId);

@@ -19,6 +19,7 @@ using Infraestructura.Transversal.Perfiles;
 
 using ViaticosAplicacion = Aplicacion.Viaticos.Servicios;
 using ViaticosDominio = Dominio.Viaticos.Servicios;
+using ViaticosRepositorio = Infraestructura.Datos.Viaticos;
 namespace Presentacion.WebApi.App
 {
     public class AplicacionBase : AplicacionNucleo.IAplicacion
@@ -181,6 +182,7 @@ namespace Presentacion.WebApi.App
 
             new ViaticosAplicacion.ViaticosMapperServices().Maping(this);
             new ViaticosDominio.ViaticosMapperServices().Maping(this);
+            new ViaticosRepositorio.ViaticosMapperServices().Maping(this);
 
             new ServiciosExternosMapperServices().Maping(this);
         }

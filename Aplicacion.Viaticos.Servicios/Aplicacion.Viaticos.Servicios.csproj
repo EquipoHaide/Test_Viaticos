@@ -10,6 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aplicacion.Nucleo\Aplicacion.Nucleo.csproj" />
+    <ProjectReference Include="..\Dominio.Viaticos.Repositorios\Dominio.Viaticos.Repositorios.csproj" />
     <ProjectReference Include="..\Dominio.Viaticos.Servicios\Dominio.Viaticos.Servicios.csproj" />
     <ProjectReference Include="..\Dominio.Viaticos.Entidades\Dominio.Viaticos.Entidades.csproj" />
     <ProjectReference Include="..\Dominio.Viaticos.Modelos\Dominio.Viaticos.Modelos.csproj" />

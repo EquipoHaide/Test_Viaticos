@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+
 
 namespace Infraestructura.Datos.Viaticos.UnidadDeTrabajo
 {
-    class ViaticosUnidadDeTrabajo : Infraestructura.Datos.Nucleo.UnidadDeTrabajo, IViaticosUnidadDeTrabajo
+    public class ViaticosUnidadDeTrabajo : Infraestructura.Datos.Nucleo.UnidadDeTrabajo, IViaticosUnidadDeTrabajo
     {
+        public ViaticosUnidadDeTrabajo() : base() { }
+
+        public ViaticosUnidadDeTrabajo(DbContextOptions<ViaticosUnidadDeTrabajo> options) : base(options) { }
     }
 }

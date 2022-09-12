@@ -8,13 +8,13 @@ using Dominio.Viaticos.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioFlujoViaticos : Repository<Dominio.Viaticos.Entidades.FlujoViaticos>
+    public class RepositorioConfiguracionFlujoViaticos : Repository<Dominio.Viaticos.Entidades.FlujoViaticos>, IRepositorioConfiguracionFlujoViaticos
     {
-        public RepositorioFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
+        public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
         public bool ExisteFlujoPredeterminado()
         {
-            return false;
+            return true;
         }
 
         public bool ExisteNivelRepetido()
@@ -24,9 +24,13 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
         public IEnumerable<FlujoViaticos> ObtenerFlujos(IEnumerable<FlujoViaticos> flujo, string subjectId)
         {
-            IEnumerable<FlujoViaticos> lista = null ;
-
+            IEnumerable<FlujoViaticos> lista = null;
             return lista;
         }
     }
 }
+
+
+
+//PENDIENTE PARA EL LUNES CONTINUNAR CON LA CREACION DE LA CARPTETA DE MIGRACIONS, SCRIPT DEL 
+//PROYECTO DE INFREASTRUCTURA DE DATOS DE VIATICOS
