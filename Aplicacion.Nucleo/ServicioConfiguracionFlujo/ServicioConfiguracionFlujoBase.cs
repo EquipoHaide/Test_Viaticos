@@ -27,8 +27,14 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         /// </summary>
         /// <param name="flujos"></param>
         /// <returns></returns>
-        public abstract bool ValidarPasos(IFlujo<TPaso> flujos); 
+        public abstract bool ValidarPasos(IFlujo<TPaso> flujos);
 
+
+        public Respuesta Consultar(IConsulta query, string subjectId)
+        {
+
+            return new Respuesta();
+        }
 
         public Respuesta Crear(IFlujo<TPaso> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
         {
@@ -37,7 +43,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
 
             if (!flujo.IsValid())
-                return new Respuesta("El Flujo es invalido",TAG);
+                return new Respuesta("El Flujo es invalido", TAG);
 
             if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
                 return new Respuesta("La lista de pasos es requerida.", TAG);
@@ -55,7 +61,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             }
 
             //CONSULTA AL REPOSITORIO
-            //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO 
+            //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO ANTES QUE UN FLUJO PARTICULAR 
             //            
             var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado());
 
@@ -65,9 +71,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return esPredertiminado.ErrorBaseDatos(TAG);
             }
 
-            ////CONSULTA AL REPOSITORIO 
-            ///BUSCA SI EXITE ALGUN FLUJO PARTICULAR CON EL MISMO NIVEL 
-            ///
+            //CONSULTA AL REPOSITORIO 
+            //BUSCA SI EXITE ALGUN FLUJO PARTICULAR CON EL MISMO NIVEL 
+            //
             var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido());
 
 
@@ -78,7 +84,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             //var respuesta = Servicio.Crear(concepto.ToEntity<Entidades.Concepto>(), existeAccionConcepto.Contenido, esConfiguracionInactivo.Contenido, subjectId);
 
-            var respuesta = ServicioDominio.Crear(flujo, esPredertiminado.Contenido, esNivelRepetido.Contenido,subjectId);
+            var respuesta = ServicioDominio.Crear(flujo, esPredertiminado.Contenido, esNivelRepetido.Contenido, subjectId);
 
             if (respuesta.EsExito)
             {
@@ -86,7 +92,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 {
                     //Todo: Aqui todo lo que sigue 
                     //---------------PENDIENTE------------------
-                    Repositorio.Add(***);
+                    /*Temporal ------->  */
+                    var flujoBase = new Dominio.Nucleo.Entidades.FlujoBase();
+                    Repositorio.Add(flujoBase);
 
                     var save = repositorioConfiguracion.Try(r => r.Save());
 
@@ -103,16 +111,95 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return new Respuesta(respuesta.Mensaje, TAG);
             }
 
-             return new Respuesta(respuesta.Mensaje,TAG);
+            return new Respuesta(respuesta.Mensaje, TAG);
 
         }
 
 
+        public Respuesta Modificar(IFlujo<TPaso> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
+        {
+            //Valida que el objeto no este vacio
+            if (flujo == null)
+                return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
 
-       
+            if (!flujo.IsValid())
+                return new Respuesta("El Flujo es invalido", TAG);
 
-       
+            if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
+                return new Respuesta("La lista de pasos es requerida.", TAG);
 
-     
+            if (flujo.TipoFlujo.ToString() == null)
+                return new Respuesta("El tipo de flujo es requerido", TAG);
+
+            if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
+            {
+                if (flujo.NivelEmpleado == null)
+                    return new Respuesta("El nivel de empleado es requerido", TAG);
+
+                if (flujo.NivelEmpleado.Nivel.ToString().IsNullOrEmptyOrWhiteSpace())
+                    return new Respuesta("El nivel del empleado es requerido para un flujo particular.", TAG);
+            }
+
+            var flujoOriginal = Repositorio.Try(r => r.Get(g => g.Id == flujo.Id));
+            if (flujoOriginal.EsError) return flujoOriginal.ErrorBaseDatos(TAG);
+
+            //var respuesta = Servicio.Modificar(grupo.ToEntity<Entidades.Grupo>(grupoOriginal.Contenido), mismoNombre.Contenido, permisos.Contenido, subjectId);
+
+            var respuesta = ServicioDominio.Modificar(flujo, /*esPredertiminado.Contenido*/ false, /*esNivelRepetido.Contenido*/ false, subjectId);
+
+
+            if (respuesta.EsExito)
+            {
+                if (this.ValidarPasos(flujo))
+                {
+                    var save = Repositorio.Try(r => r.Save());
+                    if (save.EsError) return save.ErrorBaseDatos(TAG);
+
+                    return new Respuesta();
+                }
+                
+            }
+            else
+            {
+                return new Respuesta(respuesta.Mensaje, respuesta.TAG);
+            }
+
+            return new Respuesta(respuesta.Mensaje, respuesta.TAG);
+
+        }
+
+        public Respuesta Eliminar(List<IFlujo<TPaso>> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
+        {
+            IEnumerable<Dominio.Nucleo.Entidades.FlujoBase> lista = null;
+            var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos(lista, subjectId));
+ 
+            if (flujosOriginales.EsError)
+                return flujosOriginales.ErrorBaseDatos();
+
+           
+            var respuesta = ServicioDominio.Eliminar(null, subjectId);
+
+            if (respuesta.EsExito)
+            {
+                //Repositorio.Remove( ----> PENDIENTE <----);
+                try
+                {
+                    return new Respuesta();
+                }
+                catch (Exception ex)
+                {
+
+                    return new Respuesta(ex, /*R.strings.ErrorConexionBaseDeDatos*/ "Error en la conexion en Base de Datos", TAG);
+                }
+            }
+            else
+            {
+                return new Respuesta(respuesta.Mensaje, respuesta.TAG);
+            }
+        }
+
+
+
+
     }
 }

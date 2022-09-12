@@ -17,11 +17,9 @@
     <ProjectReference Include="..\Dominio.Viaticos.Entidades\Dominio.Viaticos.Entidades.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="ConfiguracionFlujos\" />
     <None Remove="ServicioConfiguracionFlujo\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ConfiguracionFlujos\" />
     <Folder Include="ServicioConfiguracionFlujo\" />
   </ItemGroup>
 </Project>

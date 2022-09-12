@@ -17,20 +17,34 @@ namespace Presentacion.WebApi.FlujosAutorizacion
          where TPaso : IPaso
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
-        //public virtual IServicioRecursoBase ServicioRecursos { get; }
-        public virtual IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo { get; }
+ 
         public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioConfiguracionFlujoBase { get; }
 
 
-        [HttpGet("recursos")]
-        public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro) 
-        {
-           
-            var respuesta = ServicioConfiguracionFlujo.Consultar(filtro, "");
 
-            Console.WriteLine("TEST");
-            return null;
+        [HttpGet("recursos")]
+        public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro)
+        {
+            try
+            {
+                var consulta = ServicioConfiguracionFlujoBase.Consultar(filtro, this.GetSubjectId());
+
+                if (consulta.EsError)
+                {
+                    if (consulta.Estado == EstadoProceso.Fatal)
+                        return this.ApiResult(consulta.ExcepcionInterna, App.GetLogger());
+
+                    return this.ApiResult(consulta.Mensaje);
+                }
+
+                return this.ApiResult(new { consulta });
+            }
+            catch (Exception e)
+            {
+                return this.ApiResult(e, App.GetLogger());
+            }
         }
+
 
         [HttpPost("recursos")]
         public object Crear([FromBody] ModeloConfiguracionFlujo<TPaso> config)   
@@ -55,5 +69,36 @@ namespace Presentacion.WebApi.FlujosAutorizacion
             }
 
         }
+
+
+        [HttpPut("recursos")]
+        public object Modificar([FromBody] ModeloConfiguracionFlujo<TPaso> config)
+        {
+            try
+            {
+                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujo, null, this.GetSubjectId());
+                if (resultado.EsError)
+                {
+                    if (resultado.Estado == EstadoProceso.Fatal)
+                        return this.ApiResult(resultado.ExcepcionInterna, App.GetLogger());
+
+                    return this.ApiResult(resultado.Mensaje);
+                }
+
+                return this.ApiResult(new { resultado });
+            }
+            catch (Exception e)
+            {
+                return this.ApiResult(e, App.GetLogger());
+            }
+        }
+
+
+        [HttpDelete("recursos")]
+        public object Eliminar(ModeloConfiguracionFlujo<TPaso> config)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

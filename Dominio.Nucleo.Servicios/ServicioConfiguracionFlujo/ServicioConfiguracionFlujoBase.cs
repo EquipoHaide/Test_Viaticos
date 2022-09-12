@@ -51,6 +51,45 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         }
 
 
+        public Respuesta<IFlujo<TPaso>> Modificar(IFlujo<TPaso> flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
+        {
+
+            ///VALIDAR QUE SOLO EXISTA UN FLUJO PREDETERMINADO 
+            if (esPredeterminado)
+                return new Respuesta<IFlujo<TPaso>>("Solo se permite un flujo predeterminado ", TAG);
+
+            ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
+            if (esNivelRepetido)
+                return new Respuesta<IFlujo<TPaso>>("No se permite flujos con el mismo nivel de empleado", TAG);
+
+            if (flujo.TipoEntePublico == null)
+                return new Respuesta<IFlujo<TPaso>>("El tipo ente publico es requerida", TAG);
+
+            if (flujo.TipoEntePublico.Descripcion == null)
+                return new Respuesta<IFlujo<TPaso>>("La descripcion del ente publico es requerido", TAG);
+
+
+            //Aplicamos la validacion con respecto a los pasos.
+            foreach (var item in flujo.Pasos)
+            {
+                var respuestaPaso = this.ValidarPaso(item);
+
+                if (!respuestaPaso.Contenido)
+                    return new Respuesta<IFlujo<TPaso>>(respuestaPaso.Mensaje, TAG);
+            }
+
+            if (this.EsRepetido(flujo.Pasos))
+                return new Respuesta<IFlujo<TPaso>>("La lista de pasos del flujo no deben de repetirse", TAG);
+
+            if (!this.EsConsecutivo(flujo.Pasos))
+                return new Respuesta<IFlujo<TPaso>>("La lista de pasos del flujo debe ser consecutivo.", TAG);
+
+            ////AQUI VA IR LA TRANSFORMACION A ENTITY
+            /////EL MODELO A REGRESAR DEBE SER LA ENTITIDA BASE 
+
+            return new Respuesta<IFlujo<TPaso>>(flujo);
+        }
+
         private Respuesta<bool> ValidarPaso(TPaso paso)
         {
 
@@ -89,6 +128,9 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return true;
         }
 
-    
+        public Respuesta<List<IFlujo<TPaso>>> Eliminar(IFlujo<TPaso> flujos, string subjectId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

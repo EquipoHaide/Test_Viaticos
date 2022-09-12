@@ -9,8 +9,6 @@ namespace Aplicacion.Viaticos.Servicios
     {
         public override void Maping(IAplicacion app)
         {
-            app.Register<IServicioFlujos, ServicioFlujos>();
-            app.Register<IServicioFlujosNew<FlujoViaticos>, ServicioFlujosNew>();
             app.Register<IServicioFlujo<PasoViatico>, ServicioFlujo>();
         }
     }

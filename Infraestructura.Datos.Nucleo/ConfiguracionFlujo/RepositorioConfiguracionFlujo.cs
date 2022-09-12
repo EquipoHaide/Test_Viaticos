@@ -14,15 +14,23 @@ namespace Infraestructura.Datos.Nucleo
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        //public bool ExisteFlujoPredeterminado()
-        //{
-        //    return false;
-        //}
+        public bool ExisteFlujoPredeterminado()
+        {
+            return false;
+        }
 
-        //public bool ExisteNivelRepetido()
-        //{
-        //    return false;
-        //}
+        public bool ExisteNivelRepetido()
+        {
+            return false;
+        }
+
+        public IEnumerable<TEntidad> ObtenerFlujos(IEnumerable<TEntidad> flujo, string subjectId)
+        {
+            IEnumerable<TEntidad> lista = null;
+            return lista;
+        }
+
+     
         //Agregar los metodos particulares que se requieren para realizar el guardado general
     }
 }

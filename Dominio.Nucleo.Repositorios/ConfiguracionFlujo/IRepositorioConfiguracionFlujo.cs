@@ -17,5 +17,7 @@ namespace Dominio.Nucleo.Repositorios
         bool ExisteFlujoPredeterminado();
 
         bool ExisteNivelRepetido();
+       
+        IEnumerable<TEntidad> ObtenerFlujos(IEnumerable<TEntidad> flujo, string subjectId);
     }
 }

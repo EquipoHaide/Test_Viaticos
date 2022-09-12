@@ -22,9 +22,6 @@ namespace Presentacion.WebApi.Controllers.Viaticos
     public class ConfiguracionFlujoViaticosController : ConfiguracionFlujoAutorizacionBaseController<PasoViatico, ConsultaConfiguracionFlujo>
     {
 
-        //IServicioFlujos servicio;
-        //IServicioFlujos Servicio => App.Inject(ref servicio);
-
         AplicacionViaticos.IServicioFlujo<PasoViatico> servicioViaticos;
         AplicacionViaticos.IServicioFlujo<PasoViatico> ServicioViaticos => App.Inject(ref servicioViaticos);
 

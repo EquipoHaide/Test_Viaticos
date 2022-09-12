@@ -9,6 +9,7 @@ namespace Presentacion.WebApi.Modelos
     public class ModeloFlujo<TPaso> : IFlujo<TPaso>
          where TPaso : IPaso
     {
+        public int Id {get; set;}
         public TipoEntePublico TipoEntePublico { get; set; }
         public NivelEmpleado NivelEmpleado { get; set; }
         public List<TPaso> Pasos { get ;set ;}

@@ -18,7 +18,12 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         //public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos, IRepositorioConfiguracionFlujo<Flujo> repositorioConfiguracionFlujo );
 
         //bool ValidarPasos();
-        public Respuesta Crear(IFlujo<TPaso> flujos, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId);
+        public Respuesta Consultar(IConsulta query, string subjectId);
+
+        public Respuesta Crear(IFlujo<TPaso> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId);
+
+        public Respuesta Modificar(IFlujo<TPaso> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId);
+
 
     }
 }

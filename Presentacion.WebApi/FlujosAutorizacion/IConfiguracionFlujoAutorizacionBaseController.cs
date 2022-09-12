@@ -11,5 +11,11 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         object ConsultarConfiguracionFlujo(TConsulta filtro);
 
         object Crear(ModeloConfiguracionFlujo<TPaso> config);
+
+        object Modificar(ModeloConfiguracionFlujo<TPaso> config);
+
+        object Eliminar(ModeloConfiguracionFlujo<TPaso> config);
+
+
     }
 }

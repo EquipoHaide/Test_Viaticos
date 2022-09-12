@@ -6,6 +6,8 @@ namespace Dominio.Nucleo
     public interface IFlujo<TPaso> where TPaso : IPaso
     {
 
+        int Id { get; set; }
+
         TipoEntePublico TipoEntePublico { get; set; }
 
         NivelEmpleado NivelEmpleado { get; set; }
