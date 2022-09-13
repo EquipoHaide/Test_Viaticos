@@ -7,7 +7,7 @@ using Infraestructura.Transversal.Plataforma;
 using Infraestructura.Datos.Nucleo;
 
 using Dominio.Nucleo.Repositorios;
-using Dominio.Nucleo.Entidades;
+
 using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
@@ -32,10 +32,15 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public abstract bool ValidarPasos(IFlujo<TPaso> flujos);
 
 
-        public Respuesta Consultar(IConsulta query, string subjectId)
+        public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
         {
+            if (parametros == null) return new Respuesta<ConsultaPaginada<IConsulta>>("El modelo de consulta para obtener no es valido.", TAG);
 
-            return new Respuesta();
+            var recursos = Repositorio.Try(r => r.ConsultarFlujosDeAutorizacion(parametros, subjectId));
+            if (recursos.EsError) return recursos.ErrorBaseDatos<ConsultaPaginada<IConsulta>>(TAG);
+
+            return new Respuesta<ConsultaPaginada<IConsulta>>(recursos.Contenido);
+
         }
 
         public Respuesta Crear(IFlujo<TPaso> flujo, string subjectId)
@@ -52,6 +57,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (flujo.TipoFlujo.ToString() == null)
                 return new Respuesta("El tipo de flujo es requerido", TAG);
+
+            if (flujo.TipoEntePublico == null)
+                return new Respuesta("El tipo ente publico es requerida", TAG);
 
             if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
             {
@@ -171,34 +179,28 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         }
 
-        public Respuesta Eliminar(List<IFlujo<TPaso>> flujo, RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> repositorioConfiguracion, string subjectId)
+        public Respuesta Eliminar(IFlujo<TPaso> flujo,string subjectId)
         {
-            IEnumerable<Dominio.Nucleo.Entidades.FlujoBase> lista = null;
-           // var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos(lista, subjectId));
+            
+           var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos((TFlujo)flujo, subjectId));
  
-            //if (flujosOriginales.EsError)
-            //    return flujosOriginales.ErrorBaseDatos();
+            if (flujosOriginales.EsError)
+                return flujosOriginales.ErrorBaseDatos();
 
            
-            var respuesta = ServicioDominio.Eliminar(null, subjectId);
+            var respuesta = ServicioDominio.Eliminar((IFlujo<TPaso>)flujosOriginales.Contenido, subjectId);
 
-            if (respuesta.EsExito)
-            {
-                //Repositorio.Remove( ----> PENDIENTE <----);
-                try
-                {
-                    return new Respuesta();
-                }
-                catch (Exception ex)
-                {
+            if (respuesta.EsError)
+                return new Respuesta("", TAG);
+            
+            Repositorio.RemoverFlujo((TFlujo)respuesta.Contenido);
 
-                    return new Respuesta(ex, /*R.strings.ErrorConexionBaseDeDatos*/ "Error en la conexion en Base de Datos", TAG);
-                }
-            }
-            else
-            {
-                return new Respuesta(respuesta.Mensaje, respuesta.TAG);
-            }
+
+            var guardar = Repositorio.Try(x => x.Save());
+            if (guardar.EsError)
+                return new Respuesta(guardar.Mensaje, guardar.TAG);
+
+            return new Respuesta();
         }
 
 

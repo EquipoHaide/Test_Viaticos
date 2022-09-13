@@ -1,5 +1,6 @@
 ﻿using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
+using Infraestructura.Transversal.Plataforma;
 using MicroServices.Platform.Repository;
 using MicroServices.Platform.Repository.Core;
 using System;
@@ -13,6 +14,8 @@ namespace Infraestructura.Datos.Nucleo
         //where TFlujo : Flujo
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+
+        public abstract Respuesta<ConsultaPaginada<Dominio.Nucleo.IConsulta>> ConsultarFlujosDeAutorizacion(Dominio.Nucleo.IConsulta parametros, string subjectId);
 
         public abstract bool ExisteFlujoPredeterminado(int idTipoEntePublico);
 
