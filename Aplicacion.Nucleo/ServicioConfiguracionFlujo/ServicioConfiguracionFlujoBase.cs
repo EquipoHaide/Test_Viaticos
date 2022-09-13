@@ -39,7 +39,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             var recursos = Repositorio.Try(r => r.ConsultarFlujosDeAutorizacion(parametros, subjectId));
             if (recursos.EsError) return recursos.ErrorBaseDatos<ConsultaPaginada<IConsulta>>(TAG);
 
-            return new Respuesta<ConsultaPaginada<IConsulta>>(recursos.Contenido);
+            return new Respuesta<ConsultaPaginada<IConsulta>>("");
 
         }
 
@@ -114,7 +114,10 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                     //PENDIENTE: ESTO ME DA UN ERROR AL REALIZAR EL CASTEO, LO QUE SE TRATA DE CONVERTIR ES UN FLUJO BASE A UN FLUJO BASE VIATICOS
                     //Repositorio.Add((TFlujo)flujoBase);
                     //var flujoAguardar = (TFlujo)respuesta.Contenido;
-                    Repositorio.Add((TFlujo)respuesta.Contenido);
+
+                    Repositorio.AddFlujo((TFlujo)respuesta.Contenido);
+
+                    //  Repositorio.Add((TFlujo)respuesta.Contenido);
 
                     //====>> De esta manera no me da error, pero lo que se guarda es un base.
                     Repositorio.Add(entity);
@@ -206,7 +209,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return new Respuesta("", TAG);
             
             Repositorio.RemoverFlujo((TFlujo)respuesta.Contenido);
-
 
             var guardar = Repositorio.Try(x => x.Save());
             if (guardar.EsError)

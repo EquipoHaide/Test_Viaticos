@@ -7,6 +7,7 @@ using Infraestructura.Datos.Viaticos.UnidadDeTrabajo;
 using Dominio.Viaticos.Entidades;
 using Infraestructura.Transversal.Plataforma;
 using Dominio.Nucleo;
+using Dominio.Nucleo.Repositorios;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
@@ -14,11 +15,18 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-        public ConsultaPaginada<IConsulta> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId)
+        public void AddFlujo(FlujoViaticos flujo)
+        {
+
+
+            UnitOfWork.Set<FlujoViaticos>().AddRange(flujo);
+        }
+
+        public Respuesta<ConsultaPaginada<IConsulta>> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId)
         {
 
              
-            return new ConsultaPaginada<IConsulta>();
+            return new Respuesta<ConsultaPaginada<IConsulta>>("");
         }
 
         public bool ExisteFlujoPredeterminado(int idTipoEntePublico)
@@ -36,6 +44,21 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             FlujoViaticos lista = null;
             return lista;
         }
+
+        public void RemoverFlujo(FlujoViaticos flujo)
+        {
+
+            //var flujo = (from c in Set
+            //             where id == c.id
+            //             select c);
+            UnitOfWork.Set<FlujoViaticos>().RemoveRange(flujo);
+
+
+            //UnitOfWork.Set<FlujoViaticos>().AddRange(flujo);
+
+        }
+
+        
     }
 }
 

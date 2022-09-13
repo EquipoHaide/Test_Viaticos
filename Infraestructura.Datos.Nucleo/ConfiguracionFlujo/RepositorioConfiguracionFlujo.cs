@@ -15,6 +15,7 @@ namespace Infraestructura.Datos.Nucleo
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
+        public abstract void AddFlujo(TEntidad flujo);
         public abstract Respuesta<ConsultaPaginada<Dominio.Nucleo.IConsulta>> ConsultarFlujosDeAutorizacion(Dominio.Nucleo.IConsulta parametros, string subjectId);
 
         public abstract bool ExisteFlujoPredeterminado(int idTipoEntePublico);
@@ -24,9 +25,14 @@ namespace Infraestructura.Datos.Nucleo
 
 
         public abstract IEnumerable<TEntidad> ObtenerFlujos(IEnumerable<TEntidad> flujo, string subjectId);
+
+        public abstract TEntidad ObtenerFlujos(TEntidad flujo, string subjectId);
+
+        public abstract void RemoverFlujo(TEntidad flujo);
+
         
 
-     
+
         //Agregar los metodos particulares que se requieren para realizar el guardado general
     }
 }

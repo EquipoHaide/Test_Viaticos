@@ -24,6 +24,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta Modificar(IFlujo<TPaso> flujo, string subjectId);
 
+        public Respuesta Eliminar(IFlujo<TPaso> flujo, string subjectId);
+        
 
-    }
+
+        }
 }
