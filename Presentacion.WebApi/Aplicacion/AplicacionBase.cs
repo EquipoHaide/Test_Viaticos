@@ -172,6 +172,7 @@ namespace Presentacion.WebApi.App
         private void MapingModels()
         {
             Dominio.Seguridad.Modelos.SeguridadProfileMapper.CreateMap(Mapper);
+            Dominio.Viaticos.Modelos.ViaticosProfileMapper.CreateMap(Mapper);
         }
 
         private void RegistTypes()

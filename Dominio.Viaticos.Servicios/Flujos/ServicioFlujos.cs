@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dominio.Nucleo;
+using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Servicios;
 using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 using Dominio.Viaticos.Modelos;
@@ -38,5 +39,18 @@ namespace Dominio.Viaticos.Servicios
             throw new NotImplementedException();
         }
 
+        public override Dominio.Nucleo.Entidades.FlujoBase ObtnerEntidad (Dominio.Nucleo.IFlujo<PasoViatico> flujo)
+        {
+            try {
+
+                var entidad = flujo.ToEntity<Dominio.Viaticos.Entidades.FlujoViaticos>();
+                return entidad;
+            } catch (Exception e) {
+                return null;
+            }
+
+
+        
+        }
     }
 }

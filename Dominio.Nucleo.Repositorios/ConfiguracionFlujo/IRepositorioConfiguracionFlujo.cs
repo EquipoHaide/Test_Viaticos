@@ -24,6 +24,6 @@ namespace Dominio.Nucleo.Repositorios
 
         void RemoverFlujo(TEntidad flujo);
 
-        void AddFlujo(TEntidad flujo);
+        void AddFlujo(Dominio.Nucleo.Entidades.FlujoBase flujo);
     }
 }

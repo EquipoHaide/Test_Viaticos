@@ -15,11 +15,18 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-        public void AddFlujo(FlujoViaticos flujo)
+        //public void AddFlujo(FlujoViaticos flujo)
+        //{
+
+
+        //    UnitOfWork.Set<FlujoViaticos>().AddRange(flujo);
+        //}
+
+        public void AddFlujo(Dominio.Nucleo.Entidades.FlujoBase flujo)
         {
 
-
-            UnitOfWork.Set<FlujoViaticos>().AddRange(flujo);
+            var d = flujo;
+        
         }
 
         public Respuesta<ConsultaPaginada<IConsulta>> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId)
@@ -31,7 +38,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
         public bool ExisteFlujoPredeterminado(int idTipoEntePublico)
         {
-            return true;
+            return false;
         }
 
         public bool ExisteNivelRepetido(int idTipoEntePublico, string nivel)

@@ -6,7 +6,7 @@ namespace Dominio.Viaticos.Modelos
 {
     public class PasoViatico : IPaso
     {
-      public string Descripcion { get; set; }
+        public string Descripcion { get; set; }
         public int Id { get; set ; }
         public int Orden { get; set; }
         public int Rol { get; set; }

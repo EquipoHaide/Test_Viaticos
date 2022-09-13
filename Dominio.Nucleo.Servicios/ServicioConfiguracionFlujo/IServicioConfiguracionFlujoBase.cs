@@ -9,8 +9,9 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         where TPaso : IPaso
     {
 
+        public Dominio.Nucleo.Entidades.FlujoBase ObtnerEntidad(IFlujo<TPaso> flujo);
 
-        public Respuesta<IFlujo> Crear(IFlujo<TPaso> flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);
+        public Respuesta<Entidades.FlujoBase> Crear(IFlujo<TPaso> flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);
 
 
 

@@ -17,6 +17,5 @@ namespace Dominio.Nucleo
 
         int TipoFlujo { get; set; }
 
-        bool IsValid();
     }
 }
