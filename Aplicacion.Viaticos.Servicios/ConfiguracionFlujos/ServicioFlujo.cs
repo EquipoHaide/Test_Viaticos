@@ -41,6 +41,8 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         public override Respuesta<bool> ValidarPasos(IFlujo<PasoViatico> flujos)
         {
          
+            //Agregar las validaciones pertienentes a los pasos para los flujos de viaticos
+
             return new Respuesta<bool>(false); 
         }
 

@@ -12,7 +12,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
     where TPaso : IPaso
     {
 
-        bool ValidarPasos(IFlujo<TPaso> flujos);
+        Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
 
         //las entidades de los deferentes negocios(viaticos, compras, etc), deberian de heredar de mi entidad principal Flujo
         //public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos, IRepositorioConfiguracionFlujo<Flujo> repositorioConfiguracionFlujo );
