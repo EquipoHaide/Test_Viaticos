@@ -15,18 +15,10 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-        //public void AddFlujo(FlujoViaticos flujo)
-        //{
 
-
-        //    UnitOfWork.Set<FlujoViaticos>().AddRange(flujo);
-        //}
-
-        public void AddFlujo(Dominio.Nucleo.Entidades.FlujoBase flujo)
+        public void AddFlujo(FlujoViaticos flujo)
         {
-
-            var d = flujo;
-        
+            UnitOfWork.Set<FlujoViaticos>().AddRange(flujo);
         }
 
         public Respuesta<ConsultaPaginada<IConsulta>> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId)

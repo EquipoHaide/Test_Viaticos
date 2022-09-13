@@ -7,7 +7,7 @@ using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public interface IServicioFlujos<TPaso> : IServicioConfiguracionFlujoBase<TPaso>
+    public interface IServicioFlujos<TPaso> : Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso,Dominio.Viaticos.Entidades.FlujoViaticos>
         where TPaso: IPaso
     {
         void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId);

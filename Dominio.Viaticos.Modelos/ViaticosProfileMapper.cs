@@ -15,6 +15,7 @@ namespace Dominio.Viaticos.Modelos
 
             perfil.CreateMap<Entidades.FlujoViaticos, Modelos.FlujoViaticos>().ReverseMap();
 
+            perfil.CreateMap<Modelos.ModeloFlujo<PasoViatico>, Modelos.FlujoViaticos>();
 
         }
     }

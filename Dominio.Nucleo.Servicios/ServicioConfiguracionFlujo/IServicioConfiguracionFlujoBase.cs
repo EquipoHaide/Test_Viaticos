@@ -5,15 +5,14 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 {
-    public interface IServicioConfiguracionFlujoBase<TPaso>
+    public interface IServicioConfiguracionFlujoBase<TPaso,TEntidad>
         where TPaso : IPaso
+        where TEntidad : class
     {
 
-        public Dominio.Nucleo.Entidades.FlujoBase ObtnerEntidad(IFlujo<TPaso> flujo);
+        public TEntidad ObtenerEntidad(IFlujo<TPaso> flujo);
 
-        public Respuesta<Entidades.FlujoBase> Crear(IFlujo<TPaso> flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);
-
-
+        public Respuesta<TEntidad> Crear(IFlujo<TPaso> flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);
 
         public Respuesta<IFlujo<TPaso>> Modificar(IFlujo<TPaso> flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);
 

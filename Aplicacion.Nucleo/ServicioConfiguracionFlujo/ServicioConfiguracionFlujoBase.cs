@@ -12,16 +12,16 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
-    public abstract class ServicioConfiguracionFlujoBase<TPaso, TFlujo> : IServicioConfiguracionFlujoBase<TPaso>
-         where TPaso : IPaso
-        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase, new()
+    public abstract class ServicioConfiguracionFlujoBase<TPaso, TEntidad> : IServicioConfiguracionFlujoBase<TPaso>
+        where TPaso : IPaso
+        where TEntidad : class
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 
-        public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioDominio { get; }
+        public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso,TEntidad> ServicioDominio { get; }
 
 
-        public virtual IRepositorioConfiguracionFlujo<TFlujo> Repositorio { get; }
+        public virtual IRepositorioConfiguracionFlujo<TEntidad> Repositorio { get; }
        
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         /// </summary>
         /// <param name="flujos"></param>
         /// <returns></returns>
-        public abstract bool ValidarPasos(IFlujo<TPaso> flujos);
+        public abstract Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
 
 
         public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
@@ -96,54 +96,31 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return esPredertiminado.ErrorBaseDatos(TAG);
             }
 
-
-            
             var respuesta = ServicioDominio.Crear(flujo, esPredertiminado.Contenido, esNivelRepetido.Contenido, subjectId);
 
-           
 
-            //if (respuesta.EsExito)
-            //{
-                if (this.ValidarPasos(flujo))
+            if (respuesta.EsExito)
+            {
+                var respuestaComplementaria= this.ValidarPasos(flujo);
+
+                if (respuestaComplementaria.EsExito)
                 {
-                    //Todo: Aqui todo lo que sigue 
-                    //---------------PENDIENTE------------------
-                    /*Temporal ------->  */
-                    //var flujoBase = new Dominio.Nucleo.Entidades.FlujoBase();
-                    //TFlujo entity = new TFlujo()
-                    //{
-                    //    Id = respuesta.Contenido.Id,
-                    //    //IdNivelEmpleado = respuesta.Contenido.NivelEmpleado.Id
-                    //};
-                    //PENDIENTE: ESTO ME DA UN ERROR AL REALIZAR EL CASTEO, LO QUE SE TRATA DE CONVERTIR ES UN FLUJO BASE A UN FLUJO BASE VIATICOS
-                    //Repositorio.Add((TFlujo)flujoBase);
-                    //var flujoAguardar = (TFlujo)respuesta.Contenido;
-
-                     Repositorio.AddFlujo(respuesta.Contenido);
-
-                    //  Repositorio.Add((TFlujo)respuesta.Contenido);
-
-                    //====>> De esta manera no me da error, pero lo que se guarda es un base.
-                    //Repositorio.Add(entity);
+                    Repositorio.AddFlujo(respuesta.Contenido);
 
                     var save = Repositorio.Try(r => r.Save());
 
                     if (save.EsError)
                     {
-                        //App.GetLogger().Log.Information(save.ExcepcionInterna, save.Mensaje);
                         return save.ErrorBaseDatos(TAG);
                     }
 
                     return new Respuesta();
-
                 }
 
-            //return new Respuesta(respuesta.Mensaje, TAG);
-            //}
+                return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+            }
 
-            //return new Respuesta(respuesta.Mensaje, TAG);
-            return new Respuesta("", TAG);
-
+            return new Respuesta(respuesta.Mensaje, TAG);
 
         }
 
@@ -172,8 +149,8 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                     return new Respuesta("El nivel del empleado es requerido para un flujo particular.", TAG);
             }
 
-            var flujoOriginal = Repositorio.Try(r => r.Get(g => g.Id == flujo.Id));
-            if (flujoOriginal.EsError) return flujoOriginal.ErrorBaseDatos(TAG);
+            //var flujoOriginal = Repositorio.Try(r => r.Get(g => g.Id == flujo.Id));
+            //if (flujoOriginal.EsError) return flujoOriginal.ErrorBaseDatos(TAG);
 
             //var respuesta = Servicio.Modificar(grupo.ToEntity<Entidades.Grupo>(grupoOriginal.Contenido), mismoNombre.Contenido, permisos.Contenido, subjectId);
 
@@ -182,7 +159,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (respuesta.EsExito)
             {
-                if (this.ValidarPasos(flujo))
+                var respuestaComplementaria = this.ValidarPasos(flujo);
+
+                if (respuestaComplementaria.EsExito)
                 {
                     var save = Repositorio.Try(r => r.Save());
                     if (save.EsError) return save.ErrorBaseDatos(TAG);
@@ -203,21 +182,21 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public Respuesta Eliminar(IFlujo<TPaso> flujo,string subjectId)
         {
             
-           var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos((TFlujo)flujo, subjectId));
+           //var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos((TFlujo)flujo, subjectId));
  
-            if (flujosOriginales.EsError)
-                return flujosOriginales.ErrorBaseDatos();
+           // if (flujosOriginales.EsError)
+           //     return flujosOriginales.ErrorBaseDatos();
            
-            var respuesta = ServicioDominio.Eliminar((IFlujo<TPaso>)flujosOriginales.Contenido, subjectId);
+           // var respuesta = ServicioDominio.Eliminar((IFlujo<TPaso>)flujosOriginales.Contenido, subjectId);
 
-            if (respuesta.EsError)
-                return new Respuesta("", TAG);
+           // if (respuesta.EsError)
+           //     return new Respuesta("", TAG);
             
-            Repositorio.RemoverFlujo((TFlujo)respuesta.Contenido);
+           // Repositorio.RemoverFlujo((TFlujo)respuesta.Contenido);
 
-            var guardar = Repositorio.Try(x => x.Save());
-            if (guardar.EsError)
-                return new Respuesta(guardar.Mensaje, guardar.TAG);
+           // var guardar = Repositorio.Try(x => x.Save());
+           // if (guardar.EsError)
+           //     return new Respuesta(guardar.Mensaje, guardar.TAG);
 
             return new Respuesta();
         }

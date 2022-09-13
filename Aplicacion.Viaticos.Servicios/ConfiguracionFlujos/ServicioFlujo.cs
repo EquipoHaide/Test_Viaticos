@@ -5,6 +5,7 @@ using Dominio.Nucleo;
 using Dominio.Nucleo.Repositorios;
 using Dominio.Viaticos.Modelos;
 using Dominio.Viaticos.Repositorios;
+using Infraestructura.Transversal.Plataforma;
 using DominioServicio = Dominio.Viaticos.Servicios;
 using EntidadesViaticos = Dominio.Viaticos.Entidades;
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
@@ -22,7 +23,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
         IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
 
-        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<PasoViatico> ServicioDominio => this.Servicio;
+        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<PasoViatico,Dominio.Viaticos.Entidades.FlujoViaticos> ServicioDominio => this.Servicio;
 
         //Verificar por que me pidio una conversion explicita.
         //public override IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> Repositorio => (IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase>)this.RepositorioConfiguracionFlujoViaticos;
@@ -37,12 +38,10 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
             App = app;
         }
 
-        public override bool ValidarPasos(IFlujo<PasoViatico> flujos)
+        public override Respuesta<bool> ValidarPasos(IFlujo<PasoViatico> flujos)
         {
-            var pasos = flujos.Pasos;
-           
-
-            return true; 
+         
+            return new Respuesta<bool>(false); 
         }
 
        

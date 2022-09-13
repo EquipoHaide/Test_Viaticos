@@ -1,5 +1,5 @@
 ﻿using Dominio.Nucleo;
-using Presentacion.WebApi.Modelos;
+using Dominio.Viaticos.Modelos;
 using System.Collections.Generic;
 
 namespace Presentacion.WebApi.FlujosAutorizacion

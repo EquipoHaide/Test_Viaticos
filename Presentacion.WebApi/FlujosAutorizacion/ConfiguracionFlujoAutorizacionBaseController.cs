@@ -1,7 +1,4 @@
-﻿using Aplicacion.Nucleo;
-using Aplicacion.Viaticos.Servicios;
-using Dominio.Nucleo;
-using EntidadesNucleo = Dominio.Nucleo.Entidades;
+﻿using Dominio.Nucleo;
 using Dominio.Nucleo.Repositorios;
 using Dominio.Seguridad.Entidades;
 using Dominio.Seguridad.Repositorios;
@@ -10,11 +7,8 @@ using EntidadesViaticos = Dominio.Viaticos.Entidades;
 using Dominio.Viaticos.Repositorios;
 using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Mvc;
-using Presentacion.WebApi.Modelos;
 using Presentacion.WebApi.Seguridad;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Presentacion.WebApi.FlujosAutorizacion
 {
@@ -35,9 +29,6 @@ namespace Presentacion.WebApi.FlujosAutorizacion
 
 
         public virtual IRepositorioRecurso<RecursoAccion> RepositorioRecurso => this.Repositorio;
-
-      
-
 
 
         [HttpGet("recursos")]
@@ -65,16 +56,11 @@ namespace Presentacion.WebApi.FlujosAutorizacion
 
 
         [HttpPost("recursos")]
+        
         public object Crear([FromBody] ModeloConfiguracionFlujo<TPaso> config)   
         {
             try {
-                //PROBE LA INYECCION DE LOS RECURSOS Y LO HIZO SIN PROBLEMAS.
-                //var repoRecurso = Repositorio;
-                //var repoRecursoINYECTADO = RepositorioRecurso;
-
-                //Hasta aqui llega bien la inyeccion, asi como lo hace con recursos.
-                //var repo = RepositorioConfiguracionFlujoViaticos;
-                //Falta pasarle el repositorio especifico que usara viaticos
+               
                 var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, this.GetSubjectId());
 
                 if (resultado.EsError)
@@ -124,5 +110,6 @@ namespace Presentacion.WebApi.FlujosAutorizacion
             throw new NotImplementedException();
         }
 
+  
     }
 }

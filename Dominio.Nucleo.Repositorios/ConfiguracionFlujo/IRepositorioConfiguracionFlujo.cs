@@ -10,7 +10,7 @@ namespace Dominio.Nucleo.Repositorios
     /// </summary>
     /// <typeparam name="TRecurso"></typeparam>
     public interface IRepositorioConfiguracionFlujo<TEntidad> : IRepository<TEntidad>
-        where TEntidad : Entidades.FlujoBase 
+        where TEntidad : class 
     {
         //Agregar los metodos particulares que se requieren para realizar el guardado general
 
@@ -24,6 +24,6 @@ namespace Dominio.Nucleo.Repositorios
 
         void RemoverFlujo(TEntidad flujo);
 
-        void AddFlujo(Dominio.Nucleo.Entidades.FlujoBase flujo);
+        void AddFlujo(TEntidad flujo);
     }
 }
