@@ -18,13 +18,14 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
                 return new Respuesta<IFlujo>("Solo se permite un flujo predeterminado ", TAG);
 
-
             ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
             if (esNivelRepetido && flujo.TipoFlujo == (int)TipoFlujo.Particular)
                 return new Respuesta<IFlujo>("No se permite flujos con el mismo nivel de empleado", TAG);
 
+
             if (flujo.TipoEntePublico == null || flujo.TipoEntePublico.Id <=0)
                 return new Respuesta<IFlujo>("El tipo ente publico es requerida", TAG);
+
 
             if (flujo.TipoEntePublico.Descripcion == null)
                 return new Respuesta<IFlujo>("La descripcion del ente publico es requerido", TAG);
@@ -131,9 +132,15 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return true;
         }
 
-        public Respuesta<List<IFlujo<TPaso>>> Eliminar(IFlujo<TPaso> flujos, string subjectId)
+        public Respuesta<Dominio.Nucleo.Entidades.IFlujo>Eliminar(IFlujo<TPaso> flujo, string subjectId)
         {
-            throw new NotImplementedException();
+
+            if (flujo == null)
+                return new Respuesta<Dominio.Nucleo.Entidades.IFlujo>("El flujo no existe");
+
+            
+
+            return new Respuesta<Dominio.Nucleo.Entidades.IFlujo>((Dominio.Nucleo.Entidades.IFlujo)flujo);
         }
     }
 }

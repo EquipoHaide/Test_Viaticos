@@ -19,5 +19,7 @@ namespace Dominio.Nucleo.Repositorios
         bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
        
         IEnumerable<TEntidad> ObtenerFlujos(IEnumerable<TEntidad> flujo, string subjectId);
+
+        ConsultaPaginada<IConsulta> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId);
     }
 }
