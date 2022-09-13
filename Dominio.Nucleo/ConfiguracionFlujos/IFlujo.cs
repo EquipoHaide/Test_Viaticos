@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Dominio.Nucleo
 {
-    public interface IFlujo<TPaso> where TPaso : IPaso
+    public interface IFlujo<TPaso> : IModel
+        where TPaso : IPaso
     {
 
         int Id { get; set; }

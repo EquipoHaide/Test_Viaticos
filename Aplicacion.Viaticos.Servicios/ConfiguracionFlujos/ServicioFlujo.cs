@@ -39,7 +39,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 
         public override bool ValidarPasos(IFlujo<PasoViatico> flujos)
         {
-
+            var pasos = flujos.Pasos;
            
 
             return true; 

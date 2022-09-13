@@ -14,7 +14,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
     public abstract class ServicioConfiguracionFlujoBase<TPaso, TFlujo> : IServicioConfiguracionFlujoBase<TPaso>
          where TPaso : IPaso
-        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase
+        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase, new()
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 
@@ -47,10 +47,13 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (!flujo.IsValid())
                 return new Respuesta("El Flujo es invalido", TAG);
 
+            if (flujo.TipoEntePublico == null || flujo.TipoEntePublico.Id <= 0)
+                return new Respuesta("El Tipo de Ente es requerido", TAG);
+
             if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
                 return new Respuesta("La lista de pasos es requerida.", TAG);
 
-            if (flujo.TipoFlujo.ToString() == null)
+            if (flujo.TipoFlujo <= 0)
                 return new Respuesta("El tipo de flujo es requerido", TAG);
 
             if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
@@ -83,9 +86,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (esNivelRepetido.EsError)
             {
                 return esPredertiminado.ErrorBaseDatos(TAG);
-            }
-
-            //var respuesta = Servicio.Crear(concepto.ToEntity<Entidades.Concepto>(), existeAccionConcepto.Contenido, esConfiguracionInactivo.Contenido, subjectId);
+            }            
 
             var respuesta = ServicioDominio.Crear(flujo, esPredertiminado.Contenido, esNivelRepetido.Contenido, subjectId);
 
@@ -97,7 +98,18 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                     //---------------PENDIENTE------------------
                     /*Temporal ------->  */
                     var flujoBase = new Dominio.Nucleo.Entidades.FlujoBase();
-                    //Repositorio.Add(flujoBase);
+                    TFlujo entity = new TFlujo()
+                    {
+                        Id = respuesta.Contenido.Id,
+                        //IdNivelEmpleado = respuesta.Contenido.NivelEmpleado.Id
+                    };
+                    //PENDIENTE: ESTO ME DA UN ERROR AL REALIZAR EL CASTEO, LO QUE SE TRATA DE CONVERTIR ES UN FLUJO BASE A UN FLUJO BASE VIATICOS
+                    //Repositorio.Add((TFlujo)flujoBase);
+                    //var flujoAguardar = (TFlujo)respuesta.Contenido;
+                    Repositorio.Add((TFlujo)respuesta.Contenido);
+
+                    //====>> De esta manera no me da error, pero lo que se guarda es un base.
+                    Repositorio.Add(entity);
 
                     var save = Repositorio.Try(r => r.Save());
 
