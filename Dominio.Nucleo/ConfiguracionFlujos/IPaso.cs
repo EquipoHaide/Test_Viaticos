@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace Dominio.Nucleo
 {
    
-    public interface IPaso 
+    public interface IPaso : IModel
     {
 
         int Id { get; set; }       
@@ -13,6 +13,5 @@ namespace Dominio.Nucleo
         int TipoRol { get; set; }   
         bool EsFirma { get; set; }
 
-        public bool IsValid();
     }
 }

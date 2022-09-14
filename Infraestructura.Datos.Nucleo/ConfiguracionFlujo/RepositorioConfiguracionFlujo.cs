@@ -1,4 +1,5 @@
-﻿using Dominio.Nucleo.Entidades;
+﻿using Dominio.Nucleo;
+using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
 using Infraestructura.Transversal.Plataforma;
 using MicroServices.Platform.Repository;
@@ -9,13 +10,13 @@ using System.Text;
 
 namespace Infraestructura.Datos.Nucleo
 {
-    public abstract class RepositorioConfiguracionFlujo<TEntidad> : Repository<TEntidad>, IRepositorioConfiguracionFlujo<TEntidad>
-        where TEntidad : FlujoBase
-        //where TFlujo : Flujo
+    public abstract class RepositorioConfiguracionFlujo<TFlujo,TPaso> : Repository<TFlujo>, IRepositorioConfiguracionFlujo<TFlujo,TPaso>
+         where TFlujo : class, IFlujo<TPaso>
+        where TPaso : class, IPaso
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        public abstract void AddFlujo(TEntidad flujo);
+        //public abstract void AddFlujo(TEntidad flujo);
 
         public abstract Respuesta<ConsultaPaginada<Dominio.Nucleo.IConsulta>> ConsultarFlujosDeAutorizacion(Dominio.Nucleo.IConsulta parametros, string subjectId);
 
@@ -23,11 +24,11 @@ namespace Infraestructura.Datos.Nucleo
 
         public abstract bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
 
-        public abstract IEnumerable<TEntidad> ObtenerFlujos(IEnumerable<TEntidad> flujo, string subjectId);
+        public abstract IEnumerable<TFlujo> ObtenerFlujos(IEnumerable<TFlujo> flujo, string subjectId);
 
-        public abstract TEntidad ObtenerFlujos(TEntidad flujo, string subjectId);
+        public abstract TFlujo ObtenerFlujos(TFlujo flujo, string subjectId);
 
-        public abstract void RemoverFlujo(TEntidad flujo);
+        public abstract void RemoverFlujo(TFlujo flujo);
 
         //Agregar los metodos particulares que se requieren para realizar el guardado general
     }

@@ -7,32 +7,31 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 {
-    public abstract class ServicioConfiguracionFlujoBase<TPaso,TEntidad> : IServicioConfiguracionFlujoBase<TPaso,TEntidad>
-        where TPaso : IPaso
-        where TEntidad : class
+    public abstract class ServicioConfiguracionFlujoBase<TFlujo,TPaso> : IServicioConfiguracionFlujoBase<TFlujo,TPaso>
+          where TFlujo : class, IFlujo<TPaso>
+        where TPaso : class, IPaso
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
 
-        public abstract TEntidad ObtenerEntidad(IFlujo<TPaso> flujo);
-
-        public Respuesta<TEntidad> Crear(IFlujo<TPaso> flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
+       
+        public Respuesta<TFlujo> Crear(TFlujo flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
         {
             ///VALIDAR QUE SOLO EXISTA UN FLUJO PREDETERMINADO 
             if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
-                return new Respuesta<TEntidad>("Solo se permite un flujo predeterminado ", TAG);
+                return new Respuesta<TFlujo>("Solo se permite un flujo predeterminado ", TAG);
 
             ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
             if (esNivelRepetido && flujo.TipoFlujo == (int)TipoFlujo.Particular)
-                return new Respuesta<TEntidad>("No se permite flujos con el mismo nivel de empleado", TAG);
+                return new Respuesta<TFlujo>("No se permite flujos con el mismo nivel de empleado", TAG);
 
 
             if (flujo.TipoEntePublico == null || flujo.TipoEntePublico.Id <=0)
-                return new Respuesta<TEntidad>("El tipo ente publico es requerida", TAG);
+                return new Respuesta<TFlujo>("El tipo ente publico es requerida", TAG);
 
 
             if (flujo.TipoEntePublico.Descripcion == null)
-                return new Respuesta<TEntidad>("La descripcion del ente publico es requerido", TAG);
+                return new Respuesta<TFlujo>("La descripcion del ente publico es requerido", TAG);
 
            
             //Aplicamos la validacion con respecto a los pasos.
@@ -41,41 +40,41 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 var respuestaPaso = this.ValidarPaso(item);
 
                 if (!respuestaPaso.Contenido)
-                    return new Respuesta<TEntidad>(respuestaPaso.Mensaje, TAG);
+                    return new Respuesta<TFlujo>(respuestaPaso.Mensaje, TAG);
             }
 
             if (this.EsRepetido(flujo.Pasos))
-                return new Respuesta<TEntidad>("La lista de pasos del flujo no deben de repetirse", TAG);
+                return new Respuesta<TFlujo>("La lista de pasos del flujo no deben de repetirse", TAG);
 
             if (!this.EsConsecutivo(flujo.Pasos))
-                return new Respuesta<TEntidad>("La lista de pasos del flujo debe ser consecutivo.", TAG);
+                return new Respuesta<TFlujo>("La lista de pasos del flujo debe ser consecutivo.", TAG);
 
             ////AQUI VA IR LA TRANSFORMACION A ENTITY
             /////EL MODELO A REGRESAR DEBE SER LA ENTITIDA BASE 
 
-            var respuesta =  this.ObtenerEntidad(flujo);
+  
 
 
-            return new Respuesta<TEntidad>(respuesta);
+            return new Respuesta<TFlujo>(flujo);
         }
 
 
-        public Respuesta<IFlujo<TPaso>> Modificar(IFlujo<TPaso> flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
+        public Respuesta<TFlujo> Modificar(TFlujo flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
         {
 
             ///VALIDAR QUE SOLO EXISTA UN FLUJO PREDETERMINADO 
             if (esPredeterminado)
-                return new Respuesta<IFlujo<TPaso>>("Solo se permite un flujo predeterminado ", TAG);
+                return new Respuesta<TFlujo>("Solo se permite un flujo predeterminado ", TAG);
 
             ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
             if (esNivelRepetido)
-                return new Respuesta<IFlujo<TPaso>>("No se permite flujos con el mismo nivel de empleado", TAG);
+                return new Respuesta<TFlujo>("No se permite flujos con el mismo nivel de empleado", TAG);
 
             if (flujo.TipoEntePublico == null)
-                return new Respuesta<IFlujo<TPaso>>("El tipo ente publico es requerida", TAG);
+                return new Respuesta<TFlujo>("El tipo ente publico es requerida", TAG);
 
             if (flujo.TipoEntePublico.Descripcion == null)
-                return new Respuesta<IFlujo<TPaso>>("La descripcion del ente publico es requerido", TAG);
+                return new Respuesta<TFlujo>("La descripcion del ente publico es requerido", TAG);
 
 
             //Aplicamos la validacion con respecto a los pasos.
@@ -84,19 +83,19 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 var respuestaPaso = this.ValidarPaso(item);
 
                 if (!respuestaPaso.Contenido)
-                    return new Respuesta<IFlujo<TPaso>>(respuestaPaso.Mensaje, TAG);
+                    return new Respuesta<TFlujo>(respuestaPaso.Mensaje, TAG);
             }
 
             if (this.EsRepetido(flujo.Pasos))
-                return new Respuesta<IFlujo<TPaso>>("La lista de pasos del flujo no deben de repetirse", TAG);
+                return new Respuesta<TFlujo>("La lista de pasos del flujo no deben de repetirse", TAG);
 
             if (!this.EsConsecutivo(flujo.Pasos))
-                return new Respuesta<IFlujo<TPaso>>("La lista de pasos del flujo debe ser consecutivo.", TAG);
+                return new Respuesta<TFlujo>("La lista de pasos del flujo debe ser consecutivo.", TAG);
 
             ////AQUI VA IR LA TRANSFORMACION A ENTITY
             /////EL MODELO A REGRESAR DEBE SER LA ENTITIDA BASE 
 
-            return new Respuesta<IFlujo<TPaso>>(flujo);
+            return new Respuesta<TFlujo>(flujo);
         }
 
         private Respuesta<bool> ValidarPaso(TPaso paso)
@@ -137,15 +136,15 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return true;
         }
 
-        public Respuesta<Dominio.Nucleo.Entidades.IFlujo>Eliminar(IFlujo<TPaso> flujo, string subjectId)
+        public Respuesta<TFlujo>Eliminar(TFlujo flujo, string subjectId)
         {
 
             if (flujo == null)
-                return new Respuesta<Dominio.Nucleo.Entidades.IFlujo>("El flujo no existe");
+                return new Respuesta<TFlujo>("El flujo no existe");
 
             
 
-            return new Respuesta<Dominio.Nucleo.Entidades.IFlujo>((Dominio.Nucleo.Entidades.IFlujo)flujo);
+            return new Respuesta<TFlujo>(flujo);
         }
     }
 }

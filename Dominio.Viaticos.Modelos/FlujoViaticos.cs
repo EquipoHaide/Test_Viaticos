@@ -4,10 +4,12 @@ using Dominio.Nucleo;
 
 namespace Dominio.Viaticos.Modelos
 {
-    public class FlujoViaticos : IModel//: FlujoBase
+    public class FlujoViaticos : IFlujo<PasoViatico> //: FlujoBase
     {
+        public int Id { get; set; }
+        public string NombreFlujo { get; set; }
         public TipoEntePublico TipoEntePublico { get; set; }
-        public INivelEmpleado NivelEmpleado { get; set; }
+        public NivelEmpleado NivelEmpleado { get; set; }
         public List<PasoViatico> Pasos { get; set; }
 
         public int TipoFlujo { get; set; }
@@ -19,9 +21,7 @@ namespace Dominio.Viaticos.Modelos
 
 
 
-        public string NombreFlujo { get; set; }
-        
 
-       
+
     }
 }

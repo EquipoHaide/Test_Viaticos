@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Dominio.Nucleo;
 using Dominio.Nucleo.Entidades;
-using Dominio.Nucleo.Servicios;
 using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public class ServicioFlujos : Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase<Dominio.Viaticos.Modelos.PasoViatico, Dominio.Viaticos.Entidades.FlujoViaticos>, IServicioFlujos<Dominio.Viaticos.Modelos.PasoViatico>
+    public class ServicioFlujos : ServicioConfiguracionFlujoBase<FlujoViaticos, PasoViatico>, IServicioFlujos<FlujoViaticos,PasoViatico>
     {
         private new const string TAG = "Dominio.Seguridad.Servicios.ServicioFlujos";
 
@@ -39,22 +38,7 @@ namespace Dominio.Viaticos.Servicios
             throw new NotImplementedException();
         }
 
-        public override Entidades.FlujoViaticos ObtenerEntidad(IFlujo<PasoViatico> flujo)
-        {
-
-            var modeloFlujo = MainMapper.Instance.Mapper.Map<Dominio.Viaticos.Modelos.FlujoViaticos>(flujo);
-
-            var entidad = modeloFlujo.ToEntity<Dominio.Viaticos.Entidades.FlujoViaticos>();
-
-            var entidadNueva = new Entidades.FlujoViaticos
-            {
-                IdNivelEmpleado = flujo.NivelEmpleado.Id,
-                IdTipoEntePublico = flujo.TipoEntePublico.Id,
-                TipoFlujo = flujo.TipoFlujo
-            };
-
-            return entidadNueva;
-        }
+      
 
     }
 }

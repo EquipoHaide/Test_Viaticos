@@ -10,25 +10,21 @@ using DominioServicio = Dominio.Viaticos.Servicios;
 using EntidadesViaticos = Dominio.Viaticos.Entidades;
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
-    public class ServicioFlujo : ServicioConfiguracionFlujoBase<PasoViatico, EntidadesViaticos.FlujoViaticos>, IServicioFlujo<PasoViatico>
+    public class ServicioFlujo : ServicioConfiguracionFlujoBase<FlujoViaticos, PasoViatico> , IServicioFlujo<FlujoViaticos,PasoViatico>
     {
         const string TAG = "Aplicacion.Viaticos.Servicios.ConfiguracionFlujos";
 
         Nucleo.IAplicacion App { get; set; }
 
 
-        DominioServicio.IServicioFlujos<PasoViatico> servicio;
-        DominioServicio.IServicioFlujos<PasoViatico> Servicio => App.Inject(ref servicio);
+        DominioServicio.IServicioFlujos<FlujoViaticos,PasoViatico> servicio;
+        DominioServicio.IServicioFlujos<FlujoViaticos,PasoViatico> Servicio => App.Inject(ref servicio);
+        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<FlujoViaticos, PasoViatico> ServicioDominio => this.Servicio;
 
         IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
         IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
 
-        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<PasoViatico,Dominio.Viaticos.Entidades.FlujoViaticos> ServicioDominio => this.Servicio;
-
-        //Verificar por que me pidio una conversion explicita.
-        //public override IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase> Repositorio => (IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase>)this.RepositorioConfiguracionFlujoViaticos;
-
-        public override IRepositorioConfiguracionFlujo<EntidadesViaticos.FlujoViaticos> Repositorio => RepositorioConfiguracionFlujoViaticos;
+        public override IRepositorioConfiguracionFlujo<Dominio.Viaticos.Entidades.FlujoViaticos, Dominio.Viaticos.Entidades.PasoViatico> Repositorio => this.RepositorioConfiguracionFlujoViaticos;
 
 
 

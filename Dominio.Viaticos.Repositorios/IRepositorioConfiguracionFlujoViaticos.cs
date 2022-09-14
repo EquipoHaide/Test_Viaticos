@@ -7,7 +7,9 @@ using System.Text;
 
 namespace Dominio.Viaticos.Repositorios
 {
-    public interface IRepositorioConfiguracionFlujoViaticos : IRepository<FlujoViaticos>, IRepositorioConfiguracionFlujo<FlujoViaticos>
+   
+    public interface IRepositorioConfiguracionFlujoViaticos : IRepository<FlujoViaticos>, IRepositorioConfiguracionFlujo<FlujoViaticos, PasoViatico>
+
     {
     }
 

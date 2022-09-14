@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Dominio.Nucleo;
 using Dominio.Viaticos.Modelos;
-using Dominio.Nucleo.Servicios;
 using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public interface IServicioFlujos<TPaso> : Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso,Dominio.Viaticos.Entidades.FlujoViaticos>
-        where TPaso: IPaso
+    public interface IServicioFlujos<TFlujo,TPaso> : IServicioConfiguracionFlujoBase<TFlujo,TPaso>
+        where TFlujo : class, IFlujo<TPaso>
+        where TPaso : class, IPaso
     {
         void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId);
 

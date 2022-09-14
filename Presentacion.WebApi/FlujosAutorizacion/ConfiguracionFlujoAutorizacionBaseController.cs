@@ -12,47 +12,42 @@ using System;
 
 namespace Presentacion.WebApi.FlujosAutorizacion
 {
-    public class ConfiguracionFlujoAutorizacionBaseController<TPaso, TConsulta> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TPaso, TConsulta>
-         where TConsulta : IConsulta
-         where TPaso : IPaso
+    public class ConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso>
+        where TFlujo : class, IFlujo<TPaso>
+        where TPaso : class, IPaso
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
  
-        public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso> ServicioConfiguracionFlujoBase { get; }
+        public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioConfiguracionFlujoBase { get; }
 
-        IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
-        IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
-        public virtual IRepositorioConfiguracionFlujo<EntidadesViaticos.FlujoViaticos> RepositorioViaticos => this.RepositorioConfiguracionFlujoViaticos;
+        //IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
+        //IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
 
-        IRepositorioAcciones repositorio;
-        IRepositorioAcciones Repositorio => App.Inject(ref repositorio);
+        //public virtual IRepositorioConfiguracionFlujo<TFlujo,TPaso> RepositorioViaticos => this.RepositorioConfiguracionFlujoViaticos;
 
 
-        public virtual IRepositorioRecurso<RecursoAccion> RepositorioRecurso => this.Repositorio;
+        //[HttpGet("recursos")]
+        //public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro)
+        //{
+        //    try
+        //    {
+        //        var consulta = ServicioConfiguracionFlujoBase.Consultar(filtro, this.GetSubjectId());
 
+        //        if (consulta.EsError)
+        //        {
+        //            if (consulta.Estado == EstadoProceso.Fatal)
+        //                return this.ApiResult(consulta.ExcepcionInterna, App.GetLogger());
 
-        [HttpGet("recursos")]
-        public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro)
-        {
-            try
-            {
-                var consulta = ServicioConfiguracionFlujoBase.Consultar(filtro, this.GetSubjectId());
+        //            return this.ApiResult(consulta.Mensaje);
+        //        }
 
-                if (consulta.EsError)
-                {
-                    if (consulta.Estado == EstadoProceso.Fatal)
-                        return this.ApiResult(consulta.ExcepcionInterna, App.GetLogger());
-
-                    return this.ApiResult(consulta.Mensaje);
-                }
-
-                return this.ApiResult(new { consulta });
-            }
-            catch (Exception e)
-            {
-                return this.ApiResult(e, App.GetLogger());
-            }
-        }
+        //        return this.ApiResult(new { consulta });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return this.ApiResult(e, App.GetLogger());
+        //    }
+        //}
 
 
         [HttpPost("recursos")]

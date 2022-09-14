@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace Presentacion.WebApi.FlujosAutorizacion
 {
-    public interface IConfiguracionFlujoAutorizacionBaseController<TPaso, TConsulta>        
-        where TConsulta : IConsulta
-        where TPaso : IPaso
+    public interface IConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso>
+        where TFlujo : class, IFlujo<TPaso>
+        where TPaso : class, IPaso
     {        
-        object ConsultarConfiguracionFlujo(TConsulta filtro);
+        //object ConsultarConfiguracionFlujo(TConsulta filtro);
 
         object Crear(ModeloConfiguracionFlujo<TPaso> config);
 

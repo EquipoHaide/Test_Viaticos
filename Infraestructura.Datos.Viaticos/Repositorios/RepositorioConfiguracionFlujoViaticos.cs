@@ -8,56 +8,43 @@ using Dominio.Viaticos.Entidades;
 using Infraestructura.Transversal.Plataforma;
 using Dominio.Nucleo;
 using Dominio.Nucleo.Repositorios;
+using Infraestructura.Datos.Nucleo;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioConfiguracionFlujoViaticos : Repository<Dominio.Viaticos.Entidades.FlujoViaticos>, IRepositorioConfiguracionFlujoViaticos
+    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<FlujoViaticos, PasoViatico>, IRepositorioConfiguracionFlujoViaticos
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-
-        public void AddFlujo(FlujoViaticos flujo)
+        public override Respuesta<ConsultaPaginada<IConsulta>> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId)
         {
-            UnitOfWork.Set<FlujoViaticos>().AddRange(flujo);
+            throw new NotImplementedException();
         }
 
-        public Respuesta<ConsultaPaginada<IConsulta>> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId)
+        public override bool ExisteFlujoPredeterminado(int idTipoEntePublico)
         {
-
-             
-            return new Respuesta<ConsultaPaginada<IConsulta>>("");
+            throw new NotImplementedException();
         }
 
-        public bool ExisteFlujoPredeterminado(int idTipoEntePublico)
+        public override bool ExisteNivelRepetido(int idTipoEntePublico, string nivel)
         {
-            return false;
+            throw new NotImplementedException();
         }
 
-        public bool ExisteNivelRepetido(int idTipoEntePublico, string nivel)
+        public override IEnumerable<FlujoViaticos> ObtenerFlujos(IEnumerable<FlujoViaticos> flujo, string subjectId)
         {
-            return false;
+            throw new NotImplementedException();
         }
 
-        public FlujoViaticos ObtenerFlujos(FlujoViaticos flujo, string subjectId)
+        public override FlujoViaticos ObtenerFlujos(FlujoViaticos flujo, string subjectId)
         {
-            FlujoViaticos lista = null;
-            return lista;
+            throw new NotImplementedException();
         }
 
-        public void RemoverFlujo(FlujoViaticos flujo)
+        public override void RemoverFlujo(FlujoViaticos flujo)
         {
-
-            //var flujo = (from c in Set
-            //             where id == c.id
-            //             select c);
-            UnitOfWork.Set<FlujoViaticos>().RemoveRange(flujo);
-
-
-            //UnitOfWork.Set<FlujoViaticos>().AddRange(flujo);
-
+            throw new NotImplementedException();
         }
-
-        
     }
 }
 

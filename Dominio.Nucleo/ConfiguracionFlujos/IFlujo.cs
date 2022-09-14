@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Dominio.Nucleo
 {
+    /// <summary>
+    /// /
+    /// </summary>
+    /// <typeparam name="TPaso"></typeparam>
     public interface IFlujo<TPaso> : IModel
         where TPaso : IPaso
     {

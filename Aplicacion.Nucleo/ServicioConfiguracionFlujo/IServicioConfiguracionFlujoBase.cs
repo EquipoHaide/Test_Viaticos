@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dominio.Nucleo;
-using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
 using Infraestructura.Datos.Nucleo;
 using Infraestructura.Transversal.Plataforma;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
-    public interface IServicioConfiguracionFlujoBase<TPaso>
-    where TPaso : IPaso
+    public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso>
+        where TFlujo : class, IFlujo<TPaso>
+        where TPaso : class, IPaso
     {
 
         Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
@@ -20,11 +20,11 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         //bool ValidarPasos();ConsultaPaginada<IPermisoModel>
         public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta query, string subjectId);
 
-        public Respuesta Crear(IFlujo<TPaso> flujo,  string subjectId);
+        public Respuesta Crear(TFlujo flujo,  string subjectId);
 
-        public Respuesta Modificar(IFlujo<TPaso> flujo, string subjectId);
+        public Respuesta Modificar(TFlujo flujo, string subjectId);
 
-        public Respuesta Eliminar(IFlujo<TPaso> flujo, string subjectId);
+        public Respuesta Eliminar(TFlujo flujo, string subjectId);
         
 
 

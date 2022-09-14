@@ -12,16 +12,16 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
-    public abstract class ServicioConfiguracionFlujoBase<TPaso, TEntidad> : IServicioConfiguracionFlujoBase<TPaso>
-        where TPaso : IPaso
-        where TEntidad : class
+    public abstract class ServicioConfiguracionFlujoBase<TFlujo, TPaso> : IServicioConfiguracionFlujoBase<TFlujo, TPaso>
+        where TFlujo : class,IFlujo<TPaso>
+        where TPaso : class,IPaso
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 
-        public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TPaso,TEntidad> ServicioDominio { get; }
+        public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioDominio { get; }
 
 
-        public virtual IRepositorioConfiguracionFlujo<TEntidad> Repositorio { get; }
+        public virtual IRepositorioConfiguracionFlujo<TFlujo,TPaso> Repositorio { get; }
        
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         }
 
-        public Respuesta Crear(IFlujo<TPaso> flujo, string subjectId)
+        public Respuesta Crear(TFlujo flujo, string subjectId)
         {
             //Valida que el objeto no este vacio
             if (flujo == null)
@@ -105,7 +105,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
                 if (respuestaComplementaria.EsExito)
                 {
-                    Repositorio.AddFlujo(respuesta.Contenido);
+                    Repositorio.Add(respuesta.Contenido);
 
                     var save = Repositorio.Try(r => r.Save());
 
@@ -125,7 +125,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         }
 
 
-        public Respuesta Modificar(IFlujo<TPaso> flujo,  string subjectId)
+        public Respuesta Modificar(TFlujo flujo,  string subjectId)
         {
             //Valida que el objeto no este vacio
             if (flujo == null)
@@ -179,7 +179,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         }
 
-        public Respuesta Eliminar(IFlujo<TPaso> flujo,string subjectId)
+        public Respuesta Eliminar(TFlujo flujo,string subjectId)
         {
             
            //var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos((TFlujo)flujo, subjectId));
