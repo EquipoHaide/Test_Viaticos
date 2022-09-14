@@ -15,7 +15,13 @@ namespace Dominio.Viaticos.Modelos
 
             perfil.CreateMap<Entidades.FlujoViaticos, Modelos.FlujoViaticos>().ReverseMap();
 
-            perfil.CreateMap<Modelos.ModeloFlujo<PasoViatico>, Modelos.FlujoViaticos>();
+            perfil.CreateMap<Modelos.FlujoViaticos, Entidades.FlujoViaticos>()
+                  .ForMember(dest => dest.IdNivelEmpleado, opts => opts.MapFrom(src => src.NivelEmpleado.Id))
+                  .ForMember(dest => dest.IdTipoEntePublico, opts => opts.MapFrom(src => src.TipoEntePublico.Id)).ReverseMap();
+
+
+
+            perfil.CreateMap<Modelos.ModeloFlujo<PasoViatico>, Modelos.FlujoViaticos>().ReverseMap();
 
         }
     }

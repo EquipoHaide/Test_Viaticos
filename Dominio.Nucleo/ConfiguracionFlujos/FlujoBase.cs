@@ -7,14 +7,14 @@ using System.Text.Json.Serialization;
 namespace Dominio.Nucleo
 {
 
-    public class FlujoBase : IFlujoNew
-    {
+    public class FlujoBase 
+    {   
         public TipoEntePublico TipoEntePublico { get; set; }
         //public INivelEmpleado NivelEmpleado { get; set; }
         public List<Paso> Pasos { get; set; }       
-
-        public int TipoFlujo { get; set; }
         
+
+      
         public bool IsValid()
         {
             return true;

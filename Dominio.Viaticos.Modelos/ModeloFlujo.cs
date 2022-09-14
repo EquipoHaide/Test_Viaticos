@@ -15,7 +15,7 @@ namespace Dominio.Viaticos.Modelos
         public List<TPaso> Pasos { get ;set ;}
         public int TipoFlujo { get; set; }
 
-        public string Nombre { get; set; }
+        public string NombreFlujo { get; set; }
         public string Descripcion { get; set; }
 
         public bool Activo { get; set; }
