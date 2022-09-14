@@ -52,11 +52,11 @@ namespace Presentacion.WebApi.FlujosAutorizacion
 
         [HttpPost("recursos")]
         
-        public object Crear([FromBody] ModeloConfiguracionFlujo<TPaso> config)   
+        public object Crear([FromBody] TFlujo config)   
         {
             try {
                
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, this.GetSubjectId());
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config, this.GetSubjectId());
 
                 if (resultado.EsError)
                 {
@@ -77,11 +77,11 @@ namespace Presentacion.WebApi.FlujosAutorizacion
 
 
         [HttpPut("recursos")]
-        public object Modificar([FromBody] ModeloConfiguracionFlujo<TPaso> config)
+        public object Modificar([FromBody] TFlujo config)
         {
             try
             {
-                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujo, this.GetSubjectId());
+                var resultado = ServicioConfiguracionFlujoBase.Modificar(config, this.GetSubjectId());
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)
@@ -100,11 +100,10 @@ namespace Presentacion.WebApi.FlujosAutorizacion
 
 
         [HttpDelete("recursos")]
-        public object Eliminar(ModeloConfiguracionFlujo<TPaso> config)
+        public object Eliminar(TFlujo config)
         {
             throw new NotImplementedException();
         }
 
-  
     }
 }
