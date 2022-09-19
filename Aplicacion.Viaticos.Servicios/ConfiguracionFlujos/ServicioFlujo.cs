@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
 using Dominio.Nucleo;
+using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
 using Dominio.Viaticos.Modelos;
 using Dominio.Viaticos.Repositorios;
@@ -10,7 +11,7 @@ using DominioServicio = Dominio.Viaticos.Servicios;
 using EntidadesViaticos = Dominio.Viaticos.Entidades;
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
-    public class ServicioFlujo : ServicioConfiguracionFlujoBase<FlujoViaticos, PasoViatico> , IServicioFlujo<FlujoViaticos,PasoViatico>
+    public class ServicioFlujo : ServicioConfiguracionFlujoBase<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico>
     {
         const string TAG = "Aplicacion.Viaticos.Servicios.ConfiguracionFlujos";
 
@@ -24,7 +25,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
         IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
 
-        public override IRepositorioConfiguracionFlujo<FlujoViaticos, PasoViatico> Repositorio => this.RepositorioConfiguracionFlujoViaticos;
+        public override IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico> Repositorio => this.RepositorioConfiguracionFlujoViaticos;
 
 
 

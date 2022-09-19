@@ -27,9 +27,6 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (flujo.TipoFlujo <= 0)
                 return new  Respuesta<TFlujo>("El tipo de flujo es requerido", TAG);
 
-            if (flujo.TipoEntePublico == null)
-                return new  Respuesta<TFlujo>("El tipo ente publico es requerida", TAG);
-
             if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
             {
                 if (flujo.NivelEmpleado == null)
@@ -46,11 +43,6 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
             if (esNivelRepetido && flujo.TipoFlujo == (int)TipoFlujo.Particular)
                 return new Respuesta<TFlujo>("No se permite flujos con el mismo nivel de empleado", TAG);
-
-
-            if (flujo.TipoEntePublico == null || flujo.TipoEntePublico.Id <=0)
-                return new Respuesta<TFlujo>("El tipo ente publico es requerida", TAG);
-
 
             if (flujo.TipoEntePublico.Descripcion == null)
                 return new Respuesta<TFlujo>("La descripcion del ente publico es requerido", TAG);

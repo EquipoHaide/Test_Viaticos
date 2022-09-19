@@ -4,20 +4,27 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dominio.Nucleo.Entidades
 {
-    public class FlujoBase : IFlujo
+    public class FlujoBase <TPaso> : IFlujo<TPaso>, IEntity
+           where TPaso : IPaso
     {
         [Required]
         public int Id { get; set; }
-        //public List<Paso> Pasos { get; set; }
+      
         [Required]
         public int TipoFlujo { get; set; }
         [Required]
         public int IdTipoEntePublico { get; set; }
-        
-        //Solo cuando sea un flujo particular se requiere el nivel de empleado
+
+
         public int IdNivelEmpleado { get; set; }
 
+        public TipoEntePublico TipoEntePublico { get; set; }
+        public NivelEmpleado NivelEmpleado { get; set; }
+        public List<TPaso> Pasos { get; set; }
 
-       
+        public bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

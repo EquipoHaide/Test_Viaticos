@@ -10,7 +10,7 @@ namespace Dominio.Nucleo.Repositorios
     /// </summary>
     /// <typeparam name="TRecurso"></typeparam>
     public interface IRepositorioConfiguracionFlujo<TFlujo,TPaso> : IRepository<TFlujo>
-        where TFlujo : class, IFlujo<TPaso>
+        where TFlujo : FlujoBase<TPaso>
         where TPaso : class, IPaso
     {
         //Agregar los metodos particulares que se requieren para realizar el guardado general
@@ -22,9 +22,6 @@ namespace Dominio.Nucleo.Repositorios
         TFlujo ObtenerFlujos(TFlujo flujo, string subjectId);
 
         public Respuesta<ConsultaPaginada<IConsulta>> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId);
-
-        //void RemoverFlujo(TEntidad flujo);
-
-        //void AddFlujo(TEntidad flujo);
+  
     }
 }

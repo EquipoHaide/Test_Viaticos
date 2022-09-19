@@ -7,13 +7,14 @@ using Infraestructura.Transversal.Plataforma;
 using Infraestructura.Datos.Nucleo;
 
 using Dominio.Nucleo.Repositorios;
+using Dominio.Nucleo.Entidades;
 
 using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
     public abstract class ServicioConfiguracionFlujoBase<TFlujo, TPaso> : IServicioConfiguracionFlujoBase<TFlujo, TPaso>
-        where TFlujo : class,IFlujo<TPaso>
+        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase<TPaso>//class,IFlujo<TPaso>
         where TPaso : class,IPaso
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
@@ -101,11 +102,12 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta Modificar(TFlujo flujo,  string subjectId)
         {
-            var flujoOriginal = Repositorio.Try(r => r.Get(g => g.Id (flujo == null ? 0 : flujo.Id)));
+            /*
+            var flujoOriginal = Repositorio.Try(r => r.Get(g => g.Id(flujo == null ? 0 : flujo.Id)));
 
             if (flujoOriginal.EsError)
                 return flujoOriginal.ErrorBaseDatos(TAG);
-
+            */
             
             //var inmuebleModificar = Repositorio.Try(m => m.Get(i => i.Id == (inmueble == null ? 0 : inmueble.Id)));
 

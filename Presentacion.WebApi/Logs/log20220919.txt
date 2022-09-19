@@ -1,0 +1,5 @@
+[2022-09-19 10:28:35] [FTL] Ha occurrido un error 6vohmS2hSe4dMomSO_kX3Q {  } System.NotImplementedException: The method or operation is not implemented.
+   at Infraestructura.Datos.Viaticos.Repositorios.RepositorioConfiguracionFlujoViaticos.ExisteFlujoPredeterminado(Int32 idTipoEntePublico) in C:\Users\Israel\Documents\DEV\NET_TFS\APPS\Viaticos\Test_Viaticos\Infraestructura.Datos.Viaticos\Repositorios\RepositorioConfiguracionFlujoViaticos.cs:line 26
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`2.<>c__DisplayClass9_0.<Crear>b__0(IRepositorioConfiguracionFlujo`2 r) in C:\Users\Israel\Documents\DEV\NET_TFS\APPS\Viaticos\Test_Viaticos\Aplicacion.Nucleo\ServicioConfiguracionFlujo\ServicioConfiguracionFlujoBase.cs:line 57
+   at Infraestructura.Transversal.Plataforma.Extensiones.TryExtensions.Try[TRepository,TResult](TRepository repository, Func`2 function) in C:\Users\Israel\Documents\DEV\NET_TFS\APPS\Viaticos\Test_Viaticos\Infraestructura.Transversal.Plataforma\Extensiones\TryExtensions.cs:line 29
+

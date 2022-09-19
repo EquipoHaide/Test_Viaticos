@@ -4,7 +4,7 @@ using Dominio.Nucleo;
 
 namespace Dominio.Viaticos.Modelos
 {
-    public class FlujoViaticos : IFlujo<PasoViatico> //: FlujoBase
+    public class FlujoViaticos : IFlujo<PasoViatico> 
     {
         public int Id { get; set; }
         public string NombreFlujo { get; set; }
