@@ -18,9 +18,9 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         Nucleo.IAplicacion App { get; set; }
 
 
-        DominioServicio.IServicioFlujos<FlujoViaticos,PasoViatico> servicio;
-        DominioServicio.IServicioFlujos<FlujoViaticos,PasoViatico> Servicio => App.Inject(ref servicio);
-        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<FlujoViaticos, PasoViatico> ServicioDominio => this.Servicio;
+        DominioServicio.IServicioFlujos<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico> servicio;
+        DominioServicio.IServicioFlujos<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico> Servicio => App.Inject(ref servicio);
+        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico> ServicioDominio => this.Servicio;
 
         IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
         IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
