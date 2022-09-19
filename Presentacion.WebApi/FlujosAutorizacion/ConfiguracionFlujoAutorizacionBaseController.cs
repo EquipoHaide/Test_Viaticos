@@ -13,7 +13,7 @@ using System;
 namespace Presentacion.WebApi.FlujosAutorizacion
 {
     public class ConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso>
-        where TFlujo : class, IFlujo<TPaso>
+        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase<TPaso>, IFlujo<TPaso>
         where TPaso : class, IPaso
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }

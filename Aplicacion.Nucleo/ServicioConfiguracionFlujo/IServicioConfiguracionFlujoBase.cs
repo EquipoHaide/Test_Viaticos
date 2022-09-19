@@ -8,7 +8,7 @@ using Infraestructura.Transversal.Plataforma;
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
     public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso>
-        where TFlujo : class, IFlujo<TPaso>
+        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase<TPaso>, IFlujo<TPaso>
         where TPaso : class, IPaso
     {
 

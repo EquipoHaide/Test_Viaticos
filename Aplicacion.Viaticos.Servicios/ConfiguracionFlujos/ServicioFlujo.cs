@@ -11,7 +11,7 @@ using DominioServicio = Dominio.Viaticos.Servicios;
 using EntidadesViaticos = Dominio.Viaticos.Entidades;
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
-    public class ServicioFlujo : ServicioConfiguracionFlujoBase<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico>
+    public class ServicioFlujo : ServicioConfiguracionFlujoBase<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico>, IServicioFlujo<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico>
     {
         const string TAG = "Aplicacion.Viaticos.Servicios.ConfiguracionFlujos";
 

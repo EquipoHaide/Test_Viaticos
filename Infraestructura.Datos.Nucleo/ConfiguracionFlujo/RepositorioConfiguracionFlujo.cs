@@ -11,7 +11,7 @@ using System.Text;
 namespace Infraestructura.Datos.Nucleo
 {
     public abstract class RepositorioConfiguracionFlujo<TFlujo,TPaso> : Repository<TFlujo>, IRepositorioConfiguracionFlujo<TFlujo,TPaso>
-         where TFlujo : class, IFlujo<TPaso>
+         where TFlujo : FlujoBase<TPaso>
         where TPaso : class, IPaso
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }

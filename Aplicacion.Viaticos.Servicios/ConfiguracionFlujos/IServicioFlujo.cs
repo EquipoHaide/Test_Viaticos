@@ -6,7 +6,7 @@ using Dominio.Viaticos.Modelos;
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
     public interface IServicioFlujo<TFlujo,TPaso> : IServicioConfiguracionFlujoBase<TFlujo,TPaso>
-        where TFlujo : class, IFlujo<TPaso>
+        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase<TPaso>//class, IFlujo<TPaso>
         where TPaso : class, IPaso
     {
        

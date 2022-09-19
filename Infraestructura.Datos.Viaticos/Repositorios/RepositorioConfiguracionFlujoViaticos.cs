@@ -9,10 +9,11 @@ using Infraestructura.Transversal.Plataforma;
 using Dominio.Nucleo;
 using Dominio.Nucleo.Repositorios;
 using Infraestructura.Datos.Nucleo;
+using Dominio.Nucleo.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<FlujoViaticos, PasoViatico>, IRepositorioConfiguracionFlujoViaticos
+    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>,PasoViatico>, IRepositorioConfiguracionFlujoViaticos
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
@@ -31,24 +32,20 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<FlujoViaticos> ObtenerFlujos(IEnumerable<FlujoViaticos> flujo, string subjectId)
+        public override IEnumerable<FlujoBase<PasoViatico>> ObtenerFlujos(IEnumerable<FlujoBase<PasoViatico>> flujo, string subjectId)
         {
             throw new NotImplementedException();
         }
 
-        public override FlujoViaticos ObtenerFlujos(FlujoViaticos flujo, string subjectId)
+        public override FlujoBase<PasoViatico> ObtenerFlujos(FlujoBase<PasoViatico> flujo, string subjectId)
         {
             throw new NotImplementedException();
         }
 
-        public override void RemoverFlujo(FlujoViaticos flujo)
+        public override void RemoverFlujo(FlujoBase<PasoViatico> flujo)
         {
             throw new NotImplementedException();
         }
     }
 }
 
-
-
-//PENDIENTE PARA EL LUNES CONTINUNAR CON LA CREACION DE LA CARPTETA DE MIGRACIONS, SCRIPT DEL 
-//PROYECTO DE INFREASTRUCTURA DE DATOS DE VIATICOS
