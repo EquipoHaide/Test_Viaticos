@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Infraestructura.Datos.Viaticos.UnidadDeTrabajo;
-using Dominio.Viaticos.Entidades;
+using Dominio.Viaticos.Modelos;
 using Infraestructura.Transversal.Plataforma;
 using Dominio.Nucleo;
 using Dominio.Nucleo.Repositorios;

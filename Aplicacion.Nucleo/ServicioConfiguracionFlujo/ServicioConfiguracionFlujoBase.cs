@@ -21,7 +21,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioDominio { get; }
 
 
-        public  IRepositorioConfiguracionFlujo<TFlujo,TPaso> Repositorio { get; }
+        public virtual IRepositorioConfiguracionFlujo<TFlujo,TPaso> Repositorio { get; }
        
 
         /// <summary>
