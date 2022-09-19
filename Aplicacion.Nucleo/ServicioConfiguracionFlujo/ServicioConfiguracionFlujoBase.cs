@@ -20,9 +20,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioDominio { get; }
 
-
-        public virtual IRepositorioConfiguracionFlujo<TFlujo,TPaso> RepositorioDominio { get; }
-       
+        public virtual IRepositorioConfiguracionFlujo<TFlujo,TPaso> Repositorio { get; }
 
         /// <summary>
         /// PENDIENTE :

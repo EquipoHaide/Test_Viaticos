@@ -1,5 +1,5 @@
 ﻿using Dominio.Nucleo.Repositorios;
-using Dominio.Viaticos.Entidades;
+using Dominio.Viaticos.Modelos;
 using MicroServices.Platform.Repository.Core;
 using System;
 using System.Collections.Generic;
