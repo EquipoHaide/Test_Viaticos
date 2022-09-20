@@ -9,7 +9,7 @@ using System.Text;
 namespace Dominio.Viaticos.Repositorios
 {
    
-    public interface IRepositorioConfiguracionFlujoViaticos : IRepository<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>>, IRepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico>
+    public interface IRepositorioConfiguracionFlujoViaticos : IRepositorioConfiguracionFlujo<Dominio.Viaticos.Entidades.FlujoViaticos<PasoViatico>, PasoViatico>
 
     {
     }
