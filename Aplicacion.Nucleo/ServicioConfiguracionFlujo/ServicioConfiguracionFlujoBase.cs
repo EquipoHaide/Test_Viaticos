@@ -13,8 +13,8 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
-    public abstract class ServicioConfiguracionFlujoBase<TFlujo, TPaso> : IServicioConfiguracionFlujoBase<TFlujo, TPaso>
-        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase<TPaso>//class,IFlujo<TPaso>
+    public abstract class ServicioConfiguracionFlujoBase<TFlujo, TPaso> : IServicioConfiguracionFlujoBase<TFlujo,TPaso>
+        where TFlujo : FlujoGeneral, IFlujo<TPaso>
         where TPaso : class,IPaso
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
@@ -28,7 +28,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         /// </summary>
         /// <param name="flujos"></param>
         /// <returns></returns>
-        public abstract Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
+        public abstract Respuesta<bool> ValidarPasos(TFlujo flujos);
 
 
         public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
@@ -42,7 +42,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         }
 
-        public Respuesta Crear(TFlujo flujo, string subjectId)
+        public Respuesta Crear(IFlujoModel<IPasoModel> flujo, string subjectId)
         {
             //Valida que el objeto no este vacio
             if (flujo == null)
@@ -71,28 +71,28 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return esPredertiminado.ErrorBaseDatos(TAG);
             
 
-            var respuesta = ServicioDominio.Crear(flujo, esPredertiminado.Contenido, esNivelRepetido.Contenido, subjectId);
+            var respuesta = ServicioDominio.Crear(null, esPredertiminado.Contenido, esNivelRepetido.Contenido, subjectId);
 
 
             if (respuesta.EsExito)
             {
-                var respuestaComplementaria= this.ValidarPasos(flujo);
+                //var respuestaComplementaria= this.ValidarPasos(null);
 
-                if (respuestaComplementaria.EsExito)
-                {
-                    Repositorio.Add(respuesta.Contenido);
+                //if (respuestaComplementaria.EsExito)
+                //{
+                //    Repositorio.Add(respuesta.Contenido);
 
-                    var save = Repositorio.Try(r => r.Save());
+                //    var save = Repositorio.Try(r => r.Save());
 
-                    if (save.EsError)
-                    {
-                        return save.ErrorBaseDatos(TAG);
-                    }
+                //    if (save.EsError)
+                //    {
+                //        return save.ErrorBaseDatos(TAG);
+                //    }
 
-                    return new Respuesta();
-                }
+                //    return new Respuesta();
+                //}
 
-                return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+                //return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
 
             return new Respuesta(respuesta.Mensaje, TAG);
@@ -165,8 +165,80 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             return new Respuesta();
         }
 
+        public Respuesta<bool> ValidarPasos(IFlujo<IPaso> flujos)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Respuesta Crear(IFlujo<IPaso> flujo, string subjectId)
+        {
+            //Valida que el objeto no este vacio
+            if (flujo == null)
+                return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
+
+            if (!flujo.IsValid())
+                return new Respuesta("El Flujo es invalido", TAG);
 
 
+            //CONSULTA AL REPOSITORIO
+            //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO ANTES QUE UN FLUJO PARTICULAR 
+            //            
+            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id));
 
+            if (esPredertiminado.EsError)
+                return esPredertiminado.ErrorBaseDatos(TAG);
+
+
+            //CONSULTA AL REPOSITORIO 
+            //BUSCA SI EXITE ALGUN FLUJO PARTICULAR CON EL MISMO NIVEL 
+            //
+            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id, flujo.NivelEmpleado.Nivel == null ? "" : flujo.NivelEmpleado.Nivel));
+
+
+            if (esNivelRepetido.EsError)
+                return esPredertiminado.ErrorBaseDatos(TAG);
+
+
+            var respuesta = ServicioDominio.Crear(flujo, esPredertiminado.Contenido, esNivelRepetido.Contenido, subjectId);
+
+
+            if (respuesta.EsExito)
+            {
+                var respuestaComplementaria = this.ValidarPasos(flujo);
+
+                if (respuestaComplementaria.EsExito)
+                {
+                    Repositorio.Add(respuesta.Contenido);
+
+                    var save = Repositorio.Try(r => r.Save());
+
+                    if (save.EsError)
+                    {
+                        return save.ErrorBaseDatos(TAG);
+                    }
+
+                    return new Respuesta();
+                }
+
+                return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+            }
+
+            return new Respuesta(respuesta.Mensaje, TAG);
+        }
+
+        public Respuesta Modificar(IFlujo<IPaso> flujo, string subjectId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Respuesta Eliminar(IFlujo<IPaso> flujo, string subjectId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Respuesta Crear(TFlujo flujo, string subjectId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

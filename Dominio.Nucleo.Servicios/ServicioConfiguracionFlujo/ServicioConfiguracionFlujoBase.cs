@@ -8,7 +8,7 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 {
     public abstract class ServicioConfiguracionFlujoBase<TFlujo,TPaso> : IServicioConfiguracionFlujoBase<TFlujo,TPaso>
-          where TFlujo : class, IFlujo<TPaso>
+          where TFlujo : FlujoGeneral
         where TPaso : class, IPaso
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
@@ -56,7 +56,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 if (!respuestaPaso.Contenido)
                     return new Respuesta<TFlujo>(respuestaPaso.Mensaje, TAG);
             }
-
+           
             if (this.EsRepetido(flujo.Pasos))
                 return new Respuesta<TFlujo>("La lista de pasos del flujo no deben de repetirse", TAG);
 
@@ -127,7 +127,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return new Respuesta<TFlujo>(flujo);
         }
 
-        private Respuesta<bool> ValidarPaso(TPaso paso)
+        private Respuesta<bool> ValidarPaso(IPaso paso)
         {
 
             if (paso.Orden <= 0)
@@ -143,12 +143,12 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         }
 
 
-        private bool EsRepetido(List<TPaso> paso)
+        private bool EsRepetido(List<IPaso> paso)
         {
             return paso.GroupBy(x => x.Orden).Any(g => g.Count() > 1);
         }
 
-        private bool EsConsecutivo(List<TPaso> paso)
+        private bool EsConsecutivo(List<IPaso> paso)
         {
 
             int index = 1;
@@ -174,6 +174,59 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             
 
             return new Respuesta<TFlujo>(flujo);
+        }
+
+        public Respuesta<TFlujo> Crear(IFlujo<IPaso> flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
+        {
+
+
+            if (flujo.TipoEntePublico == null || flujo.TipoEntePublico.Id <= 0)
+                return new Respuesta<TFlujo>("El Tipo de Ente es requerido", TAG);
+
+            if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
+                return new Respuesta<TFlujo>("La lista de pasos es requerida.", TAG);
+
+            if (flujo.TipoFlujo <= 0)
+                return new Respuesta<TFlujo>("El tipo de flujo es requerido", TAG);
+
+            if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
+            {
+                if (flujo.NivelEmpleado == null)
+                    return new Respuesta<TFlujo>("El nivel de empleado es requerido", TAG);
+
+                if (flujo.NivelEmpleado.Nivel.ToString().IsNullOrEmptyOrWhiteSpace())
+                    return new Respuesta<TFlujo>("El nivel del empleado es requerido para un flujo particular.", TAG);
+            }
+
+            ///VALIDAR QUE SOLO EXISTA UN FLUJO PREDETERMINADO 
+            if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
+                return new Respuesta<TFlujo>("Solo se permite un flujo predeterminado ", TAG);
+
+            ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
+            if (esNivelRepetido && flujo.TipoFlujo == (int)TipoFlujo.Particular)
+                return new Respuesta<TFlujo>("No se permite flujos con el mismo nivel de empleado", TAG);
+
+            if (flujo.TipoEntePublico.Descripcion == null)
+                return new Respuesta<TFlujo>("La descripcion del ente publico es requerido", TAG);
+
+
+            //Aplicamos la validacion con respecto a los pasos.
+            foreach (var item in flujo.Pasos)
+            {
+                var respuestaPaso = this.ValidarPaso(item);
+
+                if (!respuestaPaso.Contenido)
+                    return new Respuesta<TFlujo>(respuestaPaso.Mensaje, TAG);
+            }
+
+            if (this.EsRepetido(flujo.Pasos))
+                return new Respuesta<TFlujo>("La lista de pasos del flujo no deben de repetirse", TAG);
+
+            if (!this.EsConsecutivo(flujo.Pasos))
+                return new Respuesta<TFlujo>("La lista de pasos del flujo debe ser consecutivo.", TAG);
+
+
+            return new Respuesta<TFlujo>((TFlujo)flujo);
         }
     }
 }

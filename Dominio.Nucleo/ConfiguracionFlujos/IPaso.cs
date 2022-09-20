@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace Dominio.Nucleo
 {
    
-    public interface IPaso : IModel
+    public interface IPaso
     {
 
         int Id { get; set; }       

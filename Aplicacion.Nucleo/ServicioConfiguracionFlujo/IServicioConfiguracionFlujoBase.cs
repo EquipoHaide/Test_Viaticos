@@ -8,11 +8,11 @@ using Infraestructura.Transversal.Plataforma;
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
     public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso>
-        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase<TPaso>, IFlujo<TPaso>
+        where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
     {
 
-        Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
+        Respuesta<bool> ValidarPasos(IFlujo<IPaso> flujos);
 
         //las entidades de los deferentes negocios(viaticos, compras, etc), deberian de heredar de mi entidad principal Flujo
         //public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos, IRepositorioConfiguracionFlujo<Flujo> repositorioConfiguracionFlujo );

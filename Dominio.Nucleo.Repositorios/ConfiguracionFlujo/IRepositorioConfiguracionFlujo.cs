@@ -10,7 +10,7 @@ namespace Dominio.Nucleo.Repositorios
     /// </summary>
     /// <typeparam name="TRecurso"></typeparam>
     public interface IRepositorioConfiguracionFlujo<TFlujo,TPaso> : IRepository<TFlujo>
-        where TFlujo : FlujoBase<TPaso>
+        where TFlujo : FlujoGeneral
         where TPaso : class, IPaso
     {
         //Agregar los metodos particulares que se requieren para realizar el guardado general

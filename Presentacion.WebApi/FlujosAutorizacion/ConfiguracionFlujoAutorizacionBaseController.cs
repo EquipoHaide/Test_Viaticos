@@ -13,18 +13,12 @@ using System;
 namespace Presentacion.WebApi.FlujosAutorizacion
 {
     public class ConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso>
-        where TFlujo : Dominio.Nucleo.Entidades.FlujoBase<TPaso>, IFlujo<TPaso>
-        where TPaso : class, IPaso
+        where TFlujo : FlujoBase<TPaso>, IFlujoModel<TPaso>
+        where TPaso : Dominio.Nucleo.Paso, IPasoModel
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
  
         public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioConfiguracionFlujoBase { get; }
-
-        //IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
-        //IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
-
-        //public virtual IRepositorioConfiguracionFlujo<TFlujo,TPaso> RepositorioViaticos => this.RepositorioConfiguracionFlujoViaticos;
-
 
         //[HttpGet("recursos")]
         //public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro)
@@ -55,7 +49,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         public object Crear([FromBody] TFlujo config)   
         {
             try {
-               
+                //var cas = (IFlujoModel<IPasoModel>)config;
                 var resultado = ServicioConfiguracionFlujoBase.Crear(config, this.GetSubjectId());
 
                 if (resultado.EsError)

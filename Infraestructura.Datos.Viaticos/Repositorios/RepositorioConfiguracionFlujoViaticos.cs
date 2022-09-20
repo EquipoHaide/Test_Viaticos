@@ -13,7 +13,7 @@ using Dominio.Nucleo.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>,PasoViatico>, IRepositorioConfiguracionFlujoViaticos
+    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Dominio.Viaticos.Entidades.FlujoViaticos,PasoViatico>, IRepositorioConfiguracionFlujoViaticos
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
@@ -32,17 +32,17 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<FlujoBase<PasoViatico>> ObtenerFlujos(IEnumerable<FlujoBase<PasoViatico>> flujo, string subjectId)
+        public override IEnumerable<Dominio.Viaticos.Entidades.FlujoViaticos> ObtenerFlujos(IEnumerable<Dominio.Viaticos.Entidades.FlujoViaticos> flujo, string subjectId)
         {
             throw new NotImplementedException();
         }
 
-        public override FlujoBase<PasoViatico> ObtenerFlujos(FlujoBase<PasoViatico> flujo, string subjectId)
+        public override Dominio.Viaticos.Entidades.FlujoViaticos ObtenerFlujos(Dominio.Viaticos.Entidades.FlujoViaticos flujo, string subjectId)
         {
             throw new NotImplementedException();
         }
 
-        public override void RemoverFlujo(FlujoBase<PasoViatico> flujo)
+        public override void RemoverFlujo(Dominio.Viaticos.Entidades.FlujoViaticos flujo)
         {
             throw new NotImplementedException();
         }

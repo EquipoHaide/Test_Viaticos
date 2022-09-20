@@ -4,8 +4,9 @@ using Dominio.Nucleo;
 
 namespace Dominio.Viaticos.Modelos
 {
-    public class PasoViatico : PasoViaticoBase
+    public class PasoViaticoBase : Dominio.Nucleo.Paso, IPasoModel
     {
-        
+        public string Descripcion { get; set; }
+   
     }
 }

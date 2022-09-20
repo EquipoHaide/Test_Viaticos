@@ -20,19 +20,14 @@ namespace Presentacion.WebApi.Controllers.Viaticos
 {
     [Route("api/[controller]")]
     //[Authorize]
-    public class ConfiguracionFlujoViaticosController : ConfiguracionFlujoAutorizacionBaseController<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico>
+    public class ConfiguracionFlujoViaticosController : ConfiguracionFlujoAutorizacionBaseController<FlujoViaticos, PasoViatico>
     {
 
-        AplicacionViaticos.IServicioFlujo<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico> servicioViaticos;
-        AplicacionViaticos.IServicioFlujo<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico> ServicioViaticos => App.Inject(ref servicioViaticos);
+        AplicacionViaticos.IServicioFlujo servicioViaticos;
+        AplicacionViaticos.IServicioFlujo ServicioViaticos => App.Inject(ref servicioViaticos);
 
-        //public override IServicioConfiguracionFlujoBaseNew ServicioConfiguracionFlujo => Servicio;
-
-        //IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
-        //IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
-
-
-        public override IServicioConfiguracionFlujoBase<Dominio.Nucleo.Entidades.FlujoBase<PasoViatico>, PasoViatico> ServicioConfiguracionFlujoBase => this.ServicioViaticos;
+       
+        public override IServicioConfiguracionFlujoBase<FlujoViaticos,PasoViatico> ServicioConfiguracionFlujoBase => this.ServicioViaticos;
 
 
         public ConfiguracionFlujoViaticosController(Aplicacion.Nucleo.IAplicacion app)
