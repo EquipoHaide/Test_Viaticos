@@ -24,12 +24,12 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
         public override bool ExisteFlujoPredeterminado(int idTipoEntePublico)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override bool ExisteNivelRepetido(int idTipoEntePublico, string nivel)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override IEnumerable<Entidades.FlujoViaticos> ObtenerFlujos(IEnumerable<Entidades.FlujoViaticos> flujo, string subjectId)

@@ -105,7 +105,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
                 if (respuestaComplementaria.EsExito)
                 {
-                    //Repositorio.Add(respuesta.Contenido);
+                    Repositorio.Add(respuesta.Contenido);
 
                     var save = Repositorio.Try(r => r.Save());
 

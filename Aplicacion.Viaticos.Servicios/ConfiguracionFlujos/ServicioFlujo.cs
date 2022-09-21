@@ -39,7 +39,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 
         public override Respuesta<bool> ValidarPasos(EntidadesViaticos.FlujoViaticos flujos)
         {
-            throw new NotImplementedException();
+            return new Respuesta<bool>(true);
         }
     }
 }
