@@ -10,12 +10,12 @@ namespace Dominio.Viaticos.Servicios
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
     {
-        void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId);
+        //void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId);
 
-        void Crear(List<Flujo> flujos, string subjectId);
+        //void Crear(TFlujo flujos, string subjectId);
 
-        void Eliminar(Flujo flujo, string subjectId);
+        //void Eliminar(TFlujo flujo, string subjectId);
 
-        void Modificar(Flujo flujo, string subjectId);
+        //void Modificar(TFlujo flujo, string subjectId);
     }
 }

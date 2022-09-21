@@ -9,7 +9,6 @@
     <None Remove="Aplicacion\" />
     <None Remove="AppCircuitBreaker\" />
     <None Remove="HealthCheck\" />
-    <None Remove="Logs\" />
     <None Remove="IdentityModel" />
     <None Remove="Serilog.Sinks.Async" />
     <None Remove="Seguridad\" />
@@ -21,7 +20,6 @@
     <Folder Include="Aplicacion\" />
     <Folder Include="AppCircuitBreaker\" />
     <Folder Include="HealthCheck\" />
-    <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aplicacion.Seguridad.Servicios\Aplicacion.Seguridad.Servicios.csproj" />

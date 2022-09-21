@@ -17,22 +17,43 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
        
         public Respuesta<TFlujo> Crear(TFlujo flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
         {
+            //Valida que el objeto no este vacio
+            if (flujo == null)
+                return new Respuesta<TFlujo>("Es requerido un flujo de autorizacion ", TAG);
+
+            if (!flujo.IsValid())
+                return new Respuesta<TFlujo>("El Flujo es invalido", TAG);
+
+            if (flujo.TipoEntePublico == null || flujo.TipoEntePublico.Id <= 0)
+                return new Respuesta<TFlujo>("El Tipo de Ente es requerido", TAG);
+
+            if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
+                return new Respuesta<TFlujo>("La lista de pasos es requerida.", TAG);
+
+            if (flujo.TipoFlujo <= 0)
+                return new Respuesta<TFlujo>("El tipo de flujo es requerido", TAG);
+
+            if (flujo.TipoEntePublico.Descripcion == null)
+                return new Respuesta<TFlujo>("La descripcion del ente publico es requerido", TAG);
+
+
+            if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
+            {
+                if (flujo.NivelEmpleado == null)
+                    return new Respuesta<TFlujo>("El nivel de empleado es requerido", TAG);
+
+                if (flujo.NivelEmpleado.Nivel.ToString().IsNullOrEmptyOrWhiteSpace())
+                    return new Respuesta<TFlujo>("El nivel del empleado es requerido para un flujo particular.", TAG);
+            }
+
+
             ///VALIDAR QUE SOLO EXISTA UN FLUJO PREDETERMINADO 
             if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
                 return new Respuesta<TFlujo>("Solo se permite un flujo predeterminado ", TAG);
 
             ///VALIDAR QUE SOLO EXISTA UN FLUJO CON UN UNICO NIVEL DE EMPLEADO 
             if (esNivelRepetido && flujo.TipoFlujo == (int)TipoFlujo.Particular)
-                return new Respuesta<TFlujo>("No se permite flujos con el mismo nivel de empleado", TAG);
-
-
-            if (flujo.TipoEntePublico == null || flujo.TipoEntePublico.Id <=0)
-                return new Respuesta<TFlujo>("El tipo ente publico es requerida", TAG);
-
-
-            if (flujo.TipoEntePublico.Descripcion == null)
-                return new Respuesta<TFlujo>("La descripcion del ente publico es requerido", TAG);
-
+                return new Respuesta<TFlujo>("No se permite flujos con el mismo nivel de empleado", TAG);        
            
             //Aplicamos la validacion con respecto a los pasos.
             foreach (var item in flujo.Pasos)
@@ -49,18 +70,43 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (!this.EsConsecutivo(flujo.Pasos))
                 return new Respuesta<TFlujo>("La lista de pasos del flujo debe ser consecutivo.", TAG);
 
-            ////AQUI VA IR LA TRANSFORMACION A ENTITY
-            /////EL MODELO A REGRESAR DEBE SER LA ENTITIDA BASE 
-
-  
-
 
             return new Respuesta<TFlujo>(flujo);
         }
 
 
-        public Respuesta<TFlujo> Modificar(TFlujo flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
+        public Respuesta<TFlujo> Modificar(TFlujo flujo, TFlujo flujoOriginal, bool esPredeterminado, bool esNivelRepetido, string subjectId)
         {
+            //Valida que el objeto no este vacio
+            if (flujo == null)
+                return new Respuesta<TFlujo>("Es requerido un flujo de autorizacion ", TAG);
+
+            if (flujoOriginal == null)
+                return new Respuesta<TFlujo>("El flujo no existe", TAG);
+
+            if (!flujo.IsValid())
+                return new Respuesta<TFlujo>("El Flujo es invalido", TAG);
+
+            if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
+                return new Respuesta<TFlujo>("La lista de pasos es requerida.", TAG);
+
+            if (flujo.TipoFlujo.ToString() == null)
+                return new Respuesta<TFlujo>("El tipo de flujo es requerido", TAG);
+
+            if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
+            {
+                if (flujo.NivelEmpleado == null)
+                    return new Respuesta<TFlujo>("El nivel de empleado es requerido", TAG);
+
+                if (flujo.NivelEmpleado.Nivel.ToString().IsNullOrEmptyOrWhiteSpace())
+                    return new Respuesta<TFlujo>("El nivel del empleado es requerido para un flujo particular.", TAG);
+            }
+
+            if (flujo.TipoEntePublico == null)
+                return new Respuesta<TFlujo>("El tipo ente publico es requerida", TAG);
+
+            if (flujo.TipoEntePublico.Descripcion == null)
+                return new Respuesta<TFlujo>("La descripcion del ente publico es requerido", TAG);
 
             ///VALIDAR QUE SOLO EXISTA UN FLUJO PREDETERMINADO 
             if (esPredeterminado)
@@ -70,13 +116,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (esNivelRepetido)
                 return new Respuesta<TFlujo>("No se permite flujos con el mismo nivel de empleado", TAG);
 
-            if (flujo.TipoEntePublico == null)
-                return new Respuesta<TFlujo>("El tipo ente publico es requerida", TAG);
-
-            if (flujo.TipoEntePublico.Descripcion == null)
-                return new Respuesta<TFlujo>("La descripcion del ente publico es requerido", TAG);
-
-
+           
             //Aplicamos la validacion con respecto a los pasos.
             foreach (var item in flujo.Pasos)
             {
@@ -91,9 +131,6 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             if (!this.EsConsecutivo(flujo.Pasos))
                 return new Respuesta<TFlujo>("La lista de pasos del flujo debe ser consecutivo.", TAG);
-
-            ////AQUI VA IR LA TRANSFORMACION A ENTITY
-            /////EL MODELO A REGRESAR DEBE SER LA ENTITIDA BASE 
 
             return new Respuesta<TFlujo>(flujo);
         }
@@ -146,5 +183,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             return new Respuesta<TFlujo>(flujo);
         }
+
+        
     }
 }

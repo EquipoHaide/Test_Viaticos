@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Presentacion.WebApi.Modelos
 {
-    public class ModeloConfiguracionFlujo<TPaso>
-        where TPaso:IPaso
+    public class ModeloConfiguracionFlujo<TFlujo,TPaso>
+      where TFlujo : class, IFlujo<TPaso>
+      where TPaso : IPaso
     {
-        public ModeloFlujo<TPaso> Flujo { get; set; }
+        public TFlujo Flujo { get; set; }
     }
+
+   
 }

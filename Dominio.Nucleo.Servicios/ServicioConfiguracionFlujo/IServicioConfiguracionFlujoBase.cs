@@ -12,7 +12,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         public Respuesta<TFlujo> Crear(TFlujo flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);
 
-        public Respuesta<TFlujo> Modificar(TFlujo flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);
+        public Respuesta<TFlujo> Modificar(TFlujo flujos, TFlujo flujoOriginal, bool esPredeterminado, bool esNivelRepetido, string subjectId);
 
         //  IEnumerable<TEntidad> ObtenerFlujos(IEnumerable<TEntidad> flujo, string subjectId);
 

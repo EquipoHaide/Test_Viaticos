@@ -10,6 +10,5 @@ namespace Dominio.Viaticos.Modelos
         public int Pagina { get; set; } = 1;
         public int ElementosPorPagina { get; set; } = 20;
 
-        public string Query2 { get; set; } = "";
     }
 }

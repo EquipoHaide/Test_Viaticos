@@ -9,6 +9,7 @@ using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Mvc;
 using Presentacion.WebApi.Seguridad;
 using System;
+using Presentacion.WebApi.Modelos;
 
 namespace Presentacion.WebApi.FlujosAutorizacion
 {
@@ -20,13 +21,9 @@ namespace Presentacion.WebApi.FlujosAutorizacion
  
         public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioConfiguracionFlujoBase { get; }
 
-        //IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
-        //IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
-
-        ////public IRepositorioConfiguracionFlujo<TFlujo, TPaso> Repositorio;
 
         //[HttpGet("recursos")]
-        //public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro)
+        //public object ConsultarConfiguracionFlujo([FromQuery] TQuery filtro)
         //{
         //    try
         //    {
@@ -51,11 +48,11 @@ namespace Presentacion.WebApi.FlujosAutorizacion
 
         [HttpPost("recursos")]
         
-        public object Crear([FromBody] TFlujo config)   
+        public object Crear([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)   
         {
             try {
                
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config, this.GetSubjectId());
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, this.GetSubjectId());
 
                 if (resultado.EsError)
                 {
@@ -76,11 +73,11 @@ namespace Presentacion.WebApi.FlujosAutorizacion
 
 
         [HttpPut("recursos")]
-        public object Modificar([FromBody] TFlujo config)
+        public object Modificar([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)
         {
             try
             {
-                var resultado = ServicioConfiguracionFlujoBase.Modificar(config, this.GetSubjectId());
+                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujo, this.GetSubjectId());
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)
@@ -99,7 +96,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
 
 
         [HttpDelete("recursos")]
-        public object Eliminar(TFlujo config)
+        public object Eliminar([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)
         {
             throw new NotImplementedException();
         }

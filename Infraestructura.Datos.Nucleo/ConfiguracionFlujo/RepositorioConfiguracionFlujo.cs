@@ -16,7 +16,7 @@ namespace Infraestructura.Datos.Nucleo
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        public abstract Respuesta<ConsultaPaginada<Dominio.Nucleo.IConsulta>> ConsultarFlujosDeAutorizacion(Dominio.Nucleo.IConsulta parametros, string subjectId);
+        public abstract Respuesta<ConsultaPaginada<TFlujo>> ConsultarFlujosDeAutorizacion(TFlujo parametros, string subjectId);
 
         public abstract bool ExisteFlujoPredeterminado(int idTipoEntePublico);
 

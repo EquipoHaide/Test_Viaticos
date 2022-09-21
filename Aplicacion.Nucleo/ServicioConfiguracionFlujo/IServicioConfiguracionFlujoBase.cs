@@ -18,7 +18,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         //public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos, IRepositorioConfiguracionFlujo<Flujo> repositorioConfiguracionFlujo );
 
         //bool ValidarPasos();ConsultaPaginada<IPermisoModel>
-        public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta query, string subjectId);
+        public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TFlujo query, string subjectId);
 
         public Respuesta Crear(TFlujo flujo,  string subjectId);
 

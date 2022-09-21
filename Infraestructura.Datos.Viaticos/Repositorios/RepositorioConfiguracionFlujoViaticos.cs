@@ -10,6 +10,7 @@ using Infraestructura.Transversal.Plataforma;
 using Dominio.Nucleo;
 using Dominio.Nucleo.Repositorios;
 using Infraestructura.Datos.Nucleo;
+using Dominio.Viaticos.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
@@ -17,7 +18,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-        public override Respuesta<ConsultaPaginada<IConsulta>> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId)
+        public override Respuesta<ConsultaPaginada<FlujoViaticos>> ConsultarFlujosDeAutorizacion(FlujoViaticos parametros, string subjectId)
         {
             throw new NotImplementedException();
         }
