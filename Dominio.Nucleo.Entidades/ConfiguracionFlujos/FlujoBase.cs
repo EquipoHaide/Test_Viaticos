@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dominio.Nucleo.Entidades
 {
-    public class FlujoBase : IFlujo
+    public class FlujoBase : IFlujo<Paso>, IEntity
     {
         [Required]
         public int Id { get; set; }
@@ -17,7 +17,13 @@ namespace Dominio.Nucleo.Entidades
         //Solo cuando sea un flujo particular se requiere el nivel de empleado
         public int IdNivelEmpleado { get; set; }
 
+        public TipoEntePublico TipoEntePublico { get; set; }
+        public NivelEmpleado NivelEmpleado { get; set; }
+        public List<Paso> Pasos { get; set; }
 
-       
+        public bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -5,7 +5,7 @@ using Dominio.Nucleo;
 using Infraestructura.Transversal.Plataforma;
 
 using Infraestructura.Datos.Nucleo;
-
+using Entidades = Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
 
 using Infraestructura.Transversal.Plataforma.Extensiones;
@@ -21,16 +21,16 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioDominio { get; }
 
 
-        public virtual IRepositorioConfiguracionFlujo<TFlujo,TPaso> Repositorio { get; }
-       
+        public virtual IRepositorioConfiguracionFlujo<TFlujo, TPaso> Repositorio { get; }
+        
 
         /// <summary>
         /// PENDIENTE :
         /// </summary>
         /// <param name="flujos"></param>
         /// <returns></returns>
-        public abstract Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
-
+        //public abstract Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
+        public abstract Respuesta<bool> ValidarPasos(TFlujo flujos);
 
         public Respuesta<ConsultaPaginada<IConsulta>> Consultar(IConsulta parametros, string subjectId)
         {
@@ -105,7 +105,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
                 if (respuestaComplementaria.EsExito)
                 {
-                    Repositorio.Add(respuesta.Contenido);
+                    //Repositorio.Add(respuesta.Contenido);
 
                     var save = Repositorio.Try(r => r.Save());
 
@@ -119,6 +119,8 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
                 return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
+
+            //Repositorio.Add();
 
             return new Respuesta(respuesta.Mensaje, TAG);
 

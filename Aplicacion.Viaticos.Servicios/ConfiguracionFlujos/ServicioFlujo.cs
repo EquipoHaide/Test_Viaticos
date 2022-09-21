@@ -4,27 +4,29 @@ using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
 using Dominio.Nucleo;
 using Dominio.Nucleo.Repositorios;
 using Dominio.Viaticos.Modelos;
+using Entidades = Dominio.Nucleo.Entidades;
 using Dominio.Viaticos.Repositorios;
 using Infraestructura.Transversal.Plataforma;
 using DominioServicio = Dominio.Viaticos.Servicios;
 using EntidadesViaticos = Dominio.Viaticos.Entidades;
+
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
-    public class ServicioFlujo : ServicioConfiguracionFlujoBase<FlujoViaticos, PasoViatico> , IServicioFlujo<FlujoViaticos,PasoViatico>
+    public class ServicioFlujo : ServicioConfiguracionFlujoBase<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico> , IServicioFlujo<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico>
     {
         const string TAG = "Aplicacion.Viaticos.Servicios.ConfiguracionFlujos";
 
         Nucleo.IAplicacion App { get; set; }
 
 
-        DominioServicio.IServicioFlujos<FlujoViaticos,PasoViatico> servicio;
-        DominioServicio.IServicioFlujos<FlujoViaticos,PasoViatico> Servicio => App.Inject(ref servicio);
-        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<FlujoViaticos, PasoViatico> ServicioDominio => this.Servicio;
+        DominioServicio.IServicioFlujos<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico> servicio;
+        DominioServicio.IServicioFlujos<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico> Servicio => App.Inject(ref servicio);
+        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico> ServicioDominio => this.Servicio;
 
         IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
         IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
 
-        public override IRepositorioConfiguracionFlujo<FlujoViaticos, PasoViatico> Repositorio => this.RepositorioConfiguracionFlujoViaticos;
+        public override IRepositorioConfiguracionFlujo<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico> Repositorio => this.RepositorioConfiguracionFlujoViaticos;
 
 
 
@@ -35,14 +37,9 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
             App = app;
         }
 
-        public override Respuesta<bool> ValidarPasos(IFlujo<PasoViatico> flujos)
+        public override Respuesta<bool> ValidarPasos(EntidadesViaticos.FlujoViaticos flujos)
         {
-         
-            //Agregar las validaciones pertienentes a los pasos para los flujos de viaticos
-
-            return new Respuesta<bool>(false); 
+            throw new NotImplementedException();
         }
-
-       
     }
 }

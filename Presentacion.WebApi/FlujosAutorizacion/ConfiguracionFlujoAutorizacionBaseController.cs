@@ -23,8 +23,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
         //IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
         //IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
 
-        //public virtual IRepositorioConfiguracionFlujo<TFlujo,TPaso> RepositorioViaticos => this.RepositorioConfiguracionFlujoViaticos;
-
+        ////public IRepositorioConfiguracionFlujo<TFlujo, TPaso> Repositorio;
 
         //[HttpGet("recursos")]
         //public object ConsultarConfiguracionFlujo([FromQuery] TConsulta filtro)

@@ -9,9 +9,9 @@ namespace Dominio.Nucleo.Repositorios
     /// 
     /// </summary>
     /// <typeparam name="TRecurso"></typeparam>
-    public interface IRepositorioConfiguracionFlujo<TFlujo,TPaso> : IRepository<TFlujo>
-        where TFlujo : class, IFlujo<TPaso>
-        where TPaso : class, IPaso
+    public interface IRepositorioConfiguracionFlujo<TFlujoEntidad, TPasoEntidad> : IRepository<TFlujoEntidad>
+        where TFlujoEntidad : class, IFlujo<TPasoEntidad>
+        where TPasoEntidad : class, IPaso
     {
         //Agregar los metodos particulares que se requieren para realizar el guardado general
 
@@ -19,7 +19,7 @@ namespace Dominio.Nucleo.Repositorios
 
         bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
        
-        TFlujo ObtenerFlujos(TFlujo flujo, string subjectId);
+        TFlujoEntidad ObtenerFlujos(TFlujoEntidad flujo, string subjectId);
 
         public Respuesta<ConsultaPaginada<IConsulta>> ConsultarFlujosDeAutorizacion(IConsulta parametros, string subjectId);
 

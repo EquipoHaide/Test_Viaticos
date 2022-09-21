@@ -3,7 +3,7 @@ using Dominio.Nucleo;
 
 namespace Dominio.Viaticos.Entidades
 {
-    public class PasoViatico : IPaso, IEntity
+    public class PasoViatico : IPaso,IEntity
     {
         public int Id { get; set ; }
         public int Orden { get; set ; }
