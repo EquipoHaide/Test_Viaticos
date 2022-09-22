@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Presentacion.WebApi.Modelos
 {
     public class ModeloConfiguracionFlujo<TFlujo,TPaso>
-      where TFlujo : class, IFlujo<TPaso>
-      where TPaso : IPaso
+      where TFlujo : class, Dominio.Nucleo.Entidades.IFlujo<TPaso>
+      where TPaso : Dominio.Nucleo.Entidades.IPaso
     {
         public TFlujo Flujo { get; set; }
     }

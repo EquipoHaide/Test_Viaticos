@@ -10,11 +10,9 @@
     <ProjectReference Include="..\Infraestructura.Transversal.Plataforma\Infraestructura.Transversal.Plataforma.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="ConfiguracionFlujos\" />
     <None Remove="ServicioConfiguracionFlujo\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ConfiguracionFlujos\" />
     <Folder Include="ServicioConfiguracionFlujo\" />
   </ItemGroup>
 </Project>

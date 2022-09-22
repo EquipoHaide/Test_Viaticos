@@ -6,11 +6,11 @@ using Dominio.Nucleo;
 namespace Dominio.Viaticos.Entidades
 {
     [Table("EntePublico", Schema = "Viaticos")]
-    public class TipoEntePublico : ITipoEntePublico
+    public class TipoEntePublico : Dominio.Nucleo.TipoEntePublico
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
-        [Required]
-        public string Descripcion { get; set; }
+        //[Required]
+        //public string Descripcion { get; set; }
     }
 }

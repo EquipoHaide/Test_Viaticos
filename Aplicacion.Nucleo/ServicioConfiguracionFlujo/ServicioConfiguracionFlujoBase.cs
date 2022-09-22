@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dominio.Nucleo;
+﻿using Dominio.Nucleo;
 using Infraestructura.Transversal.Plataforma;
-
-using Infraestructura.Datos.Nucleo;
 using Entidades = Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
 
@@ -13,8 +8,8 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
     public abstract class ServicioConfiguracionFlujoBase<TFlujo, TPaso, TQuery> : IServicioConfiguracionFlujoBase<TFlujo, TPaso, TQuery>
-        where TFlujo : class,IFlujo<TPaso>
-        where TPaso : class,IPaso
+        where TFlujo : class, Entidades.IFlujo<TPaso> 
+        where TPaso : class, Entidades.IPaso
         where TQuery : class, IConsultaFlujo
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
@@ -22,7 +17,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioDominio { get; }
 
 
-        public virtual IRepositorioConfiguracionFlujo<TFlujo, TPaso, TQuery> Repositorio { get; }
+        public virtual IRepositorioConfiguracionFlujo<TFlujo,TQuery> Repositorio { get; }
         
 
         /// <summary>
@@ -50,15 +45,14 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public abstract Respuesta<TFlujo> EliminarFlujo(TFlujo flujos, string subjectId);
 
 
-        public Respuesta<ConsultaPaginada<List<TFlujo>>> Consultar(TQuery parametros, string subjectId)
+        public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TQuery parametros, string subjectId)
         {
-            if (parametros == null) return new Respuesta<ConsultaPaginada<List<TFlujo>>>("El modelo de consulta para obtener no es valido.", TAG);
+            if (parametros == null) return new Respuesta<ConsultaPaginada<TFlujo>>("El modelo de consulta para obtener no es valido.", TAG);
 
             var recursos = Repositorio.Try(r => r.ConsultarFlujosDeAutorizacion(parametros, subjectId));
-            if (recursos.EsError) return recursos.ErrorBaseDatos<ConsultaPaginada<List<TFlujo>>>(TAG);
+            if (recursos.EsError) return recursos.ErrorBaseDatos<ConsultaPaginada<TFlujo>>(TAG);
 
-            return new Respuesta<ConsultaPaginada<List<TFlujo>>>("");
-
+            return new Respuesta<ConsultaPaginada<TFlujo>>(recursos.Contenido);
         }
 
         public Respuesta Crear(TFlujo flujo, string subjectId)
@@ -66,28 +60,18 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             //Valida que el objeto no este vacio
             if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
-
-            //CONSULTA AL REPOSITORIO
-            //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO ANTES QUE UN FLUJO PARTICULAR 
-            //            
+       
             var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id));
 
             if (esPredertiminado.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
 
-
-            //CONSULTA AL REPOSITORIO 
-            //BUSCA SI EXITE ALGUN FLUJO PARTICULAR CON EL MISMO NIVEL 
-            //
             var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id, flujo.NivelEmpleado.Nivel == null ? "" : flujo.NivelEmpleado.Nivel));
-
 
             if (esNivelRepetido.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
 
-
             var respuesta = ServicioDominio.Crear(flujo, esPredertiminado.Contenido, esNivelRepetido.Contenido, subjectId);
-
 
             if (respuesta.EsExito)
             {
@@ -121,19 +105,12 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             //Valida que el objeto no este vacio
             if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
-
-            //CONSULTA AL REPOSITORIO
-            //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO ANTES QUE UN FLUJO PARTICULAR 
-            //            
+        
             var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id));
 
             if (esPredertiminado.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
 
-
-            //CONSULTA AL REPOSITORIO 
-            //BUSCA SI EXITE ALGUN FLUJO PARTICULAR CON EL MISMO NIVEL 
-            //
             var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id, flujo.NivelEmpleado.Nivel == null ? "" : flujo.NivelEmpleado.Nivel));
 
             if (esNivelRepetido.EsError)
@@ -145,9 +122,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (flujoOriginal.EsError)
                 return flujoOriginal.ErrorBaseDatos(TAG);
 
-         
             var respuesta = ServicioDominio.Modificar(flujo, flujoOriginal.Contenido, esPredertiminado.Contenido,esNivelRepetido.Contenido, subjectId);
-
 
             if (respuesta.EsExito)
             {
@@ -155,17 +130,11 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
                 if (respuestaComplementaria.EsExito)
                 {
-
                     var save = Repositorio.Try(r => r.Save());
                     if (save.EsError) return save.ErrorBaseDatos(TAG);
 
                     return new Respuesta();
                 }
-                
-            }
-            else
-            {
-                return new Respuesta(respuesta.Mensaje, respuesta.TAG);
             }
 
             return new Respuesta(respuesta.Mensaje, respuesta.TAG);
@@ -184,7 +153,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (respuesta.EsError)
                 return new Respuesta(respuesta.Mensaje, TAG);
-
 
             var respuestaComplementaria = this.EliminarFlujo(flujo,subjectId);
 

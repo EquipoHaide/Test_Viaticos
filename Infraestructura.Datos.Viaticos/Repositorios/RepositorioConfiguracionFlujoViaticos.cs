@@ -14,15 +14,13 @@ using Dominio.Viaticos.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.FlujoViatico, Entidades.PasoViatico, ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
+    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.ConfiguracionFlujo,ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-
-        public override Respuesta<ConsultaPaginada<List<FlujoViatico>>> ConsultarFlujosDeAutorizacion(ConsultaConfiguracionFlujo parametros, string subjectId)
+        public override ConsultaPaginada<ConfiguracionFlujo> ConsultarFlujosDeAutorizacion(ConsultaConfiguracionFlujo parametros, string subjectId)
         {
-
-            return new Respuesta<ConsultaPaginada<List<FlujoViatico>>>(""); 
+            return new ConsultaPaginada<ConfiguracionFlujo>();
         }
 
         public override bool ExisteFlujoPredeterminado(int idTipoEntePublico)
@@ -36,7 +34,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
         }
 
 
-        public override FlujoViatico ObtenerFlujos(FlujoViatico flujo, string subjectId)
+        public override ConfiguracionFlujo ObtenerFlujos(ConfiguracionFlujo flujo, string subjectId)
         {
 
             return flujo;

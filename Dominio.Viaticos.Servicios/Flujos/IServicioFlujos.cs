@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Dominio.Nucleo;
-using Dominio.Viaticos.Modelos;
+﻿using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 using Infraestructura.Transversal.Plataforma;
 

@@ -10,15 +10,14 @@ using System.Text;
 
 namespace Infraestructura.Datos.Nucleo
 {
-    public abstract class RepositorioConfiguracionFlujo<TFlujo,TPaso,TQuery> : Repository<TFlujo>, IRepositorioConfiguracionFlujo<TFlujo,TPaso,TQuery>
-         where TFlujo : class, IFlujo<TPaso>
-        where TPaso : class, IPaso
+    public abstract class RepositorioConfiguracionFlujo<TFlujo,TQuery> : Repository<TFlujo>, IRepositorioConfiguracionFlujo<TFlujo,TQuery>
+         where TFlujo : class, IEntity
         where TQuery : class, IConsultaFlujo
 
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        public abstract Respuesta<ConsultaPaginada<List<TFlujo>>> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
+        public abstract ConsultaPaginada<TFlujo> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 
         public abstract bool ExisteFlujoPredeterminado(int idTipoEntePublico);
 

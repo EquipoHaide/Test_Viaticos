@@ -1,5 +1,5 @@
 ﻿using Dominio.Nucleo;
-using Dominio.Viaticos.Modelos;
+using Dominio.Nucleo.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using Presentacion.WebApi.Modelos;
 using System.Collections.Generic;

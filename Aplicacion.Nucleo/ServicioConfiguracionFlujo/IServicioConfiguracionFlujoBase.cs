@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo;
-using Dominio.Nucleo.Repositorios;
-using Infraestructura.Datos.Nucleo;
 using Infraestructura.Transversal.Plataforma;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
@@ -19,7 +18,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta<TFlujo> EliminarFlujo(TFlujo flujo,string subjectId);
 
-        public Respuesta<ConsultaPaginada<List<TFlujo>>> Consultar(TQuery query, string subjectId);
+        public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TQuery query, string subjectId);
 
         public Respuesta Crear(TFlujo flujo,  string subjectId);
 

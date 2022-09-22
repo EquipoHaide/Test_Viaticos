@@ -1,10 +1,5 @@
 ﻿using Dominio.Nucleo;
-using Dominio.Nucleo.Repositorios;
-using Dominio.Seguridad.Entidades;
-using Dominio.Seguridad.Repositorios;
-using Dominio.Viaticos.Modelos;
-using EntidadesViaticos = Dominio.Viaticos.Entidades;
-using Dominio.Viaticos.Repositorios;
+using Dominio.Nucleo.Entidades;
 using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Mvc;
 using Presentacion.WebApi.Seguridad;
@@ -38,7 +33,7 @@ namespace Presentacion.WebApi.FlujosAutorizacion
                     return this.ApiResult(consulta.Mensaje);
                 }
 
-                return this.ApiResult(new { consulta });
+                return this.ApiResult(consulta.Contenido);
             }
             catch (Exception e)
             {

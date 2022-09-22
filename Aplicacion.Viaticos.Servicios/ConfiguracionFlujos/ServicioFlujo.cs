@@ -14,22 +14,22 @@ using Dominio.Viaticos.Entidades;
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
     public class ServicioFlujo :
-        ServicioConfiguracionFlujoBase<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico, ConsultaConfiguracionFlujo> ,
-        IServicioFlujo<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico, ConsultaConfiguracionFlujo>
+        ServicioConfiguracionFlujoBase<EntidadesViaticos.ConfiguracionFlujo, EntidadesViaticos.PasoViatico, ConsultaConfiguracionFlujo> ,
+        IServicioFlujo<EntidadesViaticos.ConfiguracionFlujo, EntidadesViaticos.PasoViatico, ConsultaConfiguracionFlujo>
     {
         const string TAG = "Aplicacion.Viaticos.Servicios.ConfiguracionFlujos";
 
         Nucleo.IAplicacion App { get; set; }
 
 
-        DominioServicio.IServicioFlujos<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico> servicio;
-        DominioServicio.IServicioFlujos<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico> Servicio => App.Inject(ref servicio);
-        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico> ServicioDominio => this.Servicio;
+        DominioServicio.IServicioFlujos<EntidadesViaticos.ConfiguracionFlujo, EntidadesViaticos.PasoViatico> servicio;
+        DominioServicio.IServicioFlujos<EntidadesViaticos.ConfiguracionFlujo, EntidadesViaticos.PasoViatico> Servicio => App.Inject(ref servicio);
+        public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<EntidadesViaticos.ConfiguracionFlujo, EntidadesViaticos.PasoViatico> ServicioDominio => this.Servicio;
 
         IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViatico;
         IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViatico => App.Inject(ref repositorioConfiguracionFlujoViatico);
 
-        public override IRepositorioConfiguracionFlujo<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico, ConsultaConfiguracionFlujo> Repositorio => this.RepositorioConfiguracionFlujoViatico;
+        public override IRepositorioConfiguracionFlujo<EntidadesViaticos.ConfiguracionFlujo, ConsultaConfiguracionFlujo> Repositorio => this.RepositorioConfiguracionFlujoViatico;
 
 
         public ServicioFlujo(Nucleo.IAplicacion app)
@@ -37,37 +37,37 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
             App = app;
         }
 
-        public override Respuesta<FlujoViatico> CreacionFlujo(FlujoViatico flujo, string subjectId)
+        public override Respuesta<ConfiguracionFlujo> CreacionFlujo(ConfiguracionFlujo flujo, string subjectId)
         {
             var respuesta = Servicio.Crear(flujo, false, subjectId);
 
             if(respuesta.EsError)
-                return new Respuesta<FlujoViatico>(respuesta.Mensaje,respuesta.TAG);
+                return new Respuesta<ConfiguracionFlujo>(respuesta.Mensaje,respuesta.TAG);
 
 
-            return new Respuesta<FlujoViatico>(flujo);
+            return new Respuesta<ConfiguracionFlujo>(flujo);
         }
 
-        public override Respuesta<FlujoViatico> ModificarFlujo(FlujoViatico flujo, string subjectId)
+        public override Respuesta<ConfiguracionFlujo> ModificarFlujo(ConfiguracionFlujo flujo, string subjectId)
         {
             var respuesta = Servicio.Modificar(flujo, false, subjectId);
 
             if (respuesta.EsError)
-                return new Respuesta<FlujoViatico>(respuesta.Mensaje, respuesta.TAG);
+                return new Respuesta<ConfiguracionFlujo>(respuesta.Mensaje, respuesta.TAG);
 
 
-            return new Respuesta<FlujoViatico>(flujo);
+            return new Respuesta<ConfiguracionFlujo>(flujo);
         }
 
-        public override Respuesta<FlujoViatico> EliminarFlujo(FlujoViatico flujo, string subjectId)
+        public override Respuesta<ConfiguracionFlujo> EliminarFlujo(ConfiguracionFlujo flujo, string subjectId)
         {
             var respuesta = Servicio.Eliminar(flujo, false, subjectId);
 
             if (respuesta.EsError)
-                return new Respuesta<FlujoViatico>(respuesta.Mensaje, respuesta.TAG);
+                return new Respuesta<ConfiguracionFlujo>(respuesta.Mensaje, respuesta.TAG);
 
 
-            return new Respuesta<FlujoViatico>(flujo);
+            return new Respuesta<ConfiguracionFlujo>(flujo);
         }
     }
 }

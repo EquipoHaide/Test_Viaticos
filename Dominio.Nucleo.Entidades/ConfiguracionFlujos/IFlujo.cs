@@ -4,14 +4,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dominio.Nucleo.Entidades
 {
-    public interface IFlujo : IEntity
-    {        
-        public int TipoFlujo { get; set; }
-      
-        public int IdTipoEntePublico { get; set; }
-        
-        public int IdNivelEmpleado { get; set; }
+    public interface IFlujo<TPaso> : IEntity
+       where TPaso : IPaso
+    {
 
+        TipoEntePublico TipoEntePublico { get; set; }
+
+        NivelEmpleado NivelEmpleado { get; set; }
+
+        List<TPaso> Pasos { get; set; }
+
+        int TipoFlujo { get; set; }
 
     }
 }

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Dominio.Nucleo;
-using Entidades = Dominio.Nucleo.Entidades;
+using Dominio.Nucleo.Entidades;
 
 namespace Dominio.Viaticos.Entidades
 {
@@ -12,7 +11,7 @@ namespace Dominio.Viaticos.Entidades
     /// Configuracion del Flujo 
     /// </summary>
     [Table("Flujo", Schema = "Viaticos")]
-    public class FlujoViatico : IFlujo<PasoViatico>, IEntity   
+    public class ConfiguracionFlujo : IFlujo<PasoViatico>
     {
         public int Id { get; set; }
 
@@ -38,8 +37,9 @@ namespace Dominio.Viaticos.Entidades
 
         public List<PasoViatico> Pasos { get; set; }
 
-        Nucleo.TipoEntePublico IFlujo<PasoViatico>.TipoEntePublico { get; set; }
+       //PENDIENTE 
         Nucleo.NivelEmpleado IFlujo<PasoViatico>.NivelEmpleado { get; set; }
+        Nucleo.TipoEntePublico IFlujo<PasoViatico>.TipoEntePublico { get; set ; }
     }
 
 

@@ -7,7 +7,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 {
     public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso>
         where TFlujo : class, IFlujo<TPaso>
-        where TPaso : class, IPaso
+        where TPaso : class, Dominio.Nucleo.Entidades.IPaso
     {
     
         public Respuesta<TFlujo> Crear(TFlujo flujos, bool esPredeterminado, bool esNivelRepetido, string subjectId);

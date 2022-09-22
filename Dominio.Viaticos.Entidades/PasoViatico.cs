@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Dominio.Nucleo;
+using Dominio.Nucleo.Entidades;
 
 namespace Dominio.Viaticos.Entidades
 {
     [Table("Paso", Schema = "Viaticos")]
-    public class PasoViatico : IPaso,IEntity
+    public class PasoViatico : IPaso
     {
         public int Id { get; set ; }
 

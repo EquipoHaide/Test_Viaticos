@@ -1,7 +1,7 @@
 ﻿using System;
 using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
+using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo;
-using Dominio.Viaticos.Modelos;
 
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
