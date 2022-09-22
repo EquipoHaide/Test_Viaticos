@@ -10,24 +10,24 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public class ServicioFlujos : ServicioConfiguracionFlujoBase<Dominio.Viaticos.Entidades.FlujoViaticos, Dominio.Viaticos.Entidades.PasoViatico>,
-        IServicioFlujos<Dominio.Viaticos.Entidades.FlujoViaticos, Dominio.Viaticos.Entidades.PasoViatico>
+    public class ServicioFlujos : ServicioConfiguracionFlujoBase<Dominio.Viaticos.Entidades.FlujoViatico, Dominio.Viaticos.Entidades.PasoViatico>,
+        IServicioFlujos<Dominio.Viaticos.Entidades.FlujoViatico, Dominio.Viaticos.Entidades.PasoViatico>
     {
         private new const string TAG = "Dominio.Seguridad.Servicios.ServicioFlujos";
 
-        public Respuesta<FlujoViaticos> Crear(FlujoViaticos flujo, bool validacionExtra, string subjectId)
+        public Respuesta<FlujoViatico> Crear(FlujoViatico flujo, bool validacionExtra, string subjectId)
         {
-            return new Respuesta<FlujoViaticos>(flujo);
+            return new Respuesta<FlujoViatico>(flujo);
         }
 
-        public Respuesta<FlujoViaticos> Eliminar(FlujoViaticos flujo, bool validacionExtra, string subjectId)
+        public Respuesta<FlujoViatico> Eliminar(FlujoViatico flujo, bool validacionExtra, string subjectId)
         {
-            return new Respuesta<FlujoViaticos>(flujo);
+            return new Respuesta<FlujoViatico>(flujo);
         }
 
-        public Respuesta<FlujoViaticos> Modificar(FlujoViaticos flujo, bool validacionExtra, string subjectId)
+        public Respuesta<FlujoViatico> Modificar(FlujoViatico flujo, bool validacionExtra, string subjectId)
         {
-            return new Respuesta<FlujoViaticos>(flujo);
+            return new Respuesta<FlujoViatico>(flujo);
 
         }
     }

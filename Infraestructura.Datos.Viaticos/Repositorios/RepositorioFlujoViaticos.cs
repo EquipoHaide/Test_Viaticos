@@ -8,7 +8,7 @@ using Dominio.Viaticos.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioFlujoViaticos : Repository<Dominio.Viaticos.Entidades.FlujoViaticos>
+    public class RepositorioFlujoViaticos : Repository<Dominio.Viaticos.Entidades.FlujoViatico>
     {
         public RepositorioFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
@@ -22,9 +22,9 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return false;
         }
 
-        public IEnumerable<FlujoViaticos> ObtenerFlujos(IEnumerable<FlujoViaticos> flujo, string subjectId)
+        public IEnumerable<FlujoViatico> ObtenerFlujos(IEnumerable<FlujoViatico> flujo, string subjectId)
         {
-            IEnumerable<FlujoViaticos> lista = null ;
+            IEnumerable<FlujoViatico> lista = null ;
 
             return lista;
         }

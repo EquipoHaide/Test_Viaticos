@@ -26,15 +26,27 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         
 
         /// <summary>
-        /// PENDIENTE :
+        /// El CrearFlujo se usa para añadir las validaciones adicionales de tu flujo 
         /// </summary>
         /// <param name="flujos"></param>
         /// <returns></returns>
         //public abstract Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
         public abstract Respuesta<TFlujo> CreacionFlujo(TFlujo flujos, string subjectId);
 
+        /// <summary>
+        /// El ModificarFlujo se usa para añadir las validaciones adicionales de tu flujo 
+        /// </summary>
+        /// <param name="flujos"></param>
+        /// <param name="subjectId"></param>
+        /// <returns></returns>
         public abstract Respuesta<TFlujo> ModificarFlujo(TFlujo flujos, string subjectId);
 
+        /// <summary>
+        /// El EliminarFlujo se usa para añadir las validaciones adicionales requeridas para tu flujo 
+        /// </summary>
+        /// <param name="flujos"></param>
+        /// <param name="subjectId"></param>
+        /// <returns></returns>
         public abstract Respuesta<TFlujo> EliminarFlujo(TFlujo flujos, string subjectId);
 
 

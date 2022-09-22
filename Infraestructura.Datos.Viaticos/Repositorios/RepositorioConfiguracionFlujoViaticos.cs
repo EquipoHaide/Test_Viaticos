@@ -14,15 +14,15 @@ using Dominio.Viaticos.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.FlujoViaticos, Entidades.PasoViatico, ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
+    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.FlujoViatico, Entidades.PasoViatico, ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
 
-        public override Respuesta<ConsultaPaginada<List<FlujoViaticos>>> ConsultarFlujosDeAutorizacion(ConsultaConfiguracionFlujo parametros, string subjectId)
+        public override Respuesta<ConsultaPaginada<List<FlujoViatico>>> ConsultarFlujosDeAutorizacion(ConsultaConfiguracionFlujo parametros, string subjectId)
         {
 
-            return new Respuesta<ConsultaPaginada<List<FlujoViaticos>>>(""); 
+            return new Respuesta<ConsultaPaginada<List<FlujoViatico>>>(""); 
         }
 
         public override bool ExisteFlujoPredeterminado(int idTipoEntePublico)
@@ -36,28 +36,12 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
         }
 
 
-        public override FlujoViaticos ObtenerFlujos(FlujoViaticos flujo, string subjectId)
+        public override FlujoViatico ObtenerFlujos(FlujoViatico flujo, string subjectId)
         {
 
             return flujo;
         }
 
-
-
-        //public override IEnumerable<FlujoViaticos> ObtenerFlujos(IEnumerable<FlujoViaticos> flujo, string subjectId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override FlujoViaticos ObtenerFlujos(FlujoViaticos flujo, string subjectId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override void RemoverFlujo(FlujoViaticos flujo)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
 
