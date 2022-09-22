@@ -13,17 +13,14 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
-
-       
+  
         public Respuesta<TFlujo> Crear(TFlujo flujo, bool esPredeterminado, bool esNivelRepetido, string subjectId)
         {
             //Valida que el objeto no este vacio
             if (flujo == null)
                 return new Respuesta<TFlujo>("Es requerido un flujo de autorizacion ", TAG);
 
-            if (!flujo.IsValid())
-                return new Respuesta<TFlujo>("El Flujo es invalido", TAG);
-
+          
             if (flujo.TipoEntePublico == null || flujo.TipoEntePublico.Id <= 0)
                 return new Respuesta<TFlujo>("El Tipo de Ente es requerido", TAG);
 
@@ -70,7 +67,6 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (!this.EsConsecutivo(flujo.Pasos))
                 return new Respuesta<TFlujo>("La lista de pasos del flujo debe ser consecutivo.", TAG);
 
-
             return new Respuesta<TFlujo>(flujo);
         }
 
@@ -84,8 +80,8 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (flujoOriginal == null)
                 return new Respuesta<TFlujo>("El flujo no existe", TAG);
 
-            if (!flujo.IsValid())
-                return new Respuesta<TFlujo>("El Flujo es invalido", TAG);
+            //if (!flujo.IsValid())
+            //    return new Respuesta<TFlujo>("El Flujo es invalido", TAG);
 
             if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
                 return new Respuesta<TFlujo>("La lista de pasos es requerida.", TAG);

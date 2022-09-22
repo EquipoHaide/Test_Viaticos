@@ -12,16 +12,17 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
-    public abstract class ServicioConfiguracionFlujoBase<TFlujo, TPaso> : IServicioConfiguracionFlujoBase<TFlujo, TPaso>
+    public abstract class ServicioConfiguracionFlujoBase<TFlujo, TPaso, TQuery> : IServicioConfiguracionFlujoBase<TFlujo, TPaso, TQuery>
         where TFlujo : class,IFlujo<TPaso>
         where TPaso : class,IPaso
+        where TQuery : class, IConsultaFlujo
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 
         public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioDominio { get; }
 
 
-        public virtual IRepositorioConfiguracionFlujo<TFlujo, TPaso> Repositorio { get; }
+        public virtual IRepositorioConfiguracionFlujo<TFlujo, TPaso, TQuery> Repositorio { get; }
         
 
         /// <summary>
@@ -30,16 +31,21 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         /// <param name="flujos"></param>
         /// <returns></returns>
         //public abstract Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
-        public abstract Respuesta<bool> ValidarPasos(TFlujo flujos);
+        public abstract Respuesta<TFlujo> CreacionFlujo(TFlujo flujos, string subjectId);
 
-        public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TFlujo parametros, string subjectId)
+        public abstract Respuesta<TFlujo> ModificarFlujo(TFlujo flujos, string subjectId);
+
+        public abstract Respuesta<TFlujo> EliminarFlujo(TFlujo flujos, string subjectId);
+
+
+        public Respuesta<ConsultaPaginada<List<TFlujo>>> Consultar(TQuery parametros, string subjectId)
         {
-            if (parametros == null) return new Respuesta<ConsultaPaginada<TFlujo>>("El modelo de consulta para obtener no es valido.", TAG);
+            if (parametros == null) return new Respuesta<ConsultaPaginada<List<TFlujo>>>("El modelo de consulta para obtener no es valido.", TAG);
 
             var recursos = Repositorio.Try(r => r.ConsultarFlujosDeAutorizacion(parametros, subjectId));
-            if (recursos.EsError) return recursos.ErrorBaseDatos<ConsultaPaginada<TFlujo>>(TAG);
+            if (recursos.EsError) return recursos.ErrorBaseDatos<ConsultaPaginada<List<TFlujo>>>(TAG);
 
-            return new Respuesta<ConsultaPaginada<TFlujo>>("");
+            return new Respuesta<ConsultaPaginada<List<TFlujo>>>("");
 
         }
 
@@ -48,10 +54,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             //Valida que el objeto no este vacio
             if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
-
-            //if (!flujo.IsValid())
-            //    return new Respuesta("El Flujo es invalido", TAG);
-
 
             //CONSULTA AL REPOSITORIO
             //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO ANTES QUE UN FLUJO PARTICULAR 
@@ -77,11 +79,11 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (respuesta.EsExito)
             {
-                var respuestaComplementaria= this.ValidarPasos(flujo);
+                var respuestaComplementaria= this.CreacionFlujo(flujo,subjectId);
 
                 if (respuestaComplementaria.EsExito)
                 {
-                    Repositorio.Add(respuesta.Contenido);
+                    Repositorio.Add(respuestaComplementaria.Contenido);
 
                     var save = Repositorio.Try(r => r.Save());
 
@@ -96,8 +98,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
 
-            //Repositorio.Add();
-
             return new Respuesta(respuesta.Mensaje, TAG);
 
         }
@@ -109,10 +109,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             //Valida que el objeto no este vacio
             if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
-
-            //if (!flujo.IsValid())
-            //    return new Respuesta("El Flujo es invalido", TAG);
-
 
             //CONSULTA AL REPOSITORIO
             //BUSCAR SI YA EXISTE UN FLUJO PREDETERMINADO ANTES QUE UN FLUJO PARTICULAR 
@@ -143,10 +139,11 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (respuesta.EsExito)
             {
-                var respuestaComplementaria = this.ValidarPasos(flujo);
+                var respuestaComplementaria = this.ModificarFlujo(flujo, subjectId);
 
                 if (respuestaComplementaria.EsExito)
                 {
+
                     var save = Repositorio.Try(r => r.Save());
                     if (save.EsError) return save.ErrorBaseDatos(TAG);
 
@@ -174,15 +171,23 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             var respuesta = ServicioDominio.Eliminar(flujosOriginales.Contenido, subjectId);
 
             if (respuesta.EsError)
-                return new Respuesta("", TAG);
+                return new Respuesta(respuesta.Mensaje, TAG);
 
-            Repositorio.Remove(respuesta.Contenido);
 
-            var guardar = Repositorio.Try(x => x.Save());
-            if (guardar.EsError)
-                return new Respuesta(guardar.Mensaje, guardar.TAG);
+            var respuestaComplementaria = this.EliminarFlujo(flujo,subjectId);
 
-            return new Respuesta();
+            if (respuestaComplementaria.EsExito)
+            {
+                Repositorio.Remove(respuesta.Contenido);
+
+                var guardar = Repositorio.Try(r => r.Save());
+                if (guardar.EsError)
+                    return guardar.ErrorBaseDatos(TAG);
+
+                return new Respuesta();
+            }
+
+            return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
         }
 
 

@@ -15,20 +15,20 @@ namespace Dominio.Viaticos.Servicios
     {
         private new const string TAG = "Dominio.Seguridad.Servicios.ServicioFlujos";
 
-        //public void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId)
-        //{
-          
-        //    throw new NotImplementedException();
-        //}
+        public Respuesta<FlujoViaticos> Crear(FlujoViaticos flujo, bool validacionExtra, string subjectId)
+        {
+            return new Respuesta<FlujoViaticos>(flujo);
+        }
 
-        //public void Crear(FlujoViaticos flujos, string subjectId)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public Respuesta<FlujoViaticos> Eliminar(FlujoViaticos flujo, bool validacionExtra, string subjectId)
+        {
+            return new Respuesta<FlujoViaticos>(flujo);
+        }
 
-        //public void Modificar(FlujoViaticos flujo, string subjectId)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public Respuesta<FlujoViaticos> Modificar(FlujoViaticos flujo, bool validacionExtra, string subjectId)
+        {
+            return new Respuesta<FlujoViaticos>(flujo);
+
+        }
     }
 }

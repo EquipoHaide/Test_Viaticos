@@ -13,37 +13,38 @@ using Presentacion.WebApi.Modelos;
 
 namespace Presentacion.WebApi.FlujosAutorizacion
 {
-    public class ConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso>
+    public class ConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso, TQuery> : ControllerBase, IConfiguracionFlujoAutorizacionBaseController<TFlujo, TPaso, TQuery>
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
+        where TQuery : class , IConsultaFlujo
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
  
-        public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioConfiguracionFlujoBase { get; }
+        public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso,TQuery> ServicioConfiguracionFlujoBase { get; }
 
 
-        //[HttpGet("recursos")]
-        //public object ConsultarConfiguracionFlujo([FromQuery] TQuery filtro)
-        //{
-        //    try
-        //    {
-        //        var consulta = ServicioConfiguracionFlujoBase.Consultar(filtro, this.GetSubjectId());
+        [HttpGet("recursos")]
+        public object ConsultarConfiguracionFlujo([FromQuery] TQuery filtro)
+        {
+            try
+            {
+                var consulta = ServicioConfiguracionFlujoBase.Consultar(filtro, this.GetSubjectId());
 
-        //        if (consulta.EsError)
-        //        {
-        //            if (consulta.Estado == EstadoProceso.Fatal)
-        //                return this.ApiResult(consulta.ExcepcionInterna, App.GetLogger());
+                if (consulta.EsError)
+                {
+                    if (consulta.Estado == EstadoProceso.Fatal)
+                        return this.ApiResult(consulta.ExcepcionInterna, App.GetLogger());
 
-        //            return this.ApiResult(consulta.Mensaje);
-        //        }
+                    return this.ApiResult(consulta.Mensaje);
+                }
 
-        //        return this.ApiResult(new { consulta });
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return this.ApiResult(e, App.GetLogger());
-        //    }
-        //}
+                return this.ApiResult(new { consulta });
+            }
+            catch (Exception e)
+            {
+                return this.ApiResult(e, App.GetLogger());
+            }
+        }
 
 
         [HttpPost("recursos")]

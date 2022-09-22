@@ -7,7 +7,7 @@ namespace Dominio.Nucleo
     /// /
     /// </summary>
     /// <typeparam name="TPaso"></typeparam>
-    public interface IFlujo<TPaso> : IModel
+    public interface IFlujo<TPaso> 
         where TPaso : IPaso
     {
 

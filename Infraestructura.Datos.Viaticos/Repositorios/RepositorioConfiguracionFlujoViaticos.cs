@@ -14,13 +14,15 @@ using Dominio.Viaticos.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.FlujoViaticos, Entidades.PasoViatico>, IRepositorioConfiguracionFlujoViaticos
+    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.FlujoViaticos, Entidades.PasoViatico, ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-        public override Respuesta<ConsultaPaginada<FlujoViaticos>> ConsultarFlujosDeAutorizacion(FlujoViaticos parametros, string subjectId)
+
+        public override Respuesta<ConsultaPaginada<List<FlujoViaticos>>> ConsultarFlujosDeAutorizacion(ConsultaConfiguracionFlujo parametros, string subjectId)
         {
-            throw new NotImplementedException();
+
+            return new Respuesta<ConsultaPaginada<List<FlujoViaticos>>>(""); 
         }
 
         public override bool ExisteFlujoPredeterminado(int idTipoEntePublico)
@@ -33,20 +35,14 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return false;
         }
 
-        public override IEnumerable<Entidades.FlujoViaticos> ObtenerFlujos(IEnumerable<Entidades.FlujoViaticos> flujo, string subjectId)
+
+        public override FlujoViaticos ObtenerFlujos(FlujoViaticos flujo, string subjectId)
         {
-            throw new NotImplementedException();
+
+            return flujo;
         }
 
-        public override Entidades.FlujoViaticos ObtenerFlujos(Entidades.FlujoViaticos flujo, string subjectId)
-        {
-            throw new NotImplementedException();
-        }
 
-        public override void RemoverFlujo(Entidades.FlujoViaticos flujo)
-        {
-            throw new NotImplementedException();
-        }
 
         //public override IEnumerable<FlujoViaticos> ObtenerFlujos(IEnumerable<FlujoViaticos> flujo, string subjectId)
         //{

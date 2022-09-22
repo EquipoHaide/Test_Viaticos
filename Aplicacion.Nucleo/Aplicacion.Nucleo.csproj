@@ -18,8 +18,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="ServicioConfiguracionFlujo\" />
+    <None Remove="ServicioFlujoAutorizacion\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ServicioConfiguracionFlujo\" />
+    <Folder Include="ServicioFlujoAutorizacion\" />
   </ItemGroup>
 </Project>

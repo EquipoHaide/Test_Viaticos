@@ -9,10 +9,13 @@ using Dominio.Viaticos.Repositorios;
 using Infraestructura.Transversal.Plataforma;
 using DominioServicio = Dominio.Viaticos.Servicios;
 using EntidadesViaticos = Dominio.Viaticos.Entidades;
+using Dominio.Viaticos.Entidades;
 
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
-    public class ServicioFlujo : ServicioConfiguracionFlujoBase<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico> , IServicioFlujo<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico>
+    public class ServicioFlujo :
+        ServicioConfiguracionFlujoBase<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico, ConsultaConfiguracionFlujo> ,
+        IServicioFlujo<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico, ConsultaConfiguracionFlujo>
     {
         const string TAG = "Aplicacion.Viaticos.Servicios.ConfiguracionFlujos";
 
@@ -26,10 +29,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViaticos;
         IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViaticos => App.Inject(ref repositorioConfiguracionFlujoViaticos);
 
-        public override IRepositorioConfiguracionFlujo<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico> Repositorio => this.RepositorioConfiguracionFlujoViaticos;
-
-
-
+        public override IRepositorioConfiguracionFlujo<EntidadesViaticos.FlujoViaticos, EntidadesViaticos.PasoViatico, ConsultaConfiguracionFlujo> Repositorio => this.RepositorioConfiguracionFlujoViaticos;
 
 
         public ServicioFlujo(Nucleo.IAplicacion app)
@@ -37,9 +37,37 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
             App = app;
         }
 
-        public override Respuesta<bool> ValidarPasos(EntidadesViaticos.FlujoViaticos flujos)
+        public override Respuesta<FlujoViaticos> CreacionFlujo(FlujoViaticos flujo, string subjectId)
         {
-            return new Respuesta<bool>(true);
+            var respuesta = Servicio.Crear(flujo, false, subjectId);
+
+            if(respuesta.EsError)
+                return new Respuesta<FlujoViaticos>(respuesta.Mensaje,respuesta.TAG);
+
+
+            return new Respuesta<FlujoViaticos>(flujo);
+        }
+
+        public override Respuesta<FlujoViaticos> ModificarFlujo(FlujoViaticos flujo, string subjectId)
+        {
+            var respuesta = Servicio.Modificar(flujo, false, subjectId);
+
+            if (respuesta.EsError)
+                return new Respuesta<FlujoViaticos>(respuesta.Mensaje, respuesta.TAG);
+
+
+            return new Respuesta<FlujoViaticos>(flujo);
+        }
+
+        public override Respuesta<FlujoViaticos> EliminarFlujo(FlujoViaticos flujo, string subjectId)
+        {
+            var respuesta = Servicio.Eliminar(flujo, false, subjectId);
+
+            if (respuesta.EsError)
+                return new Respuesta<FlujoViaticos>(respuesta.Mensaje, respuesta.TAG);
+
+
+            return new Respuesta<FlujoViaticos>(flujo);
         }
     }
 }

@@ -9,6 +9,11 @@ namespace Dominio.Nucleo.Servicios
         where TPaso  : IPaso
        
     {
+        /// <summary>
+        /// Validaciones adicionales de la creacion de un flujo 
+        /// </summary>
+        /// <param name="flujos"></param>
+        /// <returns></returns>
         Respuesta<bool> ValidarFlujo(List<TFlujo> flujos);
 
         //Respuesta<bool> ValidarPaso(TPaso paso);

@@ -10,23 +10,21 @@ using System.Text;
 
 namespace Infraestructura.Datos.Nucleo
 {
-    public abstract class RepositorioConfiguracionFlujo<TFlujo,TPaso> : Repository<TFlujo>, IRepositorioConfiguracionFlujo<TFlujo,TPaso>
+    public abstract class RepositorioConfiguracionFlujo<TFlujo,TPaso,TQuery> : Repository<TFlujo>, IRepositorioConfiguracionFlujo<TFlujo,TPaso,TQuery>
          where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
+        where TQuery : class, IConsultaFlujo
+
     {
         public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        public abstract Respuesta<ConsultaPaginada<TFlujo>> ConsultarFlujosDeAutorizacion(TFlujo parametros, string subjectId);
+        public abstract Respuesta<ConsultaPaginada<List<TFlujo>>> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 
         public abstract bool ExisteFlujoPredeterminado(int idTipoEntePublico);
 
         public abstract bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
 
-        public abstract IEnumerable<TFlujo> ObtenerFlujos(IEnumerable<TFlujo> flujo, string subjectId);
-
         public abstract TFlujo ObtenerFlujos(TFlujo flujo, string subjectId);
-
-        public abstract void RemoverFlujo(TFlujo flujo);
 
         //Agregar los metodos particulares que se requieren para realizar el guardado general
     }

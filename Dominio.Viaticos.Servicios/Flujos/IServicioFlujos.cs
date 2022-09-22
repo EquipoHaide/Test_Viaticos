@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Dominio.Nucleo;
 using Dominio.Viaticos.Modelos;
 using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
+using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Viaticos.Servicios
 {
@@ -10,12 +11,12 @@ namespace Dominio.Viaticos.Servicios
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
     {
-        //void Consultar(ConsultaConfiguracionFlujo parametros, string subjectId);
+       
+        public Respuesta<TFlujo> Crear(TFlujo flujo, bool validacionExtra, string subjectId);
 
-        //void Crear(TFlujo flujos, string subjectId);
+        public Respuesta<TFlujo> Modificar(TFlujo flujo, bool validacionExtra, string subjectId);
 
-        //void Eliminar(TFlujo flujo, string subjectId);
-
-        //void Modificar(TFlujo flujo, string subjectId);
+        public Respuesta<TFlujo> Eliminar(TFlujo flujo, bool validacionExtra, string subjectId);
+     
     }
 }

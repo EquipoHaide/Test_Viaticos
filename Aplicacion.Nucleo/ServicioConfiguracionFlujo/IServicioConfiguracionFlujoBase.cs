@@ -7,18 +7,19 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
-    public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso>
+    public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso,TQuery>
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
+        where TQuery : class, IConsultaFlujo
     {
 
-        Respuesta<bool> ValidarPasos(TFlujo flujos);
+        public Respuesta<TFlujo> CreacionFlujo(TFlujo flujo,string subjectId);
 
-        //las entidades de los deferentes negocios(viaticos, compras, etc), deberian de heredar de mi entidad principal Flujo
-        //public Respuesta<bool> Crear(List<IFlujo<TPaso>> flujos, IRepositorioConfiguracionFlujo<Flujo> repositorioConfiguracionFlujo );
+        public Respuesta<TFlujo> ModificarFlujo(TFlujo flujo,string subjectId);
 
-        //bool ValidarPasos();ConsultaPaginada<IPermisoModel>
-        public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TFlujo query, string subjectId);
+        public Respuesta<TFlujo> EliminarFlujo(TFlujo flujo,string subjectId);
+
+        public Respuesta<ConsultaPaginada<List<TFlujo>>> Consultar(TQuery query, string subjectId);
 
         public Respuesta Crear(TFlujo flujo,  string subjectId);
 
