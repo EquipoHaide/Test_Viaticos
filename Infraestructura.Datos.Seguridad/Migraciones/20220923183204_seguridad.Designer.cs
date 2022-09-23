@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructura.Datos.Seguridad.Migraciones
 {
     [DbContext(typeof(SeguridadUnidadDeTrabajo))]
-    [Migration("20220603181000_Seguridad_0001")]
-    partial class Seguridad_0001
+    [Migration("20220923183204_seguridad")]
+    partial class seguridad
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.22")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

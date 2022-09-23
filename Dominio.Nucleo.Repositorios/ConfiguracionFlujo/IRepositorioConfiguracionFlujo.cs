@@ -19,7 +19,7 @@ namespace Dominio.Nucleo.Repositorios
 
         bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
        
-        TFlujoEntidad ObtenerFlujos(TFlujoEntidad flujo, string subjectId);
+        List<TFlujoEntidad> ObtenerFlujos(int idEntePublico);
 
         public ConsultaPaginada<TFlujoEntidad> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 

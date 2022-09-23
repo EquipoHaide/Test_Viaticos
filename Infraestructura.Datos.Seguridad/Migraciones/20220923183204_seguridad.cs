@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infraestructura.Datos.Seguridad.Migraciones
 {
-    public partial class Seguridad_0001 : Migration
+    public partial class seguridad : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

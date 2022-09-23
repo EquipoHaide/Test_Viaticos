@@ -40,6 +40,10 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return flujo;
         }
 
+        public override List<ConfiguracionFlujo> ObtenerFlujos(int idEntePublico)
+        {
+            return new List<ConfiguracionFlujo>();
+        }
     }
 }
 

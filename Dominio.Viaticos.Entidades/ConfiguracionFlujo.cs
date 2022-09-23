@@ -16,30 +16,37 @@ namespace Dominio.Viaticos.Entidades
         public int Id { get; set; }
 
         [Required]
-        public int idNivelEmpleado { get; set; }
-
+        public int IdNivelEmpleado { get; set; }
+ 
         [Required]
-        public int idEntePublico { get; set; }
-
-        //A manera de ejemplo voy agrerar el campo nombre
-        [Required]
-        public string NombreFlujo { get; set; }
+        public int IdEntePublico { get; set; }
 
         [Required]
         public int TipoFlujo { get; set; }
 
-        [ForeignKey("idEntePublico")]
-        public TipoEntePublico TipoEntePublico { get; set; }
-
-        [ForeignKey("idNivelEmpleado")]
-        public NivelEmpleado NivelEmpleado { get; set; }
-
+        /// Ejemplo de Variables añadidas por los desarrolladores 
+        [Required]
+        public string NombreFlujo { get; set; }
+        [Required]
+        public bool Activo { get; set; }
+        ///
 
         public List<PasoViatico> Pasos { get; set; }
 
-       //PENDIENTE 
-        Nucleo.NivelEmpleado IFlujo<PasoViatico>.NivelEmpleado { get; set; }
-        Nucleo.TipoEntePublico IFlujo<PasoViatico>.TipoEntePublico { get; set ; }
+        public string DescripcionEntePublico { get; set; }
+
+        public string Nivel { get; set; }
+
+
+        [ForeignKey("idEntePublico")]
+        public TipoEntePublico TipoEntePublico { get; set; }
+
+        [ForeignKey("IdNivelEmpleado")]
+        public NivelEmpleado NivelEmpleado { get; set; }
+
+    
+
+
     }
 
 

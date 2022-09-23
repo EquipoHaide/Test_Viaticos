@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Dominio.Nucleo.Entidades;
+using Dominio.Seguridad.Entidades;
 
 namespace Dominio.Viaticos.Entidades
 {
@@ -14,16 +15,25 @@ namespace Dominio.Viaticos.Entidades
         public int IdRol { get; set; }
 
         [Required]
-        public int Orden { get; set ; }
+        public int IdConfiguracionFlujo { get; set; }
 
         [Required]
-        public int Rol { get; set ; }
+        public int Orden { get; set ; }
 
         [Required]
         public int TipoRol { get; set ; }
 
         [Required]
         public bool EsFirma { get; set ; }
+
+        [Required]
+        public string Descripcion { get; set; }
+
+        //[ForeignKey("IdRol")]
+        //public Rol Rol { get; set; }
+
+        [ForeignKey("IdConfiguracionFlujo")]
+        public ConfiguracionFlujo Flujo { get; set; }
 
     }
 }

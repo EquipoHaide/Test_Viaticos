@@ -330,7 +330,7 @@ CREATE INDEX [IX_UsuariosGrupo_IdUsuario] ON [Seguridad].[UsuariosGrupo] ([IdUsu
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20220603181000_Seguridad_0001', N'3.1.22');
+VALUES (N'20220923183204_seguridad', N'3.1.2');
 
 GO
 

@@ -25,6 +25,8 @@ namespace Infraestructura.Datos.Nucleo
 
         public abstract TFlujo ObtenerFlujos(TFlujo flujo, string subjectId);
 
+        public abstract List<TFlujo> ObtenerFlujos(int idEntePublico);
+
         //Agregar los metodos particulares que se requieren para realizar el guardado general
     }
 }

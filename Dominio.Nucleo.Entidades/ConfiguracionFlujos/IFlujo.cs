@@ -8,12 +8,21 @@ namespace Dominio.Nucleo.Entidades
        where TPaso : IPaso
     {
 
-        TipoEntePublico TipoEntePublico { get; set; }
+        //TipoEntePublico TipoEntePublico { get; set; }
+        public int IdEntePublico { get; set; }
+        public string DescripcionEntePublico { get; set; }
 
-        NivelEmpleado NivelEmpleado { get; set; }
+       //NivelEmpleado NivelEmpleado { get; set; }
+        public int IdNivelEmpleado { get; set; }
+        public string Nivel { get; set; }
 
         List<TPaso> Pasos { get; set; }
 
+        /// <summary>
+        /// Es un Enumerable
+        /// 1 --> Predeterminado
+        /// 2 --> Particular
+        /// </summary>
         int TipoFlujo { get; set; }
 
     }

@@ -1,6 +1,6 @@
 ﻿using Dominio.Viaticos.Modelos;
 using Microsoft.AspNetCore.Mvc;
-using Presentacion.WebApi.FlujosAutorizacion;
+using Presentacion.WebApi.ConfiguracionFlujo                                                                                              ;
 using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
 using AplicacionViaticos = Aplicacion.Viaticos.Servicios.ConfiguracionFlujos;
 using Entidad = Dominio.Viaticos.Entidades;

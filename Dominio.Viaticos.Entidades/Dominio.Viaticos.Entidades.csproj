@@ -8,5 +8,6 @@
     <ProjectReference Include="..\Dominio.Nucleo.Entidades\Dominio.Nucleo.Entidades.csproj" />
     <ProjectReference Include="..\Dominio.Nucleo.Repositorios\Dominio.Nucleo.Repositorios.csproj" />
     <ProjectReference Include="..\Dominio.Nucleo\Dominio.Nucleo.csproj" />
+    <ProjectReference Include="..\Dominio.Seguridad.Entidades\Dominio.Seguridad.Entidades.csproj" />
   </ItemGroup>
 </Project>

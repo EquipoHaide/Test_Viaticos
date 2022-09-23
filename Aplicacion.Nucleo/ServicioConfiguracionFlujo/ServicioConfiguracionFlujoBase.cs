@@ -61,12 +61,12 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
        
-            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id));
+            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico));
 
             if (esPredertiminado.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
 
-            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id, flujo.NivelEmpleado.Nivel == null ? "" : flujo.NivelEmpleado.Nivel));
+            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico, flujo.Nivel == null ? "" : flujo.Nivel));
 
             if (esNivelRepetido.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
@@ -106,12 +106,12 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
         
-            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id));
+            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico));
 
             if (esPredertiminado.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
 
-            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo.TipoEntePublico?.Id == null ? 0 : flujo.TipoEntePublico.Id, flujo.NivelEmpleado.Nivel == null ? "" : flujo.NivelEmpleado.Nivel));
+            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico, flujo.Nivel == null ? "" : flujo.Nivel));
 
             if (esNivelRepetido.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
@@ -144,12 +144,20 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public Respuesta Eliminar(TFlujo flujo,string subjectId)
         {
             
-           var flujosOriginales = Repositorio.Try(r => r.ObtenerFlujos(flujo, subjectId));
+           var flujos = Repositorio.Try(r => r.ObtenerFlujos(flujo.IdEntePublico));
  
-            if (flujosOriginales.EsError)
-                return flujosOriginales.ErrorBaseDatos();
+           // if (flujoOriginale.EsError)
+           //     return flujosOriginales.ErrorBaseDatos();
 
-            var respuesta = ServicioDominio.Eliminar(flujosOriginales.Contenido, subjectId);
+           // var flujos = Repositorio
+
+
+            var flujoOriginale = Repositorio.Try(r => r.Get(g => g.Id == flujo.Id));
+
+            if (flujoOriginale.EsError)
+                return flujoOriginale.ErrorBaseDatos();
+
+            var respuesta = ServicioDominio.Eliminar(flujoOriginale.Contenido, subjectId);
 
             if (respuesta.EsError)
                 return new Respuesta(respuesta.Mensaje, TAG);
