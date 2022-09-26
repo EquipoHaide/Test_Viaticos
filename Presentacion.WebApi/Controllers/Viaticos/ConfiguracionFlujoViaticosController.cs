@@ -22,8 +22,6 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         public ConfiguracionFlujoViaticosController(Aplicacion.Nucleo.IAplicacion app)
         {
             this.App = app;
-
-            //ServicioConfiguracionFlujoBase.Crear(null);
         }
 
         

@@ -17,11 +17,11 @@ namespace Dominio.Nucleo.Repositorios
 
         bool ExisteFlujoPredeterminado(int idTipoEntePublico);
 
-        bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
-       
-        List<TFlujoEntidad> ObtenerFlujos(int idEntePublico);
+        bool ExisteNivelRepetido(int idTipoEntePublico, int idNivel);
 
-        public ConsultaPaginada<TFlujoEntidad> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
+        TFlujoEntidad ObtenerFlujo(int id);
+
+        ConsultaPaginada<TFlujoEntidad> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 
         //void RemoverFlujo(TEntidad flujo);
 

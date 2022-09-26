@@ -21,11 +21,10 @@ namespace Infraestructura.Datos.Nucleo
 
         public abstract bool ExisteFlujoPredeterminado(int idTipoEntePublico);
 
-        public abstract bool ExisteNivelRepetido(int idTipoEntePublico, string nivel);
+        public abstract bool ExisteNivelRepetido(int idTipoEntePublico, int idNivel);
 
-        public abstract TFlujo ObtenerFlujos(TFlujo flujo, string subjectId);
-
-        public abstract List<TFlujo> ObtenerFlujos(int idEntePublico);
+        public abstract TFlujo ObtenerFlujo(int id);
+        
 
         //Agregar los metodos particulares que se requieren para realizar el guardado general
     }

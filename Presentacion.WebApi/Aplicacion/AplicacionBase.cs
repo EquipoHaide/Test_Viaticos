@@ -20,6 +20,9 @@ using Infraestructura.Transversal.Perfiles;
 using ViaticosAplicacion = Aplicacion.Viaticos.Servicios;
 using ViaticosDominio = Dominio.Viaticos.Servicios;
 using ViaticosRepositorio = Infraestructura.Datos.Viaticos;
+using Microsoft.EntityFrameworkCore;
+using Infraestructura.Datos.Viaticos.UnidadDeTrabajo;
+
 namespace Presentacion.WebApi.App
 {
     public class AplicacionBase : AplicacionNucleo.IAplicacion
@@ -113,6 +116,10 @@ namespace Presentacion.WebApi.App
             Contenedor.Register(vehicularOptions);
 
             BasesDeDatosEnMemoria = true;*/
+
+            //var vehicularOptions = new DbContextOptionsBuilder<ViaticosUnidadDeTrabajo>()
+            //  .UseInMemoryDatabase(dbName)
+            //  .Options;
         }
 
         /// <summary>
@@ -136,6 +143,13 @@ namespace Presentacion.WebApi.App
             Contenedor.Register(options);
             Contenedor.Register(ingresosOptions);
             Contenedor.Register(vehicularOptions);*/
+
+            var viaticosOptions = new DbContextOptionsBuilder<ViaticosUnidadDeTrabajo>()
+               .UseSqlServer(conexion)
+               .Options;
+
+           Contenedor.Register(viaticosOptions);
+
         }
 
         private void ConfigurarLogger()

@@ -12,7 +12,11 @@ namespace Infraestructura.Datos.Viaticos.UnidadDeTrabajo
         public ViaticosUnidadDeTrabajo(DbContextOptions<ViaticosUnidadDeTrabajo> options) : base(options) { }
 
 
-        public DbSet<PasoViatico> Usuarios { get; set; }
+        public DbSet<PasoViatico> Pasos { get; set; }
+        public DbSet<ConfiguracionFlujo> Flujos { get; set; }
+        public DbSet<NivelEmpleado> NivelEmpleados { get; set; }
+        public DbSet<TipoEntePublico> TipoEntePublicos { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

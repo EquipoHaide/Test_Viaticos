@@ -9,6 +9,7 @@ namespace Dominio.Viaticos.Modelos
         public string Query { get; set; } = "";
         public int Pagina { get; set; } = 1;
         public int ElementosPorPagina { get; set; } = 20;
+        public int IdEntePublico { get; set; }
 
     }
 }

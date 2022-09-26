@@ -4,6 +4,7 @@ using Entidades = Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Repositorios;
 
 using Infraestructura.Transversal.Plataforma.Extensiones;
+using System;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
@@ -60,13 +61,13 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             //Valida que el objeto no este vacio
             if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
-       
+
             var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico));
 
             if (esPredertiminado.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
 
-            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico, flujo.Nivel == null ? "" : flujo.Nivel));
+            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico , flujo?.IdNivelEmpleado == null ? 0: flujo.IdNivelEmpleado));
 
             if (esNivelRepetido.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
@@ -111,13 +112,12 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (esPredertiminado.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
 
-            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico, flujo.Nivel == null ? "" : flujo.Nivel));
+            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo?.IdEntePublico == null ? 0 : flujo.IdEntePublico, flujo?.IdNivelEmpleado== null ? 0 : flujo.IdNivelEmpleado));
 
             if (esNivelRepetido.EsError)
                 return esPredertiminado.ErrorBaseDatos(TAG);
 
-
-            var flujoOriginal = Repositorio.Try(r => r.Get(g => g.Id == flujo.Id));
+            var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujo(flujo.Id));
 
             if (flujoOriginal.EsError)
                 return flujoOriginal.ErrorBaseDatos(TAG);
@@ -144,7 +144,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public Respuesta Eliminar(TFlujo flujo,string subjectId)
         {
             
-           var flujos = Repositorio.Try(r => r.ObtenerFlujos(flujo.IdEntePublico));
+           var flujos = Repositorio.Try(r => r.ObtenerFlujo(flujo.Id));
  
            // if (flujoOriginale.EsError)
            //     return flujosOriginales.ErrorBaseDatos();

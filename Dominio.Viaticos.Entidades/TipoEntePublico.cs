@@ -5,7 +5,7 @@ using Dominio.Nucleo;
 
 namespace Dominio.Viaticos.Entidades
 {
-    [Table("EntePublico", Schema = "Viaticos")]
+    [Table("EntePublicos", Schema = "Viaticos")]
     public class TipoEntePublico : Dominio.Nucleo.ITipoEntePublico
     {
         public int Id { get; set; }

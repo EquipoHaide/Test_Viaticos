@@ -4,12 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.Viaticos.Entidades
 {
-    [Table("NivelEmpleado", Schema = "Viaticos")]
+    [Table("NivelEmpleados", Schema = "Viaticos")]
     public class NivelEmpleado : Dominio.Nucleo.INivelEmpleado
     {
         public int Id { get; set; }
 
         [Required]
         public string Nivel { get; set; }
+
+
     }
 }

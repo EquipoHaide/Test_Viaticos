@@ -10,7 +10,7 @@ namespace Dominio.Viaticos.Entidades
     /// <summary>
     /// Configuracion del Flujo 
     /// </summary>
-    [Table("Flujo", Schema = "Viaticos")]
+    [Table("Flujos", Schema = "Viaticos")]
     public class ConfiguracionFlujo : IFlujo<PasoViatico>
     {
         public int Id { get; set; }
@@ -33,20 +33,18 @@ namespace Dominio.Viaticos.Entidades
 
         public List<PasoViatico> Pasos { get; set; }
 
-        public string DescripcionEntePublico { get; set; }
+        //[NotMapped]
+        //public Nucleo.TipoEntePublico TipoEntePublico { get; set; }
 
-        public string Nivel { get; set; }
+        //[NotMapped]
+        //public Nucleo.NivelEmpleado NivelEmpleado { get; set; }
 
 
-        [ForeignKey("idEntePublico")]
-        public TipoEntePublico TipoEntePublico { get; set; }
+        [ForeignKey("IdEntePublico")]
+        public TipoEntePublico EntePublico { get; set; }
 
         [ForeignKey("IdNivelEmpleado")]
-        public NivelEmpleado NivelEmpleado { get; set; }
-
-    
-
-
+        public NivelEmpleado Nivel { get; set; }
     }
 
 

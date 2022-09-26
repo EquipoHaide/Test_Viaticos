@@ -65,9 +65,8 @@ namespace Presentacion.WebApi
 
             App.Aplicacion.Instancia
                       .Inicializar(contenedor, Configuration)
-                      .UsarBasesDeDatosSQL(Configuration.GetConnectionString("db"));
-
-
+                      .UsarBasesDeDatosSQL(Configuration.GetConnectionString("sit"));
+        
             App.Aplicacion.Instancia.Authentication(Configuration["Auth:Authority"], Configuration["Auth:ClientId"], Configuration["Auth:ClientSecret"], bool.Parse(Configuration["Auth:RequireHttpsMetadata"]));
             App.Aplicacion.Instancia.AuthorizationEnabled = true;
 

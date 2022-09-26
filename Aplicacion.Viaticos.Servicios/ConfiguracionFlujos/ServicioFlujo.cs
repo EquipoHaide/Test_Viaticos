@@ -45,7 +45,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
                 return new Respuesta<ConfiguracionFlujo>(respuesta.Mensaje,respuesta.TAG);
 
 
-            return new Respuesta<ConfiguracionFlujo>(flujo);
+            return new Respuesta<ConfiguracionFlujo>(respuesta.Contenido);
         }
 
         public override Respuesta<ConfiguracionFlujo> ModificarFlujo(ConfiguracionFlujo flujo, string subjectId)

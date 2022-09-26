@@ -11,7 +11,22 @@ namespace Dominio.Viaticos.Servicios
 
         public Respuesta<ConfiguracionFlujo> Crear(ConfiguracionFlujo flujo, bool validacionExtra, string subjectId)
         {
-            return new Respuesta<ConfiguracionFlujo>(flujo);
+            if (flujo.NombreFlujo == null)
+                return new Respuesta<ConfiguracionFlujo>("Es necesario una descripcion en el flujo", TAG);
+
+            if(!flujo.Activo)
+                return new Respuesta<ConfiguracionFlujo>("Es necesario activar el flujo", TAG);
+
+            var controlFlujo = new ConfiguracionFlujo() {
+                IdEntePublico = flujo.IdEntePublico,
+                IdNivelEmpleado = flujo.IdNivelEmpleado,
+                TipoFlujo = flujo.TipoFlujo,
+                NombreFlujo = flujo.NombreFlujo,
+                Activo = flujo.Activo,
+                Pasos = flujo.Pasos
+            };
+
+            return new Respuesta<ConfiguracionFlujo>(controlFlujo);
         }
 
         public Respuesta<ConfiguracionFlujo> Eliminar(ConfiguracionFlujo flujo, bool validacionExtra, string subjectId)
