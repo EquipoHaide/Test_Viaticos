@@ -17,7 +17,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
 
         object Modificar([FromBody]ModeloConfiguracionFlujo<TFlujo, TPaso> config);
 
-        object Eliminar([FromBody]ModeloConfiguracionFlujo<TFlujo, TPaso> config);
+        object Eliminar([FromQuery]int id );
 
 
     }

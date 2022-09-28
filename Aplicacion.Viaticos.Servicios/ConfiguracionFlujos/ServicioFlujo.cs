@@ -48,15 +48,17 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
             return new Respuesta<ConfiguracionFlujo>(respuesta.Contenido);
         }
 
-        public override Respuesta<ConfiguracionFlujo> ModificarFlujo(ConfiguracionFlujo flujo, string subjectId)
+        public override Respuesta<ConfiguracionFlujo> ModificarFlujo(ConfiguracionFlujo flujo, ConfiguracionFlujo flujoOriginal, string subjectId)
         {
-            var respuesta = Servicio.Modificar(flujo, false, subjectId);
+            var respuesta = Servicio.Modificar(flujo, flujoOriginal, false, subjectId);
 
             if (respuesta.EsError)
                 return new Respuesta<ConfiguracionFlujo>(respuesta.Mensaje, respuesta.TAG);
 
 
-            return new Respuesta<ConfiguracionFlujo>(flujo);
+
+
+            return new Respuesta<ConfiguracionFlujo>(respuesta.Contenido);
         }
 
         public override Respuesta<ConfiguracionFlujo> EliminarFlujo(ConfiguracionFlujo flujo, string subjectId)
@@ -65,6 +67,9 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 
             if (respuesta.EsError)
                 return new Respuesta<ConfiguracionFlujo>(respuesta.Mensaje, respuesta.TAG);
+
+
+       
 
 
             return new Respuesta<ConfiguracionFlujo>(flujo);

@@ -11,7 +11,7 @@ namespace Dominio.Viaticos.Servicios
        
         public Respuesta<TFlujo> Crear(TFlujo flujo, bool validacionExtra, string subjectId);
 
-        public Respuesta<TFlujo> Modificar(TFlujo flujo, bool validacionExtra, string subjectId);
+        public Respuesta<TFlujo> Modificar(TFlujo flujo,TFlujo flujoOrigial, bool validacionExtra, string subjectId);
 
         public Respuesta<TFlujo> Eliminar(TFlujo flujo, bool validacionExtra, string subjectId);
      

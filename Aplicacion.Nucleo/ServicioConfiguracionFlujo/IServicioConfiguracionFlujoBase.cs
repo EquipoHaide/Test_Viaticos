@@ -14,7 +14,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta<TFlujo> CreacionFlujo(TFlujo flujo,string subjectId);
 
-        public Respuesta<TFlujo> ModificarFlujo(TFlujo flujo,string subjectId);
+        public Respuesta<TFlujo> ModificarFlujo(TFlujo flujo, TFlujo flujoOriginal, string subjectId);
 
         public Respuesta<TFlujo> EliminarFlujo(TFlujo flujo,string subjectId);
 
@@ -24,7 +24,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta Modificar(TFlujo flujo, string subjectId);
 
-        public Respuesta Eliminar(TFlujo flujo, string subjectId);
+        public Respuesta Eliminar(int id, string subjectId);
         
 
 

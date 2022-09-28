@@ -85,63 +85,54 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return result.Paginar(parametros == null ? 1 : parametros.Pagina, parametros == null ? 20 : parametros.ElementosPorPagina);
         }
 
-        public override bool ExisteFlujoPredeterminado(int idTipoEntePublico)
+        public override bool ExisteFlujoPredeterminado(ConfiguracionFlujo flujo)
         {
 
-            var flujo = (from u in Set
-                        where u.IdEntePublico == idTipoEntePublico
+            var flujos = (from u in Set
+                        where u.IdEntePublico == flujo.IdEntePublico
                         select u).ToList();
 
-            var existe = flujo.GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado)
+            var existe = flujos.GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado)
                 .Any(g => g.Count() > 0);
 
             return existe;
         }
 
-        public override bool ExisteNivelRepetido(int idTipoEntePublico, int idNivel)
+        public override bool ExisteNivelRepetido(ConfiguracionFlujo flujo)
         {
-            var flujo = (from u in Set
-                        where u.IdEntePublico == idTipoEntePublico
+            var flujos = (from u in Set
+                        where u.IdEntePublico == flujo.IdEntePublico 
                         select u).ToList();
 
-            var existe = flujo.Exists(x => x.IdNivelEmpleado == idNivel);
+            //var existe = false;
+            var existe = flujos.GroupBy(x => x.IdNivelEmpleado == flujo.IdNivelEmpleado)
+                .Any(g => g.Count() > 0);
 
             return existe;
+        }
+
+        public override bool ExisteRegistroEntePublico(ConfiguracionFlujo flujo)
+        {
+            return false;
         }
 
         public override ConfiguracionFlujo ObtenerFlujo(int id)
         {
             if (id <= 0)
                 return new ConfiguracionFlujo();
-          
+
             return (from u in Set
-                   where u.Id == id
-                   let pasos = (from p in u.Pasos
-                                where p.IdConfiguracionFlujo == id
-                                select p)
-                   select new ConfiguracionFlujo()
-                   {
-                       Id = u.Id,
-                       IdEntePublico = u.IdEntePublico,
-                       IdNivelEmpleado = u.IdNivelEmpleado,
-                       NombreFlujo = u.NombreFlujo,
-                       Activo = u.Activo,
-                       Pasos = pasos.ToList(),
-                       TipoFlujo = u.TipoFlujo
-                   }).FirstOrDefault();
+                    where u.Id == id
+                    select new
+                    {
+                        flujo = u,
+                        paso = u.Pasos.Where(r => r.Activo)
+                    }).ToList().Select(r => r.flujo).FirstOrDefault();
+                   
         }
 
 
-        //public override ConfiguracionFlujo ObtenerFlujos(ConfiguracionFlujo flujo, string subjectId)
-        //{
-
-        //    return flujo;
-        //}
-
-        //public override List<ConfiguracionFlujo> ObtenerFlujos(int idEntePublico)
-        //{
-        //    return new List<ConfiguracionFlujo>();
-        //}
+       
     }
 }
 

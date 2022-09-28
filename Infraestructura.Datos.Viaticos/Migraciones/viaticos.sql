@@ -31,11 +31,18 @@ GO
 
 CREATE TABLE [Viaticos].[Flujos] (
     [Id] int NOT NULL IDENTITY,
+    [IdUsuarioCreo] nvarchar(max) NOT NULL,
+    [FechaCreacion] datetime2 NOT NULL,
+    [IdUsuarioModifico] nvarchar(max) NULL,
+    [FechaModificacion] datetime2 NOT NULL,
+    [IdUsuarioElimino] nvarchar(max) NULL,
+    [FechaEliminacion] datetime2 NULL,
+    [Activo] bit NOT NULL,
     [IdNivelEmpleado] int NOT NULL,
     [IdEntePublico] int NOT NULL,
     [TipoFlujo] int NOT NULL,
     [NombreFlujo] nvarchar(max) NOT NULL,
-    [Activo] bit NOT NULL,
+    [Clasificacion] int NOT NULL,
     CONSTRAINT [PK_Flujos] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Flujos_EntePublicos_IdEntePublico] FOREIGN KEY ([IdEntePublico]) REFERENCES [Viaticos].[EntePublicos] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_Flujos_NivelEmpleados_IdNivelEmpleado] FOREIGN KEY ([IdNivelEmpleado]) REFERENCES [Viaticos].[NivelEmpleados] ([Id]) ON DELETE NO ACTION
@@ -45,6 +52,13 @@ GO
 
 CREATE TABLE [Viaticos].[Pasos] (
     [Id] int NOT NULL IDENTITY,
+    [IdUsuarioCreo] nvarchar(max) NOT NULL,
+    [FechaCreacion] datetime2 NOT NULL,
+    [IdUsuarioModifico] nvarchar(max) NULL,
+    [FechaModificacion] datetime2 NOT NULL,
+    [IdUsuarioElimino] nvarchar(max) NULL,
+    [FechaEliminacion] datetime2 NULL,
+    [Activo] bit NOT NULL,
     [IdRol] int NOT NULL,
     [IdConfiguracionFlujo] int NOT NULL,
     [Orden] int NOT NULL,
@@ -70,7 +84,7 @@ CREATE INDEX [IX_Pasos_IdConfiguracionFlujo] ON [Viaticos].[Pasos] ([IdConfigura
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20220926155455_viaticos', N'3.1.2');
+VALUES (N'20220928185816_viaticos', N'3.1.2');
 
 GO
 

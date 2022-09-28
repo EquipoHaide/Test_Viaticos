@@ -23,7 +23,8 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         {
             try
             {
-                var consulta = ServicioConfiguracionFlujoBase.Consultar(filtro, this.GetSubjectId());
+                var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
+                var consulta = ServicioConfiguracionFlujoBase.Consultar(filtro, GetSubjectId);
 
                 if (consulta.EsError)
                 {
@@ -47,8 +48,8 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         public object Crear([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)   
         {
             try {
-               
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, this.GetSubjectId());
+                var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, GetSubjectId);
 
                 if (resultado.EsError)
                 {
@@ -73,7 +74,8 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         {
             try
             {
-                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujo, this.GetSubjectId());
+                var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
+                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujo, GetSubjectId);
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)
@@ -92,9 +94,26 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
 
 
         [HttpDelete("recursos")]
-        public object Eliminar([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)
+        public object Eliminar( int id )
         {
-            throw new NotImplementedException();
+            try
+            {
+                var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
+                var resultado = ServicioConfiguracionFlujoBase.Eliminar(id, GetSubjectId);
+                if (resultado.EsError)
+                {
+                    if (resultado.Estado == EstadoProceso.Fatal)
+                        return this.ApiResult(resultado.ExcepcionInterna, App.GetLogger());
+
+                    return this.ApiResult(resultado.Mensaje);
+                }
+
+                return this.ApiResult(new { resultado });
+            }
+            catch (Exception e)
+            {
+                return this.ApiResult(e, App.GetLogger());
+            }
         }
 
     }

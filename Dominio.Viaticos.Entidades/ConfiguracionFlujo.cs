@@ -11,11 +11,11 @@ namespace Dominio.Viaticos.Entidades
     /// Configuracion del Flujo 
     /// </summary>
     [Table("Flujos", Schema = "Viaticos")]
-    public class ConfiguracionFlujo : IFlujo<PasoViatico>
+    public class ConfiguracionFlujo : Seguimiento, IFlujo<PasoViatico>
     {
         public int Id { get; set; }
 
-        [Required]
+        
         public int IdNivelEmpleado { get; set; }
  
         [Required]
@@ -27,17 +27,12 @@ namespace Dominio.Viaticos.Entidades
         /// Ejemplo de Variables añadidas por los desarrolladores 
         [Required]
         public string NombreFlujo { get; set; }
+
         [Required]
-        public bool Activo { get; set; }
+        public int Clasificacion { get; set; }
         ///
 
         public List<PasoViatico> Pasos { get; set; }
-
-        //[NotMapped]
-        //public Nucleo.TipoEntePublico TipoEntePublico { get; set; }
-
-        //[NotMapped]
-        //public Nucleo.NivelEmpleado NivelEmpleado { get; set; }
 
 
         [ForeignKey("IdEntePublico")]

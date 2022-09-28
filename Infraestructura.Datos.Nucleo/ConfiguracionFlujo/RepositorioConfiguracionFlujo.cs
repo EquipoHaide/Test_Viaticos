@@ -19,11 +19,14 @@ namespace Infraestructura.Datos.Nucleo
 
         public abstract ConsultaPaginada<TFlujo> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 
-        public abstract bool ExisteFlujoPredeterminado(int idTipoEntePublico);
+        public abstract bool ExisteFlujoPredeterminado(TFlujo flujo);
 
-        public abstract bool ExisteNivelRepetido(int idTipoEntePublico, int idNivel);
+        public abstract bool ExisteNivelRepetido(TFlujo flujo);
+
+        public abstract bool ExisteRegistroEntePublico(TFlujo flujo);
 
         public abstract TFlujo ObtenerFlujo(int id);
+
         
 
         //Agregar los metodos particulares que se requieren para realizar el guardado general

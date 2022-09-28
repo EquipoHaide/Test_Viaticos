@@ -7,7 +7,7 @@ using Dominio.Seguridad.Entidades;
 namespace Dominio.Viaticos.Entidades
 {
     [Table("Pasos", Schema = "Viaticos")]
-    public class PasoViatico : IPaso
+    public class PasoViatico : Seguimiento,  IPaso
     {
         public int Id { get; set ; }
 

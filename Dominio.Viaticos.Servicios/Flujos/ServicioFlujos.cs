@@ -1,6 +1,9 @@
-﻿using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
+﻿
+using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 using Dominio.Viaticos.Entidades;
 using Infraestructura.Transversal.Plataforma;
+using System;
+using System.Linq;
 
 namespace Dominio.Viaticos.Servicios
 {
@@ -14,8 +17,6 @@ namespace Dominio.Viaticos.Servicios
             if (flujo.NombreFlujo == null)
                 return new Respuesta<ConfiguracionFlujo>("Es necesario una descripcion en el flujo", TAG);
 
-            if(!flujo.Activo)
-                return new Respuesta<ConfiguracionFlujo>("Es necesario activar el flujo", TAG);
 
             var controlFlujo = new ConfiguracionFlujo() {
                 IdEntePublico = flujo.IdEntePublico,
@@ -23,20 +24,71 @@ namespace Dominio.Viaticos.Servicios
                 TipoFlujo = flujo.TipoFlujo,
                 NombreFlujo = flujo.NombreFlujo,
                 Activo = flujo.Activo,
-                Pasos = flujo.Pasos
+                Pasos = flujo.Pasos        
             };
+
+            foreach (var item in flujo.Pasos)
+            {
+                item.Seguir(subjectId);
+                
+            }
+            controlFlujo.Pasos = flujo.Pasos;
+
+            controlFlujo.Seguir(subjectId);
 
             return new Respuesta<ConfiguracionFlujo>(controlFlujo);
         }
 
-        public Respuesta<ConfiguracionFlujo> Eliminar(ConfiguracionFlujo flujo, bool validacionExtra, string subjectId)
+        public Respuesta<ConfiguracionFlujo> Eliminar(ConfiguracionFlujo flujoOriginal, bool validacionExtra, string subjectId)
         {
-            return new Respuesta<ConfiguracionFlujo>(flujo);
+            foreach (var item in flujoOriginal.Pasos)
+            {
+
+                if (item.Id > 0 && !item.Activo)
+                    item.Seguir(subjectId, true);
+
+            }
+
+            //flujoOriginal.Pasos = flujo.Pasos;
+            flujoOriginal.Seguir(subjectId, true);
+
+
+            return new Respuesta<ConfiguracionFlujo>(flujoOriginal);
         }
 
-        public Respuesta<ConfiguracionFlujo> Modificar(ConfiguracionFlujo flujo, bool validacionExtra, string subjectId)
+        public Respuesta<ConfiguracionFlujo> Modificar(ConfiguracionFlujo flujo, ConfiguracionFlujo flujoOriginal, bool validacionExtra, string subjectId)
         {
-            return new Respuesta<ConfiguracionFlujo>(flujo);
+
+            flujoOriginal.IdNivelEmpleado = flujo.IdNivelEmpleado;
+            flujoOriginal.IdEntePublico = flujo.IdEntePublico;
+            flujoOriginal.Clasificacion = 1;
+            flujoOriginal.NombreFlujo = flujo.NombreFlujo;
+      
+
+            foreach (var item in flujoOriginal.Pasos)
+            {
+                    //if (item.Id == 0)
+                    //    //item.Seguir(subjectId);
+                    //flujoOriginal.Pasos.Add(item);
+
+                    if (item.Id > 0 && !item.Activo)
+                        item.Seguir(subjectId, true,false);
+
+                    //if (item.Id > 0 )
+                    //{
+                    //    var itemOriginal = flujoOriginal.Pasos.FirstOrDefault(r => r.Id == item.Id);
+
+                    //    itemOriginal.Orden = item.Orden;
+
+                    //    //itemOriginal.Seguir(subjectId, true, false);
+                    //}
+
+            }
+
+            //flujoOriginal.Pasos = flujo.Pasos;
+            flujoOriginal.Seguir(subjectId, true, false);
+
+            return new Respuesta<ConfiguracionFlujo>(flujoOriginal);
 
         }
     }
