@@ -9,7 +9,9 @@ namespace Dominio.Viaticos.Servicios
         public override void Maping(IAplicacion app)
         {
             app.Register<IServicioFlujos<Dominio.Viaticos.Entidades.ConfiguracionFlujo, Dominio.Viaticos.Entidades.PasoViatico>, ServicioFlujos>();
-            
+            app.Register<IServicioPasos<Dominio.Viaticos.Entidades.PasoViatico>, ServicioPasos>();
+
+
         }
     }
 }

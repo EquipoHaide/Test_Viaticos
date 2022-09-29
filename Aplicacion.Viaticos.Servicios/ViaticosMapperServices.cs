@@ -11,6 +11,8 @@ namespace Aplicacion.Viaticos.Servicios
         {
 
             app.Register<IServicioFlujo<Dominio.Viaticos.Entidades.ConfiguracionFlujo, Dominio.Viaticos.Entidades.PasoViatico, ConsultaConfiguracionFlujo>, ServicioFlujo>();
+            app.Register<IServicioPaso<Dominio.Viaticos.Entidades.PasoViatico>, ServicioPaso>();
+
 
         }
     }
