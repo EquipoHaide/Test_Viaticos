@@ -5,6 +5,7 @@ using Dominio.Nucleo.Repositorios;
 
 using Infraestructura.Transversal.Plataforma.Extensiones;
 using System;
+using System.Collections.Generic;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
@@ -24,25 +25,16 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         /// <summary>
         /// El CrearFlujo se usa para añadir las validaciones adicionales de tu flujo 
         /// </summary>
-        /// <param name="flujos"></param>
-        /// <returns></returns>
-        //public abstract Respuesta<bool> ValidarPasos(IFlujo<TPaso> flujos);
         public abstract Respuesta<TFlujo> CreacionFlujo(TFlujo flujos, string subjectId);
 
         /// <summary>
         /// El ModificarFlujo se usa para añadir las validaciones adicionales de tu flujo 
         /// </summary>
-        /// <param name="flujos"></param>
-        /// <param name="subjectId"></param>
-        /// <returns></returns>
         public abstract Respuesta<TFlujo> ModificarFlujo(TFlujo flujos,TFlujo flujoOriginal, string subjectId);
 
         /// <summary>
         /// El EliminarFlujo se usa para añadir las validaciones adicionales requeridas para tu flujo 
         /// </summary>
-        /// <param name="flujos"></param>
-        /// <param name="subjectId"></param>
-        /// <returns></returns>
         public abstract Respuesta<TFlujo> EliminarFlujo(TFlujo flujos, string subjectId);
 
 
@@ -62,19 +54,19 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
 
-            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo));
+            var esPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo));
 
-            if (esPredertiminado.EsError)
-                return esPredertiminado.ErrorBaseDatos(TAG);
+            if (esPredeterminado.EsError)
+                return esPredeterminado.ErrorBaseDatos(TAG);
 
             var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo));
 
             if (esNivelRepetido.EsError)
-                return esPredertiminado.ErrorBaseDatos(TAG);
+                return esPredeterminado.ErrorBaseDatos(TAG);
 
             var esEntePublico = Repositorio.Try(r => r.ExisteRegistroEntePublico(flujo));
 
-            var respuesta = ServicioDominio.Crear(flujo, esPredertiminado.Contenido, esNivelRepetido.Contenido, esEntePublico.Contenido, subjectId);
+            var respuesta = ServicioDominio.Crear(flujo, esPredeterminado.Contenido, esNivelRepetido.Contenido, esEntePublico.Contenido, subjectId);
 
             if (respuesta.EsExito)
             {
@@ -104,27 +96,25 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta Modificar(TFlujo flujo,  string subjectId)
         {
-
-            //Valida que el objeto no este vacio
-            if (flujo is null)
+            if (flujo == null)
                 return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
         
-            var esPredertiminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo));
+            var esPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo));
 
-            if (esPredertiminado.EsError)
-                return esPredertiminado.ErrorBaseDatos(TAG);
+            if (esPredeterminado.EsError)
+                return esPredeterminado.ErrorBaseDatos(TAG);
 
             var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo));
 
             if (esNivelRepetido.EsError)
-                return esPredertiminado.ErrorBaseDatos(TAG);
+                return esPredeterminado.ErrorBaseDatos(TAG);
 
             var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujo(flujo.Id));
          
             if (flujoOriginal.EsError)
                 return flujoOriginal.ErrorBaseDatos(TAG);
-            //Retorna el flujo Original con sus datos modifi
-            var respuesta = ServicioDominio.Modificar(flujo, flujoOriginal.Contenido, esPredertiminado.Contenido,esNivelRepetido.Contenido, subjectId);
+
+            var respuesta = ServicioDominio.Modificar(flujo, flujoOriginal.Contenido, esPredeterminado.Contenido,esNivelRepetido.Contenido, subjectId);
 
             if (respuesta.EsExito)
             {
@@ -161,7 +151,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (flujoOriginale.EsError)
                 return flujoOriginale.ErrorBaseDatos();
 
-            var respuesta = ServicioDominio.Eliminar(flujoOriginale.Contenido, subjectId);
+            var respuesta = ServicioDominio.Eliminar(flujoOriginale.Contenido,subjectId);
 
             if (respuesta.EsError)
                 return new Respuesta(respuesta.Mensaje, TAG);
@@ -170,9 +160,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (respuestaComplementaria.EsExito)
             {
-               
-                //Repositorio.Remove(respuestaComplementaria.Contenido);
-
+             
                 var guardar = Repositorio.Try(r => r.Save());
                 if (guardar.EsError)
                     return guardar.ErrorBaseDatos(TAG);

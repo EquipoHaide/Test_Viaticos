@@ -12,11 +12,11 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         where TQuery : class, IConsultaFlujo
     {
 
-        public Respuesta<TFlujo> CreacionFlujo(TFlujo flujo,string subjectId);
+        public Respuesta<TFlujo> CreacionFlujo(TFlujo flujo, string subjectId);
 
         public Respuesta<TFlujo> ModificarFlujo(TFlujo flujo, TFlujo flujoOriginal, string subjectId);
 
-        public Respuesta<TFlujo> EliminarFlujo(TFlujo flujo,string subjectId);
+        public Respuesta<TFlujo> EliminarFlujo(TFlujo flujo, string subjectId);
 
         public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TQuery query, string subjectId);
 

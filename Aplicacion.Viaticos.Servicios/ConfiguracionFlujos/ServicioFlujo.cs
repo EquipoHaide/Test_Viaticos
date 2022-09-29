@@ -10,6 +10,7 @@ using Infraestructura.Transversal.Plataforma;
 using DominioServicio = Dominio.Viaticos.Servicios;
 using EntidadesViaticos = Dominio.Viaticos.Entidades;
 using Dominio.Viaticos.Entidades;
+using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
@@ -56,14 +57,22 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
                 return new Respuesta<ConfiguracionFlujo>(respuesta.Mensaje, respuesta.TAG);
 
 
-
-
             return new Respuesta<ConfiguracionFlujo>(respuesta.Contenido);
         }
 
         public override Respuesta<ConfiguracionFlujo> EliminarFlujo(ConfiguracionFlujo flujo, string subjectId)
         {
-            var respuesta = Servicio.Eliminar(flujo, false, subjectId);
+
+            
+            var totalFlujos = RepositorioConfiguracionFlujoViatico.ObtenerTotalFlujos(flujo.IdEntePublico);
+
+            var esPredeterminado = RepositorioConfiguracionFlujoViatico.Try(r => r.ExisteFlujoPredeterminado(flujo));
+
+            if (esPredeterminado.EsError)
+                return new Respuesta<ConfiguracionFlujo>(esPredeterminado.Mensaje, TAG);
+
+
+            var respuesta = Servicio.Eliminar(flujo,totalFlujos, esPredeterminado.Contenido, subjectId);
 
             if (respuesta.EsError)
                 return new Respuesta<ConfiguracionFlujo>(respuesta.Mensaje, respuesta.TAG);

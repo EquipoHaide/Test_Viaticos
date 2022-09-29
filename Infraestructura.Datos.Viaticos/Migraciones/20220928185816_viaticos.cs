@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infraestructura.Datos.Viaticos.Migraciones
 {
@@ -44,11 +45,18 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdUsuarioCreo = table.Column<string>(nullable: false),
+                    FechaCreacion = table.Column<DateTime>(nullable: false),
+                    IdUsuarioModifico = table.Column<string>(nullable: true),
+                    FechaModificacion = table.Column<DateTime>(nullable: false),
+                    IdUsuarioElimino = table.Column<string>(nullable: true),
+                    FechaEliminacion = table.Column<DateTime>(nullable: true),
+                    Activo = table.Column<bool>(nullable: false),
                     IdNivelEmpleado = table.Column<int>(nullable: false),
                     IdEntePublico = table.Column<int>(nullable: false),
                     TipoFlujo = table.Column<int>(nullable: false),
                     NombreFlujo = table.Column<string>(nullable: false),
-                    Activo = table.Column<bool>(nullable: false)
+                    Clasificacion = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,6 +84,13 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdUsuarioCreo = table.Column<string>(nullable: false),
+                    FechaCreacion = table.Column<DateTime>(nullable: false),
+                    IdUsuarioModifico = table.Column<string>(nullable: true),
+                    FechaModificacion = table.Column<DateTime>(nullable: false),
+                    IdUsuarioElimino = table.Column<string>(nullable: true),
+                    FechaEliminacion = table.Column<DateTime>(nullable: true),
+                    Activo = table.Column<bool>(nullable: false),
                     IdRol = table.Column<int>(nullable: false),
                     IdConfiguracionFlujo = table.Column<int>(nullable: false),
                     Orden = table.Column<int>(nullable: false),

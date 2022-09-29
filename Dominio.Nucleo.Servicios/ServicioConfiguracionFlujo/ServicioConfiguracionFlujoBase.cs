@@ -138,10 +138,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         public Respuesta<TFlujo> Eliminar(TFlujo flujo, string subjectId)
         {
             if (flujo == null)
-                return new Respuesta<TFlujo>("El flujo no existe");
-
-            if(flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
-                return new Respuesta<TFlujo>("El Ente publico no se puede quedar sin un flujo predeterminado");
+                return new Respuesta<TFlujo>("El flujo no existe",TAG);
 
 
             return new Respuesta<TFlujo>(flujo);

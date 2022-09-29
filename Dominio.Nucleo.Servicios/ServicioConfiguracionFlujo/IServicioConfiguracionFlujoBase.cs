@@ -14,7 +14,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         public Respuesta<TFlujo> Modificar(TFlujo flujos, TFlujo flujoOriginal, bool esPredeterminado, bool esNivelRepetido, string subjectId);
 
-        public Respuesta<TFlujo> Eliminar(TFlujo flujos,string subjectId);
+        public Respuesta<TFlujo> Eliminar(TFlujo flujos, string subjectId);
 
 
     }

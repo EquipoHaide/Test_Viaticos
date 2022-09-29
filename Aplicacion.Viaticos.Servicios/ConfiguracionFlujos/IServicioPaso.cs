@@ -1,10 +1,13 @@
 ﻿using System;
+using Dominio.Nucleo.Entidades;
+using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
+using Infraestructura.Transversal.Plataforma;
+
 namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 {
-    public class IServicioPaso
+    public interface IServicioPaso<TPaso> : IServicioPasoBase<TPaso>
+        where TPaso : class, IPaso
     {
-        public IServicioPaso()
-        {
-        }
+   
     }
 }

@@ -1,4 +1,5 @@
-﻿using Dominio.Nucleo.Entidades;
+﻿using System.Collections.Generic;
+using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 using Infraestructura.Transversal.Plataforma;
 
@@ -13,7 +14,7 @@ namespace Dominio.Viaticos.Servicios
 
         public Respuesta<TFlujo> Modificar(TFlujo flujo,TFlujo flujoOrigial, bool validacionExtra, string subjectId);
 
-        public Respuesta<TFlujo> Eliminar(TFlujo flujo, bool validacionExtra, string subjectId);
+        public Respuesta<TFlujo> Eliminar(TFlujo flujo, List<TFlujo> listaFlujos, bool validacionExtra, string subjectId);
      
     }
 }

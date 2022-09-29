@@ -11,7 +11,7 @@ namespace Dominio.Viaticos.Entidades
     /// Configuracion del Flujo 
     /// </summary>
     [Table("Flujos", Schema = "Viaticos")]
-    public class ConfiguracionFlujo : Seguimiento, IFlujo<PasoViatico>
+    public class ConfiguracionFlujo : Seguimiento, IFlujo<PasoViatico> 
     {
         public int Id { get; set; }
 

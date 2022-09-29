@@ -12,6 +12,10 @@ namespace Dominio.Viaticos.Repositorios
     public interface IRepositorioConfiguracionFlujoViaticos : IRepository<Entidades.ConfiguracionFlujo>, IRepositorioConfiguracionFlujo<Entidades.ConfiguracionFlujo,ConsultaConfiguracionFlujo>
 
     {
+        /// <summary>
+        /// Metodo que cuenta los registros totales que tiene un Ente Publico 
+        /// </summary>
+        List<Entidades.ConfiguracionFlujo> ObtenerTotalFlujos(int idEntePublico);
     }
 
     

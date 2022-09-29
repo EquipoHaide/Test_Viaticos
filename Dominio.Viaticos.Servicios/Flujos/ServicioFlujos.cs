@@ -3,6 +3,7 @@ using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 using Dominio.Viaticos.Entidades;
 using Infraestructura.Transversal.Plataforma;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Dominio.Viaticos.Servicios
@@ -39,17 +40,18 @@ namespace Dominio.Viaticos.Servicios
             return new Respuesta<ConfiguracionFlujo>(controlFlujo);
         }
 
-        public Respuesta<ConfiguracionFlujo> Eliminar(ConfiguracionFlujo flujoOriginal, bool validacionExtra, string subjectId)
+        public Respuesta<ConfiguracionFlujo> Eliminar(ConfiguracionFlujo flujoOriginal, List<ConfiguracionFlujo> listaFlujos, bool esPredeterminado, string subjectId)
         {
+
+            if (listaFlujos.Count() == 1)
+                return new Respuesta<ConfiguracionFlujo>("",TAG);
+
             foreach (var item in flujoOriginal.Pasos)
             {
-
-                if (item.Id > 0 && !item.Activo)
+                if (item.Id > 0 && item.Activo)
                     item.Seguir(subjectId, true);
-
             }
 
-            //flujoOriginal.Pasos = flujo.Pasos;
             flujoOriginal.Seguir(subjectId, true);
 
 
@@ -67,25 +69,11 @@ namespace Dominio.Viaticos.Servicios
 
             foreach (var item in flujoOriginal.Pasos)
             {
-                    //if (item.Id == 0)
-                    //    //item.Seguir(subjectId);
-                    //flujoOriginal.Pasos.Add(item);
-
                     if (item.Id > 0 && !item.Activo)
                         item.Seguir(subjectId, true,false);
 
-                    //if (item.Id > 0 )
-                    //{
-                    //    var itemOriginal = flujoOriginal.Pasos.FirstOrDefault(r => r.Id == item.Id);
-
-                    //    itemOriginal.Orden = item.Orden;
-
-                    //    //itemOriginal.Seguir(subjectId, true, false);
-                    //}
-
             }
 
-            //flujoOriginal.Pasos = flujo.Pasos;
             flujoOriginal.Seguir(subjectId, true, false);
 
             return new Respuesta<ConfiguracionFlujo>(flujoOriginal);

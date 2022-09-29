@@ -93,7 +93,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                         select u).ToList();
 
             var existe = flujos.GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado)
-                .Any(g => g.Count() > 0);
+                .Any(g => g.Count() == 1);
 
             return existe;
         }
@@ -105,8 +105,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                         select u).ToList();
 
             //var existe = false;
-            var existe = flujos.GroupBy(x => x.IdNivelEmpleado == flujo.IdNivelEmpleado)
-                .Any(g => g.Count() > 0);
+            var existe = flujos.Exists(x => x.IdNivelEmpleado == flujo.IdNivelEmpleado);
 
             return existe;
         }
@@ -131,8 +130,18 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                    
         }
 
+        public List<ConfiguracionFlujo> ObtenerTotalFlujos(int idEntePublico)
+        {
+            var listaFlujos = (from u in Set
+                               where u.IdEntePublico == idEntePublico
+                               select new
+                               {
+                                   flujo = u,
+                                   paso = u.Pasos.Where(r => r.Activo)
+                               }).Select(r => r.flujo).Where( x => x.Activo == true).ToList();
 
-       
+            return listaFlujos;
+        }
     }
 }
 
