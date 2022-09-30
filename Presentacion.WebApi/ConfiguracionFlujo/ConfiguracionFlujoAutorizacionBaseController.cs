@@ -93,6 +93,8 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         }
 
 
+
+
         [HttpDelete("recursos")]
         public object Eliminar( int id )
         {

@@ -14,7 +14,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
 
         public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioPasoBase<TPaso> ServicioPasosBase  { get;}
 
-        [HttpDelete()]
+        [HttpDelete]
         public object Eliminar([FromQuery] int id)
         {
             try
@@ -37,7 +37,9 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
             }
         }
 
-        [HttpPut()]
+
+
+        [HttpPut("recursos")]
         public object Modificar([FromBody] ModeloPaso<TPaso> config)
         {
             try

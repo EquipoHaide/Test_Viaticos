@@ -15,13 +15,11 @@
     <None Remove="System.IdentityModel.Tokens.Jwt" />
     <None Remove="IdentityServer4.AccessTokenValidation" />
     <None Remove="Newtonsoft.Json" />
-    <None Remove="FlujoAutorizacion \" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aplicacion\" />
     <Folder Include="AppCircuitBreaker\" />
     <Folder Include="HealthCheck\" />
-    <Folder Include="FlujoAutorizacion \" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aplicacion.Seguridad.Servicios\Aplicacion.Seguridad.Servicios.csproj" />
