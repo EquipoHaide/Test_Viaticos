@@ -3,11 +3,11 @@ using Presentacion.WebApi.ConfiguracionFlujo;
 using Entidad = Dominio.Viaticos.Entidades;
 using AplicacionViaticos = Aplicacion.Viaticos.Servicios.ConfiguracionFlujos;
 using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.WebApi.Controllers.Viaticos
 {
-    [Route("api/[controller]")]
+    [Route("api2/[controller]")]
     //[Authorize]
     public class PasosViaticosController : PasosBaseController<Entidad.PasoViatico>
     {
