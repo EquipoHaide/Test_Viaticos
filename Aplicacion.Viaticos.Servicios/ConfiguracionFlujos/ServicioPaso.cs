@@ -29,8 +29,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 
         public override Respuesta<PasoViatico> EliminarPaso(PasoViatico paso, string subjectId)
         {
-
-            var respuesta = Servicio.Eliminar(paso, subjectId);
+            var respuesta = Servicio.Eliminar(paso,false, subjectId);
 
             if(respuesta.EsError)
                 return new Respuesta<PasoViatico>(respuesta.Mensaje,TAG);
@@ -38,10 +37,10 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
             return new Respuesta<PasoViatico>(paso);
         }
 
-        public override Respuesta<PasoViatico> ModificarPaso(PasoViatico paso, string subjectId)
+        public override Respuesta<PasoViatico> ModificarPaso(PasoViatico paso, PasoViatico pasoOriginal,string subjectId)
         {
 
-            var respuesta = Servicio.Modificar(paso,null, subjectId);
+            var respuesta = Servicio.Modificar(paso, pasoOriginal, false, subjectId);
 
             if (respuesta.EsError)
                 return new Respuesta<PasoViatico>(respuesta.Mensaje, TAG);

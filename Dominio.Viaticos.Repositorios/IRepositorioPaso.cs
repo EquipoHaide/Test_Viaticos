@@ -6,5 +6,6 @@ namespace Dominio.Viaticos.Repositorios
 {
     public interface IRepositorioPaso : IRepository<Entidades.PasoViatico>, IRepositorioPasoBase<Entidades.PasoViatico>
     {
+   
     }
 }

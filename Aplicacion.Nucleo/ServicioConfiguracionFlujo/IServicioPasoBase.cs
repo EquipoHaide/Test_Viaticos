@@ -16,5 +16,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta Eliminar(int paso, string subjectId);
 
+       
+
     }
 }

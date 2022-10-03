@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.WebApi.Controllers.Viaticos
 {
-    [Route("api2/[controller]")]
+    [Route("api/[controller]")]
     //[Authorize]
     public class PasosViaticosController : PasosBaseController<Entidad.PasoViatico>
     {
