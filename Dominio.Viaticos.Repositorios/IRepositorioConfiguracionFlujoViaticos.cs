@@ -9,13 +9,13 @@ using System.Text;
 namespace Dominio.Viaticos.Repositorios
 {
    
-    public interface IRepositorioConfiguracionFlujoViaticos : IRepository<Entidades.ConfiguracionFlujo>, IRepositorioConfiguracionFlujo<Entidades.ConfiguracionFlujo,ConsultaConfiguracionFlujo>
+    public interface IRepositorioConfiguracionFlujoViaticos : IRepository<Entidades.FlujoViatico>, IRepositorioConfiguracionFlujo<Entidades.FlujoViatico,ConsultaConfiguracionFlujo>
 
     {
         /// <summary>
         /// Metodo que cuenta los registros totales que tiene un Ente Publico 
         /// </summary>
-        List<Entidades.ConfiguracionFlujo> ObtenerTotalFlujos(int idEntePublico);
+        List<Entidades.FlujoViatico> ObtenerTotalFlujos(int idEntePublico);
     }
 
     

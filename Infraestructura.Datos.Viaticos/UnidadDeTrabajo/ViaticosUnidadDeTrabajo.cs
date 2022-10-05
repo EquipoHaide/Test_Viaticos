@@ -13,7 +13,7 @@ namespace Infraestructura.Datos.Viaticos.UnidadDeTrabajo
 
 
         public DbSet<PasoViatico> Pasos { get; set; }
-        public DbSet<ConfiguracionFlujo> Flujos { get; set; }
+        public DbSet<FlujoViatico> Flujos { get; set; }
         public DbSet<NivelEmpleado> NivelEmpleados { get; set; }
         public DbSet<TipoEntePublico> TipoEntePublicos { get; set; }
 
@@ -29,7 +29,6 @@ namespace Infraestructura.Datos.Viaticos.UnidadDeTrabajo
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
 

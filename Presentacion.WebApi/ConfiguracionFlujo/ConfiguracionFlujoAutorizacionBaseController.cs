@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Presentacion.WebApi.Seguridad;
 using System;
 using Presentacion.WebApi.Modelos;
+using System.Collections.Generic;
 
 namespace Presentacion.WebApi.ConfiguracionFlujo
 {
@@ -49,7 +50,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         {
             try {
                 var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujo, GetSubjectId);
+                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujos, GetSubjectId);
 
                 if (resultado.EsError)
                 {
@@ -75,7 +76,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
             try
             {
                 var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
-                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujo, GetSubjectId);
+                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujos, GetSubjectId);
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)
@@ -96,12 +97,12 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
 
 
         [HttpDelete("recursos")]
-        public object Eliminar( int id )
+        public object Eliminar( List<int> ids )
         {
             try
             {
                 var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
-                var resultado = ServicioConfiguracionFlujoBase.Eliminar(id, GetSubjectId);
+                var resultado = ServicioConfiguracionFlujoBase.Eliminar(ids, GetSubjectId);
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)

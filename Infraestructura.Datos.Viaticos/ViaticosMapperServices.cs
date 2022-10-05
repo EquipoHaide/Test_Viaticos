@@ -12,7 +12,7 @@ namespace Infraestructura.Datos.Viaticos
         {
             app.Register<IViaticosUnidadDeTrabajo, ViaticosUnidadDeTrabajo>();
             app.Register<IRepositorioConfiguracionFlujoViaticos, RepositorioConfiguracionFlujoViaticos>();
-            app.Register<IRepositorioPaso, RepositorioPaso>();
+           
 
 
         }

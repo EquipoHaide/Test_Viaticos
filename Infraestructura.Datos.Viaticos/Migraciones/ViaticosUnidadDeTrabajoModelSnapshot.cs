@@ -19,7 +19,7 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Dominio.Viaticos.Entidades.ConfiguracionFlujo", b =>
+            modelBuilder.Entity("Dominio.Viaticos.Entidades.FlujoViatico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -28,9 +28,6 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
 
                     b.Property<bool>("Activo")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Clasificacion")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
@@ -41,10 +38,10 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.Property<DateTime>("FechaModificacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdEntePublico")
+                    b.Property<int>("IdNivelEmpleado")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdNivelEmpleado")
+                    b.Property<int>("IdTipoEnte")
                         .HasColumnType("int");
 
                     b.Property<string>("IdUsuarioCreo")
@@ -57,18 +54,12 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.Property<string>("IdUsuarioModifico")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NombreFlujo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TipoFlujo")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdEntePublico");
-
-                    b.HasIndex("IdNivelEmpleado");
+                    b.HasIndex("IdTipoEnte");
 
                     b.ToTable("Flujos","Viaticos");
                 });
@@ -99,11 +90,7 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.Property<bool>("Activo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EsFirma")
+                    b.Property<bool>("AplicaFirma")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("FechaCreacion")
@@ -115,10 +102,10 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.Property<DateTime>("FechaModificacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdConfiguracionFlujo")
+                    b.Property<int>("IdFlujo")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdRol")
+                    b.Property<int>("IdRolAutoriza")
                         .HasColumnType("int");
 
                     b.Property<string>("IdUsuarioCreo")
@@ -139,7 +126,7 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdConfiguracionFlujo");
+                    b.HasIndex("IdFlujo");
 
                     b.ToTable("Pasos","Viaticos");
                 });
@@ -160,26 +147,20 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.ToTable("EntePublicos","Viaticos");
                 });
 
-            modelBuilder.Entity("Dominio.Viaticos.Entidades.ConfiguracionFlujo", b =>
+            modelBuilder.Entity("Dominio.Viaticos.Entidades.FlujoViatico", b =>
                 {
                     b.HasOne("Dominio.Viaticos.Entidades.TipoEntePublico", "EntePublico")
                         .WithMany()
-                        .HasForeignKey("IdEntePublico")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Dominio.Viaticos.Entidades.NivelEmpleado", "Nivel")
-                        .WithMany()
-                        .HasForeignKey("IdNivelEmpleado")
+                        .HasForeignKey("IdTipoEnte")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Dominio.Viaticos.Entidades.PasoViatico", b =>
                 {
-                    b.HasOne("Dominio.Viaticos.Entidades.ConfiguracionFlujo", "Flujo")
+                    b.HasOne("Dominio.Viaticos.Entidades.FlujoViatico", "Flujo")
                         .WithMany("Pasos")
-                        .HasForeignKey("IdConfiguracionFlujo")
+                        .HasForeignKey("IdFlujo")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

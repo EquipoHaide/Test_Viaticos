@@ -10,7 +10,7 @@ namespace Presentacion.WebApi.Modelos
       where TFlujo : class, Dominio.Nucleo.Entidades.IFlujo<TPaso>
       where TPaso : Dominio.Nucleo.Entidades.IPaso
     {
-        public TFlujo Flujo { get; set; }
+        public List<TFlujo> Flujos { get; set; }
     }
 
    

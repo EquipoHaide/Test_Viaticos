@@ -4,9 +4,10 @@ namespace Dominio.Nucleo.Entidades
 {
     public interface IPaso : IEntity
     {
-        int IdRol { get; set; }
+      
 
-        int IdConfiguracionFlujo { get; set; }
+        int IdFlujo { get; set; }
+        int IdRolAutoriza { get; set; }
 
         int Orden { get; set; }
         /// <summary>
@@ -16,7 +17,7 @@ namespace Dominio.Nucleo.Entidades
         /// </summary>
         int TipoRol { get; set; }
 
-        bool EsFirma { get; set; }
+        bool AplicaFirma { get; set; }
 
     }
 }

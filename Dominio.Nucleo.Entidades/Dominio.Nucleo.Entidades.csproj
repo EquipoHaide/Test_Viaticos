@@ -9,5 +9,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="ConfiguracionFlujos\" />
+    <None Remove="FlujoAutorizacion\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FlujoAutorizacion\" />
   </ItemGroup>
 </Project>

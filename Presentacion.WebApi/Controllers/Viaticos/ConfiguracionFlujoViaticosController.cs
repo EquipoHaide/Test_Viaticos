@@ -10,13 +10,13 @@ namespace Presentacion.WebApi.Controllers.Viaticos
     [Route("api/[controller]")]
     //[Authorize]
     public class ConfiguracionFlujoViaticosController :
-        ConfiguracionFlujoAutorizacionBaseController<Entidad.ConfiguracionFlujo, Entidad.PasoViatico, ConsultaConfiguracionFlujo>
+        ConfiguracionFlujoAutorizacionBaseController<Entidad.FlujoViatico, Entidad.PasoViatico, ConsultaConfiguracionFlujo>
     {
 
-        AplicacionViaticos.IServicioFlujo<Entidad.ConfiguracionFlujo, Entidad.PasoViatico, ConsultaConfiguracionFlujo> servicioViaticos;
-        AplicacionViaticos.IServicioFlujo<Entidad.ConfiguracionFlujo, Entidad.PasoViatico, ConsultaConfiguracionFlujo> ServicioViaticos => App.Inject(ref servicioViaticos);
+        AplicacionViaticos.IServicioFlujo<Entidad.FlujoViatico, Entidad.PasoViatico, ConsultaConfiguracionFlujo> servicioViaticos;
+        AplicacionViaticos.IServicioFlujo<Entidad.FlujoViatico, Entidad.PasoViatico, ConsultaConfiguracionFlujo> ServicioViaticos => App.Inject(ref servicioViaticos);
 
-        public override IServicioConfiguracionFlujoBase<Entidad.ConfiguracionFlujo, Entidad.PasoViatico, ConsultaConfiguracionFlujo> ServicioConfiguracionFlujoBase => this.ServicioViaticos;
+        public override IServicioConfiguracionFlujoBase<Entidad.FlujoViatico  , Entidad.PasoViatico, ConsultaConfiguracionFlujo> ServicioConfiguracionFlujoBase => this.ServicioViaticos;
 
 
         public ConfiguracionFlujoViaticosController(Aplicacion.Nucleo.IAplicacion app)

@@ -38,14 +38,11 @@ CREATE TABLE [Viaticos].[Flujos] (
     [IdUsuarioElimino] nvarchar(max) NULL,
     [FechaEliminacion] datetime2 NULL,
     [Activo] bit NOT NULL,
+    [IdTipoEnte] int NOT NULL,
     [IdNivelEmpleado] int NOT NULL,
-    [IdEntePublico] int NOT NULL,
     [TipoFlujo] int NOT NULL,
-    [NombreFlujo] nvarchar(max) NOT NULL,
-    [Clasificacion] int NOT NULL,
     CONSTRAINT [PK_Flujos] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_Flujos_EntePublicos_IdEntePublico] FOREIGN KEY ([IdEntePublico]) REFERENCES [Viaticos].[EntePublicos] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Flujos_NivelEmpleados_IdNivelEmpleado] FOREIGN KEY ([IdNivelEmpleado]) REFERENCES [Viaticos].[NivelEmpleados] ([Id]) ON DELETE NO ACTION
+    CONSTRAINT [FK_Flujos_EntePublicos_IdTipoEnte] FOREIGN KEY ([IdTipoEnte]) REFERENCES [Viaticos].[EntePublicos] ([Id]) ON DELETE NO ACTION
 );
 
 GO
@@ -59,32 +56,27 @@ CREATE TABLE [Viaticos].[Pasos] (
     [IdUsuarioElimino] nvarchar(max) NULL,
     [FechaEliminacion] datetime2 NULL,
     [Activo] bit NOT NULL,
-    [IdRol] int NOT NULL,
-    [IdConfiguracionFlujo] int NOT NULL,
-    [Orden] int NOT NULL,
+    [IdFlujo] int NOT NULL,
+    [IdRolAutoriza] int NOT NULL,
     [TipoRol] int NOT NULL,
-    [EsFirma] bit NOT NULL,
-    [Descripcion] nvarchar(max) NOT NULL,
+    [Orden] int NOT NULL,
+    [AplicaFirma] bit NOT NULL,
     CONSTRAINT [PK_Pasos] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_Pasos_Flujos_IdConfiguracionFlujo] FOREIGN KEY ([IdConfiguracionFlujo]) REFERENCES [Viaticos].[Flujos] ([Id]) ON DELETE NO ACTION
+    CONSTRAINT [FK_Pasos_Flujos_IdFlujo] FOREIGN KEY ([IdFlujo]) REFERENCES [Viaticos].[Flujos] ([Id]) ON DELETE NO ACTION
 );
 
 GO
 
-CREATE INDEX [IX_Flujos_IdEntePublico] ON [Viaticos].[Flujos] ([IdEntePublico]);
+CREATE INDEX [IX_Flujos_IdTipoEnte] ON [Viaticos].[Flujos] ([IdTipoEnte]);
 
 GO
 
-CREATE INDEX [IX_Flujos_IdNivelEmpleado] ON [Viaticos].[Flujos] ([IdNivelEmpleado]);
-
-GO
-
-CREATE INDEX [IX_Pasos_IdConfiguracionFlujo] ON [Viaticos].[Pasos] ([IdConfiguracionFlujo]);
+CREATE INDEX [IX_Pasos_IdFlujo] ON [Viaticos].[Pasos] ([IdFlujo]);
 
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20220928185816_viaticos', N'3.1.2');
+VALUES (N'20221005191823_viaticos', N'3.1.2');
 
 GO
 

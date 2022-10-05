@@ -15,9 +15,9 @@ namespace Dominio.Nucleo.Repositorios
     {
         //Agregar los metodos particulares que se requieren para realizar el guardado general
 
-        bool ExisteFlujoPredeterminado(TFlujoEntidad flujo);
+        bool ExisteFlujoPredeterminado(int idTipoEnte);
 
-        bool ExisteNivelRepetido(TFlujoEntidad flujo);
+        bool ExisteNivelRepetido(int idTipoEnte);
 
         /// <summary>
         /// Valida que no existe flujo de autorizacion ya registrados con dicho Ente Publico 
@@ -25,7 +25,7 @@ namespace Dominio.Nucleo.Repositorios
       
         bool ExisteRegistroEntePublico(TFlujoEntidad flujo);
 
-        TFlujoEntidad ObtenerFlujo(int id);
+        List<TFlujoEntidad> ObtenerFlujos(List<TFlujoEntidad> flujos);
 
         ConsultaPaginada<TFlujoEntidad> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 

@@ -52,27 +52,18 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     IdUsuarioElimino = table.Column<string>(nullable: true),
                     FechaEliminacion = table.Column<DateTime>(nullable: true),
                     Activo = table.Column<bool>(nullable: false),
+                    IdTipoEnte = table.Column<int>(nullable: false),
                     IdNivelEmpleado = table.Column<int>(nullable: false),
-                    IdEntePublico = table.Column<int>(nullable: false),
-                    TipoFlujo = table.Column<int>(nullable: false),
-                    NombreFlujo = table.Column<string>(nullable: false),
-                    Clasificacion = table.Column<int>(nullable: false)
+                    TipoFlujo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Flujos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Flujos_EntePublicos_IdEntePublico",
-                        column: x => x.IdEntePublico,
+                        name: "FK_Flujos_EntePublicos_IdTipoEnte",
+                        column: x => x.IdTipoEnte,
                         principalSchema: "Viaticos",
                         principalTable: "EntePublicos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Flujos_NivelEmpleados_IdNivelEmpleado",
-                        column: x => x.IdNivelEmpleado,
-                        principalSchema: "Viaticos",
-                        principalTable: "NivelEmpleados",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -91,19 +82,18 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     IdUsuarioElimino = table.Column<string>(nullable: true),
                     FechaEliminacion = table.Column<DateTime>(nullable: true),
                     Activo = table.Column<bool>(nullable: false),
-                    IdRol = table.Column<int>(nullable: false),
-                    IdConfiguracionFlujo = table.Column<int>(nullable: false),
-                    Orden = table.Column<int>(nullable: false),
+                    IdFlujo = table.Column<int>(nullable: false),
+                    IdRolAutoriza = table.Column<int>(nullable: false),
                     TipoRol = table.Column<int>(nullable: false),
-                    EsFirma = table.Column<bool>(nullable: false),
-                    Descripcion = table.Column<string>(nullable: false)
+                    Orden = table.Column<int>(nullable: false),
+                    AplicaFirma = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pasos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pasos_Flujos_IdConfiguracionFlujo",
-                        column: x => x.IdConfiguracionFlujo,
+                        name: "FK_Pasos_Flujos_IdFlujo",
+                        column: x => x.IdFlujo,
                         principalSchema: "Viaticos",
                         principalTable: "Flujos",
                         principalColumn: "Id",
@@ -111,26 +101,24 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flujos_IdEntePublico",
+                name: "IX_Flujos_IdTipoEnte",
                 schema: "Viaticos",
                 table: "Flujos",
-                column: "IdEntePublico");
+                column: "IdTipoEnte");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flujos_IdNivelEmpleado",
-                schema: "Viaticos",
-                table: "Flujos",
-                column: "IdNivelEmpleado");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pasos_IdConfiguracionFlujo",
+                name: "IX_Pasos_IdFlujo",
                 schema: "Viaticos",
                 table: "Pasos",
-                column: "IdConfiguracionFlujo");
+                column: "IdFlujo");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "NivelEmpleados",
+                schema: "Viaticos");
+
             migrationBuilder.DropTable(
                 name: "Pasos",
                 schema: "Viaticos");
@@ -141,10 +129,6 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
 
             migrationBuilder.DropTable(
                 name: "EntePublicos",
-                schema: "Viaticos");
-
-            migrationBuilder.DropTable(
-                name: "NivelEmpleados",
                 schema: "Viaticos");
         }
     }

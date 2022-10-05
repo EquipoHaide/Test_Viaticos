@@ -10,9 +10,9 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         where TPaso : class, Dominio.Nucleo.Entidades.IPaso
     {
     
-        public Respuesta<TFlujo> Crear(TFlujo flujos, bool esPredeterminado, bool esNivelRepetido, bool esEntePublico, string subjectId);
+        public Respuesta<List<TFlujo>> Crear(List<TFlujo> flujos, bool esPredeterminado, bool esNivelRepetido, bool esEntePublico, string subjectId);
 
-        public Respuesta<TFlujo> Modificar(TFlujo flujos, TFlujo flujoOriginal, bool esPredeterminado, bool esNivelRepetido, string subjectId);
+        public Respuesta<List<TFlujo>> Modificar(List<TFlujo> flujos, List<TFlujo> flujoOriginal, bool esPredeterminado, bool esNivelRepetido, string subjectId);
 
         public Respuesta<TFlujo> Eliminar(TFlujo flujos, string subjectId);
 

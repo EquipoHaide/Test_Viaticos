@@ -9,7 +9,7 @@ namespace Dominio.Nucleo.Entidades
     {
 
         //TipoEntePublico TipoEntePublico { get; set; }
-        public int IdEntePublico { get; set; }
+        public int IdTipoEnte { get; set; }
        
         //NivelEmpleado NivelEmpleado { get; set; }
         public int IdNivelEmpleado { get; set; }

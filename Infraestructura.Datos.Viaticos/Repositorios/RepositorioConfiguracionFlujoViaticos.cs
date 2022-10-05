@@ -16,14 +16,14 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.ConfiguracionFlujo,ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
+    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.FlujoViatico,ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-        public override ConsultaPaginada<ConfiguracionFlujo> ConsultarFlujosDeAutorizacion(ConsultaConfiguracionFlujo parametros, string subjectId)
+        public override ConsultaPaginada<FlujoViatico> ConsultarFlujosDeAutorizacion(ConsultaConfiguracionFlujo parametros, string subjectId)
         {
 
-            IQueryable<ConfiguracionFlujo> result = null;
+            IQueryable<FlujoViatico> result = null;
            
             if (parametros.Query.IsNotNullOrEmptyOrWhiteSpace())//Busqueda Generica
             {
@@ -31,16 +31,15 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
             
                 result = from u in Set
-                         where u.NombreFlujo.Trim().ToLower() == parametro
-                         select new ConfiguracionFlujo()
+                         //where u.NombreFlujo.Trim().ToLower() == parametro
+                         select new FlujoViatico()
                              {
                                  Id = u.Id,
-                                 IdEntePublico = u.IdEntePublico,
-                                 IdNivelEmpleado = u.IdNivelEmpleado,
-                                 NombreFlujo = u.NombreFlujo,
+                                 IdTipoEnte = u.IdTipoEnte,
+                            
                                  Activo = u.Activo,
                                  Pasos = u.Pasos,
-                                 TipoFlujo = u.TipoFlujo
+                                 //TipoAutorizacion = u.IdTipoEnte
                              };
 
             }
@@ -51,30 +50,28 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                 if (parametros.IdEntePublico > 0)
                 {
                     result = from u in Set
-                             where u.IdEntePublico == parametros.IdEntePublico
-                             select new ConfiguracionFlujo()
+                             where u.IdTipoEnte == parametros.IdEntePublico
+                             select new FlujoViatico()
                              {
                                  Id = u.Id,
-                                 IdEntePublico = u.IdEntePublico,
-                                 IdNivelEmpleado = u.IdNivelEmpleado,
-                                 NombreFlujo = u.NombreFlujo,
+                                 IdTipoEnte = u.IdTipoEnte,
+                        
                                  Activo = u.Activo,
-                                 Pasos = u.Pasos,
-                                 TipoFlujo = u.TipoFlujo
+                                 Pasos = u.Pasos
+                                 //TipoAutorizacion = u.TipoAutorizacion
                              };
                 }
                 else
                 {
                     result = from u in Set
-                             select new ConfiguracionFlujo()
+                             select new FlujoViatico()
                              {
                                  Id = u.Id,
-                                 IdEntePublico = u.IdEntePublico,
-                                 IdNivelEmpleado = u.IdNivelEmpleado,
-                                 NombreFlujo = u.NombreFlujo,
+                                 IdTipoEnte = u.IdTipoEnte,
+                             
                                  Activo = u.Activo,
                                  Pasos = u.Pasos,
-                                 TipoFlujo = u.TipoFlujo
+                                 //TipoAutorizacion = u.TipoAutorizacion
                              };
                 }
 
@@ -85,12 +82,12 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return result.Paginar(parametros == null ? 1 : parametros.Pagina, parametros == null ? 20 : parametros.ElementosPorPagina);
         }
 
-        public override bool ExisteFlujoPredeterminado(ConfiguracionFlujo flujo)
+        public override bool ExisteFlujoPredeterminado(int idTipoEnte)
         {
 
             var flujos = (from u in Set
-                        where u.IdEntePublico == flujo.IdEntePublico
-                        select u).ToList();
+                        where u.IdTipoEnte == idTipoEnte
+                          select u).ToList();
 
             var existe = flujos.GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado)
                 .Any(g => g.Count() == 1);
@@ -98,42 +95,45 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return existe;
         }
 
-        public override bool ExisteNivelRepetido(ConfiguracionFlujo flujo)
+        public override bool ExisteNivelRepetido(int idTipoEnte)
         {
+           
             var flujos = (from u in Set
-                        where u.IdEntePublico == flujo.IdEntePublico 
-                        select u).ToList();
+                          where u.IdTipoEnte == idTipoEnte
+                          select u).ToList();
 
-            //var existe = false;
-            var existe = flujos.Exists(x => x.IdNivelEmpleado == flujo.IdNivelEmpleado);
 
-            return existe;
+            var repetido = flujos.GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
+
+            return repetido;
         }
 
-        public override bool ExisteRegistroEntePublico(ConfiguracionFlujo flujo)
+        public override bool ExisteRegistroEntePublico(FlujoViatico flujo)
         {
             return false;
         }
 
-        public override ConfiguracionFlujo ObtenerFlujo(int id)
+        public override List<FlujoViatico> ObtenerFlujos(List<FlujoViatico> flujos)
         {
-            if (id <= 0)
-                return new ConfiguracionFlujo();
+            //if (id <= 0)
+            //    return new ConfiguracionFlujo();
 
-            return (from u in Set
-                    where u.Id == id
-                    select new
-                    {
-                        flujo = u,
-                        paso = u.Pasos.Where(r => r.Activo)
-                    }).ToList().Select(r => r.flujo).FirstOrDefault();
-                   
+            //return (from u in Set
+            //        where u.id ==flujos[0].IdTipoEnte
+            //        select new
+            //        {
+            //            flujo = u,
+            //            paso = u.Pasos.Where(r => r.Activo)
+            //        }).ToList().Select(r => r.flujo);
+
+            return new List<FlujoViatico>();
+
         }
 
-        public List<ConfiguracionFlujo> ObtenerTotalFlujos(int idEntePublico)
+        public List<FlujoViatico> ObtenerTotalFlujos(int idEntePublico)
         {
             var listaFlujos = (from u in Set
-                               where u.IdEntePublico == idEntePublico
+                               where u.IdTipoEnte == idEntePublico
                                select new
                                {
                                    flujo = u,

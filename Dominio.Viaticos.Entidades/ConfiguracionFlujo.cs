@@ -11,35 +11,25 @@ namespace Dominio.Viaticos.Entidades
     /// Configuracion del Flujo 
     /// </summary>
     [Table("Flujos", Schema = "Viaticos")]
-    public class ConfiguracionFlujo : Seguimiento, IFlujo<PasoViatico> 
+    public class FlujoViatico : Seguimiento, IFlujo<PasoViatico> 
     {
         public int Id { get; set; }
 
-        
-        public int IdNivelEmpleado { get; set; }
- 
         [Required]
-        public int IdEntePublico { get; set; }
+        public int IdTipoEnte { get; set; }
+
+
+        public int IdNivelEmpleado { get; set; }
 
         [Required]
         public int TipoFlujo { get; set; }
 
-        /// Ejemplo de Variables añadidas por los desarrolladores 
-        [Required]
-        public string NombreFlujo { get; set; }
-
-        [Required]
-        public int Clasificacion { get; set; }
-        ///
 
         public List<PasoViatico> Pasos { get; set; }
 
-
-        [ForeignKey("IdEntePublico")]
+        [ForeignKey("IdTipoEnte")]
         public TipoEntePublico EntePublico { get; set; }
 
-        [ForeignKey("IdNivelEmpleado")]
-        public NivelEmpleado Nivel { get; set; }
     }
 
 

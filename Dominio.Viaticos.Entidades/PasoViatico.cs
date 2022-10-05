@@ -12,28 +12,23 @@ namespace Dominio.Viaticos.Entidades
         public int Id { get; set ; }
 
         [Required]
-        public int IdRol { get; set; }
+        public int IdFlujo { get; set; }
 
         [Required]
-        public int IdConfiguracionFlujo { get; set; }
-
-        [Required]
-        public int Orden { get; set ; }
+        public int IdRolAutoriza { get; set; }
 
         [Required]
         public int TipoRol { get; set ; }
 
         [Required]
-        public bool EsFirma { get; set ; }
+        public int Orden { get; set; }
 
         [Required]
-        public string Descripcion { get; set; }
+        public bool AplicaFirma { get; set ; }
 
-        //[ForeignKey("IdRol")]
-        //public Rol Rol { get; set; }
 
-        [ForeignKey("IdConfiguracionFlujo")]
-        public ConfiguracionFlujo Flujo { get; set; }
-
+        [ForeignKey("IdFlujo")]
+        public FlujoViatico Flujo { get; set; }
+        
     }
 }
