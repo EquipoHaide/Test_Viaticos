@@ -1,0 +1,84 @@
+[2022-10-05 15:25:56] [FTL] Ha occurrido un error Gl2B7PHuL9UVTk10mF7TSQ {  } System.ArgumentNullException: Value cannot be null. (Parameter 'source')
+   at System.Linq.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)
+   at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`3.Crear(List`1 flujo, String subjectId) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/ServicioConfiguracionFlujo/ServicioConfiguracionFlujoBase.cs:line 54
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-05 15:27:56] [FTL] Ha occurrido un error WxAy9c3b6hpvkZmr1H3nKQ {  } System.ArgumentNullException: Value cannot be null. (Parameter 'source')
+   at System.Linq.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)
+   at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`3.Crear(List`1 flujo, String subjectId) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/ServicioConfiguracionFlujo/ServicioConfiguracionFlujoBase.cs:line 54
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-05 15:28:16] [FTL] Ha occurrido un error 8MhVk2GJWqg_8Ny6eXurXQ {  } System.ArgumentNullException: Value cannot be null. (Parameter 'source')
+   at System.Linq.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)
+   at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`3.Crear(List`1 flujo, String subjectId) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/ServicioConfiguracionFlujo/ServicioConfiguracionFlujoBase.cs:line 54
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-05 15:30:49] [FTL] Ha occurrido un error ycYLKIm8ztbe71lw94u-JA {  } System.ArgumentNullException: Value cannot be null. (Parameter 'source')
+   at System.Linq.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)
+   at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`3.Crear(List`1 flujo, String subjectId) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/ServicioConfiguracionFlujo/ServicioConfiguracionFlujoBase.cs:line 54
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-05 15:31:26] [FTL] Ha occurrido un error kh_qh-sPbaucgEK2POY-zg {  } System.NullReferenceException: Object reference not set to an instance of an object.
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-05 15:32:00] [FTL] Ha occurrido un error Xqzkz-AVXjz9mzffnL98AA {  } System.NullReferenceException: Object reference not set to an instance of an object.
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-05 15:32:30] [FTL] Ha occurrido un error RWq-wOAv5jkvspa3Y1LWYg {  } Microsoft.Data.SqlClient.SqlException (0x80131904): Login failed for user 'sa'.
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at Microsoft.Data.SqlClient.SqlConnection.Open()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Infraestructura.Datos.Viaticos.Repositorios.RepositorioConfiguracionFlujoViaticos.ExisteFlujoPredeterminado(Int32 idTipoEnte) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Datos.Viaticos/Repositorios/RepositorioConfiguracionFlujoViaticos.cs:line 88
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`3.<>c__DisplayClass11_0.<Crear>b__0(IRepositorioConfiguracionFlujo`2 r) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/ServicioConfiguracionFlujo/ServicioConfiguracionFlujoBase.cs:line 57
+   at Infraestructura.Transversal.Plataforma.Extensiones.TryExtensions.Try[TRepository,TResult](TRepository repository, Func`2 function) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Extensiones/TryExtensions.cs:line 29
+ClientConnectionId:85729dc1-544b-40e5-baf8-a0332f35641a
+Error Number:18456,State:1,Class:14
+
+[2022-10-05 15:34:15] [FTL] Ha occurrido un error B9P49bdvzEf7_Brc5Qn8AA {  } Microsoft.Data.SqlClient.SqlException (0x80131904): Login failed for user 'sa'.
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at Microsoft.Data.SqlClient.SqlConnection.Open()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Infraestructura.Datos.Viaticos.Repositorios.RepositorioConfiguracionFlujoViaticos.ExisteFlujoPredeterminado(Int32 idTipoEnte) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Datos.Viaticos/Repositorios/RepositorioConfiguracionFlujoViaticos.cs:line 88
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`3.<>c__DisplayClass11_0.<Crear>b__0(IRepositorioConfiguracionFlujo`2 r) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/ServicioConfiguracionFlujo/ServicioConfiguracionFlujoBase.cs:line 57
+   at Infraestructura.Transversal.Plataforma.Extensiones.TryExtensions.Try[TRepository,TResult](TRepository repository, Func`2 function) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Infraestructura.Transversal.Plataforma/Extensiones/TryExtensions.cs:line 29
+ClientConnectionId:04b05245-26e7-4af0-83fa-ed3003e431e6
+Error Number:18456,State:1,Class:14
+

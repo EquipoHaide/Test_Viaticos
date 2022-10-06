@@ -108,26 +108,42 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return repetido;
         }
 
+
+        
         public override bool ExisteRegistroEntePublico(FlujoViatico flujo)
         {
-            return false;
+
+            //var existe = (from u in Entidades.TipoEntePublico
+            //             where u.Id == flujo.IdTipoEnte
+            //             select u)
+
+
+            //var query = (from a in db1
+            //             join b in db2 on a.EnteredBy equals b.UserId
+            //             where a.LHManifestNum == LHManifestNum
+            //             select new { LHManifestId = a.LHManifestId, LHManifestNum = a.LHManifestNum, LHManifestDate = a.LHManifestDate, StnCode = a.StnCode, Operatr = b.UserName }).FirstOrDefault();
+
+            var tipoEnte = (from e in UnitOfWork.Set<Entidades.TipoEntePublico>()
+                            select e).Any(r => r.Id == flujo.IdTipoEnte);
+
+
+            return tipoEnte;
         }
 
-        public override List<FlujoViatico> ObtenerFlujos(List<FlujoViatico> flujos)
+  
+        public override List<FlujoViatico> ObtenerFlujosPorEntePublico(int idTipoEnte)
         {
-            //if (id <= 0)
-            //    return new ConfiguracionFlujo();
+            var lista = (from u in Set
+                         where u.IdTipoEnte == idTipoEnte && u.Activo == true
+                         select new
+                         {
+                             flujos = u,
+                             paso = u.Pasos.Where(r => r.Activo)
+                         }).ToList().Select(r => r.flujos);
 
-            //return (from u in Set
-            //        where u.id ==flujos[0].IdTipoEnte
-            //        select new
-            //        {
-            //            flujo = u,
-            //            paso = u.Pasos.Where(r => r.Activo)
-            //        }).ToList().Select(r => r.flujo);
 
-            return new List<FlujoViatico>();
-
+            return lista.ToList();
+         
         }
 
         public List<FlujoViatico> ObtenerTotalFlujos(int idEntePublico)

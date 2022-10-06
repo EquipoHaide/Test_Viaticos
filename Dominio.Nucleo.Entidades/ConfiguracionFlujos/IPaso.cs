@@ -2,7 +2,7 @@
 
 namespace Dominio.Nucleo.Entidades
 {
-    public interface IPaso : IEntity
+    public interface IPaso : IEntity , ISeguimiento
     {
       
 

@@ -26,7 +26,7 @@ namespace Infraestructura.Datos.Nucleo
         public abstract bool ExisteRegistroEntePublico(TFlujo flujo);
 
        
-        public abstract List<TFlujo> ObtenerFlujos(List<TFlujo> flujos);
+        public abstract List<TFlujo> ObtenerFlujosPorEntePublico(int idTipoEnte);
 
 
         //Agregar los metodos particulares que se requieren para realizar el guardado general

@@ -25,7 +25,7 @@ namespace Dominio.Nucleo.Repositorios
       
         bool ExisteRegistroEntePublico(TFlujoEntidad flujo);
 
-        List<TFlujoEntidad> ObtenerFlujos(List<TFlujoEntidad> flujos);
+        List<TFlujoEntidad> ObtenerFlujosPorEntePublico(int idTipoEnte);
 
         ConsultaPaginada<TFlujoEntidad> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 

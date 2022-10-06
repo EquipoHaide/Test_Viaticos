@@ -39,67 +39,76 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
             App = app;
         }
 
-        public override Respuesta<List<FlujoViatico>> CreacionFlujo(List<FlujoViatico> flujos, string subjectId)
+
+        public override Respuesta<List<FlujoViatico>> AdministrarConfiguracionFlujos(List<FlujoViatico> flujos, string subjectId)
         {
 
-            List<FlujoViatico> flujosCreados = null;
-            foreach (var flujo in flujos)
-            {
-                var respuesta = Servicio.Crear(flujo, false, subjectId);
 
-                if (respuesta.EsError)
-                    return new Respuesta<List<FlujoViatico>>(respuesta.Mensaje, respuesta.TAG);
-
-                flujosCreados.Add(respuesta.Contenido);
-            }
-
-            return new Respuesta<List<FlujoViatico>>(flujosCreados);
+            return new Respuesta<List<FlujoViatico>>(flujos);
         }
 
-        public override Respuesta<List<FlujoViatico>> ModificarFlujo(List<FlujoViatico> flujos, List<FlujoViatico> flujosOriginales, string subjectId)
-        {
-            List<FlujoViatico> flujosModificados = null;
 
-            foreach (var flujo in flujos)
-            {
-                var flujoOriginal = flujosOriginales.Where(r => r.Id == flujo.Id).FirstOrDefault();
+        //public override Respuesta<List<FlujoViatico>> CreacionFlujo(List<FlujoViatico> flujos, string subjectId)
+        //{
 
-                var respuesta = Servicio.Modificar(flujo, flujoOriginal, false, subjectId);
+        //    List<FlujoViatico> flujosCreados = new List<FlujoViatico>();
+        //    foreach (var flujo in flujos)
+        //    {
+        //        var respuesta = Servicio.Crear(flujo, false, subjectId);
 
-                if (respuesta.EsError)
-                    return new Respuesta<List<FlujoViatico>>(respuesta.Mensaje, respuesta.TAG);
+        //        if (respuesta.EsError)
+        //            return new Respuesta<List<FlujoViatico>>(respuesta.Mensaje, respuesta.TAG);
 
-                flujosModificados.Add(respuesta.Contenido);
-            }
-      
-            return new Respuesta<List<FlujoViatico>>(flujosModificados);
-        }
 
-        public override Respuesta<List<FlujoViatico>> EliminarFlujo(List<FlujoViatico> flujos, string subjectId)
-        {
-            //var totalFlujos = RepositorioConfiguracionFlujoViatico.ObtenerTotalFlujos(flujo.IdTipoEnte);
+        //        flujosCreados.Add(respuesta.Contenido);
 
-            //var esPredeterminado = RepositorioConfiguracionFlujoViatico.Try(r => r.ExisteFlujoPredeterminado(flujo));
+        //    }
 
-            //if (esPredeterminado.EsError)
-            //    return new Respuesta<List<ConfiguracionFlujo>>(esPredeterminado.Mensaje, TAG);
+        //    return new Respuesta<List<FlujoViatico>>(flujosCreados);
+        //}
 
-            List<FlujoViatico> flujosEliminados = null;
+        //public override Respuesta<List<FlujoViatico>> ModificarFlujo(List<FlujoViatico> flujos, List<FlujoViatico> flujosOriginales, string subjectId)
+        //{
+        //    List<FlujoViatico> flujosModificados = null;
 
-            foreach (var flujo in flujos)
-            {
-                var respuesta = Servicio.Eliminar(flujo, null, false, subjectId);
+        //    foreach (var flujo in flujos)
+        //    {
+        //        var flujoOriginal = flujosOriginales.Where(r => r.Id == flujo.Id).FirstOrDefault();
 
-                if (respuesta.EsError)
-                    return new Respuesta<List<FlujoViatico>>(respuesta.Mensaje, respuesta.TAG);
+        //        var respuesta = Servicio.Modificar(flujo, flujoOriginal, false, subjectId);
 
-                flujosEliminados.Add(respuesta.Contenido);
-            }
-           
+        //        if (respuesta.EsError)
+        //            return new Respuesta<List<FlujoViatico>>(respuesta.Mensaje, respuesta.TAG);
 
-            return new Respuesta<List<FlujoViatico>>(flujosEliminados);
-        }
+        //        flujosModificados.Add(respuesta.Contenido);
+        //    }
 
-        
+        //    return new Respuesta<List<FlujoViatico>>(flujosModificados);
+        //}
+
+        //public override Respuesta<List<FlujoViatico>> EliminarFlujo(List<FlujoViatico> flujos, string subjectId)
+        //{
+        //    //var totalFlujos = RepositorioConfiguracionFlujoViatico.ObtenerTotalFlujos(flujo.IdTipoEnte);
+
+        //    //var esPredeterminado = RepositorioConfiguracionFlujoViatico.Try(r => r.ExisteFlujoPredeterminado(flujo));
+
+        //    //if (esPredeterminado.EsError)
+        //    //    return new Respuesta<List<ConfiguracionFlujo>>(esPredeterminado.Mensaje, TAG);
+
+        //    List<FlujoViatico> flujosEliminados = null;
+
+        //    foreach (var flujo in flujos)
+        //    {
+        //        var respuesta = Servicio.Eliminar(flujo, null, false, subjectId);
+
+        //        if (respuesta.EsError)
+        //            return new Respuesta<List<FlujoViatico>>(respuesta.Mensaje, respuesta.TAG);
+
+        //        flujosEliminados.Add(respuesta.Contenido);
+        //    }
+
+
+        //    return new Respuesta<List<FlujoViatico>>(flujosEliminados);
+        //}
     }
 }

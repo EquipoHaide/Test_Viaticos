@@ -1,0 +1,22 @@
+[2022-10-06 10:21:56] [FTL] Ha occurrido un error mG9cKiCgt44988IhH9uigA {  } System.NullReferenceException: Object reference not set to an instance of an object.
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-06 10:22:13] [FTL] Ha occurrido un error vt84UI1OO_gaclSwnKIqHQ {  } System.NullReferenceException: Object reference not set to an instance of an object.
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-06 10:24:30] [FTL] Ha occurrido un error YXRgMvE13YafpnYRndgPvg {  } System.NullReferenceException: Object reference not set to an instance of an object.
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-06 10:56:49] [FTL] Ha occurrido un error wXQizrl3nugYKBj1Wb6qgA {  } System.NullReferenceException: Object reference not set to an instance of an object.
+   at Aplicacion.Viaticos.Servicios.ConfiguracionFlujos.ServicioFlujo.CreacionFlujo(List`1 flujos, String subjectId) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Viaticos.Servicios/ConfiguracionFlujos/ServicioFlujo.cs:line 53
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`3.Crear(List`1 flujo, String subjectId) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/ServicioConfiguracionFlujo/ServicioConfiguracionFlujoBase.cs:line 77
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-06 10:59:37] [FTL] Ha occurrido un error R49yhXEv2vT8_ivce1xdRQ {  } System.NullReferenceException: Object reference not set to an instance of an object.
+   at Aplicacion.Viaticos.Servicios.ConfiguracionFlujos.ServicioFlujo.CreacionFlujo(List`1 flujos, String subjectId) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Viaticos.Servicios/ConfiguracionFlujos/ServicioFlujo.cs:line 53
+   at Aplicacion.Nucleo.ServicioConfiguracionFlujo.ServicioConfiguracionFlujoBase`3.Crear(List`1 flujo, String subjectId) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Aplicacion.Nucleo/ServicioConfiguracionFlujo/ServicioConfiguracionFlujoBase.cs:line 77
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+
+[2022-10-06 11:37:22] [FTL] Ha occurrido un error YX2or9h37lSpaGn5x_0H0Q {  } System.NullReferenceException: Object reference not set to an instance of an object.
+   at Presentacion.WebApi.ConfiguracionFlujo.ConfiguracionFlujoAutorizacionBaseController`3.Crear(ModeloConfiguracionFlujo`2 config) in /Users/haidehaaz/Documents/Proyectos/Test_Viaticos/Presentacion.WebApi/ConfiguracionFlujo/ConfiguracionFlujoAutorizacionBaseController.cs:line 53
+

@@ -59,21 +59,18 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (esPredeterminado.EsError)
                 return esPredeterminado.ErrorBaseDatos(TAG);
 
-            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(flujo[0].IdTipoEnte));
+            var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujo[0].IdTipoEnte));
 
-            if (esNivelRepetido.EsError)
-                return esPredeterminado.ErrorBaseDatos(TAG);
+            if (flujoOriginal.EsError)
+                return flujoOriginal.ErrorBaseDatos(TAG);
 
-            var flujos = Repositorio.Try(r => r.Get(x => x.IdTipoEnte == flujo[0].IdTipoEnte));
+            flujo.ForEach(flujo => {
+                flujoOriginal.Contenido.Add(flujo);
+            });
 
-            if (flujos.EsError)
-                return flujos.ErrorBaseDatos(TAG);
-
-            flujo.Add(flujos.Contenido);
-            
             var esEntePublico = Repositorio.Try(r => r.ExisteRegistroEntePublico(flujo[0]));
 
-            var respuesta = ServicioDominio.Crear(flujo, esPredeterminado.Contenido, esNivelRepetido.Contenido, esEntePublico.Contenido, subjectId);
+            var respuesta = ServicioDominio.Crear(flujoOriginal.Contenido, esPredeterminado.Contenido, esEntePublico.Contenido, subjectId);
 
             if (respuesta.EsExito)
             {
@@ -116,7 +113,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (esNivelRepetido.EsError)
                 return esPredeterminado.ErrorBaseDatos(TAG);
 
-            var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujos(flujo));
+            var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujo[0].Id));
          
             if (flujoOriginal.EsError)
                 return flujoOriginal.ErrorBaseDatos(TAG);
