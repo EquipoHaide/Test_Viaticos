@@ -13,12 +13,13 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
     {        
         object ConsultarConfiguracionFlujo(TQuery filtro);
 
-        object Crear([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config);
+        object AdministrarFlujos([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config);
 
-        object Modificar([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config);
+        //object Modificar([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config);
 
-        object Eliminar([FromQuery] List<int> id );
+        //object Eliminar([FromQuery] List<int> id );
 
+        
 
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dominio.Nucleo.Entidades
 {
-    public interface IFlujo<TPaso> : IEntity
+    public interface IFlujo<TPaso> : IEntity ,ISeguimiento
        where TPaso : IPaso
     {
 

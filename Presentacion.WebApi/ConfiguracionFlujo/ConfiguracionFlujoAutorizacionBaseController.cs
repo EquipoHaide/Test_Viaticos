@@ -45,38 +45,13 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
 
 
         [HttpPost("recursos")]
-        
-        public object Crear([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)   
-        {
-            try {
-                var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
-                var resultado = ServicioConfiguracionFlujoBase.Crear(config.Flujos, GetSubjectId);
-
-                if (resultado.EsError)
-                {
-                    if (resultado.Estado == EstadoProceso.Fatal)
-                        return this.ApiResult(resultado.ExcepcionInterna, App.GetLogger());
-
-                    return this.ApiResult(resultado.Mensaje);
-                }
-
-                return this.ApiResult(new { resultado});
-            }
-             catch (Exception e)
-            {
-                return this.ApiResult(e, App.GetLogger());
-            }
-
-        }
-
-
-        [HttpPut("recursos")]
-        public object Modificar([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)
+        public object AdministrarFlujos([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)
         {
             try
             {
                 var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
-                var resultado = ServicioConfiguracionFlujoBase.Modificar(config.Flujos, GetSubjectId);
+                var resultado = ServicioConfiguracionFlujoBase.AdministrarFlujos(config.Flujos, GetSubjectId);
+
                 if (resultado.EsError)
                 {
                     if (resultado.Estado == EstadoProceso.Fatal)
@@ -92,32 +67,5 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
                 return this.ApiResult(e, App.GetLogger());
             }
         }
-
-
-
-
-        [HttpDelete("recursos")]
-        public object Eliminar( List<int> ids )
-        {
-            try
-            {
-                var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
-                var resultado = ServicioConfiguracionFlujoBase.Eliminar(ids, GetSubjectId);
-                if (resultado.EsError)
-                {
-                    if (resultado.Estado == EstadoProceso.Fatal)
-                        return this.ApiResult(resultado.ExcepcionInterna, App.GetLogger());
-
-                    return this.ApiResult(resultado.Mensaje);
-                }
-
-                return this.ApiResult(new { resultado });
-            }
-            catch (Exception e)
-            {
-                return this.ApiResult(e, App.GetLogger());
-            }
-        }
-
     }
 }

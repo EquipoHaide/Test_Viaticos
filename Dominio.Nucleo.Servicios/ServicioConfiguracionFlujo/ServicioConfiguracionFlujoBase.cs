@@ -15,7 +15,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
   
 
-        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujoOriginal, bool esPredeterminado, bool esEntePublico, string subjectId)
+        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool esPredeterminado, bool esEntePublico, string subjectId)
         {
             if (flujos.Count() < 0)
                 return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion ", TAG);
@@ -26,38 +26,79 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             foreach (var flujo in flujos)
             {
 
+                var respuesta = this.ValidarFlujo(flujo, esPredeterminado);
+
+                if (respuesta.EsError)
+                    return new Respuesta<List<TFlujo>>(respuesta.Mensaje, TAG);
+
+
+                var respuestaPaso = this.AdministrarPasos(flujo.Pasos);
+
+                if (respuestaPaso.EsError)
+                    return new Respuesta<List<TFlujo>>(respuestaPaso.Mensaje, TAG);
+
                 if (flujo.Id == 0)
                 {
-                    var respuesta = this.ValidarFlujo(flujo, esPredeterminado);
-                    if (respuesta.EsError)
-                        return new Respuesta<List<TFlujo>>(respuesta.Mensaje, TAG);
-
                     flujo.Seguir(subjectId);
-                    flujoOriginal.Add(flujo);
+                    flujosOriginales.Add(flujo);
                 }
+
+                var flujoOriginal = flujosOriginales.Where(r => r.Id == flujo.Id).FirstOrDefault();
+
+                if (flujoOriginal == null)
+                    return new Respuesta<List<TFlujo>>("No se encontro el flujo que desea administrar", TAG);
+
 
                 if (flujo.Id > 0 && !flujo.Activo)
                 {
-                    var flujoEliminado = flujoOriginal.Where(r => r.Id == flujo.Id).FirstOrDefault();
-
-                    flujoEliminado.Seguir(subjectId, false, true);
+                    
+                    flujoOriginal.Seguir(subjectId, false, true);
                 }
 
                 if (flujo.Id > 0)
                 {
-                    var flujoModificado = flujoOriginal.Where(r => r.Id == flujo.Id).FirstOrDefault();
-
-                    flujoModificado = flujo;
-
-                    flujoModificado.Seguir(subjectId, true, false);
+                    flujoOriginal = flujo;
+                    flujoOriginal.Seguir(subjectId, true, false);
                 }
 
             }
 
-            if(this.EsNivelRepetido(flujoOriginal))
+            if(this.EsNivelRepetido(flujosOriginales))
                 return new Respuesta<List<TFlujo>>("Ya existe un flujo con el mismo nivel de empleado", TAG);
 
-            return new Respuesta<List<TFlujo>>(flujoOriginal);
+            return new Respuesta<List<TFlujo>>(flujosOriginales);
+        }
+
+
+        private Respuesta AdministrarPasos(List<TPaso> paso, List<TPaso> pasosOriginales = null)
+        {
+
+           
+
+
+            //foreach (var item in flujoOriginal.Pasos)
+            //    //    {
+            //    //        if (item.Id == 0)
+            //    //            item.Seguir(subjectId);
+            //    //            flujoOriginal.Pasos.Add(item);
+
+            //    //        if (item.Id > 0 && !item.Activo)
+            //    //            item.Seguir(subjectId, true);
+
+            //    //        if (item.Id > 0)
+            //    //        {
+            //    //            var itemOriginal = flujoOriginal.Pasos.FirstOrDefault(r => r.Id == item.Id);
+
+            //    //            itemOriginal.Orden = item.Orden;
+
+            //    //            itemOriginal.Seguir(subjectId, true, false);
+            //    //        }
+            //    //    }
+
+            //    //    flujoOriginal.Seguir(subjectId, true, false);
+
+
+            return new Respuesta();
         }
 
         private Respuesta ValidarFlujo(TFlujo flujo, bool esPredeterminado)
@@ -94,7 +135,6 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             if (!this.EsConsecutivo(flujo.Pasos))
                 return new Respuesta("La lista de pasos del flujo debe ser consecutivo.", TAG);
-
 
             return new Respuesta();
         }

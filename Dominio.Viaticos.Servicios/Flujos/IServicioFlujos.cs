@@ -10,11 +10,11 @@ namespace Dominio.Viaticos.Servicios
         where TPaso : class, IPaso
     {
        
-        public Respuesta<TFlujo> Crear(TFlujo flujo, bool validacionExtra, string subjectId);
+        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, bool validacionExtra, string subjectId);
 
-        public Respuesta<TFlujo> Modificar(TFlujo flujo,TFlujo flujoOrigial, bool validacionExtra, string subjectId);
+        //public Respuesta<TFlujo> Modificar(TFlujo flujo,TFlujo flujoOrigial, bool validacionExtra, string subjectId);
 
-        public Respuesta<TFlujo> Eliminar(TFlujo flujo, List<TFlujo> listaFlujos, bool validacionExtra, string subjectId);
+        //public Respuesta<TFlujo> Eliminar(TFlujo flujo, List<TFlujo> listaFlujos, bool validacionExtra, string subjectId);
      
     }
 }

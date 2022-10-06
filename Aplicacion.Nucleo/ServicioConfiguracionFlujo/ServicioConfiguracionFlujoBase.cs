@@ -22,21 +22,8 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public virtual IRepositorioConfiguracionFlujo<TFlujo,TQuery> Repositorio { get; }
         
-        /// <summary>
-        /// El CrearFlujo se usa para añadir las validaciones adicionales de tu flujo 
-        /// </summary>
-        public abstract Respuesta<List<TFlujo>> CreacionFlujo(List<TFlujo> flujos, string subjectId);
-
-        /// <summary>
-        /// El ModificarFlujo se usa para añadir las validaciones adicionales de tu flujo 
-        /// </summary>
-        public abstract Respuesta<List<TFlujo>> ModificarFlujo(List<TFlujo> flujos, List<TFlujo> flujosOriginal, string subjectId);
-
-        /// <summary>
-        /// El EliminarFlujo se usa para añadir las validaciones adicionales requeridas para tu flujo 
-        /// </summary>
-        public abstract Respuesta<List<TFlujo>> EliminarFlujo(List<TFlujo> flujos, string subjectId);
-
+   
+        public abstract Respuesta<List<TFlujo>> AdministrarConfiguracionFlujos(List<TFlujo> flujos, string subjectId);
 
         public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TQuery parametros, string subjectId)
         {
@@ -48,142 +35,196 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             return new Respuesta<ConsultaPaginada<TFlujo>>(recursos.Contenido);
         }
 
-        public Respuesta Crear(List<TFlujo> flujo, string subjectId)
+   
+
+        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, string subjectId)
         {
             //Valida que el objeto no este vacio
-            if (flujo.Count() <= 0)
-                return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
+            if (flujos.Count() <= 0)
+                return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion", TAG);
 
-            var esPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo[0].IdTipoEnte));
+            var esPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujos[0].IdTipoEnte));
 
             if (esPredeterminado.EsError)
-                return esPredeterminado.ErrorBaseDatos(TAG);
+                return new Respuesta<List<TFlujo>>(esPredeterminado.Mensaje,TAG);
 
-            var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujo[0].IdTipoEnte));
+            var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujos[0].IdTipoEnte));
 
             if (flujoOriginal.EsError)
-                return flujoOriginal.ErrorBaseDatos(TAG);
+                return new Respuesta<List<TFlujo>>(flujoOriginal.Mensaje, TAG);
 
-            flujo.ForEach(flujo => {
-                flujoOriginal.Contenido.Add(flujo);
-            });
+            var esEntePublico = Repositorio.Try(r => r.ExisteRegistroEntePublico(flujos[0]));
 
-            var esEntePublico = Repositorio.Try(r => r.ExisteRegistroEntePublico(flujo[0]));
+            if (esEntePublico.EsError)
+                return new Respuesta<List<TFlujo>>(esEntePublico.Mensaje, TAG);
 
-            var respuesta = ServicioDominio.Crear(flujoOriginal.Contenido, esPredeterminado.Contenido, esEntePublico.Contenido, subjectId);
+
+            var respuesta = ServicioDominio.AdministrarFlujos(flujos, flujoOriginal.Contenido, esPredeterminado.Contenido, esEntePublico.Contenido, subjectId);
+
 
             if (respuesta.EsExito)
             {
-                var respuestaComplementaria= this.CreacionFlujo(flujo,subjectId);
+                var respuestaComplementaria = this.AdministrarConfiguracionFlujos(respuesta.Contenido, subjectId);
 
                 if (respuestaComplementaria.EsExito)
                 {
                     Repositorio.Add(respuestaComplementaria.Contenido);
-                   
+
                     var save = Repositorio.Try(r => r.Save());
 
                     if (save.EsError)
                     {
-                        return save.ErrorBaseDatos(TAG);
+                        return new Respuesta<List<TFlujo>>(save.Mensaje,TAG);
                     }
 
-                    return new Respuesta();
+                    return new Respuesta<List<TFlujo>>(respuestaComplementaria.Contenido);
                 }
 
-                return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+                return new Respuesta<List<TFlujo>>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
-
-            return new Respuesta(respuesta.Mensaje, TAG);
-
+            
+            return new Respuesta<List<TFlujo>>(respuesta.Mensaje,TAG);
         }
 
 
-        public Respuesta Modificar(List<TFlujo> flujo,  string subjectId)
-        {
-            if (flujo == null)
-                return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
-        
-            var esPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo[0].IdTipoEnte));
+        //public Respuesta Crear(List<TFlujo> flujo, string subjectId)
+        //{
+        //    //Valida que el objeto no este vacio
+        //    if (flujo.Count() <= 0)
+        //        return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
 
-            if (esPredeterminado.EsError)
-                return esPredeterminado.ErrorBaseDatos(TAG);
+        //    var esPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo[0].IdTipoEnte));
 
-            var esNivelRepetido = Repositorio.Try(r => r.ExisteNivelRepetido(1));
+        //    if (esPredeterminado.EsError)
+        //        return esPredeterminado.ErrorBaseDatos(TAG);
 
-            if (esNivelRepetido.EsError)
-                return esPredeterminado.ErrorBaseDatos(TAG);
+        //    var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujo[0].IdTipoEnte));
 
-            var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujo[0].Id));
-         
-            if (flujoOriginal.EsError)
-                return flujoOriginal.ErrorBaseDatos(TAG);
+        //    if (flujoOriginal.EsError)
+        //        return flujoOriginal.ErrorBaseDatos(TAG);
 
-            var respuesta = ServicioDominio.Modificar(flujo, flujoOriginal.Contenido, esPredeterminado.Contenido,esNivelRepetido.Contenido, subjectId);
+        //    flujo.ForEach(flujo => {
+        //        flujoOriginal.Contenido.Add(flujo);
+        //    });
 
-            if (respuesta.EsExito)
-            {
-               
-                var respuestaComplementaria = this.ModificarFlujo(flujo,respuesta.Contenido, subjectId);
+        //    var esEntePublico = Repositorio.Try(r => r.ExisteRegistroEntePublico(flujo[0]));
 
-                if (respuestaComplementaria.EsExito)
-                {
-                    var save = Repositorio.Try(r => r.Save());
-                    if (save.EsError)
-                        return save.ErrorBaseDatos(TAG);
+        //    ///PREGUNTA: SE TENDRIA QUE VALIRDAR LA EXISTENCIA DEL NIVEL DEL EMPLEADO 
 
-                    return new Respuesta();
-                }
+        //    var respuesta = ServicioDominio.Crear(flujoOriginal.Contenido, esPredeterminado.Contenido, esEntePublico.Contenido, subjectId);
 
-                return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
-            }
+        //    if (respuesta.EsExito)
+        //    {
+        //        var respuestaComplementaria = this.CreacionFlujo(flujo, subjectId);
 
-            return new Respuesta(respuesta.Mensaje, respuesta.TAG);
+        //        if (respuestaComplementaria.EsExito)
+        //        {
+        //            Repositorio.Add(respuestaComplementaria.Contenido);
 
-        }
+        //            var save = Repositorio.Try(r => r.Save());
 
-        /// <summary>
-        /// Elimina los flujos de manera individual que tenga un Ente Publico 
-        /// </summary>
-        /// <param name="flujo"></param>
-        /// <param name="subjectId"></param>
-        /// <returns></returns>
-        public Respuesta Eliminar(List<int> IdsFlujos, string subjectId)
-        {
-            if(IdsFlujos.Count() <= 0)
-                return new Respuesta("Es requerido un flujo de autorizacion", TAG);
+        //            if (save.EsError)
+        //            {
+        //                return save.ErrorBaseDatos(TAG);
+        //            }
 
-            List<TFlujo> flujosOriginales = null;
+        //            return new Respuesta();
+        //        }
 
-            foreach (var idFlujo in IdsFlujos)
-            {
-                var flujo = Repositorio.Try(r => r.Get( x => x.Id == idFlujo));
+        //        return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+        //    }
 
-                if (flujo.EsError)
-                    return flujo.ErrorBaseDatos();
+        //    return new Respuesta(respuesta.Mensaje, TAG);
 
-                var respuesta = ServicioDominio.Eliminar(flujo.Contenido, subjectId);
+        //}
 
-                if (respuesta.EsError)
-                    return new Respuesta(respuesta.Mensaje, TAG);
 
-                flujosOriginales.Add(respuesta.Contenido);
-            }
-           
-            var respuestaComplementaria = this.EliminarFlujo(flujosOriginales,subjectId);
+        //public Respuesta Modificar(List<TFlujo> flujo, string subjectId)
+        //{
 
-            if (respuestaComplementaria.EsExito)
-            {
-             
-                var guardar = Repositorio.Try(r => r.Save());
-                if (guardar.EsError)
-                    return guardar.ErrorBaseDatos(TAG);
+        //    if (flujo.Count() <= 0)
+        //        return new Respuesta("Es requerido un flujo de autorizacion ", TAG);
 
-                return new Respuesta();
-            }
+        //    var esPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujo[0].IdTipoEnte));
 
-            return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
-        }
+        //    if (esPredeterminado.EsError)
+        //        return esPredeterminado.ErrorBaseDatos(TAG);
 
-       
+
+        //    var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujo[0].IdTipoEnte));
+
+        //    if (flujoOriginal.EsError)
+        //        return flujoOriginal.ErrorBaseDatos(TAG);
+
+        //    //flujo.ForEach(flujo => {
+        //    //    flujoOriginal.Contenido.Add(flujo);
+        //    //});
+
+
+        //    var respuesta = ServicioDominio.Modificar(flujo, flujoOriginal.Contenido, esPredeterminado.Contenido, false, subjectId);
+
+        //    if (respuesta.EsExito)
+        //    {
+
+        //        var respuestaComplementaria = this.ModificarFlujo(flujo, respuesta.Contenido, subjectId);
+
+        //        if (respuestaComplementaria.EsExito)
+        //        {
+        //            var save = Repositorio.Try(r => r.Save());
+        //            if (save.EsError)
+        //                return save.ErrorBaseDatos(TAG);
+
+        //            return new Respuesta();
+        //        }
+
+        //        return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+        //    }
+
+        //    return new Respuesta(respuesta.Mensaje, respuesta.TAG);
+
+        //}
+
+        ///// <summary>
+        ///// Elimina los flujos de manera individual que tenga un Ente Publico 
+        ///// </summary>
+        ///// <param name="flujo"></param>
+        ///// <param name="subjectId"></param>
+        ///// <returns></returns>
+        //public Respuesta Eliminar(List<int> IdsFlujos, string subjectId)
+        //{
+        //    if (IdsFlujos.Count() <= 0)
+        //        return new Respuesta("Es requerido un flujo de autorizacion", TAG);
+
+        //    List<TFlujo> flujosOriginales = null;
+
+        //    foreach (var idFlujo in IdsFlujos)
+        //    {
+        //        var flujo = Repositorio.Try(r => r.Get(x => x.Id == idFlujo));
+
+        //        if (flujo.EsError)
+        //            return flujo.ErrorBaseDatos();
+
+        //        var respuesta = ServicioDominio.Eliminar(flujo.Contenido, subjectId);
+
+        //        if (respuesta.EsError)
+        //            return new Respuesta(respuesta.Mensaje, TAG);
+
+        //        flujosOriginales.Add(respuesta.Contenido);
+        //    }
+
+        //    var respuestaComplementaria = this.EliminarFlujo(flujosOriginales, subjectId);
+
+        //    if (respuestaComplementaria.EsExito)
+        //    {
+
+        //        var guardar = Repositorio.Try(r => r.Save());
+        //        if (guardar.EsError)
+        //            return guardar.ErrorBaseDatos(TAG);
+
+        //        return new Respuesta();
+        //    }
+
+        //    return new Respuesta(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+        //}
     }
 }
