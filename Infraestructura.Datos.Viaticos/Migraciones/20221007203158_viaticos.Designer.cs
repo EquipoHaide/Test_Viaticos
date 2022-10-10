@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructura.Datos.Viaticos.Migraciones
 {
     [DbContext(typeof(ViaticosUnidadDeTrabajo))]
-    [Migration("20221005191823_viaticos")]
+    [Migration("20221007203158_viaticos")]
     partial class viaticos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

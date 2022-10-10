@@ -39,7 +39,7 @@ CREATE TABLE [Viaticos].[Flujos] (
     [FechaEliminacion] datetime2 NULL,
     [Activo] bit NOT NULL,
     [IdTipoEnte] int NOT NULL,
-    [IdNivelEmpleado] int NOT NULL,
+    [IdNivelEmpleado] int NULL,
     [TipoFlujo] int NOT NULL,
     CONSTRAINT [PK_Flujos] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Flujos_EntePublicos_IdTipoEnte] FOREIGN KEY ([IdTipoEnte]) REFERENCES [Viaticos].[EntePublicos] ([Id]) ON DELETE NO ACTION
@@ -76,7 +76,7 @@ CREATE INDEX [IX_Pasos_IdFlujo] ON [Viaticos].[Pasos] ([IdFlujo]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20221005191823_viaticos', N'3.1.2');
+VALUES (N'20221007203158_viaticos', N'3.1.2');
 
 GO
 
