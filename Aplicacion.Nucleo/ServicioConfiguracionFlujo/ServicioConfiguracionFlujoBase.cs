@@ -37,25 +37,28 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, string subjectId)
         { 
-            if (flujos.Count() <= 0)
+            if (flujos == null || flujos.Count() <= 0)
                 return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion", TAG);
 
-            var esPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujos[0].IdTipoEnte));
+            if (flujos[0].IdTipoEnte <= 0)
+                return new Respuesta<List<TFlujo>>("El Tipo de ente es invalido", TAG);
 
-            if (esPredeterminado.EsError)
-                return new Respuesta<List<TFlujo>>(esPredeterminado.Mensaje,TAG);
+            var existeFlujoPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujos[0].IdTipoEnte));
 
-            var flujoOriginal = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujos[0].IdTipoEnte));
+            if (existeFlujoPredeterminado.EsError)
+                return new Respuesta<List<TFlujo>>(existeFlujoPredeterminado.Mensaje,TAG);
 
-            if (flujoOriginal.EsError)
-                return new Respuesta<List<TFlujo>>(flujoOriginal.Mensaje, TAG);
+            var flujosExistentes = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujos[0].IdTipoEnte));
 
-            var esEntePublico = Repositorio.Try(r => r.ExisteRegistroEntePublico(flujos[0]));
+            if (flujosExistentes.EsError)
+                return new Respuesta<List<TFlujo>>(flujosExistentes.Mensaje, TAG);
 
-            if (esEntePublico.EsError)
-                return new Respuesta<List<TFlujo>>(esEntePublico.Mensaje, TAG);
+            var existeEntePublico = Repositorio.Try(r => r.ExisteRegistroEntePublico(flujos[0]));
 
-            var respuesta = ServicioDominio.AdministrarFlujos(flujos, flujoOriginal.Contenido, esPredeterminado.Contenido, esEntePublico.Contenido, subjectId);
+            if (existeEntePublico.EsError)
+                return new Respuesta<List<TFlujo>>(existeEntePublico.Mensaje, TAG);
+
+            var respuesta = ServicioDominio.AdministrarFlujos(flujos, flujosExistentes.Contenido, existeFlujoPredeterminado.Contenido, existeEntePublico.Contenido, subjectId);
 
             if (respuesta.EsExito)
             {

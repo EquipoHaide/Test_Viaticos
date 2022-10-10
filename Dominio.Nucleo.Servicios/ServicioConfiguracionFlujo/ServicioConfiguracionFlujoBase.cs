@@ -13,21 +13,26 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
-        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool esPredeterminado, bool esEntePublico, string subjectId)
+        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool existeFlujoPredeterminado, bool existeEntePublico, string subjectId)
         {
-            if (flujos.Count() < 0)
+            if (flujos.Count() <= 0)
                 return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion ", TAG);
 
-            if (!esEntePublico)
+            if (!existeEntePublico)
                 return new Respuesta<List<TFlujo>>("El Ente Publico Relacionado no existe", TAG);
 
-            
-            foreach (var itemFlujo in flujos)
-            {
+            if(flujos.Select(f=>f.IdTipoEnte).Distinct().Count()>1)
+                return new Respuesta<List<TFlujo>>("El tipo de ente publico debe ser el mismo para los flujos recibidos", TAG);
 
+            if(!existeFlujoPredeterminado && !flujos.Any(f=>f.TipoFlujo==(int)TipoFlujo.Predeterminado) )
+                return new Respuesta<List<TFlujo>>("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
+
+            foreach (var itemFlujo in flujos.OrderBy(f=>f.TipoFlujo))
+            {
+                //Si se trata de la creacion de una nueva configuracion de flujo
                 if (itemFlujo.Id == 0)
                 {
-                    var flujoNuevo = this.AdministrarFlujo(itemFlujo,null, esPredeterminado, subjectId);
+                    var flujoNuevo = this.AdministrarFlujo(itemFlujo,null, existeFlujoPredeterminado, subjectId);
 
                     if(flujoNuevo.EsError)
                         return new Respuesta<List<TFlujo>>(flujoNuevo.Mensaje, TAG);
@@ -37,25 +42,26 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                     flujosOriginales.Add(flujoNuevo.Contenido);
              
                 }
+                //Si se trata de la modificacion o eliminacion de una configuracion de flujo
                 else
                 {
                     var flujoOriginal = flujosOriginales.Where(r => r.Id == itemFlujo.Id).FirstOrDefault();
 
                     if (flujoOriginal != null && flujoOriginal.TipoFlujo != (int)TipoFlujo.Particular)
                     {
-                        if (esPredeterminado && itemFlujo.TipoFlujo != (int)TipoFlujo.Predeterminado)
+                        if (existeFlujoPredeterminado && itemFlujo.TipoFlujo != (int)TipoFlujo.Predeterminado)
                             return new Respuesta<List<TFlujo>>("No se puedo cambiar un flujo predeterminado a uno particular", TAG);
                     }
-
+                    //Si se trata de la eliminacion de una configuracion de flujo
                     if (itemFlujo.Id > 0 && !itemFlujo.Activo)
                     {
                         flujoOriginal.Seguir(subjectId, false, true);
                     }
-
-                    if(itemFlujo.Id > 0)
+                    //Si se trata de la modificacion de una configuracion de flujo
+                    if (itemFlujo.Id > 0)
                     {
 
-                        var flujoModificado = this.AdministrarFlujo(itemFlujo, flujoOriginal,esPredeterminado, subjectId);
+                        var flujoModificado = this.AdministrarFlujo(itemFlujo, flujoOriginal, existeFlujoPredeterminado, subjectId);
 
                         if (flujoModificado.EsError)
                             return new Respuesta<List<TFlujo>>(flujoModificado.Mensaje, TAG);
@@ -69,7 +75,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             }
 
             if(this.EsNivelRepetido(flujosOriginales))
-                return new Respuesta<List<TFlujo>>("Ya existe un flujo con el mismo nivel de empleado", TAG);
+                return new Respuesta<List<TFlujo>>("Ya existe un flujo particular con el mismo nivel de empleado", TAG);
 
             return new Respuesta<List<TFlujo>>(flujosOriginales);
         }
@@ -131,7 +137,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (flujo?.IdTipoEnte == null || flujo.IdTipoEnte <= 0)
                 return new Respuesta("El Tipo de Ente es requerido", TAG);
 
-            if (flujo.Pasos == null || flujo.Pasos.Count() <= 0)
+            if (flujo.Pasos == null || (flujo.Pasos.Where(p=>p.Activo).Count() <= 0))
                 return new Respuesta("La lista de pasos es requerida.", TAG);
 
 
@@ -144,8 +150,8 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado && flujo.Id == 0)
                 return new Respuesta("Solo se permite un flujo predeterminado ", TAG);
 
-            if (!esPredeterminado && flujo.TipoFlujo != (int)TipoFlujo.Predeterminado)
-                return new Respuesta("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
+            //if (!esPredeterminado && flujo.TipoFlujo != (int)TipoFlujo.Predeterminado)
+                //return new Respuesta("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
 
             var listaPasos = flujo.Pasos.Where(x => x.Activo).ToList();
 
@@ -166,9 +172,9 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return new Respuesta();
         }
 
-        private bool EsRepetido(List<TPaso> paso)
+        private bool EsRepetido(List<TPaso> pasos)
         {
-            return paso.GroupBy(x => x.Orden).Any(g => g.Count() > 1);
+            return pasos.GroupBy(x => x.Orden).Any(g => g.Count() > 1);
         }
 
         private bool EsConsecutivo(List<TPaso> paso)
@@ -199,10 +205,10 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (paso.Orden <= 0)
                 return new Respuesta<bool>(String.Format("El orden del paso debe ser mayor a 0"), TAG);
 
-            if (paso?.IdRolAutoriza == null)
-                return new Respuesta<bool>("El rol es requerido", TAG);
+            if (paso?.IdRolAutoriza == 0)
+                return new Respuesta<bool>("El rol que autoriza es requerido", TAG);
 
-            if (paso?.TipoRol == null && paso.TipoRol <= 0)
+            if (paso.TipoRol <= 0)
                 return new Respuesta<bool>("El tipo rol es requerido", TAG);
 
             return new Respuesta<bool>(true);

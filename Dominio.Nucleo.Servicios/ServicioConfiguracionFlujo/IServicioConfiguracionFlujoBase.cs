@@ -17,7 +17,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         //public Respuesta<TFlujo> Eliminar(TFlujo flujos, string subjectId);
 
 
-        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujoOriginal, bool esPredeterminado, bool esEntePublico, string subjectId);
+        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujoOriginal, bool existeFlujoPredeterminado, bool existeEntePublico, string subjectId);
 
 
     }
