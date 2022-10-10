@@ -15,8 +15,8 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool esPredeterminado, bool esEntePublico, string subjectId)
         {
-            //if (flujos.Count() < 0)
-            //    return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion ", TAG);
+            if (flujos.Count() < 0)
+                return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion ", TAG);
 
             if (!esEntePublico)
                 return new Respuesta<List<TFlujo>>("El Ente Publico Relacionado no existe", TAG);
@@ -27,15 +27,12 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
                 if (itemFlujo.Id == 0)
                 {
-
                     var flujoNuevo = this.AdministrarFlujo(itemFlujo,null, esPredeterminado, subjectId);
 
                     if(flujoNuevo.EsError)
                         return new Respuesta<List<TFlujo>>(flujoNuevo.Mensaje, TAG);
 
                     flujoNuevo.Contenido.Seguir(subjectId);
-
-                    //itemFlujo.Seguir(subjectId);
                    
                     flujosOriginales.Add(flujoNuevo.Contenido);
              
@@ -64,6 +61,8 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                             return new Respuesta<List<TFlujo>>(flujoModificado.Mensaje, TAG);
 
                         flujoOriginal = flujoModificado.Contenido;
+                        flujoOriginal.IdNivelEmpleado = flujoModificado.Contenido.IdNivelEmpleado;
+                        
                         flujoOriginal.Seguir(subjectId, true, false);
                     }
                 }
@@ -78,10 +77,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
 
         private Respuesta<TFlujo> AdministrarFlujo(TFlujo flujo, TFlujo flujoOriginal, bool esPredeterminado, string subjectId)
-        {
-
-            //TFlujo flujo = flujoOriginal != null ? flujoOriginal = flujo : flujo;
-
+        { 
             var respuesta = this.ValidarFlujo(flujo, esPredeterminado);
 
             if (respuesta.EsError)
@@ -91,11 +87,9 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             var administraPaso = this.AdministrarPasos(flujo.Pasos, listaPasos,subjectId);
 
-            //flujoOriginal = flujo;  
             flujo.Pasos = administraPaso;
             
             return new Respuesta<TFlujo>(flujo);
-
         }
 
 
@@ -118,17 +112,15 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                     paso.Seguir(subjectId, false, true);
                 }
                 
-
                 if (itemPaso.Id > 0) {
 
                     paso.IdRolAutoriza = itemPaso.IdRolAutoriza;
                     paso.TipoRol = itemPaso.TipoRol;
                     paso.Orden = itemPaso.Orden;
                     paso.AplicaFirma = itemPaso.AplicaFirma;
-
                     paso.Seguir(subjectId, true, false);
-                }
-                    
+                   
+                } 
             }
 
             return pasosOriginales;

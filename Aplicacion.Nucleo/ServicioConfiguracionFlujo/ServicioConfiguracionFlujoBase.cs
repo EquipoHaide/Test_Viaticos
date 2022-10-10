@@ -57,26 +57,30 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             var respuesta = ServicioDominio.AdministrarFlujos(flujos, flujoOriginal.Contenido, esPredeterminado.Contenido, esEntePublico.Contenido, subjectId);
 
-
             if (respuesta.EsExito)
             {
-                //var respuestaComplementaria = this.AdministrarConfiguracionFlujos(respuesta.Contenido, subjectId);
+                var respuestaComplementaria = this.AdministrarConfiguracionFlujos(respuesta.Contenido, subjectId);
 
-                //if (respuestaComplementaria.EsExito)
-                //{
-                    Repositorio.Add(respuesta.Contenido);
-
+                if (respuestaComplementaria.EsExito)
+                {
+                  
+                    foreach (var item in respuesta.Contenido)
+                    {
+                        if (item.Id == 0)
+                            Repositorio.Add(item); 
+                    }
+                    
                     var save = Repositorio.Try(r => r.Save());
 
                     if (save.EsError)
                     {
-                        return new Respuesta<List<TFlujo>>(save.Mensaje,TAG);
+                        return new Respuesta<List<TFlujo>>(save.Mensaje, save.TAG);
                     }
 
                     return new Respuesta<List<TFlujo>>(save.Mensaje);
-                //}
+                }
 
-                //return new Respuesta<List<TFlujo>>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+                return new Respuesta<List<TFlujo>>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
             
             return new Respuesta<List<TFlujo>>(respuesta.Mensaje,TAG);

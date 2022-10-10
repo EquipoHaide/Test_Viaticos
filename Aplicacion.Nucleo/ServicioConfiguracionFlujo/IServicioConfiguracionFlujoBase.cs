@@ -16,7 +16,5 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, string subjectId);
 
-
-
     }
 }

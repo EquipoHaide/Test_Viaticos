@@ -85,12 +85,20 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
         public override bool ExisteFlujoPredeterminado(int idTipoEnte)
         {
 
+            var f = (from u in Set
+                    select u).ToList();
+
             var flujos = (from u in Set
-                        where u.IdTipoEnte == idTipoEnte
+                          where u.IdTipoEnte == idTipoEnte
                           select u).ToList();
 
             var existe = flujos.GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado)
                 .Any(g => g.Count() == 1);
+
+
+            //var repetido = (from u in UnitOfWork.Set<Entidades.FlujoViatico>()
+            //                where u.IdTipoEnte == idTipoEnte
+            //                select u).ToList().GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado).Any(a => a.Count() > 1);
 
             return existe;
         }
@@ -98,12 +106,12 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
         public override bool ExisteNivelRepetido(int idTipoEnte)
         {
            
-            var flujos = (from u in Set
+            var repetido = (from u in Set
                           where u.IdTipoEnte == idTipoEnte
-                          select u).ToList();
+                          select u).ToList().GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado).Any(a => a.Count() >  1);
 
 
-            var repetido = flujos.GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
+           //var repetido = flujos.GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
 
             return repetido;
         }
