@@ -190,7 +190,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         private bool EsNivelRepetido(List<TFlujo> flujos)
         {
-            return flujos.GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
+            return flujos.Where(f=>f.TipoFlujo!=1).GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
         }
 
         private Respuesta<bool> ValidarPaso(TPaso paso)
