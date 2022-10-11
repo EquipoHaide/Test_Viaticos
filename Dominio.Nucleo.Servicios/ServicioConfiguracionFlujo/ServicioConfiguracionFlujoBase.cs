@@ -89,7 +89,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         private Respuesta<TFlujo> AdministrarFlujo(TFlujo flujo, TFlujo flujoOriginal, bool esPredeterminado, string subjectId)
         { 
-            var respuesta = this.ValidarFlujo(flujo, esPredeterminado);
+            var respuesta = this.ValidarFlujo(flujo, flujoOriginal, esPredeterminado);
 
             if (respuesta.EsError)
                 return new Respuesta<TFlujo>(respuesta.Mensaje, TAG);
@@ -137,13 +137,13 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return pasosOriginales;
         }
 
-        private Respuesta ValidarFlujo(TFlujo flujo, bool esPredeterminado)
+        private Respuesta ValidarFlujo(TFlujo flujo, TFlujo flujoOriginal, bool esPredeterminado)
         {
             if (flujo?.IdTipoEnte == null || flujo.IdTipoEnte <= 0)
                 return new Respuesta("El Tipo de Ente es requerido", TAG);
 
             if (flujo.Pasos == null || (flujo.Pasos.Where(p=>p.Activo).Count() <= 0))
-                return new Respuesta("La lista de pasos es requerida.", TAG);
+                return new Respuesta("El flujo debe tener por lo menos un paso.", TAG);
 
 
             if (flujo.TipoFlujo == (int)TipoFlujo.Particular)
@@ -160,19 +160,28 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             var listaPasos = flujo.Pasos.Where(x => x.Activo).ToList();
 
+            //aplicamos validaciones a los pasos como un todo
+            if (this.EsRepetido(listaPasos))
+                return new Respuesta("La lista de pasos del flujo no deben de repetirse", TAG);
+            
+            var pasosExistentes = flujoOriginal.Pasos.Where(p => p.Activo).ToList();
+
+            if (!this.EsConsecutivo(listaPasos))
+                return new Respuesta("La lista de pasos del flujo debe ser consecutivo e iniciar en uno.", TAG);
+
+
+            //aplicamos validaciones a cada paso.
             foreach (var item in listaPasos)
             {
-                var respuestaPaso = this.ValidarPaso(item);
+                var respuestaPaso = this.ValidarPaso(item, flujoOriginal);
 
                 if (!respuestaPaso.Contenido)
                     return new Respuesta(respuestaPaso.Mensaje, TAG);
             }
 
-            if (this.EsRepetido(listaPasos))
-                return new Respuesta("La lista de pasos del flujo no deben de repetirse", TAG);
+           
 
-            if (!this.EsConsecutivo(listaPasos))
-                return new Respuesta("La lista de pasos del flujo debe ser consecutivo.", TAG);
+            
 
             return new Respuesta();
         }
@@ -181,12 +190,16 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         {
             return pasos.GroupBy(x => x.Orden).Any(g => g.Count() > 1);
         }
-
-        private bool EsConsecutivo(List<TPaso> paso)
+        /// <summary>
+        /// Validad que del listado de pasos, su numero de orden sea consecutivo e inicie en uno.
+        /// </summary>
+        /// <param name="pasos"></param>
+        /// <returns></returns>
+        private bool EsConsecutivo(List<TPaso> pasos)
         {
 
             int index = 1;
-            var pasosOrdenados = paso.OrderBy(x => x.Orden);
+            var pasosOrdenados = pasos.OrderBy(x => x.Orden);
             foreach (var item in pasosOrdenados)
             {
                 if (item.Orden != index)
@@ -204,8 +217,12 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return flujos.Where(f=>f.TipoFlujo!=1).GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
         }
 
-        private Respuesta<bool> ValidarPaso(TPaso paso)
+        private Respuesta<bool> ValidarPaso(TPaso paso, TFlujo flujoOriginal)
         {
+            var pasosExistentes = flujoOriginal.Pasos.Where(p=>p.Activo);
+
+            if(pasosExistentes.Any(p=>p.Orden==paso.Orden))
+                return new Respuesta<bool>(String.Format("Error en el Paso: El numero de orden {0} se encuentra repetido", paso.Orden), TAG);
 
             if (paso.Orden <= 0)
                 return new Respuesta<bool>(String.Format("El orden del paso debe ser mayor a 0"), TAG);
