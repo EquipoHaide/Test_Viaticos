@@ -18,6 +18,13 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (flujos.Count() <= 0)
                 return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion ", TAG);
 
+            /*
+            var idsFlujosNuevos = flujos.Select(f=>f.Id).ToList();
+            var idsFlujosPreOriginales = flujosOriginales.Where(f => f.TipoFlujo == (int)TipoFlujo.Predeterminado && f.Activo).Select(f => f.Id).ToList();
+            var idsFlujosPartOriginales = flujosOriginales.Where(f => f.TipoFlujo == (int)TipoFlujo.Particular && f.Activo).Select(f => f.Id).ToList();
+            */
+
+
             if (!existeEntePublico)
                 return new Respuesta<List<TFlujo>>("El Ente Publico Relacionado no existe", TAG);
 
@@ -52,10 +59,10 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 {
                     var flujoOriginal = flujosOriginales.Where(r => r.Id == itemFlujo.Id).FirstOrDefault();
 
-                    if (flujoOriginal != null && flujoOriginal.TipoFlujo != (int)TipoFlujo.Particular)
+                    if (flujoOriginal != null)
                     {
-                        if (existeFlujoPredeterminado && itemFlujo.TipoFlujo != (int)TipoFlujo.Predeterminado)
-                            return new Respuesta<List<TFlujo>>("No se puedo cambiar un flujo predeterminado a uno particular", TAG);
+                        if (flujoOriginal.TipoFlujo!=itemFlujo.TipoFlujo)
+                            return new Respuesta<List<TFlujo>>("No se permite cambiar el tipo de flujo", TAG);
                     }
                     //Si se trata de la eliminacion de una configuracion de flujo
                     if (itemFlujo.Id > 0 && !itemFlujo.Activo)
@@ -98,13 +105,16 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             var administraPaso = this.AdministrarPasos(flujo.Pasos, listaPasos,subjectId);
 
-            flujo.Pasos = administraPaso;
+            if(administraPaso.EsError)
+                return new Respuesta<TFlujo>(administraPaso.Mensaje, administraPaso.TAG);
+
+            flujo.Pasos = administraPaso.Contenido;
             
             return new Respuesta<TFlujo>(flujo);
         }
 
 
-        private List<TPaso> AdministrarPasos(List<TPaso> listaPasos, List<TPaso> pasosOriginales, string subjectId)
+        private Respuesta<List<TPaso>> AdministrarPasos(List<TPaso> listaPasos, List<TPaso> pasosOriginales, string subjectId)
         {
 
             foreach (var itemPaso in listaPasos)
@@ -118,27 +128,47 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
                 var paso = pasosOriginales.Where(r => r.Id == itemPaso.Id).FirstOrDefault();
 
+                if (paso == null)                
+                    return new Respuesta<List<TPaso>>("El paso que desea guardar es invalido", TAG);
+
+
                 if (itemPaso.Id > 0 && !itemPaso.Activo)
                 {
                     paso.Seguir(subjectId, false, true);
                 }
-                
-                if (itemPaso.Id > 0) {
+
+                if (itemPaso.Id > 0)
+                {
 
                     paso.IdRolAutoriza = itemPaso.IdRolAutoriza;
                     paso.TipoRol = itemPaso.TipoRol;
                     paso.Orden = itemPaso.Orden;
                     paso.AplicaFirma = itemPaso.AplicaFirma;
                     paso.Seguir(subjectId, true, false);
-                   
-                } 
+
+                }
+
+
             }
 
-            return pasosOriginales;
+            return new Respuesta<List<TPaso>>(pasosOriginales);
         }
 
         private Respuesta ValidarFlujo(TFlujo flujo, TFlujo flujoOriginal, bool esPredeterminado)
         {
+            //validamos que los pasos que me envian coincidan con los pasos existen en la DB
+            if (flujoOriginal != null) {
+                var idsPasos = flujo.Pasos.Where(p => p.Id > 0).Select(p => p.Id).ToList();
+                var pasosExsitentesActivos = flujoOriginal.Pasos.Where(p => p.Activo).ToList();
+
+                //obtengo todos los pasos existentes que coincidan con los ids de los pasos que me envian.
+                var encontrados = pasosExsitentesActivos.FindAll(pe => idsPasos.Contains(pe.Id));
+                //Si la cantidad de pasos encontrados es menor a la cantidad de pasos existentes activos en la db
+                if (encontrados.Count() < pasosExsitentesActivos.Count())
+                    return new Respuesta("La lista de pasos recibidos no coincide con lo existente", TAG);
+            }
+           
+
             if (flujo?.IdTipoEnte == null || flujo.IdTipoEnte <= 0)
                 return new Respuesta("El Tipo de Ente es requerido", TAG);
 
@@ -152,7 +182,10 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                     return new Respuesta("El nivel del empleado es requerido para un flujo particular.", TAG);
             }
 
-            if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado && flujo.Id == 0)
+            if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado && flujo.Id>0)
+                return new Respuesta("Es obligatorio tener un flujo predeterminado, por lo tanto no se puede eliminar", TAG);
+
+            if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
                 return new Respuesta("Solo se permite un flujo predeterminado ", TAG);
 
             //if (!esPredeterminado && flujo.TipoFlujo != (int)TipoFlujo.Predeterminado)
@@ -162,9 +195,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             //aplicamos validaciones a los pasos como un todo
             if (this.EsRepetido(listaPasos))
-                return new Respuesta("La lista de pasos del flujo no deben de repetirse", TAG);
-            
-            var pasosExistentes = flujoOriginal.Pasos.Where(p => p.Activo).ToList();
+                return new Respuesta("El numero de orden de los pasos del flujo no deben de repetirse", TAG);         
 
             if (!this.EsConsecutivo(listaPasos))
                 return new Respuesta("La lista de pasos del flujo debe ser consecutivo e iniciar en uno.", TAG);
@@ -188,7 +219,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         private bool EsRepetido(List<TPaso> pasos)
         {
-            return pasos.GroupBy(x => x.Orden).Any(g => g.Count() > 1);
+            return pasos.Where(p=>p.Activo).GroupBy(x => x.Orden).Any(g => g.Count() > 1);
         }
         /// <summary>
         /// Validad que del listado de pasos, su numero de orden sea consecutivo e inicie en uno.
@@ -219,10 +250,14 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         private Respuesta<bool> ValidarPaso(TPaso paso, TFlujo flujoOriginal)
         {
+            /*
             var pasosExistentes = flujoOriginal.Pasos.Where(p=>p.Activo);
 
-            if(pasosExistentes.Any(p=>p.Orden==paso.Orden))
-                return new Respuesta<bool>(String.Format("Error en el Paso: El numero de orden {0} se encuentra repetido", paso.Orden), TAG);
+            if (paso.Id == 0) {
+                if (pasosExistentes.Any(p => p.Orden == paso.Orden))
+                    return new Respuesta<bool>(String.Format("Error en el Paso: El numero de orden {0} se encuentra repetido", paso.Orden), TAG);
+            }*/
+            
 
             if (paso.Orden <= 0)
                 return new Respuesta<bool>(String.Format("El orden del paso debe ser mayor a 0"), TAG);
