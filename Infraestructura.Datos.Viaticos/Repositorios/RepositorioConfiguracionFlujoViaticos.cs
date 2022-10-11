@@ -89,7 +89,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                     select u).ToList();
 
             var flujos = (from u in Set
-                          where u.IdTipoEnte == idTipoEnte
+                          where u.IdTipoEnte == idTipoEnte && u.Activo
                           select u).ToList();
 
             var existe = flujos.GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado)

@@ -21,8 +21,10 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (!existeEntePublico)
                 return new Respuesta<List<TFlujo>>("El Ente Publico Relacionado no existe", TAG);
 
-            if(flujos.Select(f=>f.IdTipoEnte).Distinct().Count()>1)
-                return new Respuesta<List<TFlujo>>("El tipo de ente publico debe ser el mismo para los flujos recibidos", TAG);
+            var respuestaValidacionEnte = this.ValidarTipoEnte(flujos.Select(f => f.IdTipoEnte).ToList());
+
+            if (!respuestaValidacionEnte.Contenido)
+                return new Respuesta<List<TFlujo>>(respuestaValidacionEnte.Mensaje, TAG);
 
             if(!existeFlujoPredeterminado && !flujos.Any(f=>f.TipoFlujo==(int)TipoFlujo.Predeterminado) )
                 return new Respuesta<List<TFlujo>>("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
@@ -214,5 +216,16 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return new Respuesta<bool>(true);
         }
 
+        public Respuesta<bool> ValidarTipoEnte(List<int> idsTipoEnte) {
+
+            if (idsTipoEnte.Any(i=>i<=0))
+                return new Respuesta<bool>("El tipo de ente publico de alguno de los flujos es invalido", TAG);
+
+            if (idsTipoEnte.Distinct().Count() > 1)
+                return new Respuesta<bool>("El tipo de ente publico debe ser el mismo para los flujos recibidos", TAG);
+
+            return new Respuesta<bool>(true);
+
+        }
     }
 }

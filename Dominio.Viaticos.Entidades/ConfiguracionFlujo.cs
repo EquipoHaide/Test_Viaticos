@@ -19,7 +19,7 @@ namespace Dominio.Viaticos.Entidades
         public int IdTipoEnte { get; set; }
 
 
-        public int IdNivelEmpleado { get; set; }
+        public int? IdNivelEmpleado { get; set; }
 
         [Required]
         public int TipoFlujo { get; set; }

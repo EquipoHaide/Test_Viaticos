@@ -19,6 +19,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujoOriginal, bool existeFlujoPredeterminado, bool existeEntePublico, string subjectId);
 
+        public Respuesta<bool> ValidarTipoEnte(List<int> idsTipoEnte);
 
     }
 }

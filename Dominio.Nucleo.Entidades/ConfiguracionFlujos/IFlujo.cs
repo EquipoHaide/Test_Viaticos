@@ -12,7 +12,7 @@ namespace Dominio.Nucleo.Entidades
         public int IdTipoEnte { get; set; }
        
         //NivelEmpleado NivelEmpleado { get; set; }
-        public int IdNivelEmpleado { get; set; }
+        public int? IdNivelEmpleado { get; set; }
         
         List<TPaso> Pasos { get; set; }
 

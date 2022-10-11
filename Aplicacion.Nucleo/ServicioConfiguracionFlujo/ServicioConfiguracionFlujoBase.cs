@@ -38,10 +38,14 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, string subjectId)
         { 
             if (flujos == null || flujos.Count() <= 0)
-                return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion", TAG);
+                return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion", TAG);           
 
-            if (flujos[0].IdTipoEnte <= 0)
-                return new Respuesta<List<TFlujo>>("El Tipo de ente es invalido", TAG);
+
+            var respuestaValidacionEnte = ServicioDominio.ValidarTipoEnte(flujos.Select(f => f.IdTipoEnte).ToList());
+
+            if (!respuestaValidacionEnte.Contenido)
+                return new Respuesta<List<TFlujo>>(respuestaValidacionEnte.Mensaje, respuestaValidacionEnte.TAG);
+
 
             var existeFlujoPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujos[0].IdTipoEnte));
 
