@@ -18,6 +18,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ConfiguracionFlujos\" />
-    <Folder Include="FlujoAutorizacion \" />
+    <Folder Include="AutorizacionViaticos  \" />
   </ItemGroup>
 </Project>

@@ -6,9 +6,11 @@
 
   <ItemGroup>
     <None Remove="Nueva carpeta\" />
+    <None Remove="AutorizacionViaticos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Flujos\" />
+    <Folder Include="AutorizacionViaticos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dominio.Nucleo.Servicios\Dominio.Nucleo.Servicios.csproj" />

@@ -15,11 +15,5 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
 
         object AdministrarFlujos([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config);
 
-        //object Modificar([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config);
-
-        //object Eliminar([FromQuery] List<int> id );
-
-        
-
     }
 }

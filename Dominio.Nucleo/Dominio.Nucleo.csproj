@@ -8,9 +8,13 @@
     <None Remove="AutoMapper" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="ConfiguracionFlujos\" />
+    <None Remove="FlujoAutorizacion\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FlujoAutorizacion\" />
   </ItemGroup>
 </Project>

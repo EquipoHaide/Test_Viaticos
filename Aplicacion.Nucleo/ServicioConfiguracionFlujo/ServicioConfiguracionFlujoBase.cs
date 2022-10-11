@@ -58,7 +58,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
                 if (respuestaComplementaria.EsExito)
                 {
-                  
                     foreach (var item in respuesta.Contenido)
                     {
                         if (item.Id == 0)
