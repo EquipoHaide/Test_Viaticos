@@ -40,18 +40,6 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (flujos == null || flujos.Count() <= 0)
                 return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion", TAG);           
 
-
-            var respuestaValidacionEnte = ServicioDominio.ValidarTipoEnte(flujos.Select(f => f.IdTipoEnte).ToList());
-
-            if (!respuestaValidacionEnte.Contenido)
-                return new Respuesta<List<TFlujo>>(respuestaValidacionEnte.Mensaje, respuestaValidacionEnte.TAG);
-
-
-            var existeFlujoPredeterminado = Repositorio.Try(r => r.ExisteFlujoPredeterminado(flujos[0].IdTipoEnte));
-
-            if (existeFlujoPredeterminado.EsError)
-                return new Respuesta<List<TFlujo>>(existeFlujoPredeterminado.Mensaje,TAG);
-
             var flujosExistentes = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujos[0].IdTipoEnte));
 
             if (flujosExistentes.EsError)
@@ -62,7 +50,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (existeEntePublico.EsError)
                 return new Respuesta<List<TFlujo>>(existeEntePublico.Mensaje, TAG);
 
-            var respuesta = ServicioDominio.AdministrarFlujos(flujos, flujosExistentes.Contenido, existeFlujoPredeterminado.Contenido, existeEntePublico.Contenido, subjectId);
+            var respuesta = ServicioDominio.AdministrarFlujos(flujos, flujosExistentes.Contenido, existeEntePublico.Contenido, subjectId);
 
             if (respuesta.EsExito)
             {

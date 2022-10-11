@@ -15,9 +15,9 @@ namespace Dominio.Nucleo.Repositorios
     {
         //Agregar los metodos particulares que se requieren para realizar el guardado general
 
-        bool ExisteFlujoPredeterminado(int idTipoEnte);
+        //bool ExisteFlujoPredeterminado(int idTipoEnte);
 
-        bool ExisteNivelRepetido(int idTipoEnte);
+        //bool ExisteNivelRepetido(int idTipoEnte);
 
         /// <summary>
         /// Valida que no existe flujo de autorizacion ya registrados con dicho Ente Publico 

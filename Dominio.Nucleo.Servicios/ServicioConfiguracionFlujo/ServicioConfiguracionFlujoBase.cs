@@ -13,7 +13,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
-        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool existeFlujoPredeterminado, bool existeEntePublico, string subjectId)
+        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool existeEntePublico, string subjectId)
         {
             if (flujos.Count() <= 0)
                 return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion ", TAG);
@@ -26,7 +26,10 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if (!respuestaValidacionEnte.Contenido)
                 return new Respuesta<List<TFlujo>>(respuestaValidacionEnte.Mensaje, TAG);
 
-            if(!existeFlujoPredeterminado && !flujos.Any(f=>f.TipoFlujo==(int)TipoFlujo.Predeterminado) )
+            var existeFlujoPredeterminado = flujosOriginales.
+                GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado).Any(a => a.Count() > 0);
+
+            if (!existeFlujoPredeterminado && !flujos.Any(f=>f.TipoFlujo==(int)TipoFlujo.Predeterminado) )
                 return new Respuesta<List<TFlujo>>("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
 
             foreach (var itemFlujo in flujos.OrderBy(f=>f.TipoFlujo))
