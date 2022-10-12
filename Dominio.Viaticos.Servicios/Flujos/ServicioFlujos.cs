@@ -13,77 +13,33 @@ namespace Dominio.Viaticos.Servicios
     {
         private new const string TAG = "Dominio.Seguridad.Servicios.ServicioFlujos";
 
-        public Respuesta<List<FlujoViatico>> AdministrarFlujos(List<FlujoViatico> flujos, bool validacionExtra, string subjectId)
+        public Respuesta<List<FlujoViatico>> CompletarAdministracionFlujos(List<FlujoViatico> flujos, List<FlujoViatico> flujosOriginales, string subjectId)
         {
+
+            //agregar la logica de validacion de reglas de negocio propia de viaticos
+
+
+            //creacion de los historiales si se requirieran, se inicio con su elaboracion a manera de ejemplo.
+            foreach (var item in flujos)
+            {
+                var flujoOriginal = flujosOriginales.Find(f => f.Id == item.Id);
+                if (item.IdNivelEmpleado != flujoOriginal.IdNivelEmpleado)
+                {
+                    //crear  el historial de flujo de acuerdo al flujo que se esta procesando...
+                    var nuevoHistorial = new HistorialFlujoViatico();
+                    nuevoHistorial.IdFlujo = flujoOriginal.Id;
+                    nuevoHistorial.IdNivelEmpleado = flujoOriginal.IdNivelEmpleado;
+                    nuevoHistorial.IdTipoEnte = flujoOriginal.IdTipoEnte;
+                    //etc, terminar el seteo
+
+                    item.Historiales.Add(nuevoHistorial);
+
+                }
+
+            }
             throw new NotImplementedException();
         }
 
-        //public Respuesta<FlujoViatico> Crear(FlujoViatico flujo, bool validacionExtra, string subjectId)
-        //{
-
-        //    var controlFlujo = new FlujoViatico() {
-        //        IdTipoEnte = flujo.IdTipoEnte,
-        //        IdNivelEmpleado = flujo.IdNivelEmpleado,
-        //        TipoFlujo = flujo.TipoFlujo,
-
-        //    };
-
-        //    foreach (var item in flujo.Pasos)
-        //    {
-        //        item.Seguir(subjectId);
-        //    }
-
-        //    controlFlujo.Pasos = flujo.Pasos;
-
-        //    controlFlujo.Seguir(subjectId);
-
-        //    return new Respuesta<FlujoViatico>(controlFlujo);
-        //}
-
-        //public Respuesta<FlujoViatico> Modificar(FlujoViatico flujo, FlujoViatico flujoOriginal, bool validacionExtra, string subjectId)
-        //{
-
-        //    foreach (var item in flujoOriginal.Pasos)
-        //    {
-        //        if (item.Id == 0)
-        //            item.Seguir(subjectId);
-        //            flujoOriginal.Pasos.Add(item);
-
-        //        if (item.Id > 0 && !item.Activo)
-        //            item.Seguir(subjectId, true);
-
-        //        if (item.Id > 0)
-        //        {
-        //            var itemOriginal = flujoOriginal.Pasos.FirstOrDefault(r => r.Id == item.Id);
-
-        //            itemOriginal.Orden = item.Orden;
-
-        //            itemOriginal.Seguir(subjectId, true, false);
-        //        }
-        //    }
-
-        //    flujoOriginal.Seguir(subjectId, true, false);
-
-        //    return new Respuesta<FlujoViatico>(flujoOriginal);
-        //}
-
-        //public Respuesta<FlujoViatico> Eliminar(FlujoViatico flujoOriginal, List<FlujoViatico> listaFlujos, bool esPredeterminado, string subjectId)
-        //{
-
-        //    if (listaFlujos.Count() == 1)
-        //        return new Respuesta<FlujoViatico>("",TAG);
-
-        //    foreach (var item in flujoOriginal.Pasos)
-        //    {
-        //        if (item.Id > 0 && item.Activo)
-        //            item.Seguir(subjectId, true);
-        //    }
-
-        //    flujoOriginal.Seguir(subjectId, true);
-
-
-        //    return new Respuesta<FlujoViatico>(flujoOriginal);
-        //}
-
+       
     }
 }

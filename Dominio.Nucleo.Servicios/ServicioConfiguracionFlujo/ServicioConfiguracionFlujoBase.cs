@@ -59,6 +59,9 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 {
                     var flujoOriginal = flujosOriginales.Where(r => r.Id == itemFlujo.Id).FirstOrDefault();
 
+                    if(flujoOriginal==null)
+                        return new Respuesta<List<TFlujo>>(String.Format("El flujo: {0} no fue encontrado", itemFlujo.Id), TAG);
+
                     if (flujoOriginal != null)
                     {
                         if (flujoOriginal.TipoFlujo!=itemFlujo.TipoFlujo)

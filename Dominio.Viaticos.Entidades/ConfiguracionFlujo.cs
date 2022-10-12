@@ -30,6 +30,10 @@ namespace Dominio.Viaticos.Entidades
         [ForeignKey("IdTipoEnte")]
         public TipoEntePublico EntePublico { get; set; }
 
+        public List<HistorialFlujoViatico> Historiales { get; set; }
+
+
+
     }
 
 

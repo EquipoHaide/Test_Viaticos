@@ -13,15 +13,17 @@ namespace Dominio.Nucleo.Entidades
        
         //NivelEmpleado NivelEmpleado { get; set; }
         public int? IdNivelEmpleado { get; set; }
-        
-        List<TPaso> Pasos { get; set; }
+
 
         /// <summary>
         /// Es un Enumerable
         /// 1 --> Predeterminado
         /// 2 --> Particular
         /// </summary>
-        int TipoFlujo { get; set; }
+        public int TipoFlujo { get; set; }
+
+        List<TPaso> Pasos { get; set; }
+
 
     }
 }

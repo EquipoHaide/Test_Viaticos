@@ -40,11 +40,16 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         }
 
 
-        public override Respuesta<List<FlujoViatico>> AdministrarConfiguracionFlujos(List<FlujoViatico> flujos, string subjectId)
+        public override Respuesta<List<FlujoViatico>> CompletarAdministracionFlujos(List<FlujoViatico> flujos, List<FlujoViatico> flujosOriginales,  string subjectId)
         {
 
 
-            return new Respuesta<List<FlujoViatico>>(flujos);
+            var respuesta = Servicio.CompletarAdministracionFlujos(flujos, flujosOriginales, subjectId);
+
+            //agregar la logica faltante para la completar la administracion de los flujos.
+           
+
+            return new Respuesta<List<FlujoViatico>>(respuesta.Contenido);
         }
 
 
