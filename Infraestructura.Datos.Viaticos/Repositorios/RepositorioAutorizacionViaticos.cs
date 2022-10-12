@@ -15,7 +15,8 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
         public override ConsultaPaginada<Entidad.Autorizacion> ConsultarAutorizaciones(Modelo.ConsultaSolicitudes parametros, string subjectId)
         {
-            throw new NotImplementedException();
+
+            return new ConsultaPaginada<Entidad.Autorizacion>();
         }
     }
 }

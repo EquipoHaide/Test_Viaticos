@@ -4,9 +4,9 @@ using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Presentacion.WebApi.FlujoAutorizacion
+namespace Presentacion.WebApi.AutorizacionSolicitudes
 {
-    public interface IFlujoAutorizacionController<TAutorizacion, TQuery>
+    public interface IAutorizacionSolicitudBaseController<TAutorizacion, TQuery>
         where TAutorizacion : IAutorizacion
         where TQuery : IConsultaSolicitud
     {

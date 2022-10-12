@@ -19,8 +19,6 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
         public virtual IRepositorioAutorizacionBase<TAutorizacion, TQuery> Repositorio { get; }
 
-       
-
         public Respuesta<ConsultaPaginada<TAutorizacion>> Consultar(TQuery parametros, string subjectId)
         {
             if (parametros == null) return new Respuesta<ConsultaPaginada<TAutorizacion>>("El modelo de consulta para obtener no es valido.", TAG);

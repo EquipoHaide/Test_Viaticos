@@ -21,7 +21,7 @@
     <Folder Include="Aplicacion\" />
     <Folder Include="AppCircuitBreaker\" />
     <Folder Include="HealthCheck\" />
-    <Folder Include="FlujoAutorizacion\" />
+    <Folder Include="AutorizacionSolicitud\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aplicacion.Seguridad.Servicios\Aplicacion.Seguridad.Servicios.csproj" />

@@ -16,7 +16,7 @@ namespace Presentacion.WebApi.Controllers.Viaticos
         AplicacionViaticos.IServicioFlujo<Entidad.FlujoViatico, Entidad.PasoViatico, ConsultaConfiguracionFlujo> servicioViaticos;
         AplicacionViaticos.IServicioFlujo<Entidad.FlujoViatico, Entidad.PasoViatico, ConsultaConfiguracionFlujo> ServicioViaticos => App.Inject(ref servicioViaticos);
 
-        public override IServicioConfiguracionFlujoBase<Entidad.FlujoViatico  , Entidad.PasoViatico, ConsultaConfiguracionFlujo> ServicioConfiguracionFlujoBase => this.ServicioViaticos;
+        public override IServicioConfiguracionFlujoBase<Entidad.FlujoViatico, Entidad.PasoViatico, ConsultaConfiguracionFlujo> ServicioConfiguracionFlujoBase => this.ServicioViaticos;
 
 
         public ConfiguracionFlujoViaticosController(Aplicacion.Nucleo.IAplicacion app)

@@ -5,9 +5,9 @@ using Dominio.Nucleo.FlujoAutorizacion;
 using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Presentacion.WebApi.FlujoAutorizacion
+namespace Presentacion.WebApi.AutorizacionSolicitudes
 {
-    public class FlujoAutorizacionController<TAutorizacion, TQuery> : ControllerBase, IFlujoAutorizacionController<TAutorizacion, TQuery>
+    public class AutorizacionSolicitudBaseController<TAutorizacion, TQuery> : ControllerBase, IAutorizacionSolicitudBaseController<TAutorizacion, TQuery>
         where TAutorizacion :class, IAutorizacion
         where TQuery : class,IConsultaSolicitud
     {
@@ -16,7 +16,7 @@ namespace Presentacion.WebApi.FlujoAutorizacion
         public virtual Aplicacion.Nucleo.ServicioAutorizacion.IServicioAutorizacionBase<TAutorizacion,TQuery> ServicioAutorizacion { get; }
 
 
-        [HttpGet("solicitudes")]
+        [HttpGet("recursos")]
         public object ConsultarSolicitudes([FromQuery] TQuery filtro)
         {
             try
@@ -32,7 +32,7 @@ namespace Presentacion.WebApi.FlujoAutorizacion
                     return this.ApiResult(consulta.Mensaje);
                 }
 
-                return this.ApiResult(/*consulta.Contenido*/);
+                return this.ApiResult(consulta.Contenido);
             }
             catch (Exception e)
             {
@@ -40,7 +40,7 @@ namespace Presentacion.WebApi.FlujoAutorizacion
             }
         }
 
-        [HttpPut("solicitudes")]
+        [HttpPut("recursos")]
         public object AdministrarAutorizaciones([FromBody] List<TAutorizacion> autorizacion)
         {
             try
