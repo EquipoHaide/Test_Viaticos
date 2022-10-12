@@ -17,9 +17,9 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
         public virtual Dominio.Nucleo.Servicios.ServicioAutorizacion.IServicioAutorizacionBase<TAutorizacion> ServicioDominio { get; }
 
+        public virtual IRepositorioAutorizacionBase<TAutorizacion, TQuery> Repositorio { get; }
 
-        public virtual IRepositorioAutorizacion<TAutorizacion, TQuery> Repositorio { get; }
-
+       
 
         public Respuesta<ConsultaPaginada<TAutorizacion>> Consultar(TQuery parametros, string subjectId)
         {
@@ -36,7 +36,7 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
             var respuesta = ServicioDominio.AdministrarAutorizacion(autorizacones, subjectId);
 
-            throw new NotImplementedException();
+            return new Respuesta();
         }
 
       

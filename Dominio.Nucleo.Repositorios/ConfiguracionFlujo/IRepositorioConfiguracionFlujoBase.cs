@@ -9,7 +9,7 @@ namespace Dominio.Nucleo.Repositorios
     /// 
     /// </summary>
     /// <typeparam name="TRecurso"></typeparam>
-    public interface IRepositorioConfiguracionFlujo<TFlujoEntidad, TQuery> : IRepository<TFlujoEntidad>
+    public interface IRepositorioConfiguracionFlujoBase<TFlujoEntidad, TQuery> : IRepository<TFlujoEntidad>
         where TFlujoEntidad : class, IEntity
         where TQuery : class, IConsultaFlujo
     {

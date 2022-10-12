@@ -6,7 +6,7 @@ using MicroServices.Platform.Repository.Core;
 
 namespace Dominio.Nucleo.Repositorios.ConfiguracionFlujo
 {
-    public interface IRepositorioAutorizacion<TAutorizacion, TQuery> : IRepository<TAutorizacion>
+    public interface IRepositorioAutorizacionBase<TAutorizacion, TQuery> : IRepository<TAutorizacion>
         where TAutorizacion : class, IEntity
         where TQuery : class, IConsultaSolicitud 
     {

@@ -10,12 +10,12 @@ using System.Text;
 
 namespace Infraestructura.Datos.Nucleo
 {
-    public abstract class RepositorioConfiguracionFlujo<TFlujo,TQuery> : Repository<TFlujo>, IRepositorioConfiguracionFlujo<TFlujo,TQuery>
+    public abstract class RepositorioConfiguracionFlujoBase<TFlujo,TQuery> : Repository<TFlujo>, IRepositorioConfiguracionFlujoBase<TFlujo,TQuery>
          where TFlujo : class, IEntity
         where TQuery : class, IConsultaFlujo
 
     {
-        public RepositorioConfiguracionFlujo(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+        public RepositorioConfiguracionFlujoBase(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
         public abstract ConsultaPaginada<TFlujo> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 

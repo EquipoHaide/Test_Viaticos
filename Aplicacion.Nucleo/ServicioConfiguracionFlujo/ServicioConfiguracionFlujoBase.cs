@@ -19,8 +19,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public virtual Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso> ServicioDominio { get; }
 
-
-        public virtual IRepositorioConfiguracionFlujo<TFlujo,TQuery> Repositorio { get; }
+        public virtual IRepositorioConfiguracionFlujoBase<TFlujo,TQuery> Repositorio { get; }
         
    
         public abstract Respuesta<List<TFlujo>> AdministrarConfiguracionFlujos(List<TFlujo> flujos, string subjectId);

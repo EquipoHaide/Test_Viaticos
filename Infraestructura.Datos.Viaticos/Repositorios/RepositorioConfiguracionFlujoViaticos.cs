@@ -16,7 +16,7 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujo<Entidades.FlujoViatico,ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
+    public class RepositorioConfiguracionFlujoViaticos : RepositorioConfiguracionFlujoBase<Entidades.FlujoViatico,ConsultaConfiguracionFlujo>, IRepositorioConfiguracionFlujoViaticos
     {
         public RepositorioConfiguracionFlujoViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 

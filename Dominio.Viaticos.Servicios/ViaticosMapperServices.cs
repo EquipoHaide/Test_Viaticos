@@ -1,7 +1,7 @@
 ﻿using System;
 using Dominio.Nucleo;
 using Dominio.Viaticos.Modelos;
-using Dominio.Viaticos.Servicios.AutorizacionViaticos;
+using Dominio.Viaticos.Servicios;
 
 namespace Dominio.Viaticos.Servicios
 {

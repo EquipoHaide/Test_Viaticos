@@ -8,11 +8,11 @@ using MicroServices.Platform.Repository.Core;
 
 namespace Infraestructura.Datos.Nucleo.AutorizacionSolicitud
 {
-    public abstract class RepositorioAutorizacion<TAutorizacion, TQuery> : Repository<TAutorizacion> , IRepositorioAutorizacion<TAutorizacion, TQuery>
+    public abstract class RepositorioAutorizacionBase<TAutorizacion, TQuery> : Repository<TAutorizacion> , IRepositorioAutorizacionBase<TAutorizacion, TQuery>
         where TAutorizacion : class,IEntity
         where TQuery : class,IConsultaSolicitud 
     {
-        public RepositorioAutorizacion(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+        public RepositorioAutorizacionBase(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
         public abstract ConsultaPaginada<TAutorizacion> ConsultarAutorizaciones(TQuery parametros, string subjectId);
     }

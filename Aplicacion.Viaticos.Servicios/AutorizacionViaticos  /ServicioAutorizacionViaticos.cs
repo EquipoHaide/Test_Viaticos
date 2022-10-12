@@ -3,7 +3,10 @@ using Aplicacion.Nucleo.ServicioAutorizacion;
 using Entidades = Dominio.Viaticos.Entidades;
 using Modelos = Dominio.Viaticos.Modelos;
 using DominioServicio = Dominio.Viaticos.Servicios;
-using Dominio.Nucleo.Servicios.ServicioAutorizacion;
+using ServicioBase = Dominio.Nucleo.Servicios.ServicioAutorizacion;
+using Infraestructura.Transversal.Plataforma;
+using System.Collections.Generic;
+using Dominio.Viaticos.Entidades;
 
 namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
 {
@@ -17,18 +20,20 @@ namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
 
         DominioServicio.IServicioAutorizacionViaticos<Entidades.Autorizacion> servicio;
         DominioServicio.IServicioAutorizacionViaticos<Entidades.Autorizacion> Servicio => App.Inject(ref servicio);
+        public override ServicioBase.IServicioAutorizacionBase<Entidades.Autorizacion> ServicioDominio { get; }
 
-        //public override IServicioAutorizacionBase<Entidades.Autorizacion> ServicioDomino => this.Servicio; 
+        //IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViatico;
+        //IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViatico => App.Inject(ref repositorioConfiguracionFlujoViatico);
 
+        //public override IRepositorioConfiguracionFlujo<EntidadesViaticos.FlujoViatico, ConsultaConfiguracionFlujo> Repositorio => this.RepositorioConfiguracionFlujoViatico;
 
-        //DominioServicio.IServicioFlujos<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico> servicio;
-        //DominioServicio.IServicioFlujos<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico> Servicio => App.Inject(ref servicio);
-        //public override Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<EntidadesViaticos.FlujoViatico, EntidadesViaticos.PasoViatico> ServicioDominio => this.Servicio;
+        
 
 
         public ServicioAutorizacionViaticos(Nucleo.IAplicacion app)
         {
             this.App = app;
         }
+
     }
 }

@@ -31,7 +31,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         IRepositorioConfiguracionFlujoViaticos repositorioConfiguracionFlujoViatico;
         IRepositorioConfiguracionFlujoViaticos RepositorioConfiguracionFlujoViatico => App.Inject(ref repositorioConfiguracionFlujoViatico);
 
-        public override IRepositorioConfiguracionFlujo<EntidadesViaticos.FlujoViatico, ConsultaConfiguracionFlujo> Repositorio => this.RepositorioConfiguracionFlujoViatico;
+        public override IRepositorioConfiguracionFlujoBase<EntidadesViaticos.FlujoViatico, ConsultaConfiguracionFlujo> Repositorio => this.RepositorioConfiguracionFlujoViatico;
 
 
         public ServicioFlujo(Nucleo.IAplicacion app)
