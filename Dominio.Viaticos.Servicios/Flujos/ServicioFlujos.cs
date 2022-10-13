@@ -18,22 +18,56 @@ namespace Dominio.Viaticos.Servicios
 
             //agregar la logica de validacion de reglas de negocio propia de viaticos
 
-
-            //creacion de los historiales si se requirieran, se inicio con su elaboracion a manera de ejemplo.
-            foreach (var item in flujos)
+            //PENDIENTE COMPLETAR la creacion de los historiales de los flujos y de los pasos si se requirieran, se inicio con su elaboracion a manera de ejemplo.            
+            foreach (var flujoNuevo in flujos)
             {
-                var flujoOriginal = flujosOriginales.Find(f => f.Id == item.Id);
-                if (item.IdNivelEmpleado != flujoOriginal.IdNivelEmpleado)
+                var flujoOriginal = flujosOriginales.Find(f => f.Id == flujoNuevo.Id);
+                if (flujoNuevo.IdNivelEmpleado != flujoOriginal.IdNivelEmpleado)
                 {
                     //crear  el historial de flujo de acuerdo al flujo que se esta procesando...
-                    var nuevoHistorial = new HistorialFlujoViatico();
-                    nuevoHistorial.IdFlujo = flujoOriginal.Id;
-                    nuevoHistorial.IdNivelEmpleado = flujoOriginal.IdNivelEmpleado;
-                    nuevoHistorial.IdTipoEnte = flujoOriginal.IdTipoEnte;
-                    //etc, terminar el seteo
+                    var historialFlujoViatico = new HistorialFlujoViatico();
+                    historialFlujoViatico.IdFlujo = flujoOriginal.Id;
+                    historialFlujoViatico.IdNivelEmpleado = flujoOriginal.IdNivelEmpleado;
+                    historialFlujoViatico.IdTipoEnte = flujoOriginal.IdTipoEnte;
+                    historialFlujoViatico.TipoFlujo = flujoOriginal.TipoFlujo;
 
-                    item.Historiales.Add(nuevoHistorial);
+                    historialFlujoViatico.IdUsuarioModifico = flujoOriginal.IdUsuarioModifico;
+                    historialFlujoViatico.OperacionInicio = flujoOriginal.FechaModificacion;
+                    //Si ya se aplico el seguimiento al flujo nuevo, puedo restarle un segundo, pero verificar
+                    historialFlujoViatico.OperacionFin = flujoNuevo.FechaModificacion.AddSeconds(-1); 
+       
 
+                    flujoNuevo.Historiales.Add(historialFlujoViatico);
+
+                }
+
+                foreach (var paso in flujoNuevo.Pasos)
+                {
+                    var pasosOriginales = flujoOriginal.Pasos;
+                    var pasoOriginal = pasosOriginales.Find(p=>p.Id == paso.Id);
+
+                    if (paso.AplicaFirma != pasoOriginal.AplicaFirma ||
+                        paso.IdRolAutoriza != pasoOriginal.IdRolAutoriza ||
+                        paso.Orden != pasoOriginal.Orden ||
+                        paso.TipoRol != pasoOriginal.TipoRol
+                        ) 
+                    {
+                        var historialPaso = new HistorialPasoViatico();
+
+                        historialPaso.IdPaso = pasoOriginal.Id;
+                        historialPaso.IdFlujo = pasoOriginal.IdFlujo;
+                        
+                        historialPaso.IdRolAutoriza = pasoOriginal.IdRolAutoriza;
+                        historialPaso.Orden = pasoOriginal.Orden;
+                        historialPaso.TipoRol = pasoOriginal.TipoRol;
+                        historialPaso.AplicaFirma = pasoOriginal.AplicaFirma;
+
+                        historialPaso.IdUsuarioModifico = pasoOriginal.IdUsuarioModifico;
+                        historialPaso.OperacionInicio = pasoOriginal.FechaModificacion;
+                        //Si ya se aplico el seguimiento al paso viatico, puedo restarle un segundo, pero verificar
+                        historialPaso.OperacionFin = paso.FechaModificacion.AddSeconds(-1);
+
+                    }
                 }
 
             }

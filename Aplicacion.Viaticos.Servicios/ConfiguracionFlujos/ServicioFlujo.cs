@@ -46,7 +46,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
 
             var respuesta = Servicio.CompletarAdministracionFlujos(flujos, flujosOriginales, subjectId);
 
-            //agregar la logica faltante para la completar la administracion de los flujos.
+            //agregar la logica faltante para completar la administracion de los flujos.
            
 
             return new Respuesta<List<FlujoViatico>>(respuesta.Contenido);

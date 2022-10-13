@@ -1,16 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Dominio.Nucleo;
 using Dominio.Nucleo.Entidades;
 using Dominio.Seguridad.Entidades;
 
 namespace Dominio.Viaticos.Entidades
 {
-    [Table("Pasos", Schema = "Viaticos")]
-    public class PasoViatico : Seguimiento,  IPaso
+    [Table("HitorialesPasos", Schema = "Viaticos")]
+    public class HistorialPasoViatico : IEntity
     {
-        public int Id { get; set ; }
+        [Required]
+        public int Id { get; set; }
+
+        [Required]
+        public int IdPaso { get; set ; }
 
         [Required]
         public int IdFlujo { get; set; }
@@ -28,11 +32,15 @@ namespace Dominio.Viaticos.Entidades
         public bool AplicaFirma { get; set ; }
 
 
-        [ForeignKey("IdFlujo")]
-        public FlujoViatico Flujo { get; set; }
+        [ForeignKey("IdPaso")]
+        public PasoViatico PasoViatico { get; set; }
 
-
-        public List<HistorialPasoViatico> Historiales { get; set; }
+        [Required]
+        public string IdUsuarioModifico { get; set; }
+        [Required]
+        public DateTime OperacionInicio { get; set; }
+        [Required]
+        public DateTime? OperacionFin { get; set; }
 
     }
 }
