@@ -6,12 +6,13 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Aplicacion.Nucleo.ServicioAutorizacion
 {
-    public interface IServicioAutorizacionBase<TAutorizacion,TQuery>
+    public interface IServicioAutorizacionBase<TInstanciaCondensada,TAutorizacion,TQuery>
         where TAutorizacion : class,IAutorizacion
+        where TInstanciaCondensada : class,IInstanciaCondensada
         where TQuery : class, IConsultaSolicitud 
     {
-        public Respuesta<ConsultaPaginada<TAutorizacion>> Consultar(TQuery parametros, string subjectId);
+        public Respuesta<ConsultaPaginada<TInstanciaCondensada>> Consultar(TQuery parametros, string subjectId);
 
-        public Respuesta AdministrarAutorizaciones(List<TAutorizacion> autorizacones, string subjectId);
+        public Respuesta AdministrarAutorizaciones(List<TInstanciaCondensada> Autorizacones, int Accion, string subjectId);
     }
 }

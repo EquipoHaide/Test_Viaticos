@@ -4,16 +4,18 @@ using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Infraestructura.Transversal.Plataforma;
 using Microsoft.AspNetCore.Mvc;
+using Presentacion.WebApi.Modelos;
 
 namespace Presentacion.WebApi.AutorizacionSolicitudes
 {
-    public class AutorizacionSolicitudBaseController<TAutorizacion, TQuery> : ControllerBase, IAutorizacionSolicitudBaseController<TAutorizacion, TQuery>
-        where TAutorizacion :class, IAutorizacion
+    public class AutorizacionSolicitudBaseController<TInstanciaCondensada,TAutorizacion, TQuery> : ControllerBase, IAutorizacionSolicitudBaseController<TInstanciaCondensada, TAutorizacion, TQuery>
+        where TAutorizacion : class, IAutorizacion
+        where TInstanciaCondensada :class, IInstanciaCondensada
         where TQuery : class,IConsultaSolicitud
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
 
-        public virtual Aplicacion.Nucleo.ServicioAutorizacion.IServicioAutorizacionBase<TAutorizacion,TQuery> ServicioAutorizacion { get; }
+        public virtual Aplicacion.Nucleo.ServicioAutorizacion.IServicioAutorizacionBase<TInstanciaCondensada,TAutorizacion,TQuery> ServicioAutorizacion { get; }
 
 
         [HttpGet("recursos")]
@@ -41,13 +43,14 @@ namespace Presentacion.WebApi.AutorizacionSolicitudes
         }
 
         [HttpPut("recursos")]
-        public object AdministrarAutorizaciones([FromBody] List<TAutorizacion> autorizacion)
+       
+        public object AdministrarAutorizaciones([FromBody] ModeloSolicitud<TInstanciaCondensada> modelo)
         {
             try
             {
                 var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
 
-                var resultado = ServicioAutorizacion.AdministrarAutorizaciones(autorizacion  , GetSubjectId);
+                var resultado = ServicioAutorizacion.AdministrarAutorizaciones(modelo.Solicitudes, modelo.Accion, GetSubjectId);
 
                 if (resultado.EsError)
                 {
@@ -58,7 +61,7 @@ namespace Presentacion.WebApi.AutorizacionSolicitudes
                 }
 
                 return this.ApiResult(new { resultado });
-             
+
             }
             catch (Exception e)
             {

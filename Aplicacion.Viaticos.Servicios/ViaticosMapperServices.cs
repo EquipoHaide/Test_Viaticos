@@ -4,6 +4,7 @@ using Aplicacion.Viaticos.Servicios.AutorizacionViaticos;
 
 using Dominio.Nucleo;
 using Dominio.Viaticos.Modelos;
+using Entidad = Dominio.Viaticos.Entidades;
 
 namespace Aplicacion.Viaticos.Servicios
 {
@@ -13,10 +14,8 @@ namespace Aplicacion.Viaticos.Servicios
         {
 
             app.Register<IServicioFlujo<Dominio.Viaticos.Entidades.FlujoViatico, Dominio.Viaticos.Entidades.PasoViatico, ConsultaConfiguracionFlujo>, ServicioFlujo>();
-            app.Register<IServicioAutorizacionViaticos<Dominio.Viaticos.Entidades.Autorizacion, Dominio.Viaticos.Modelos.ConsultaSolicitudes>, ServicioAutorizacionViaticos>();
-            //app.Register<IServicioFlujo<Dominio.Viaticos.Entidades.FlujoViatico, Dominio.Viaticos.Entidades.PasoViatico, ConsultaConfiguracionFlujo>, ServicioFlujo>();
-
-
+            app.Register<IServicioAutorizacionViaticos<Entidad.SolicitudCondensada,Entidad.Autorizacion, Dominio.Viaticos.Modelos.ConsultaSolicitudes>, ServicioAutorizacionViaticos>();
+            
 
         }
     }

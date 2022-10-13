@@ -3,19 +3,21 @@ using Dominio.Nucleo.Entidades;
 
 namespace Dominio.Viaticos.Entidades
 {
-    public class Autorizacion : IAutorizacion
+    public class SolicitudCondensada : IInstanciaCondensada
     {
         public int Id { get; set; }
 
-        public int IdFlujo { get; set ; }
+        public int IdAutorizacion { get; set; }
 
-        public int Orden { get ; set; }
+        public string Folio { get; set; }
 
-        public int IdRol { get ; set; }
+        public string Concepto { get; set; }
 
-        public string Sello { get ; set; }
+        public int Estado { get; set; }
 
-        public int Estado { get ; set; }
+        public int Orden { get; set; }
+
+        public int IdRol { get; set; }
 
         public string IdUsuarioCreo { get; set; }
 
@@ -26,5 +28,6 @@ namespace Dominio.Viaticos.Entidades
             this.IdUsuarioCreo = idUsuario;
             this.FechaCreacion = DateTime.Now;
         }
+
     }
 }

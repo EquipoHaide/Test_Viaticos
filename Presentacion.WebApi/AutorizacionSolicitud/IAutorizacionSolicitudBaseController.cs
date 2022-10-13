@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Microsoft.AspNetCore.Mvc;
+using Presentacion.WebApi.Modelos;
 
 namespace Presentacion.WebApi.AutorizacionSolicitudes
 {
-    public interface IAutorizacionSolicitudBaseController<TAutorizacion, TQuery>
-        where TAutorizacion : IAutorizacion
-        where TQuery : IConsultaSolicitud
+    public interface IAutorizacionSolicitudBaseController<TInstanciaCondensada, TAutorizacion, TQuery>
+        where TAutorizacion : class, IAutorizacion
+        where TInstanciaCondensada : class, IInstanciaCondensada
+        where TQuery : class,IConsultaSolicitud
     {
 
         object ConsultarSolicitudes([FromQuery] TQuery filtro);
 
-        object AdministrarAutorizaciones([FromBody] List<TAutorizacion> autorizacion);
+        object AdministrarAutorizaciones([FromBody] ModeloSolicitud<TInstanciaCondensada> modelo);
     }
 }

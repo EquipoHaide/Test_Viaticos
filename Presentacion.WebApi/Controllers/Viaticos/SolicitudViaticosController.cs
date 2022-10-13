@@ -8,13 +8,13 @@ using AplicacionBase = Aplicacion.Nucleo.ServicioAutorizacion;
 namespace Presentacion.WebApi.Controllers.Viaticos
 {
     [Route("api/[controller]")]
-    public class SolicitudViaticosController : AutorizacionSolicitudBaseController<Autorizacion, ConsultaSolicitudes>
+    public class SolicitudViaticosController : AutorizacionSolicitudBaseController<SolicitudCondensada, Autorizacion,ConsultaSolicitudes>
     {
 
-        AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<Autorizacion, ConsultaSolicitudes> servicioAutorizacionViaticos;
-        AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<Autorizacion, ConsultaSolicitudes> ServicioAutorizacionViaticos => App.Inject(ref servicioAutorizacionViaticos);
+        AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<SolicitudCondensada, Autorizacion, ConsultaSolicitudes> servicioAutorizacionViaticos;
+        AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<SolicitudCondensada, Autorizacion, ConsultaSolicitudes> ServicioAutorizacionViaticos => App.Inject(ref servicioAutorizacionViaticos);
 
-        public override AplicacionBase.IServicioAutorizacionBase<Autorizacion, ConsultaSolicitudes> ServicioAutorizacion => this.ServicioAutorizacionViaticos;
+        public override AplicacionBase.IServicioAutorizacionBase<SolicitudCondensada,Autorizacion ,ConsultaSolicitudes> ServicioAutorizacion => this.ServicioAutorizacionViaticos;
 
         public SolicitudViaticosController(Aplicacion.Nucleo.IAplicacion app)
         {

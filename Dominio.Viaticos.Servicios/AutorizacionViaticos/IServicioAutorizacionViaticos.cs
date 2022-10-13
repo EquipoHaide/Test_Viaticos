@@ -4,8 +4,9 @@ using Dominio.Nucleo.Servicios.ServicioAutorizacion;
 
 namespace Dominio.Viaticos.Servicios
 {
-    public interface IServicioAutorizacionViaticos<TAutorizacion> : IServicioAutorizacionBase<TAutorizacion>
-         where TAutorizacion : class, IAutorizacion
+    public interface IServicioAutorizacionViaticos<TSolicitudCondesada,TAutorizacion> : IServicioAutorizacionBase<TSolicitudCondesada,TAutorizacion>
+         where TAutorizacion : class,IAutorizacion  
+         where TSolicitudCondesada : class, IInstanciaCondensada
     {
     }
 }

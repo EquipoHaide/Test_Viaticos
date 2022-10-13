@@ -8,15 +8,15 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
-    public class RepositorioAutorizacionViaticos : RepositorioAutorizacionBase<Entidad.Autorizacion, Modelo.ConsultaSolicitudes>, IRepositorioAutorizacionViaticos
+    public class RepositorioAutorizacionViaticos : RepositorioAutorizacionBase<Entidad.SolicitudCondensada, Entidad.Autorizacion, Modelo.ConsultaSolicitudes>, IRepositorioAutorizacionViaticos
     {
         
         public RepositorioAutorizacionViaticos(IViaticosUnidadDeTrabajo unitOfWork) : base(unitOfWork) { }
 
-        public override ConsultaPaginada<Entidad.Autorizacion> ConsultarAutorizaciones(Modelo.ConsultaSolicitudes parametros, string subjectId)
+        public override ConsultaPaginada<Entidad.SolicitudCondensada> ConsultarAutorizaciones(Modelo.ConsultaSolicitudes parametros, string subjectId)
         {
 
-            return new ConsultaPaginada<Entidad.Autorizacion>();
+            return new ConsultaPaginada<Entidad.SolicitudCondensada>();
         }
     }
 }

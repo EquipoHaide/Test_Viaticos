@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Dominio.Nucleo.Repositorios.ConfiguracionFlujo;
@@ -8,31 +9,40 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioAutorizacion
 {
-    public class ServicioAutorizacionBase<TAutorizacion, TQuery> : IServicioAutorizacionBase<TAutorizacion, TQuery>
+    public class ServicioAutorizacionBase<TInstaciaCondensada,TAutorizacion, TQuery> : IServicioAutorizacionBase<TInstaciaCondensada,TAutorizacion, TQuery>
         where TAutorizacion : class, IAutorizacion
+        where TInstaciaCondensada : class, IInstanciaCondensada
         where TQuery : class, IConsultaSolicitud
     {
 
         const string TAG = "Aplicacion.Nucleo.ServicioFlujoAutorizacion";
 
-        public virtual Dominio.Nucleo.Servicios.ServicioAutorizacion.IServicioAutorizacionBase<TAutorizacion> ServicioDominio { get; }
+        public virtual Dominio.Nucleo.Servicios.ServicioAutorizacion.IServicioAutorizacionBase<TInstaciaCondensada,TAutorizacion> ServicioDominio { get; }
 
-        public virtual IRepositorioAutorizacionBase<TAutorizacion, TQuery> Repositorio { get; }
+        public virtual IRepositorioAutorizacionBase<TInstaciaCondensada,TAutorizacion,TQuery> Repositorio { get; }
 
-        public Respuesta<ConsultaPaginada<TAutorizacion>> Consultar(TQuery parametros, string subjectId)
+        public Respuesta<ConsultaPaginada<TInstaciaCondensada>> Consultar(TQuery parametros, string subjectId)
         {
-            if (parametros == null) return new Respuesta<ConsultaPaginada<TAutorizacion>>("El modelo de consulta para obtener no es valido.", TAG);
+            if (parametros == null) return new Respuesta<ConsultaPaginada<TInstaciaCondensada>>("El modelo de consulta para obtener no es valido.", TAG);
 
             var recursos = Repositorio.Try(r => r.ConsultarAutorizaciones(parametros, subjectId));
-            if (recursos.EsError) return recursos.ErrorBaseDatos<ConsultaPaginada<TAutorizacion>>(TAG);
+            if (recursos.EsError) return recursos.ErrorBaseDatos<ConsultaPaginada<TInstaciaCondensada>>(TAG);
 
-            return new Respuesta<ConsultaPaginada<TAutorizacion>>(recursos.Contenido);
+            return new Respuesta<ConsultaPaginada<TInstaciaCondensada>>(recursos.Contenido);
         }
 
-        public Respuesta AdministrarAutorizaciones(List<TAutorizacion> autorizacones, string subjectId)
+        public Respuesta AdministrarAutorizaciones(List<TInstaciaCondensada> Autorizacones, int Accion, string subjectId)
         {
+            if (Autorizacones == null || Autorizacones.Count() <= 0)
+                return new Respuesta("Es requerido una solicitud", TAG);
 
-            var respuesta = ServicioDominio.AdministrarAutorizacion(autorizacones, subjectId);
+            if(Accion <= 0 )
+                return new Respuesta("Es requerido alguna accion para la(s) solicitud(es)", TAG);
+
+
+            //var ultimaAutorizacion = Repositorio.Try( r => r.ConsultarAutorizaciones()); 
+
+            var respuesta = ServicioDominio.AdministrarAutorizacion(Autorizacones, subjectId);
 
             return new Respuesta();
         }

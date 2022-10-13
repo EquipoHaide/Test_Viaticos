@@ -6,12 +6,13 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 {
-    public class ServicioAutorizacionBase<TAutorizacion> : IServicioAutorizacionBase<TAutorizacion>
+    public class ServicioAutorizacionBase<TInstanciaCondensada, TAutorizacion> : IServicioAutorizacionBase<TInstanciaCondensada, TAutorizacion>
         where TAutorizacion : class, IAutorizacion
+        where TInstanciaCondensada : class, IInstanciaCondensada
     {
-        public Respuesta<List<TAutorizacion>> AdministrarAutorizacion(List<TAutorizacion> autorizaciones, string subjectId)
+        public Respuesta<List<TInstanciaCondensada>> AdministrarAutorizacion(List<TInstanciaCondensada> autorizaciones, string subjectId)
         {
-            return new Respuesta<List<TAutorizacion>>("");
+            return new Respuesta<List<TInstanciaCondensada>>("");
         }
     }
 }
