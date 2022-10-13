@@ -5,6 +5,8 @@ using Dominio.Viaticos.Repositorios;
 using Infraestructura.Datos.Nucleo.AutorizacionSolicitud;
 using Infraestructura.Datos.Viaticos.UnidadDeTrabajo;
 using Infraestructura.Transversal.Plataforma;
+using System.Collections.Generic;
+using Dominio.Viaticos.Entidades;
 
 namespace Infraestructura.Datos.Viaticos.Repositorios
 {
@@ -17,6 +19,11 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
         {
 
             return new ConsultaPaginada<Entidad.SolicitudCondensada>();
+        }
+
+        public override List<Autorizacion> ObtenerAutorizacion(List<int> IdsAutorizacion)
+        {
+            throw new NotImplementedException();
         }
     }
 }

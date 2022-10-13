@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Dominio.Nucleo;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Dominio.Nucleo.Repositorios.ConfiguracionFlujo;
@@ -16,6 +17,7 @@ namespace Infraestructura.Datos.Nucleo.AutorizacionSolicitud
         public RepositorioAutorizacionBase(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
         public abstract ConsultaPaginada<TInstanciaCondensada> ConsultarAutorizaciones(TQuery parametros, string subjectId);
+        public abstract List<TAutorizacion> ObtenerAutorizacion(List<int> IdsAutorizacion);
     }
 
 }

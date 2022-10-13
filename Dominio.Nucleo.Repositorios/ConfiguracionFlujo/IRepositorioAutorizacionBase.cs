@@ -16,7 +16,7 @@ namespace Dominio.Nucleo.Repositorios.ConfiguracionFlujo
         ConsultaPaginada<TInstanciaCondesada> ConsultarAutorizaciones(TQuery parametros, string subjectId);
 
 
-        List<TAutorizacion> ObtenerAutorizacion(List<int> IdAutorizacion);
+        List<TAutorizacion> ObtenerAutorizacion(List<int> IdsAutorizacion);
         
     }
 }
