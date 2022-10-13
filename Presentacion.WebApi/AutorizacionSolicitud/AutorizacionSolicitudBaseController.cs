@@ -8,7 +8,9 @@ using Presentacion.WebApi.Modelos;
 
 namespace Presentacion.WebApi.AutorizacionSolicitudes
 {
-    public class AutorizacionSolicitudBaseController<TInstanciaCondensada,TAutorizacion, TQuery> : ControllerBase, IAutorizacionSolicitudBaseController<TInstanciaCondensada, TAutorizacion, TQuery>
+    public class AutorizacionSolicitudBaseController<TInstanciaCondensada,TAutorizacion,TFlujo,TPaso, TQuery> : ControllerBase, IAutorizacionSolicitudBaseController<TInstanciaCondensada, TAutorizacion, TFlujo, TPaso, TQuery>
+        where TFlujo : class, IFlujo<TPaso>
+        where TPaso : class, IPaso
         where TAutorizacion : class, IAutorizacion
         where TInstanciaCondensada :class, IInstanciaCondensada
         where TQuery : class,IConsultaSolicitud
@@ -44,7 +46,7 @@ namespace Presentacion.WebApi.AutorizacionSolicitudes
 
         [HttpPut("recursos")]
        
-        public object AdministrarAutorizaciones([FromBody] ModeloSolicitud<TInstanciaCondensada> modelo)
+        public object AdministrarAutorizaciones([FromBody] ModeloSolicitud<TInstanciaCondensada,TFlujo,TPaso> modelo)
         {
             try
             {

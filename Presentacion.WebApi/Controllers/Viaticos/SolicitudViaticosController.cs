@@ -8,7 +8,7 @@ using AplicacionBase = Aplicacion.Nucleo.ServicioAutorizacion;
 namespace Presentacion.WebApi.Controllers.Viaticos
 {
     [Route("api/[controller]")]
-    public class SolicitudViaticosController : AutorizacionSolicitudBaseController<SolicitudCondensada, Autorizacion,ConsultaSolicitudes>
+    public class SolicitudViaticosController : AutorizacionSolicitudBaseController<SolicitudCondensada, Autorizacion, FlujoViatico,PasoViatico,ConsultaSolicitudes>
     {
 
         AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<SolicitudCondensada, Autorizacion, ConsultaSolicitudes> servicioAutorizacionViaticos;

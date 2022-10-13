@@ -7,7 +7,9 @@ using Presentacion.WebApi.Modelos;
 
 namespace Presentacion.WebApi.AutorizacionSolicitudes
 {
-    public interface IAutorizacionSolicitudBaseController<TInstanciaCondensada, TAutorizacion, TQuery>
+    public interface IAutorizacionSolicitudBaseController<TInstanciaCondensada, TAutorizacion, TFlujo, TPaso, TQuery>
+        where TFlujo : class, IFlujo<TPaso>
+        where TPaso : class, IPaso
         where TAutorizacion : class, IAutorizacion
         where TInstanciaCondensada : class, IInstanciaCondensada
         where TQuery : class,IConsultaSolicitud
@@ -15,6 +17,6 @@ namespace Presentacion.WebApi.AutorizacionSolicitudes
 
         object ConsultarSolicitudes([FromQuery] TQuery filtro);
 
-        object AdministrarAutorizaciones([FromBody] ModeloSolicitud<TInstanciaCondensada> modelo);
+        object AdministrarAutorizaciones([FromBody] ModeloSolicitud<TInstanciaCondensada,TFlujo,TPaso> modelo);
     }
 }

@@ -21,6 +21,8 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
         public virtual IRepositorioAutorizacionBase<TInstaciaCondensada,TAutorizacion,TQuery> Repositorio { get; }
 
+        //public virtual IRepositorioConfiguracionFlujoBase<TFlujo, TQuery> RepositorioConfiguracionFlkujo { get; }
+
         public Respuesta<ConsultaPaginada<TInstaciaCondensada>> Consultar(TQuery parametros, string subjectId)
         {
             if (parametros == null) return new Respuesta<ConsultaPaginada<TInstaciaCondensada>>("El modelo de consulta para obtener no es valido.", TAG);
@@ -31,7 +33,7 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
             return new Respuesta<ConsultaPaginada<TInstaciaCondensada>>(recursos.Contenido);
         }
 
-        public Respuesta AdministrarAutorizaciones(List<TInstaciaCondensada> Autorizacones, int Accion, string subjectId)
+        public Respuesta AdministrarAutorizaciones(List<TInstaciaCondensada> Autorizacones, List<TFlujo> flujos, int Accion, string subjectId)
         {
             if (Autorizacones == null || Autorizacones.Count() <= 0)
                 return new Respuesta("Es requerido una solicitud", TAG);
@@ -39,8 +41,13 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
             if(Accion <= 0 )
                 return new Respuesta("Es requerido alguna accion para la(s) solicitud(es)", TAG);
 
+            var listaIds = Autorizacones.Select(r => r.IdAutorizacion).ToList();
 
-            //var ultimaAutorizacion = Repositorio.Try( r => r.ConsultarAutorizaciones()); 
+            var ultimaAutorizacion = Repositorio.Try( r => r.ObtenerAutorizacion(listaIds));
+
+            if (ultimaAutorizacion.EsError) return ultimaAutorizacion.ErrorBaseDatos(TAG);
+
+            
 
             var respuesta = ServicioDominio.AdministrarAutorizacion(Autorizacones, subjectId);
 

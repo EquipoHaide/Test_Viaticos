@@ -6,6 +6,9 @@ using DominioServicio = Dominio.Viaticos.Servicios;
 using ServicioBase = Dominio.Nucleo.Servicios.ServicioAutorizacion;
 using Dominio.Viaticos.Repositorios;
 using Dominio.Nucleo.Repositorios.ConfiguracionFlujo;
+using AplicacionViaticos = Aplicacion.Viaticos.Servicios.ConfiguracionFlujos;
+using Dominio.Viaticos.Modelos;
+using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
 
 namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
 {
