@@ -8,7 +8,7 @@ namespace Dominio.Viaticos.Servicios
          where TFlujo : class, IFlujo<TPaso>
          where TPaso : class, IPaso
          where TAutorizacion : class,IAutorizacion  
-         where TSolicitudCondesada : class, IInstanciaCondensada
+         where TSolicitudCondesada : class, ISolicitudCondensada
     {
     }
 }

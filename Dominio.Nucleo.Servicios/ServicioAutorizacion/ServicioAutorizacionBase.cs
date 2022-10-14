@@ -10,7 +10,7 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
         where TAutorizacion : class, IAutorizacion
-        where TInstanciaCondensada : class, IInstanciaCondensada
+        where TInstanciaCondensada : class, ISolicitudCondensada
     {
         public Respuesta<List<TInstanciaCondensada>> AdministrarAutorizacion(List<TInstanciaCondensada> autorizaciones, string subjectId)
         {

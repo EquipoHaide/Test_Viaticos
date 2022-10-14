@@ -10,7 +10,7 @@ namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
         where TAutorizacion : class, IAutorizacion
-        where TSolicitudCondensada : class,IInstanciaCondensada
+        where TSolicitudCondensada : class,ISolicitudCondensada
         where TQuery : class, IQuery
     {
     }

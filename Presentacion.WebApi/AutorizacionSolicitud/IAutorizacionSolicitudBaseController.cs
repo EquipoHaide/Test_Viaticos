@@ -12,7 +12,7 @@ namespace Presentacion.WebApi.AutorizacionSolicitudes
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
         where TAutorizacion : class, IAutorizacion
-        where TInstanciaCondensada : class, IInstanciaCondensada
+        where TInstanciaCondensada : class, ISolicitudCondensada
         where TQuery : class,IQuery
     {
 

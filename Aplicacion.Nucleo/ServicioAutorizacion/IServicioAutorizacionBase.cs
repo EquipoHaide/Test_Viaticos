@@ -10,7 +10,7 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
     public interface IServicioAutorizacionBase<TInstanciaCondensada,TAutorizacion,TFlujo,TPaso,TQuery>
 
         where TAutorizacion : class,IAutorizacion
-        where TInstanciaCondensada : class,IInstanciaCondensada
+        where TInstanciaCondensada : class,ISolicitudCondensada
         where TQuery : class, IQuery
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso

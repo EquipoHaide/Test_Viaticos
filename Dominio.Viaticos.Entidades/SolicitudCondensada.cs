@@ -3,7 +3,7 @@ using Dominio.Nucleo.Entidades;
 
 namespace Dominio.Viaticos.Entidades
 {
-    public class SolicitudCondensada : IInstanciaCondensada
+    public class SolicitudCondensada : ISolicitudCondensada
     {
         public int Id { get; set; }
 

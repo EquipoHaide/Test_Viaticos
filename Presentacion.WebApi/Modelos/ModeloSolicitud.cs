@@ -7,7 +7,7 @@ namespace Presentacion.WebApi.Modelos
     public class ModeloSolicitud<TSolicitudCondensada, TFlujo, TPaso>
         where TFlujo : class,IFlujo<TPaso>
         where TPaso : class, IPaso
-        where TSolicitudCondensada : class,IInstanciaCondensada
+        where TSolicitudCondensada : class,ISolicitudCondensada
     {
 
         public int Accion { get; set; }

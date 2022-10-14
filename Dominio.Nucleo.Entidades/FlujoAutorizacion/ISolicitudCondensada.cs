@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Dominio.Nucleo.Entidades
 {
-    public interface IInstanciaCondensada : IEntity, ISeguimientoCreacion
+    public interface ISolicitudCondensada : IEntity, ISeguimientoCreacion
     {
         public int    IdAutorizacion { get; set; }
         //public string Quien { get; set; }
