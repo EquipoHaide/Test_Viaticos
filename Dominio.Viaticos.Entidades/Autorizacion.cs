@@ -16,15 +16,21 @@ namespace Dominio.Viaticos.Entidades
         public string Sello { get ; set; }
 
         public int Estado { get ; set; }
+
+        public string IdUsuarioAutorizacion { get; set; }
+
+        public DateTime FechaAutorizacion { get; set; }
+
+        public string IdUsuarioCancelacion { get; set; }
+
+        public DateTime FechaCancelacion { get; set; }
+
         /*
         public string IdUsuarioCreo { get; set; }
 
         public DateTime FechaCreacion { get; set; }
 
-        public void Seguir(string idUsuario)
-        {
-            this.IdUsuarioCreo = idUsuario;
-            this.FechaCreacion = DateTime.Now;
-        }*/
+       */
+
     }
 }
