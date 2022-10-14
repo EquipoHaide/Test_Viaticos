@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dominio.Nucleo;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Infraestructura.Transversal.Plataforma;
@@ -13,11 +14,11 @@ namespace Presentacion.WebApi.AutorizacionSolicitudes
         where TPaso : class, IPaso
         where TAutorizacion : class, IAutorizacion
         where TInstanciaCondensada :class, IInstanciaCondensada
-        where TQuery : class,IConsultaSolicitud
+        where TQuery : class,IQuery
     {
         public Aplicacion.Nucleo.IAplicacion App { get; set; }
 
-        public virtual Aplicacion.Nucleo.ServicioAutorizacion.IServicioAutorizacionBase<TInstanciaCondensada,TAutorizacion,TQuery> ServicioAutorizacion { get; }
+        public virtual Aplicacion.Nucleo.ServicioAutorizacion.IServicioAutorizacionBase<TInstanciaCondensada,TAutorizacion,TFlujo,TPaso,TQuery> ServicioAutorizacion { get; }
 
 
         [HttpGet("recursos")]
@@ -52,7 +53,7 @@ namespace Presentacion.WebApi.AutorizacionSolicitudes
             {
                 var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
 
-                var resultado = ServicioAutorizacion.AdministrarAutorizaciones(modelo.Solicitudes, modelo.Accion, GetSubjectId);
+                var resultado = ServicioAutorizacion.AdministrarAutorizaciones(modelo.Solicitudes, modelo.Flujos, modelo.Accion, GetSubjectId);
 
                 if (resultado.EsError)
                 {

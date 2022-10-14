@@ -14,7 +14,7 @@ namespace Aplicacion.Viaticos.Servicios
         {
 
             app.Register<IServicioFlujo<Dominio.Viaticos.Entidades.FlujoViatico, Dominio.Viaticos.Entidades.PasoViatico, ConsultaConfiguracionFlujo>, ServicioFlujo>();
-            app.Register<IServicioAutorizacionViaticos<Entidad.SolicitudCondensada,Entidad.Autorizacion, Dominio.Viaticos.Modelos.ConsultaSolicitudes>, ServicioAutorizacionViaticos>();
+            app.Register<IServicioAutorizacionViaticos<Entidad.SolicitudCondensada,Entidad.Autorizacion,Entidad.FlujoViatico,Entidad.PasoViatico,Dominio.Viaticos.Modelos.ConsultaSolicitudes>, ServicioAutorizacionViaticos>();
             
 
         }

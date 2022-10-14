@@ -1,5 +1,6 @@
 ﻿using Dominio.Nucleo;
 using Dominio.Nucleo.Entidades;
+using Dominio.Nucleo.FlujoAutorizacion;
 using Dominio.Nucleo.Repositorios;
 using Infraestructura.Transversal.Plataforma;
 using MicroServices.Platform.Repository;
@@ -12,7 +13,7 @@ namespace Infraestructura.Datos.Nucleo
 {
     public abstract class RepositorioConfiguracionFlujoBase<TFlujo,TQuery> : Repository<TFlujo>, IRepositorioConfiguracionFlujoBase<TFlujo,TQuery>
          where TFlujo : class, IEntity
-        where TQuery : class, IConsultaFlujo
+        where TQuery : class, IQuery
 
     {
         public RepositorioConfiguracionFlujoBase(IUnitOfWork unitOfWork) : base(unitOfWork) { }

@@ -7,16 +7,16 @@ using MicroServices.Platform.Repository.Core;
 
 namespace Dominio.Nucleo.Repositorios.ConfiguracionFlujo
 {
-    public interface IRepositorioAutorizacionBase<TInstanciaCondesada, TAutorizacion,TQuery> : IRepository<TInstanciaCondesada>
+    public interface IRepositorioAutorizacionBase<TInstanciaCondesada,TAutorizacion,TQuery> : IRepository<TInstanciaCondesada>
         where TAutorizacion : class, IEntity
         where TInstanciaCondesada : class, IEntity
-        where TQuery : class, IConsultaSolicitud 
+        where TQuery : class, IQuery
     {
         
         ConsultaPaginada<TInstanciaCondesada> ConsultarAutorizaciones(TQuery parametros, string subjectId);
 
-
         List<TAutorizacion> ObtenerAutorizacion(List<int> IdsAutorizacion);
-        
+
+
     }
 }

@@ -9,7 +9,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
     public interface IServicioConfiguracionFlujoBase<TFlujo,TPaso,TQuery>
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
-        where TQuery : class, IConsultaFlujo
+        where TQuery : class, IQuery
     {
 
         public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TQuery query, string subjectId);

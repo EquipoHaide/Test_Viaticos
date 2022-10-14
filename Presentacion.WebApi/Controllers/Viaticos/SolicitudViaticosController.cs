@@ -11,10 +11,10 @@ namespace Presentacion.WebApi.Controllers.Viaticos
     public class SolicitudViaticosController : AutorizacionSolicitudBaseController<SolicitudCondensada, Autorizacion, FlujoViatico,PasoViatico,ConsultaSolicitudes>
     {
 
-        AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<SolicitudCondensada, Autorizacion, ConsultaSolicitudes> servicioAutorizacionViaticos;
-        AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<SolicitudCondensada, Autorizacion, ConsultaSolicitudes> ServicioAutorizacionViaticos => App.Inject(ref servicioAutorizacionViaticos);
+        AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<SolicitudCondensada, Autorizacion, FlujoViatico, PasoViatico, ConsultaSolicitudes> servicioAutorizacionViaticos;
+        AplicacionViaticos.AutorizacionViaticos.IServicioAutorizacionViaticos<SolicitudCondensada, Autorizacion, FlujoViatico, PasoViatico, ConsultaSolicitudes> ServicioAutorizacionViaticos => App.Inject(ref servicioAutorizacionViaticos);
 
-        public override AplicacionBase.IServicioAutorizacionBase<SolicitudCondensada,Autorizacion ,ConsultaSolicitudes> ServicioAutorizacion => this.ServicioAutorizacionViaticos;
+        public override AplicacionBase.IServicioAutorizacionBase<SolicitudCondensada, Autorizacion, FlujoViatico, PasoViatico, ConsultaSolicitudes> ServicioAutorizacion => this.ServicioAutorizacionViaticos;
 
         public SolicitudViaticosController(Aplicacion.Nucleo.IAplicacion app)
         {

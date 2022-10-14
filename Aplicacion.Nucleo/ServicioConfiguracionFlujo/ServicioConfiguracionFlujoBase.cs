@@ -7,13 +7,14 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dominio.Nucleo.FlujoAutorizacion;
 
 namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 {
     public abstract class ServicioConfiguracionFlujoBase<TFlujo, TPaso, TQuery> : IServicioConfiguracionFlujoBase<TFlujo, TPaso, TQuery>
         where TFlujo : class, Entidades.IFlujo<TPaso> 
         where TPaso : class, Entidades.IPaso
-        where TQuery : class, IConsultaFlujo
+        where TQuery : class, IQuery
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 

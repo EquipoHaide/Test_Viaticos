@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dominio.Nucleo;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace Presentacion.WebApi.AutorizacionSolicitudes
         where TPaso : class, IPaso
         where TAutorizacion : class, IAutorizacion
         where TInstanciaCondensada : class, IInstanciaCondensada
-        where TQuery : class,IConsultaSolicitud
+        where TQuery : class,IQuery
     {
 
         object ConsultarSolicitudes([FromQuery] TQuery filtro);
