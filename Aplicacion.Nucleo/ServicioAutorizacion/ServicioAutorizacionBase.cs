@@ -39,26 +39,20 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
         {
             if (solicitudes == null || solicitudes.Count() <= 0)
                 return new Respuesta("Es requerido una solicitud", TAG);
-            
-            //Pendiente crear el enumerable de accion (devolver, devolver inicio, autorizar, etc)
+
             if(accion <= 0 )
                 return new Respuesta("Es requerido alguna accion para la(s) solicitud(es)", TAG);
 
             var listaIds = solicitudes.Select(r => r.IdAutorizacion).ToList();
 
-            var ultimaAutorizacion = Repositorio.Try( r => r.ObtenerAutorizacion(listaIds));
+            var listaAutorizaciones = Repositorio.Try(r => r.ObtenerAutorizacion(listaIds));
 
-            if (ultimaAutorizacion.EsError) return ultimaAutorizacion.ErrorBaseDatos(TAG);
+            if (listaAutorizaciones.EsError) return listaAutorizaciones.ErrorBaseDatos(TAG);
 
-            var listaIdsFlujo = ultimaAutorizacion.Contenido.Select(r => r.IdFlujo).ToList();
+            var respuesta = ServicioDominio.AdministrarAutorizacion(solicitudes, listaAutorizaciones.Contenido, flujos, accion, subjectId);
 
-            var idsAutorizacion = ultimaAutorizacion.Contenido.Select(r => r.IdFlujo).ToList();
-
-            //var flujosCorrespondientes = RepositorioFlujo.Try(r => r.ObtenerFlujosPorAutorizacion(idsAutorizacion));
-
-
-            //var respuesta = ServicioDominio.AdministrarAutorizacion(Autorizacones, subjectId);
-
+            if (respuesta.EsExito)
+                return new Respuesta();
 
 
             return new Respuesta();

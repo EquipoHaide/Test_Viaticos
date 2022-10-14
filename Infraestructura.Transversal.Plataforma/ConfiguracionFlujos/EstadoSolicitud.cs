@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Infraestructura.Transversal.Plataforma
 {
-    public enum EstadoSolicitud
+    public enum AccionSolicitud
     {
         [Description("Pendiente")]
         Pendiente = 1,
