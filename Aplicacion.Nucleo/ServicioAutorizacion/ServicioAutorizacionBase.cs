@@ -39,7 +39,8 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
         {
             if (solicitudes == null || solicitudes.Count() <= 0)
                 return new Respuesta("Es requerido una solicitud", TAG);
-
+            
+            //Pendiente crear el enumerable de accion (devolver, devolver inicio, autorizar, etc)
             if(accion <= 0 )
                 return new Respuesta("Es requerido alguna accion para la(s) solicitud(es)", TAG);
 

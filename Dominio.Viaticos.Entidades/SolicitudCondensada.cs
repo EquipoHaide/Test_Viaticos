@@ -3,7 +3,7 @@ using Dominio.Nucleo.Entidades;
 
 namespace Dominio.Viaticos.Entidades
 {
-    public class SolicitudCondensada : ISolicitudCondensada
+    public class SolicitudCondensada : Seguimiento, ISolicitudCondensada
     {
         public int Id { get; set; }
 
@@ -19,6 +19,7 @@ namespace Dominio.Viaticos.Entidades
 
         public int IdRol { get; set; }
 
+        /*
         public string IdUsuarioCreo { get; set; }
 
         public DateTime FechaCreacion { get; set; }
@@ -27,7 +28,7 @@ namespace Dominio.Viaticos.Entidades
         {
             this.IdUsuarioCreo = idUsuario;
             this.FechaCreacion = DateTime.Now;
-        }
+        }*/
 
     }
 }

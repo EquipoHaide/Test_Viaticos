@@ -3,7 +3,7 @@ using Dominio.Nucleo.Entidades;
 
 namespace Dominio.Viaticos.Entidades
 {
-    public class Autorizacion : IAutorizacion
+    public class Autorizacion :Seguimiento,  IAutorizacion
     {
         public int Id { get; set; }
 
@@ -16,7 +16,7 @@ namespace Dominio.Viaticos.Entidades
         public string Sello { get ; set; }
 
         public int Estado { get ; set; }
-
+        /*
         public string IdUsuarioCreo { get; set; }
 
         public DateTime FechaCreacion { get; set; }
@@ -25,6 +25,6 @@ namespace Dominio.Viaticos.Entidades
         {
             this.IdUsuarioCreo = idUsuario;
             this.FechaCreacion = DateTime.Now;
-        }
+        }*/
     }
 }

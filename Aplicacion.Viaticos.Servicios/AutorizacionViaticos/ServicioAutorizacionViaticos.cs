@@ -17,12 +17,12 @@ namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
         IServicioAutorizacionViaticos<Entidades.SolicitudCondensada, Entidades.Autorizacion, Entidades.FlujoViatico, Entidades.PasoViatico, Modelos.ConsultaSolicitudes>
     {
 
-        const string TAG = "Aplicacion.Viaticos.Servicios.ConfiguracionFlujos";
+        const string TAG = "Aplicacion.Viaticos.Servicios.AutorizacionViaticos";
 
         Nucleo.IAplicacion App { get; set; }
 
-        DominioServicio.IServicioAutorizacionViaticos<Entidades.SolicitudCondensada, Entidades.Autorizacion,Entidades.FlujoViatico,Entidades.PasoViatico> servicio;
-        DominioServicio.IServicioAutorizacionViaticos<Entidades.SolicitudCondensada, Entidades.Autorizacion, Entidades.FlujoViatico, Entidades.PasoViatico> Servicio => App.Inject(ref servicio);
+        DominioServicio.IServicioAutorizacionViaticos<Entidades.SolicitudCondensada, Entidades.Autorizacion,Entidades.FlujoViatico, Entidades.PasoViatico> servicio;
+        DominioServicio.IServicioAutorizacionViaticos<Entidades.SolicitudCondensada, Entidades.Autorizacion,Entidades.FlujoViatico, Entidades.PasoViatico> Servicio => App.Inject(ref servicio);
         public override ServicioBase.IServicioAutorizacionBase<Entidades.SolicitudCondensada, Entidades.Autorizacion, Entidades.FlujoViatico, Entidades.PasoViatico> ServicioDominio => this.Servicio;
 
         IRepositorioAutorizacionViaticos repositorioAutorizacion;
