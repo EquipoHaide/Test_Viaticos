@@ -28,39 +28,35 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
                 return new Respuesta("Es necesario que especifique una Acción", TAG);
 
 
-            foreach (var item in instanciaCondensadas)
+            foreach (var solicitud in instanciaCondensadas)
             {
-                var autorizacion = autorizaciones.Where(r => r.Id == item.IdAutorizacion).FirstOrDefault();
+                var autorizacion = autorizaciones.Where(r => r.Id == solicitud.IdAutorizacion).FirstOrDefault();
 
                 if(autorizacion == null)
                     return new Respuesta("No se encontro autorizacion relacionada con la solicitud", TAG);
+
+
+                //if(solicitud.IdRol == autorizacion.IdRol)
+                //    return new Respuesta("La solicitud no puede ser autorizada ", TAG);
 
                 var flujo = flujos.Where(r => r.Id == autorizacion.IdFlujo).FirstOrDefault();
 
                 if (flujo == null)
                     return new Respuesta("No se encontro flujo relacionada con la solicitud", TAG);
 
+                if (flujo.Pasos == null || (flujo.Pasos.Where(p => p.Activo).Count() <= 0))
+                    return new Respuesta("El flujo debe tener por lo menos un paso.", TAG);
 
-                if ((int)EstadoSolicitud.Autorizado == accion) {
+                var pasosOrdenados = flujo.Pasos.OrderBy(r => r.Orden);
 
-                    if(item.Estado == (int)EstadoSolicitud.Pendiente)
-                    {
+                var pasoActual = pasosOrdenados.Where(r => r.Orden == solicitud.Orden).FirstOrDefault();
 
-                    }
+                var pasoSiguiente = pasosOrdenados.Where(r => r.Orden == solicitud.Orden + 1).FirstOrDefault();
 
-                }else if ((int)EstadoSolicitud.Devuelto == accion)
-                {
+                var pasoFinal = pasosOrdenados.LastOrDefault();
 
-                }else if ((int)EstadoSolicitud.DevueltoInicio == accion)
-                {
 
-                }else if ((int)EstadoSolicitud.Cancelado == accion)
-                {
-
-                }
-                else {
-
-                }
+               
 
 
 
@@ -70,6 +66,36 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
             return new Respuesta();
         }
 
+
+
+        private Respuesta AccionesSolicitud()
+        {
+            //if ((int)AccionSolicitud.Autorizado == accion) {
+
+            //    if(item.Estado == (int)AccionSolicitud.Pendiente)
+            //    {
+            //        var nuevaAutorizacion = new TAutorizacion() {
+
+            //            Orden = item.Orden + 1,
+            //            //IdRol =
+            //        };
+            //    }
+
+            //}else if ((int)AccionSolicitud.Devuelto == accion)
+            //{
+
+            //}else if ((int)AccionSolicitud.DevueltoInicio == accion)
+            //{
+
+            //}else if ((int)AccionSolicitud.Cancelado == accion)
+            //{
+
+            //}
+            //else {
+
+            //}
+            return new Respuesta();
+        }
 
      
     }
