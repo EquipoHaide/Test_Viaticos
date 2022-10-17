@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Dominio.Nucleo.Entidades
 {
-    public interface ISolicitudCondensada : IEntity, ISeguimientoCreacion
+    public interface ISolicitudCondensada : IEntity, IQuien
     {
         public int    IdAutorizacion { get; set; }
         //public string Quien { get; set; }
@@ -10,6 +10,7 @@ namespace Dominio.Nucleo.Entidades
         public int    Estado { get; set; }
         public int    Orden { get; set; }
         public int    IdRol { get; set; }
+        public DateTime FechaAfectacion { get; set; }
 
     }
 }

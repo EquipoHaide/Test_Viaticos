@@ -11,7 +11,7 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Aplicacion.Nucleo.ServicioAutorizacion
 {
-    public class ServicioAutorizacionBase<TSolicitudCondensada,TAutorizacion,TFlujo,TPaso,TQuery> : IServicioAutorizacionBase<TSolicitudCondensada,TAutorizacion, TFlujo, TPaso,TQuery>
+    public abstract class ServicioAutorizacionBase<TSolicitudCondensada,TAutorizacion,TFlujo,TPaso,TQuery> : IServicioAutorizacionBase<TSolicitudCondensada,TAutorizacion, TFlujo, TPaso,TQuery>
         where TAutorizacion : class, IAutorizacion
         where TSolicitudCondensada : class, ISolicitudCondensada
         where TQuery : class, IQuery
@@ -23,7 +23,10 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
         public virtual Dominio.Nucleo.Servicios.ServicioAutorizacion.IServicioAutorizacionBase<TSolicitudCondensada,TAutorizacion,TFlujo,TPaso> ServicioDominio { get; }
 
+
         public virtual IRepositorioAutorizacionBase<TSolicitudCondensada,TAutorizacion,TQuery> Repositorio { get; }
+
+        public abstract Respuesta CompletarAdministracionAutorizacion (List<TSolicitudCondensada> solicitudes, List<TAutorizacion> autorizaciones, string subjectId);
 
         public Respuesta<ConsultaPaginada<TSolicitudCondensada>> Consultar(TQuery parametros, string subjectId)
         {
@@ -52,10 +55,17 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
             var respuesta = ServicioDominio.AdministrarAutorizacion(solicitudes, listaAutorizaciones.Contenido, flujos, accion, subjectId);
 
             if (respuesta.EsExito)
-                return new Respuesta();
+            {
+                var respuestaComplemantarioa = CompletarAdministracionAutorizacion(solicitudes, listaAutorizaciones.Contenido, subjectId);
 
+                if (respuestaComplemantarioa.EsExito)
+                    return new Respuesta();
+                else
+                    return new Respuesta(respuestaComplemantarioa.Mensaje, respuestaComplemantarioa.TAG);
+                
+            }
 
-            return new Respuesta();
+            return new Respuesta(respuesta.Mensaje,respuesta.TAG);
         }
 
        

@@ -24,6 +24,7 @@ namespace Dominio.Viaticos.Entidades
         public string IdUsuarioCancelacion { get; set; }
 
         public DateTime FechaCancelacion { get; set; }
+       
 
         /*
         public string IdUsuarioCreo { get; set; }

@@ -9,6 +9,9 @@ using Dominio.Nucleo.Repositorios.ConfiguracionFlujo;
 using AplicacionViaticos = Aplicacion.Viaticos.Servicios.ConfiguracionFlujos;
 using Dominio.Viaticos.Modelos;
 using Aplicacion.Nucleo.ServicioConfiguracionFlujo;
+using Infraestructura.Transversal.Plataforma;
+using System.Collections.Generic;
+using Dominio.Viaticos.Entidades;
 
 namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
 {
@@ -35,5 +38,9 @@ namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
             this.App = app;
         }
 
+        public override Respuesta CompletarAdministracionAutorizacion(List<SolicitudCondensada> solicitudes, List<Autorizacion> autorizaciones, string subjectId)
+        {
+            return new Respuesta();
+        }
     }
 }

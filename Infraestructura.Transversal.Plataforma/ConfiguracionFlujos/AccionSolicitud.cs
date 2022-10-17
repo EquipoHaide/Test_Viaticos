@@ -15,6 +15,10 @@ namespace Infraestructura.Transversal.Plataforma
         DevueltoInicio = 4,
         [Description("Cancelado")]
         Cancelado = 5,
+      
 
     }
+
+
+
 }

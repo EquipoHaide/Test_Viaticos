@@ -29,7 +29,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
             var query = from u in Set
                         where rolesUsuario.Contains(u.IdRol)
-                               && u.Activo
+                               //&& u.Activo
                                //&& (u.Folio.Equals(filtro))
                         select new SolicitudCondensada()
                         {
@@ -92,7 +92,24 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
         public override List<Autorizacion> ObtenerAutorizacion(List<int> IdsAutorizacion)
         {
-            throw new NotImplementedException();
+            List<Autorizacion> autorizacion = new List<Autorizacion>();
+
+            autorizacion.Add(new Autorizacion
+            {
+                Id = 1,
+                IdFlujo = 6,
+                Orden = 2,
+                IdRol = 3,
+                Sello = "kjshdjdhssdfgasdyte",
+                Estado = (int)AccionSolicitud.Pendiente,
+                IdUsuarioCreo = "sdnzcnmbzvn",
+                FechaCreacion = DateTime.Now
+           
+            });
+
+
+            return autorizacion;
+
         }
     }
 }
