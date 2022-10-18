@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructura.Datos.Viaticos.Migraciones
 {
     [DbContext(typeof(ViaticosUnidadDeTrabajo))]
-    [Migration("20221018170229_viaticos_01")]
+    [Migration("20221018174223_viaticos_01")]
     partial class viaticos_01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,10 +34,10 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaAutorizacion")
+                    b.Property<DateTime?>("FechaAutorizacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaCancelacion")
+                    b.Property<DateTime?>("FechaCancelacion")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaCreacion")
@@ -79,7 +79,7 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
 
                     b.HasKey("Id");
 
-                    b.ToTable("Autorizaciones");
+                    b.ToTable("Autorizaciones","Viaticos");
                 });
 
             modelBuilder.Entity("Dominio.Viaticos.Entidades.FlujoViatico", b =>
@@ -290,16 +290,17 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.Property<DateTime>("FechaAfectacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaAutorizacion")
+                    b.Property<DateTime?>("FechaAutorizacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaCancelacion")
+                    b.Property<DateTime?>("FechaCancelacion")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Folio")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdAutorizacion")
@@ -323,7 +324,7 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
 
                     b.HasKey("Id");
 
-                    b.ToTable("SolicitudCondensada");
+                    b.ToTable("SolicitudesCondensadas","Viaticos");
                 });
 
             modelBuilder.Entity("Dominio.Viaticos.Entidades.TipoEntePublico", b =>

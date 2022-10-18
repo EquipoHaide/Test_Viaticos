@@ -32,10 +32,10 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaAutorizacion")
+                    b.Property<DateTime?>("FechaAutorizacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaCancelacion")
+                    b.Property<DateTime?>("FechaCancelacion")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaCreacion")
@@ -77,7 +77,7 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
 
                     b.HasKey("Id");
 
-                    b.ToTable("Autorizaciones");
+                    b.ToTable("Autorizaciones","Viaticos");
                 });
 
             modelBuilder.Entity("Dominio.Viaticos.Entidades.FlujoViatico", b =>
@@ -288,16 +288,17 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
                     b.Property<DateTime>("FechaAfectacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaAutorizacion")
+                    b.Property<DateTime?>("FechaAutorizacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaCancelacion")
+                    b.Property<DateTime?>("FechaCancelacion")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Folio")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdAutorizacion")
@@ -321,7 +322,7 @@ namespace Infraestructura.Datos.Viaticos.Migraciones
 
                     b.HasKey("Id");
 
-                    b.ToTable("SolicitudCondensada");
+                    b.ToTable("SolicitudesCondensadas","Viaticos");
                 });
 
             modelBuilder.Entity("Dominio.Viaticos.Entidades.TipoEntePublico", b =>

@@ -13,6 +13,7 @@ namespace Dominio.Viaticos.Entidades
     [Table("Flujos", Schema = "Viaticos")]
     public class FlujoViatico : Seguimiento, IFlujo<PasoViatico> 
     {
+        [Required]
         public int Id { get; set; }
 
         [Required]
