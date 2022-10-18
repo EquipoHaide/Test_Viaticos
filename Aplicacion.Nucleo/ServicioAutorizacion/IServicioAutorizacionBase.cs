@@ -7,16 +7,18 @@ using Infraestructura.Transversal.Plataforma;
 
 namespace Aplicacion.Nucleo.ServicioAutorizacion
 {
-    public interface IServicioAutorizacionBase<TInstanciaCondensada,TAutorizacion,TFlujo,TPaso,TQuery>
+    public interface IServicioAutorizacionBase<TSolicitudCondensada, TAutorizacion,TFlujo,TPaso,TQuery>
 
         where TAutorizacion : class,IAutorizacion
-        where TInstanciaCondensada : class,ISolicitudCondensada
+        where TSolicitudCondensada : class,ISolicitudCondensada
         where TQuery : class, IQuery
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
     {
-        public Respuesta<ConsultaPaginada<TInstanciaCondensada>> Consultar(TQuery parametros, string subjectId);
+        public Respuesta<ConsultaPaginada<TSolicitudCondensada>> Consultar(TQuery parametros, string subjectId);
 
-        public Respuesta AdministrarAutorizaciones(List<TInstanciaCondensada> Autorizacones, List<TFlujo> flujos, int Accion, string subjectId);
+        public Respuesta AdministrarAutorizaciones(List<TSolicitudCondensada> Autorizacones, List<TFlujo> flujos, int Accion, string subjectId);
+
+        public Respuesta CompletarAdministracionAutorizacion(List<TSolicitudCondensada> solicitudes, List<TAutorizacion> autorizaciones, string subjectId);
     }
 }

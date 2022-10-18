@@ -31,7 +31,7 @@ namespace Dominio.Nucleo.Repositorios
 
         ConsultaPaginada<TFlujo> ConsultarFlujosDeAutorizacion(TQuery parametros, string subjectId);
 
-       
+        TFlujo ObtenerConfiguracionFlujo(int idFlujo);
 
     }
 }

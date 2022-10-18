@@ -26,7 +26,8 @@ namespace Infraestructura.Datos.Nucleo
 
         public abstract bool ExisteRegistroEntePublico(TFlujo flujo);
 
-       
+        public abstract TFlujo ObtenerConfiguracionFlujo(int idFlujo);
+
         public abstract List<TFlujo> ObtenerFlujosPorEntePublico(int idTipoEnte);
 
 

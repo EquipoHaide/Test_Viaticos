@@ -285,5 +285,13 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return new Respuesta<bool>(true);
 
         }
+
+        public Respuesta<TFlujo> ObtenerCofiguracionFlujo(TFlujo flujo)
+        {
+            if (flujo is null)
+                return new Respuesta<TFlujo>("La acción no pudo concluirse, porque el registro fue previamente eliminado.", TAG);
+
+            return new Respuesta<TFlujo>(flujo);
+        }
     }
 }

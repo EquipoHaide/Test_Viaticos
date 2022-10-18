@@ -14,5 +14,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         public Respuesta<bool> ValidarTipoEnte(List<int> idsTipoEnte);
 
+        public Respuesta<TFlujo> ObtenerCofiguracionFlujo(TFlujo flujo);
+
     }
 }

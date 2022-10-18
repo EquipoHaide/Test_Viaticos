@@ -16,8 +16,12 @@ namespace Infraestructura.Datos.Viaticos.UnidadDeTrabajo
         public DbSet<FlujoViatico> Flujos { get; set; }
         public DbSet<NivelEmpleado> NivelEmpleados { get; set; }
         public DbSet<TipoEntePublico> TipoEntePublicos { get; set; }
+        public DbSet<SolicitudCondensada> SolicitudCondensada { get; set; }
+        public DbSet<Autorizacion> Autorizaciones { get; set; }
+        public DbSet<HistorialFlujoViatico> HistorialFlujoViaticos { get; set; }
+        public DbSet<HistorialPasoViatico> HistorialPasoViaticos { get; set; }
 
-
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -79,5 +79,22 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             
             return new Respuesta<List<TFlujo>>(respuesta.Mensaje,TAG);
         }
+
+        public Respuesta<TFlujo> ObtenerConfiguracionFlujo(int idFlujo)
+        {
+            var obtenerConfiguracion = Repositorio.Try(r => r.ObtenerConfiguracionFlujo(idFlujo));
+
+            if (obtenerConfiguracion.EsError)
+            {
+                return obtenerConfiguracion.ErrorBaseDatos<TFlujo>(TAG);
+            }
+
+            var respuesta = ServicioDominio.ObtenerCofiguracionFlujo(obtenerConfiguracion.Contenido);
+
+            if (respuesta.EsError)
+                return new Respuesta<TFlujo>(respuesta.Mensaje, respuesta.TAG);
+
+            return new Respuesta<TFlujo>(respuesta.Contenido);
+        }
     }
 }

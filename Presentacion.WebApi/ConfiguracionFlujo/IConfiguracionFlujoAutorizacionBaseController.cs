@@ -15,5 +15,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
 
         object AdministrarFlujos([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config);
 
+        object ObtenrConfiguracionFlujo([FromBody] int idFlujo);
+
     }
 }

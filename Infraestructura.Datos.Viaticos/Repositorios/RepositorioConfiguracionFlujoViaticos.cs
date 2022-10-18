@@ -138,7 +138,22 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return tipoEnte;
         }
 
-  
+        public override FlujoViatico ObtenerConfiguracionFlujo(int idFlujo)
+        {
+            var f = (from u in Set
+                     where u.Id == idFlujo && u.Activo == true
+                     select new FlujoViatico
+                     {
+                         Id = u.Id,
+                         IdTipoEnte = u.IdTipoEnte,
+                         IdNivelEmpleado = u.IdNivelEmpleado,
+                         TipoFlujo = u.TipoFlujo,
+                         Pasos = u.Pasos.Where(r => r.Activo).ToList()
+                     }).FirstOrDefault();
+
+            return f; 
+        }
+
         public override List<FlujoViatico> ObtenerFlujosPorEntePublico(int idTipoEnte)
         {
             var lista = (from u in Set

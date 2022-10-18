@@ -67,5 +67,29 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
                 return this.ApiResult(e, App.GetLogger());
             }
         }
+
+        [HttpGet("flujo")]
+        public object ObtenrConfiguracionFlujo([FromQuery] int idFlujo)
+        {
+            try
+            {
+                var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
+                var resultado = ServicioConfiguracionFlujoBase.ObtenerConfiguracionFlujo(idFlujo);
+
+                if (resultado.EsError)
+                {
+                    if (resultado.Estado == EstadoProceso.Fatal)
+                        return this.ApiResult(resultado.ExcepcionInterna, App.GetLogger());
+
+                    return this.ApiResult(resultado.Mensaje);
+                }
+
+                return this.ApiResult(new { resultado.Contenido });
+            }
+            catch (Exception e)
+            {
+                return this.ApiResult(e, App.GetLogger());
+            }
+        }
     }
 }
