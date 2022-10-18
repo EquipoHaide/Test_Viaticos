@@ -26,7 +26,7 @@ namespace Infraestructura.Datos.Viaticos.UnidadDeTrabajo
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Solo para crear las migraciones
-            //optionsBuilder.UseSqlServer("Server=localhost; Database=BD; user id=sa; password=Admin;");
+            optionsBuilder.UseSqlServer("Server=localhost; Database=BD; user id=sa; password=Admin;");
 
         }
 

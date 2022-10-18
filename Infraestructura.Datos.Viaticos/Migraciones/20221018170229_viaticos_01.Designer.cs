@@ -4,14 +4,16 @@ using Infraestructura.Datos.Viaticos.UnidadDeTrabajo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infraestructura.Datos.Viaticos.Migraciones
 {
     [DbContext(typeof(ViaticosUnidadDeTrabajo))]
-    partial class ViaticosUnidadDeTrabajoModelSnapshot : ModelSnapshot
+    [Migration("20221018170229_viaticos_01")]
+    partial class viaticos_01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,4 +1,5 @@
 ﻿using Dominio.Nucleo;
+using Infraestructura.Transversal.ServiciosExternos.FirmaElectronica;
 
 namespace Infraestructura.Transversal.ServiciosExternos
 {
@@ -6,7 +7,7 @@ namespace Infraestructura.Transversal.ServiciosExternos
     {
         public override void Maping(IAplicacion app)
         {
-            
+            app.Register<IServicioFirmaElectronica, ServicioFirmaElectronica>();
         }
     }
 }
