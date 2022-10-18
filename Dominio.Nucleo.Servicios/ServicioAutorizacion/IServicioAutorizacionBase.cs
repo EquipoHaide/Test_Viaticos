@@ -13,6 +13,6 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
         where TInstanciaCondensada : class, ISolicitudCondensada
     {
 
-        public Respuesta AdministrarAutorizacion(List<TInstanciaCondensada> instanciaCondensadas, List<TAutorizacion> autorizaciones, List<TFlujo> flujos, int accion, string subjectId);
+        public Respuesta AdministrarAutorizacion(List<TInstanciaCondensada> instanciaCondensadas, List<TInstanciaCondensada> instanciaCondensadasOriginal, List<TAutorizacion> autorizaciones, List<TFlujo> flujos, int accion, string subjectId);
     }
 }

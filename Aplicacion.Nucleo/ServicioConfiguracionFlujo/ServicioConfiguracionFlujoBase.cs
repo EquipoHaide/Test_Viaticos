@@ -54,10 +54,10 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (respuesta.EsExito)
             {
-                var respuestaComplementaria = this.CompletarAdministracionFlujos(respuesta.Contenido, flujosExistentes.Contenido, subjectId);
+                //var respuestaComplementaria = this.CompletarAdministracionFlujos(respuesta.Contenido, flujosExistentes.Contenido, subjectId);
 
-                if (respuestaComplementaria.EsExito)
-                {
+                //if (respuestaComplementaria.EsExito)
+                //{
                     foreach (var item in respuesta.Contenido)
                     {
                         if (item.Id == 0)
@@ -72,9 +72,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                     }
 
                     return new Respuesta<List<TFlujo>>(save.Mensaje);
-                }
+                //}
 
-                return new Respuesta<List<TFlujo>>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+                //return new Respuesta<List<TFlujo>>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
             
             return new Respuesta<List<TFlujo>>(respuesta.Mensaje,TAG);

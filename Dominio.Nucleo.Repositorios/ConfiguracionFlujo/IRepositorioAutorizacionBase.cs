@@ -17,6 +17,8 @@ namespace Dominio.Nucleo.Repositorios.ConfiguracionFlujo
 
         List<TAutorizacion> ObtenerAutorizacion(List<int> IdsAutorizacion);
 
+        List<TInstanciaCondesada> ObtenerSolicitudesCondensadas(List<int> IdsSolicitudes);
+
 
     }
 }

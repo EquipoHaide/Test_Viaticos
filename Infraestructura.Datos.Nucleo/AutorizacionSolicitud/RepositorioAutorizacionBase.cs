@@ -18,6 +18,7 @@ namespace Infraestructura.Datos.Nucleo.AutorizacionSolicitud
 
         public abstract ConsultaPaginada<TInstanciaCondensada> ConsultarAutorizaciones(TQuery parametros, string subjectId);
         public abstract List<TAutorizacion> ObtenerAutorizacion(List<int> IdsAutorizacion);
+        public abstract List<TInstanciaCondensada> ObtenerSolicitudesCondensadas(List<int> IdsSolicitudes);
     }
 
 }

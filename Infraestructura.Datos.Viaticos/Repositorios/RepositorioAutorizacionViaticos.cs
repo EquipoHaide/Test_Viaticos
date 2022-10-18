@@ -41,8 +41,8 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                             Orden = u.Orden,
 
                             Estado = u.Estado,
-                            FechaCreacion = u.FechaCreacion,
-                            IdUsuarioCreo = u.IdUsuarioCreo,
+                            //FechaCreacion = u.FechaCreacion,
+                            //IdUsuarioCreo = u.IdUsuarioCreo,
                         };
 
             //Busqueda Generica
@@ -92,23 +92,20 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
         public override List<Autorizacion> ObtenerAutorizacion(List<int> IdsAutorizacion)
         {
-            List<Autorizacion> autorizacion = new List<Autorizacion>();
+            List<Autorizacion> listaAutorizacion = new List<Autorizacion>();
 
-            autorizacion.Add(new Autorizacion
+            
+            foreach (var Id in IdsAutorizacion)
             {
-                Id = 1,
-                IdFlujo = 6,
-                Orden = 2,
-                IdRol = 3,
-                Sello = "kjshdjdhssdfgasdyte",
-                Estado = (int)AccionSolicitud.Pendiente,
-                IdUsuarioCreo = "sdnzcnmbzvn",
-                FechaCreacion = DateTime.Now
+                var autorizacion = (from u in UnitOfWork.Set<Entidad.Autorizacion>()
+                                         where u.Id == Id
+                                         select u).FirstOrDefault();
+
+                listaAutorizacion.Add(autorizacion);
+            }
            
-            });
 
-
-            return autorizacion;
+            return listaAutorizacion;
 
         }
     }

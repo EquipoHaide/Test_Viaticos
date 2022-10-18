@@ -16,7 +16,8 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 
         const string TAG = "Dominio.Nucleo.Servicios.ServicioAutorizacion";
 
-        public Respuesta AdministrarAutorizacion(List<TInstanciaCondensada> instanciaCondensadas, List<TAutorizacion> autorizaciones, List<TFlujo> flujos, int accion, string subjectId)
+        public Respuesta AdministrarAutorizacion(List<TInstanciaCondensada> instanciaCondensadas, List<TInstanciaCondensada> instanciaCondensadasOriginales,
+            List<TAutorizacion> autorizaciones, List<TFlujo> flujos, int accion, string subjectId)
         {
             if (autorizaciones == null || autorizaciones.Count() <= 0)
                     return new Respuesta("",TAG);
@@ -88,6 +89,8 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 
                         //Actualizacion de la Solicitud (Instancia Condensada)
                         solicitud.Estado = (int)AccionSolicitud.Cancelado;
+                        solicitud.FechaCancelacion = DateTime.Now;
+                        solicitud.IdUsuarioCancelacion = subjectId;
                       
                     }
                     else{
@@ -114,7 +117,6 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 
                     }
 
-
                 }
                 else if ((int)AccionSolicitud.DevueltoInicio == accion)
                 {
@@ -123,6 +125,8 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 
                     //Actualizacion de la Solicitud (Instancia Condensada)
                     solicitud.Estado = (int)AccionSolicitud.DevueltoInicio;
+                    solicitud.FechaCancelacion = DateTime.Now;
+                    solicitud.IdUsuarioCancelacion = subjectId;
                 }
                 else if ((int)AccionSolicitud.Cancelado == accion)
                 {
@@ -131,6 +135,8 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 
                     //Actualizacion de la Solicitud (Instancia Condensada)
                     solicitud.Estado = (int)AccionSolicitud.Cancelado;
+                    solicitud.FechaCancelacion = DateTime.Now;
+                    solicitud.IdUsuarioCancelacion = subjectId;
                 }
 
 
@@ -146,10 +152,14 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
         {
             //Actualizar autorizacion
             autorizacion.Estado = (int)accion;
-            autorizacion.IdUsuarioAutorizacion = subjectId;
-            autorizacion.FechaAutorizacion = DateTime.Now;
+           
  
             if(accion != AccionSolicitud.Autorizado)
+            {
+                autorizacion.IdUsuarioAutorizacion = subjectId;
+                autorizacion.FechaAutorizacion = DateTime.Now;
+          
+            }else
             {
                 autorizacion.IdUsuarioCancelacion = subjectId;
                 autorizacion.FechaCancelacion = DateTime.Now;
