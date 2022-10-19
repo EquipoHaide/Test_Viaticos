@@ -108,5 +108,21 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             return listaAutorizacion;
 
         }
+
+        public override List<SolicitudCondensada> ObtenerSolicitudesCondensadas(List<int> IdsSolicitudes)
+        {
+            List<SolicitudCondensada> listaSolicitudes = new List<SolicitudCondensada>();
+
+            foreach (var Id in IdsSolicitudes)
+            {
+                var solicitud = (from u in Set
+                                   where u.Id == Id
+                                   select u).FirstOrDefault();
+                listaSolicitudes.Add(solicitud);
+            }
+
+
+            return listaSolicitudes;
+        }
     }
 }

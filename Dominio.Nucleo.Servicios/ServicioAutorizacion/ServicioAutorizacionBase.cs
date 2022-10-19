@@ -31,7 +31,15 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 
             foreach (var solicitud in instanciaCondensadas)
             {
-                var autorizacion = autorizaciones.Where(r => r.Id == solicitud.IdAutorizacion).FirstOrDefault();
+                var solicitudOriginal = instanciaCondensadasOriginales.Where(r => r.Id == solicitud.Id).FirstOrDefault();
+
+                if (solicitudOriginal == null)
+                    return new Respuesta("No se encontro la solicitud", TAG);
+
+                if (solicitudOriginal.Estado != (int)AccionSolicitud.Pendiente)
+                    return new Respuesta("La solicitud ya fue previamente afectada", TAG);
+
+                var autorizacion = autorizaciones.Where(r => r.Id == solicitudOriginal.IdAutorizacion).FirstOrDefault();
 
                 if(autorizacion == null)
                     return new Respuesta("No se encontro autorizacion relacionada con la solicitud", TAG);
@@ -46,11 +54,13 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 
                 var pasosOrdenados = flujo.Pasos.OrderBy(r => r.Orden).ToArray();
 
-                var pasoActual = pasosOrdenados.Where(r => r.Orden == solicitud.Orden).FirstOrDefault();
+                var pasoActual = pasosOrdenados.Where(r => r.Orden == solicitudOriginal.Orden).FirstOrDefault();
 
-                var pasoSiguiente = pasosOrdenados.Where(r => r.Orden == solicitud.Orden + 1).FirstOrDefault();
+                var pasoSiguiente = pasosOrdenados.Where(r => r.Orden == solicitudOriginal.Orden + 1).FirstOrDefault();
 
-                var pasoAnterior = pasosOrdenados.Where(r => r.Orden == solicitud.Orden - 1).FirstOrDefault();
+                var pasoAnterior = pasosOrdenados.Where(r => r.Orden == solicitudOriginal.Orden - 1).FirstOrDefault();
+
+                var pasoFinal = pasosOrdenados.LastOrDefault(); 
 
 
                 if ((int)AccionSolicitud.Autorizado == accion)
@@ -59,25 +69,31 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
                     //Actualizar autorizacion
                     ActualizarInstanciaActualizacion(autorizacion,AccionSolicitud.Autorizado,subjectId);
 
-                    var nuevaAutorizacion = new TAutorizacion()
+                    TAutorizacion nuevaAutorizacion = new TAutorizacion();
+
+                    if (pasoSiguiente != null)
                     {
-                        Orden = pasoSiguiente.Orden,
-                        IdRol = pasoSiguiente.IdRolAutoriza,
-                        Sello = autorizacion.Sello, ///PENDIENTE
-                        Estado = (int)AccionSolicitud.Pendiente,
-                        IdFlujo = autorizacion.IdFlujo,
-              
-                    };
+                        nuevaAutorizacion.Orden = pasoSiguiente.Orden;
+                        nuevaAutorizacion.IdRol = pasoSiguiente.IdRolAutoriza;
+                        nuevaAutorizacion.Sello = autorizacion.Sello; ///PENDIENTE
+                        nuevaAutorizacion.Estado = (int)AccionSolicitud.Pendiente;
+                        nuevaAutorizacion.IdFlujo = autorizacion.IdFlujo;
 
-                    autorizaciones.Add(nuevaAutorizacion);
+                        autorizaciones.Add(nuevaAutorizacion);
 
-                    //Actualizacion de la Solicitud (Instancia Condensada
-                
-                    solicitud.IdAutorizacion = nuevaAutorizacion.Id;
-                    solicitud.Estado = (int)AccionSolicitud.Pendiente;
-                    solicitud.Orden = pasoSiguiente.Orden;
-                    solicitud.IdRol = pasoSiguiente.IdRolAutoriza;
-                    
+                        //Actualizacion de la Solicitud (Instancia Condensada)
+                        solicitudOriginal.IdAutorizacion = nuevaAutorizacion.Id;
+                        solicitudOriginal.Estado = (int)AccionSolicitud.Pendiente;
+                        solicitudOriginal.Orden = pasoSiguiente.Orden;
+                        solicitudOriginal.IdRol = pasoSiguiente.IdRolAutoriza;
+
+                    } else if(pasoFinal.Orden == solicitudOriginal.Orden)
+                    {
+                        //Actualizacion de la Solicitud (Instancia Condensada)
+                        solicitudOriginal.Estado = (int)AccionSolicitud.Autorizado;
+                        solicitudOriginal.FechaAutorizacion = DateTime.Now;
+                        solicitudOriginal.IdUsuarioAutorizacion = subjectId;
+                    }
 
                 }
                 else if ((int)AccionSolicitud.Devuelto == accion)
@@ -88,9 +104,9 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
                         ActualizarInstanciaActualizacion(autorizacion, AccionSolicitud.DevueltoInicio, subjectId);
 
                         //Actualizacion de la Solicitud (Instancia Condensada)
-                        solicitud.Estado = (int)AccionSolicitud.Cancelado;
-                        solicitud.FechaCancelacion = DateTime.Now;
-                        solicitud.IdUsuarioCancelacion = subjectId;
+                        solicitudOriginal.Estado = (int)AccionSolicitud.Cancelado;
+                        solicitudOriginal.FechaCancelacion = DateTime.Now;
+                        solicitudOriginal.IdUsuarioCancelacion = subjectId;
                       
                     }
                     else{
@@ -110,10 +126,10 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
                         autorizaciones.Add(nuevaAutorizacion);
 
                         //Actualizacion de la Solicitud (Instancia Condensada)
-                        solicitud.IdAutorizacion = nuevaAutorizacion.Id;
-                        solicitud.Estado = (int)AccionSolicitud.Pendiente;
-                        solicitud.Orden = pasoAnterior.Orden;
-                        solicitud.IdRol = pasoAnterior.IdRolAutoriza;
+                        solicitudOriginal.IdAutorizacion = nuevaAutorizacion.Id;
+                        solicitudOriginal.Estado = (int)AccionSolicitud.Pendiente;
+                        solicitudOriginal.Orden = pasoAnterior.Orden;
+                        solicitudOriginal.IdRol = pasoAnterior.IdRolAutoriza;
 
                     }
 
@@ -124,9 +140,9 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
                     ActualizarInstanciaActualizacion(autorizacion, AccionSolicitud.DevueltoInicio, subjectId);
 
                     //Actualizacion de la Solicitud (Instancia Condensada)
-                    solicitud.Estado = (int)AccionSolicitud.DevueltoInicio;
-                    solicitud.FechaCancelacion = DateTime.Now;
-                    solicitud.IdUsuarioCancelacion = subjectId;
+                    solicitudOriginal.Estado = (int)AccionSolicitud.DevueltoInicio;
+                    solicitudOriginal.FechaCancelacion = DateTime.Now;
+                    solicitudOriginal.IdUsuarioCancelacion = subjectId;
                 }
                 else if ((int)AccionSolicitud.Cancelado == accion)
                 {
@@ -134,11 +150,10 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
                     ActualizarInstanciaActualizacion(autorizacion, AccionSolicitud.Cancelado, subjectId);
 
                     //Actualizacion de la Solicitud (Instancia Condensada)
-                    solicitud.Estado = (int)AccionSolicitud.Cancelado;
-                    solicitud.FechaCancelacion = DateTime.Now;
-                    solicitud.IdUsuarioCancelacion = subjectId;
+                    solicitudOriginal.Estado = (int)AccionSolicitud.Cancelado;
+                    solicitudOriginal.FechaCancelacion = DateTime.Now;
+                    solicitudOriginal.IdUsuarioCancelacion = subjectId;
                 }
-
 
             }
 
@@ -156,13 +171,13 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
  
             if(accion != AccionSolicitud.Autorizado)
             {
-                autorizacion.IdUsuarioAutorizacion = subjectId;
-                autorizacion.FechaAutorizacion = DateTime.Now;
-          
-            }else
-            {
                 autorizacion.IdUsuarioCancelacion = subjectId;
                 autorizacion.FechaCancelacion = DateTime.Now;
+            }
+            else
+            {
+                autorizacion.IdUsuarioAutorizacion = subjectId;
+                autorizacion.FechaAutorizacion = DateTime.Now;
             }
         }
 

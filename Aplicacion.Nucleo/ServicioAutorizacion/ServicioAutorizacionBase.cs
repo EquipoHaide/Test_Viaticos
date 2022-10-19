@@ -46,17 +46,21 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
             if(accion <= 0 )
                 return new Respuesta("Es requerido alguna accion para la(s) solicitud(es)", TAG);
 
+            var idsSolicitud = solicitudes.Select(r => r.Id).ToList();
+
+            var listaSolicitudes = Repositorio.Try(r => r.ObtenerSolicitudesCondensadas(idsSolicitud));
+
             var listaIds = solicitudes.Select(r => r.IdAutorizacion).ToList();
 
             var listaAutorizaciones = Repositorio.Try(r => r.ObtenerAutorizacion(listaIds));
 
             if (listaAutorizaciones.EsError) return listaAutorizaciones.ErrorBaseDatos(TAG);
 
-            var respuesta = ServicioDominio.AdministrarAutorizacion(solicitudes, listaAutorizaciones.Contenido, flujos, accion, subjectId);
+            var respuesta = ServicioDominio.AdministrarAutorizacion(solicitudes, listaSolicitudes.Contenido, listaAutorizaciones.Contenido, flujos, accion, subjectId);
 
             if (respuesta.EsExito)
             {
-                var respuestaComplemantarioa = CompletarAdministracionAutorizacion(solicitudes, listaAutorizaciones.Contenido, subjectId);
+                var respuestaComplemantarioa = CompletarAdministracionAutorizacion(listaSolicitudes.Contenido, listaAutorizaciones.Contenido, subjectId);
 
                 if (respuestaComplemantarioa.EsExito)
                     return new Respuesta();
