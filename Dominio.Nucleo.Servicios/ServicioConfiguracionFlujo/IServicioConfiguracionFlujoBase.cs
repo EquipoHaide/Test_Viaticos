@@ -16,5 +16,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         public Respuesta<TFlujo> ObtenerCofiguracionFlujo(TFlujo flujo);
 
+        public Respuesta<List<TFlujo>> GestionConfiguracionFlujos(List<TFlujo> flujos,string subjectId);
+
     }
 }

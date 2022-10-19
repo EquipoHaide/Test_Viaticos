@@ -74,6 +74,10 @@ namespace Dominio.Viaticos.Servicios
             throw new NotImplementedException();
         }
 
-       
+        public override Respuesta<List<FlujoViatico>> GestionConfiguracionFlujos(List<FlujoViatico> flujos, string subjectId)
+        {
+
+            return new Respuesta<List<FlujoViatico>>(flujos);
+        }
     }
 }

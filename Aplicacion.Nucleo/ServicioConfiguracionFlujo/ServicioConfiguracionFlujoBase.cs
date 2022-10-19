@@ -23,7 +23,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public virtual IRepositorioConfiguracionFlujoBase<TFlujo,TQuery> Repositorio { get; }
         
    
-        public abstract Respuesta<List<TFlujo>> CompletarAdministracionFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, string subjectId);
+        public abstract Respuesta<List<TFlujo>> SuministrarAdministracionFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, string subjectId);
 
         public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TQuery parametros, string subjectId)
         {
@@ -52,12 +52,17 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             var respuesta = ServicioDominio.AdministrarFlujos(flujos, flujosExistentes.Contenido, existeEntePublico.Contenido, subjectId);
 
+            var gestionConfiguracionFlujos = ServicioDominio.GestionConfiguracionFlujos(respuesta.Contenido, subjectId);
+
+            if(respuesta.EsError)
+                return new Respuesta<List<TFlujo>>(gestionConfiguracionFlujos.Mensaje, gestionConfiguracionFlujos.TAG);
+
             if (respuesta.EsExito)
             {
-                //var respuestaComplementaria = this.CompletarAdministracionFlujos(respuesta.Contenido, flujosExistentes.Contenido, subjectId);
+                var respuestaComplementaria = this.SuministrarAdministracionFlujos(gestionConfiguracionFlujos.Contenido, flujosExistentes.Contenido, subjectId);
 
-                //if (respuestaComplementaria.EsExito)
-                //{
+                if (respuestaComplementaria.EsExito)
+                {
                     foreach (var item in respuesta.Contenido)
                     {
                         if (item.Id == 0)
@@ -72,9 +77,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                     }
 
                     return new Respuesta<List<TFlujo>>(save.Mensaje);
-                //}
+                }
 
-                //return new Respuesta<List<TFlujo>>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+                return new Respuesta<List<TFlujo>>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
             
             return new Respuesta<List<TFlujo>>(respuesta.Mensaje,TAG);

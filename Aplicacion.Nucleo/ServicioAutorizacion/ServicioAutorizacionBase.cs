@@ -58,6 +58,7 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
             var respuesta = ServicioDominio.AdministrarAutorizacion(solicitudes, listaSolicitudes.Contenido, listaAutorizaciones.Contenido, flujos, accion, subjectId);
 
+
             if (respuesta.EsExito)
             {
                 var respuestaComplemantarioa = CompletarAdministracionAutorizacion(listaSolicitudes.Contenido, listaAutorizaciones.Contenido, subjectId);

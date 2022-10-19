@@ -13,17 +13,12 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
+        public abstract Respuesta<List<TFlujo>> GestionConfiguracionFlujos(List<TFlujo> flujos, string subjectId);
+
         public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool existeEntePublico, string subjectId)
         {
             if (flujos.Count() <= 0)
                 return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion ", TAG);
-
-            /*
-            var idsFlujosNuevos = flujos.Select(f=>f.Id).ToList();
-            var idsFlujosPreOriginales = flujosOriginales.Where(f => f.TipoFlujo == (int)TipoFlujo.Predeterminado && f.Activo).Select(f => f.Id).ToList();
-            var idsFlujosPartOriginales = flujosOriginales.Where(f => f.TipoFlujo == (int)TipoFlujo.Particular && f.Activo).Select(f => f.Id).ToList();
-            */
-
 
             if (!existeEntePublico)
                 return new Respuesta<List<TFlujo>>("El Ente Publico Relacionado no existe", TAG);
@@ -293,5 +288,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
             return new Respuesta<TFlujo>(flujo);
         }
+
+        
     }
 }
