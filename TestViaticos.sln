@@ -83,11 +83,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio.Viaticos.Modelos", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio.Viaticos.Nucleo", "Dominio.Viaticos.Nucleo\Dominio.Viaticos.Nucleo.csproj", "{E45F4C3D-DD05-4442-B161-0D5AEDDB5658}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio.Viaticos.Repositorios", "Dominio.Viaticos.Repositorios\Dominio.Viaticos.Repositorios.csproj", "{EE13870B-36CF-4CB4-A234-22C654D5CDE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio.Viaticos.Repositorios", "Dominio.Viaticos.Repositorios\Dominio.Viaticos.Repositorios.csproj", "{EE13870B-36CF-4CB4-A234-22C654D5CDE4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Viaticos", "Viaticos", "{F5CB2921-72ED-4593-BC39-858E940D15E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructura.Datos.Viaticos", "Infraestructura.Datos.Viaticos\Infraestructura.Datos.Viaticos.csproj", "{A8367120-D5E8-494B-88CF-46FD3A35A40F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infraestructura.Datos.Viaticos", "Infraestructura.Datos.Viaticos\Infraestructura.Datos.Viaticos.csproj", "{A8367120-D5E8-494B-88CF-46FD3A35A40F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Nucleo;
+using Aplicacion.Nucleo.Firma;
 using FirmaElectronica.DTOs;
 using FirmaElectronica.Excepciones;
 using FirmaElectronica.Fabricas;

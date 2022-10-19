@@ -1,4 +1,5 @@
-﻿using Dominio.Nucleo;
+﻿using Aplicacion.Nucleo.Firma;
+using Dominio.Nucleo;
 using Infraestructura.Transversal.ServiciosExternos.FirmaElectronica;
 
 namespace Infraestructura.Transversal.ServiciosExternos

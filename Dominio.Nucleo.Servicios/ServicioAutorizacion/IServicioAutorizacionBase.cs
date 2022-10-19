@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Infraestructura.Transversal.Plataforma;
@@ -14,5 +15,16 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
     {
 
         public Respuesta AdministrarAutorizacion(List<TInstanciaCondensada> instanciaCondensadas, List<TInstanciaCondensada> instanciaCondensadasOriginal, List<TAutorizacion> autorizaciones, List<TFlujo> flujos, int accion, string subjectId);
+
+        /// <summary>
+        /// Método que valida el certificado obtenido
+        /// </summary>
+        Respuesta<string> ObtenerCertificado(Stream certificado);
+
+        /// <summary>
+        /// Método que valida la llave obtenida
+        /// </summary>
+        Respuesta<byte[]> ObtenerLlave(Stream llave);
+
     }
 }

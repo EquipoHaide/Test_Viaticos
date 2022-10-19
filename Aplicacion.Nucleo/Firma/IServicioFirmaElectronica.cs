@@ -1,7 +1,9 @@
 ﻿using Infraestructura.Transversal.Plataforma;
-using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Infraestructura.Transversal.ServiciosExternos.FirmaElectronica
+namespace Aplicacion.Nucleo.Firma
 {
     public interface IServicioFirmaElectronica
     {
@@ -14,10 +16,5 @@ namespace Infraestructura.Transversal.ServiciosExternos.FirmaElectronica
         /// Método que valida firma obtenida
         /// </summary>
         Respuesta ValidarFirma(string firmaElectronica, string cadenaOriginal, string certificadoBase64);
-
-        /// <summary>
-        /// Método que obtención del data del certificado dado
-        /// </summary>
-        Respuesta<Modelos.VerModeloCertificado> ObtenerDatosCertificado(Stream certificado);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Aplicacion.Nucleo.Firma;
 using Dominio.Nucleo;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
@@ -19,7 +20,13 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
         where TPaso : class, IPaso
     {
 
+        Nucleo.IAplicacion App { get; set; }
+
         const string TAG = "Aplicacion.Nucleo.ServicioFlujoAutorizacion";
+
+        public IServicioFirmaElectronica servicioFirma;
+        public IServicioFirmaElectronica ServicioFirma => this.App.Inject(ref servicioFirma);
+
 
         public virtual Dominio.Nucleo.Servicios.ServicioAutorizacion.IServicioAutorizacionBase<TSolicitudCondensada,TAutorizacion,TFlujo,TPaso> ServicioDominio { get; }
 
@@ -28,6 +35,11 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
         public abstract Respuesta CompletarAdministracionAutorizacion (List<TSolicitudCondensada> solicitudes, List<TAutorizacion> autorizaciones, string subjectId);
 
+
+        public ServicioAutorizacionBase(Nucleo.IAplicacion app)
+        {
+            App = app;
+        }
         public Respuesta<ConsultaPaginada<TSolicitudCondensada>> Consultar(TQuery parametros, string subjectId)
         {
             if (parametros == null) return new Respuesta<ConsultaPaginada<TSolicitudCondensada>>("El modelo de consulta para obtener no es valido.", TAG);
