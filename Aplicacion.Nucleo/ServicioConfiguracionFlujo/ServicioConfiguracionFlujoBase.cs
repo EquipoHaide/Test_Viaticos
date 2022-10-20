@@ -50,16 +50,16 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (existeEntePublico.EsError)
                 return new Respuesta<List<TFlujo>>(existeEntePublico.Mensaje, TAG);
 
-            var respuesta = ServicioDominio.AdministrarFlujos(flujos, flujosExistentes.Contenido, existeEntePublico.Contenido, subjectId);
+            var configuracionFlujo = ServicioDominio.ValidacioConfiguracionFlujos(flujos, subjectId);
 
-            var gestionConfiguracionFlujos = ServicioDominio.GestionConfiguracionFlujos(respuesta.Contenido, subjectId);
+            if (configuracionFlujo.EsError)
+                return new Respuesta<List<TFlujo>>(configuracionFlujo.Mensaje, configuracionFlujo.TAG);
 
-            if(respuesta.EsError)
-                return new Respuesta<List<TFlujo>>(gestionConfiguracionFlujos.Mensaje, gestionConfiguracionFlujos.TAG);
+            var respuesta = ServicioDominio.AdministrarFlujos(configuracionFlujo.Contenido, flujosExistentes.Contenido, existeEntePublico.Contenido, subjectId);
 
             if (respuesta.EsExito)
             {
-                var respuestaComplementaria = this.SuministrarAdministracionFlujos(gestionConfiguracionFlujos.Contenido, flujosExistentes.Contenido, subjectId);
+                var respuestaComplementaria = this.SuministrarAdministracionFlujos(respuesta.Contenido, flujosExistentes.Contenido, subjectId);
 
                 if (respuestaComplementaria.EsExito)
                 {

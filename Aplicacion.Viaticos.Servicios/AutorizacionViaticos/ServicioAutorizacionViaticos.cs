@@ -38,7 +38,7 @@ namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
             this.App = app;
         }
 
-        public override Respuesta CompletarAdministracionAutorizacion(List<SolicitudCondensada> solicitudes, List<Autorizacion> autorizaciones, string subjectId)
+        public override Respuesta AdministracionFinalAutorizacion(List<SolicitudCondensada> solicitudes, List<Autorizacion> autorizaciones, string subjectId)
         {
 
           

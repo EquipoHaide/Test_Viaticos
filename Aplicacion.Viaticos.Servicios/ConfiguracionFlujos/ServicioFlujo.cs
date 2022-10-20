@@ -40,7 +40,7 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         }
 
 
-        public override Respuesta<List<FlujoViatico>> SuministrarAdministracionFlujos(List<FlujoViatico> flujos, List<FlujoViatico> flujosOriginales,  string subjectId)
+        public override Respuesta<List<FlujoViatico>> AdministracionFinalConfiguracionFlujo(List<FlujoViatico> flujos, List<FlujoViatico> flujosOriginales,  string subjectId)
         {
 
 

@@ -13,7 +13,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
-        public abstract Respuesta<List<TFlujo>> GestionConfiguracionFlujos(List<TFlujo> flujos, string subjectId);
+        public abstract Respuesta<List<TFlujo>> ValidacioConfiguracionFlujos(List<TFlujo> flujos, string subjectId);
 
         public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool existeEntePublico, string subjectId)
         {

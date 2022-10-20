@@ -19,6 +19,6 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
         public Respuesta AdministrarAutorizaciones(List<TSolicitudCondensada> Autorizacones, List<TFlujo> flujos, int Accion, string subjectId);
 
-        public Respuesta CompletarAdministracionAutorizacion(List<TSolicitudCondensada> solicitudes, List<TAutorizacion> autorizaciones, string subjectId);
+        public Respuesta AdministracionFinalAutorizacion(List<TSolicitudCondensada> solicitudes, List<TAutorizacion> autorizaciones, string subjectId);
     }
 }

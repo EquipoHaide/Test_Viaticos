@@ -8,5 +8,7 @@ namespace Dominio.Nucleo
         public int Pagina { get; set; }
 
         public int ElementosPorPagina { get; set; }
+
+        public DateTime FechaAfectacion { get; set; }
     }
 }
