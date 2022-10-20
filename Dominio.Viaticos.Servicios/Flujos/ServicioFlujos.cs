@@ -1,4 +1,5 @@
 ﻿
+using Dominio.Nucleo;
 using Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo;
 using Dominio.Viaticos.Entidades;
 using Infraestructura.Transversal.Plataforma;
@@ -74,10 +75,10 @@ namespace Dominio.Viaticos.Servicios
             throw new NotImplementedException();
         }
 
-        public override Respuesta<List<FlujoViatico>> ValidacioConfiguracionFlujos(List<FlujoViatico> flujos, string subjectId)
+        public override Respuesta<ResumenInformacion> ValidacioConfiguracionFlujos(List<FlujoViatico> flujos, string subjectId)
         {
 
-            return new Respuesta<List<FlujoViatico>>(flujos);
+            return new Respuesta<ResumenInformacion>("");
         }
     }
 }

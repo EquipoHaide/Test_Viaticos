@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Dominio.Nucleo.Entidades
 {
-    public interface IFlujo<TPaso> : IEntity ,ISeguimiento
+    public interface IFlujo<TPaso> : IEntity ,ISeguimiento 
        where TPaso : IPaso
     {
-
-        //TipoEntePublico TipoEntePublico { get; set; }
         public int IdTipoEnte { get; set; }
-       
-        //NivelEmpleado NivelEmpleado { get; set; }
+    
         public int? IdNivelEmpleado { get; set; }
-
 
         /// <summary>
         /// Es un Enumerable
@@ -25,5 +22,7 @@ namespace Dominio.Nucleo.Entidades
         List<TPaso> Pasos { get; set; }
 
 
+
     }
+
 }

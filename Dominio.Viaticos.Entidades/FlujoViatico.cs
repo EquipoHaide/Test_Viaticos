@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using Dominio.Nucleo.Entidades;
 
 namespace Dominio.Viaticos.Entidades
@@ -33,9 +34,10 @@ namespace Dominio.Viaticos.Entidades
 
         public List<HistorialFlujoViatico> Historiales { get; set; }
 
-
-
+ 
     }
+
+    
 
 
 

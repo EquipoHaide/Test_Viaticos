@@ -15,6 +15,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         where TFlujo : class, Entidades.IFlujo<TPaso> 
         where TPaso : class, Entidades.IPaso
         where TQuery : class, IQuery
+   
     {
         const string TAG = "Aplicacion.Nucleo.ServicioConfiguracionFlujo";
 
@@ -35,35 +36,35 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             return new Respuesta<ConsultaPaginada<TFlujo>>(recursos.Contenido);
         }
 
-        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, string subjectId)
-        { 
+        public Respuesta<ResumenInformacion> AdministrarFlujos(List<TFlujo> flujos, string subjectId)
+        {
             if (flujos == null || flujos.Count() <= 0)
-                return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion", TAG);           
+                return new Respuesta<ResumenInformacion>("Es requerido un flujo de autorizacion", TAG);           
 
             var flujosExistentes = Repositorio.Try(r => r.ObtenerFlujosPorEntePublico(flujos[0].IdTipoEnte));
 
             if (flujosExistentes.EsError)
-                return new Respuesta<List<TFlujo>>(flujosExistentes.Mensaje, TAG);
+                return new Respuesta<ResumenInformacion>(flujosExistentes.Mensaje, TAG);
 
             var existeEntePublico = Repositorio.Try(r => r.ExisteRegistroEntePublico(flujos[0]));
 
             if (existeEntePublico.EsError)
-                return new Respuesta<List<TFlujo>>(existeEntePublico.Mensaje, TAG);
+                return new Respuesta<ResumenInformacion>(existeEntePublico.Mensaje, TAG);
+            
+            var resumen = ServicioDominio.ValidacioConfiguracionFlujos(flujos, subjectId);
 
-            var configuracionFlujo = ServicioDominio.ValidacioConfiguracionFlujos(flujos, subjectId);
+            if (resumen.EsError)
+                return new Respuesta<ResumenInformacion>(resumen.Mensaje, resumen.TAG);
 
-            if (configuracionFlujo.EsError)
-                return new Respuesta<List<TFlujo>>(configuracionFlujo.Mensaje, configuracionFlujo.TAG);
+            var resumenInformacion = ServicioDominio.AdministrarFlujos(flujos, flujosExistentes.Contenido, resumen.Contenido, existeEntePublico.Contenido, subjectId);
 
-            var respuesta = ServicioDominio.AdministrarFlujos(configuracionFlujo.Contenido, flujosExistentes.Contenido, existeEntePublico.Contenido, subjectId);
-
-            if (respuesta.EsExito)
+            if (resumenInformacion.EsExito)
             {
-                var respuestaComplementaria = this.AdministracionFinalConfiguracionFlujo(respuesta.Contenido, flujosExistentes.Contenido, subjectId);
+                var respuestaComplementaria = this.AdministracionFinalConfiguracionFlujo(flujos, flujosExistentes.Contenido, subjectId);
 
                 if (respuestaComplementaria.EsExito)
                 {
-                    foreach (var item in respuesta.Contenido)
+                    foreach (var item in flujosExistentes.Contenido)
                     {
                         if (item.Id == 0)
                             Repositorio.Add(item); 
@@ -73,16 +74,16 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
                     if (save.EsError)
                     {
-                        return new Respuesta<List<TFlujo>>(save.Mensaje, save.TAG);
+                        return new Respuesta<ResumenInformacion>(save.Mensaje, save.TAG);
                     }
 
-                    return new Respuesta<List<TFlujo>>(save.Mensaje);
+                    return new Respuesta<ResumenInformacion>(save.Mensaje);
                 }
 
-                return new Respuesta<List<TFlujo>>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
+                return new Respuesta<ResumenInformacion>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
             
-            return new Respuesta<List<TFlujo>>(respuesta.Mensaje,TAG);
+            return new Respuesta<ResumenInformacion>(resumenInformacion.Mensaje,TAG);
         }
 
         public Respuesta<TFlujo> ObtenerConfiguracionFlujo(int idFlujo)

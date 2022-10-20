@@ -10,13 +10,13 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
         where TPaso : class, Dominio.Nucleo.Entidades.IPaso
     {
     
-        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujoOriginal, bool existeEntePublico, string subjectId);
+        public Respuesta<ResumenInformacion> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujoOriginal, ResumenInformacion resumenInfo, bool existeEntePublico, string subjectId);
 
         public Respuesta<bool> ValidarTipoEnte(List<int> idsTipoEnte);
 
         public Respuesta<TFlujo> ObtenerCofiguracionFlujo(TFlujo flujo);
 
-        public Respuesta<List<TFlujo>> ValidacioConfiguracionFlujos(List<TFlujo> flujos,string subjectId);
+        public Respuesta<ResumenInformacion> ValidacioConfiguracionFlujos(List<TFlujo> flujos,string subjectId);
 
     }
 }

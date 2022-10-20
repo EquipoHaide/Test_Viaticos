@@ -8,41 +8,42 @@ using Infraestructura.Transversal.Plataforma.Extensiones;
 namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 {
     public abstract class ServicioConfiguracionFlujoBase<TFlujo,TPaso> : IServicioConfiguracionFlujoBase<TFlujo,TPaso>
-          where TFlujo : class, IFlujo<TPaso>
-        where TPaso : class, IPaso
+    where TFlujo : class, IFlujo<TPaso>
+    where TPaso : class, IPaso
+ 
     {
         public const string TAG = "Dominio.Nucleo.Servicios.ServicioConfiguracionFlujoBase";
 
-        public abstract Respuesta<List<TFlujo>> ValidacioConfiguracionFlujos(List<TFlujo> flujos, string subjectId);
+        public abstract Respuesta<ResumenInformacion> ValidacioConfiguracionFlujos(List<TFlujo> flujos, string subjectId);
 
-        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, bool existeEntePublico, string subjectId)
+        public Respuesta<ResumenInformacion> AdministrarFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, ResumenInformacion resumenInfo, bool existeEntePublico, string subjectId)
         {
             if (flujos.Count() <= 0)
-                return new Respuesta<List<TFlujo>>("Es requerido un flujo de autorizacion ", TAG);
+                return new Respuesta<ResumenInformacion>("Es requerido un flujo de autorizacion ", TAG);
 
             if (!existeEntePublico)
-                return new Respuesta<List<TFlujo>>("El Ente Publico Relacionado no existe", TAG);
+                return new Respuesta<ResumenInformacion>("El Ente Publico Relacionado no existe", TAG);
 
             var respuestaValidacionEnte = this.ValidarTipoEnte(flujos.Select(f => f.IdTipoEnte).ToList());
 
             if (!respuestaValidacionEnte.Contenido)
-                return new Respuesta<List<TFlujo>>(respuestaValidacionEnte.Mensaje, TAG);
+                return new Respuesta<ResumenInformacion>(respuestaValidacionEnte.Mensaje, TAG);
 
             var existeFlujoPredeterminado = flujosOriginales.
                 GroupBy(x => x.TipoFlujo == (int)TipoFlujo.Predeterminado).Any(a => a.Count() > 0);
 
             if (!existeFlujoPredeterminado && !flujos.Any(f=>f.TipoFlujo==(int)TipoFlujo.Predeterminado) )
-                return new Respuesta<List<TFlujo>>("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
+                return new Respuesta<ResumenInformacion>("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
 
             foreach (var itemFlujo in flujos.OrderBy(f=>f.TipoFlujo))
             {
                 //Si se trata de la creacion de una nueva configuracion de flujo
                 if (itemFlujo.Id == 0)
                 {
-                    var flujoNuevo = this.AdministrarFlujo(itemFlujo,null, existeFlujoPredeterminado, subjectId);
+                    var flujoNuevo = this.AdministrarFlujo(itemFlujo,null, resumenInfo, existeFlujoPredeterminado, subjectId);
 
                     if(flujoNuevo.EsError)
-                        return new Respuesta<List<TFlujo>>(flujoNuevo.Mensaje, TAG);
+                        return new Respuesta<ResumenInformacion>(flujoNuevo.Mensaje, TAG);
 
                     flujoNuevo.Contenido.Seguir(subjectId);
                    
@@ -55,12 +56,12 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                     var flujoOriginal = flujosOriginales.Where(r => r.Id == itemFlujo.Id).FirstOrDefault();
 
                     if(flujoOriginal==null)
-                        return new Respuesta<List<TFlujo>>(String.Format("El flujo: {0} no fue encontrado", itemFlujo.Id), TAG);
+                        return new Respuesta<ResumenInformacion>(String.Format("El flujo: {0} no fue encontrado", itemFlujo.Id), TAG);
 
                     if (flujoOriginal != null)
                     {
                         if (flujoOriginal.TipoFlujo!=itemFlujo.TipoFlujo)
-                            return new Respuesta<List<TFlujo>>("No se permite cambiar el tipo de flujo", TAG);
+                            return new Respuesta<ResumenInformacion>("No se permite cambiar el tipo de flujo", TAG);
                     }
                     //Si se trata de la eliminacion de una configuracion de flujo
                     if (itemFlujo.Id > 0 && !itemFlujo.Activo)
@@ -71,10 +72,10 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                     if (itemFlujo.Id > 0)
                     {
 
-                        var flujoModificado = this.AdministrarFlujo(itemFlujo, flujoOriginal, existeFlujoPredeterminado, subjectId);
+                        var flujoModificado = this.AdministrarFlujo(itemFlujo, flujoOriginal, resumenInfo, existeFlujoPredeterminado, subjectId);
 
                         if (flujoModificado.EsError)
-                            return new Respuesta<List<TFlujo>>(flujoModificado.Mensaje, TAG);
+                            return new Respuesta<ResumenInformacion>(flujoModificado.Mensaje, TAG);
 
                         flujoOriginal = flujoModificado.Contenido;
                         flujoOriginal.IdNivelEmpleado = flujoModificado.Contenido.IdNivelEmpleado;
@@ -85,16 +86,16 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             }
 
             if(this.EsNivelRepetido(flujosOriginales))
-                return new Respuesta<List<TFlujo>>("Ya existe un flujo particular con el mismo nivel de empleado", TAG);
+                return new Respuesta<ResumenInformacion>("Ya existe un flujo particular con el mismo nivel de empleado", TAG);
 
-            return new Respuesta<List<TFlujo>>(flujosOriginales);
+            return new Respuesta<ResumenInformacion>(/*flujosOriginales*/"");
         }
 
 
 
-        private Respuesta<TFlujo> AdministrarFlujo(TFlujo flujo, TFlujo flujoOriginal, bool esPredeterminado, string subjectId)
+        private Respuesta<TFlujo> AdministrarFlujo(TFlujo flujo, TFlujo flujoOriginal, ResumenInformacion resumenInfo, bool esPredeterminado, string subjectId)
         { 
-            var respuesta = this.ValidarFlujo(flujo, flujoOriginal, esPredeterminado);
+            var respuesta = this.ValidarFlujo(flujo, flujoOriginal, resumenInfo, esPredeterminado);
 
             if (respuesta.EsError)
                 return new Respuesta<TFlujo>(respuesta.Mensaje, TAG);
@@ -152,7 +153,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return new Respuesta<List<TPaso>>(pasosOriginales);
         }
 
-        private Respuesta ValidarFlujo(TFlujo flujo, TFlujo flujoOriginal, bool esPredeterminado)
+        private Respuesta ValidarFlujo(TFlujo flujo, TFlujo flujoOriginal, ResumenInformacion resumenInfo, bool esPredeterminado)
         {
             //validamos que los pasos que me envian coincidan con los pasos existen en la DB
             if (flujoOriginal != null) {
@@ -202,15 +203,11 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             //aplicamos validaciones a cada paso.
             foreach (var item in listaPasos)
             {
-                var respuestaPaso = this.ValidarPaso(item, flujoOriginal);
+                var respuestaPaso = this.ValidarPaso(item, resumenInfo, flujoOriginal);
 
                 if (!respuestaPaso.Contenido)
                     return new Respuesta(respuestaPaso.Mensaje, TAG);
             }
-
-           
-
-            
 
             return new Respuesta();
         }
@@ -246,7 +243,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return flujos.Where(f=>f.TipoFlujo!=1).GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
         }
 
-        private Respuesta<bool> ValidarPaso(TPaso paso, TFlujo flujoOriginal)
+        private Respuesta<bool> ValidarPaso(TPaso paso, ResumenInformacion resumenInfo, TFlujo flujoOriginal)
         {
             /*
             var pasosExistentes = flujoOriginal.Pasos.Where(p=>p.Activo);
@@ -289,6 +286,6 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return new Respuesta<TFlujo>(flujo);
         }
 
-        
+       
     }
 }

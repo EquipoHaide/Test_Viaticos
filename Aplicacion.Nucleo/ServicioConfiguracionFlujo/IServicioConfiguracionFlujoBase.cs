@@ -14,7 +14,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
         public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TQuery query, string subjectId);
 
-        public Respuesta<List<TFlujo>> AdministrarFlujos(List<TFlujo> flujos, string subjectId);
+        public Respuesta<ResumenInformacion> AdministrarFlujos(List<TFlujo> flujos, string subjectId);
 
         public Respuesta<TFlujo> ObtenerConfiguracionFlujo(int idFlujo);
 
