@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
@@ -161,7 +162,15 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
             return new Respuesta();
         }
 
+        public Respuesta<string> ObtenerCertificado(Stream certificado)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Respuesta<byte[]> ObtenerLlave(Stream llave)
+        {
+            throw new NotImplementedException();
+        }
 
         private void ActualizarInstanciaActualizacion (TAutorizacion autorizacion,AccionSolicitud accion,string subjectId)
         {

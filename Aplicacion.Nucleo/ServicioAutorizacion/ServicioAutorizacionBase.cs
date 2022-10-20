@@ -33,13 +33,14 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
         public virtual IRepositorioAutorizacionBase<TSolicitudCondensada,TAutorizacion,TQuery> Repositorio { get; }
 
-        public abstract Respuesta CompletarAdministracionAutorizacion (List<TSolicitudCondensada> solicitudes, List<TAutorizacion> autorizaciones, string subjectId);
+        public abstract Respuesta AdministracionFinalAutorizacion (List<TSolicitudCondensada> solicitudes, List<TAutorizacion> autorizaciones, string subjectId);
 
 
         public ServicioAutorizacionBase(Nucleo.IAplicacion app)
         {
             App = app;
         }
+
         public Respuesta<ConsultaPaginada<TSolicitudCondensada>> Consultar(TQuery parametros, string subjectId)
         {
             if (parametros == null) return new Respuesta<ConsultaPaginada<TSolicitudCondensada>>("El modelo de consulta para obtener no es valido.", TAG);
@@ -70,10 +71,9 @@ namespace Aplicacion.Nucleo.ServicioAutorizacion
 
             var respuesta = ServicioDominio.AdministrarAutorizacion(solicitudes, listaSolicitudes.Contenido, listaAutorizaciones.Contenido, flujos, accion, subjectId);
 
-
             if (respuesta.EsExito)
             {
-                var respuestaComplemantarioa = CompletarAdministracionAutorizacion(listaSolicitudes.Contenido, listaAutorizaciones.Contenido, subjectId);
+                var respuestaComplemantarioa = AdministracionFinalAutorizacion(listaSolicitudes.Contenido, listaAutorizaciones.Contenido, subjectId);
 
                 if (respuestaComplemantarioa.EsExito)
                     return new Respuesta();

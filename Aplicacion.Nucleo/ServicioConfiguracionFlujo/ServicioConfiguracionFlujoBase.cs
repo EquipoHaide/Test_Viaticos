@@ -23,7 +23,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
         public virtual IRepositorioConfiguracionFlujoBase<TFlujo,TQuery> Repositorio { get; }
         
    
-        public abstract Respuesta<List<TFlujo>> SuministrarAdministracionFlujos(List<TFlujo> flujos, List<TFlujo> flujosOriginales, string subjectId);
+        public abstract Respuesta<List<TFlujo>> AdministracionFinalConfiguracionFlujo(List<TFlujo> flujos, List<TFlujo> flujosOriginales, string subjectId);
 
         public Respuesta<ConsultaPaginada<TFlujo>> Consultar(TQuery parametros, string subjectId)
         {
@@ -59,7 +59,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (respuesta.EsExito)
             {
-                var respuestaComplementaria = this.SuministrarAdministracionFlujos(respuesta.Contenido, flujosExistentes.Contenido, subjectId);
+                var respuestaComplementaria = this.AdministracionFinalConfiguracionFlujo(respuesta.Contenido, flujosExistentes.Contenido, subjectId);
 
                 if (respuestaComplementaria.EsExito)
                 {

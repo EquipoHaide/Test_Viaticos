@@ -10,6 +10,6 @@ namespace Dominio.Viaticos.Modelos
         public int Pagina { get; set; } = 1;
         public int ElementosPorPagina { get; set; } = 20;
         public int IdEntePublico { get; set; }
-
+        public DateTime FechaAfectacion { get; set; }
     }
 }

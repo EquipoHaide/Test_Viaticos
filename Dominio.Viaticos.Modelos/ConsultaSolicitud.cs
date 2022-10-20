@@ -11,6 +11,7 @@ namespace Dominio.Viaticos.Modelos
         public string Query { get; set; }
         public int Pagina { get; set; }
         public int ElementosPorPagina { get; set; }
+        public DateTime FechaAfectacion { get; set; }
     }
 
 
