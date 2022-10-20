@@ -33,7 +33,7 @@ namespace Aplicacion.Viaticos.Servicios.AutorizacionViaticos
         public override IRepositorioAutorizacionBase<Entidades.SolicitudCondensada, Entidades.Autorizacion,Modelos.ConsultaSolicitudes> Repositorio => this.RepositorioAutorizacion;
 
 
-        public ServicioAutorizacionViaticos(Nucleo.IAplicacion app)
+        public ServicioAutorizacionViaticos(Nucleo.IAplicacion app): base(app)
         {
             this.App = app;
         }
