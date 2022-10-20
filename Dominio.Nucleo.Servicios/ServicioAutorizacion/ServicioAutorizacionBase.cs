@@ -5,19 +5,20 @@ using System.Linq;
 using Dominio.Nucleo.Entidades;
 using Dominio.Nucleo.FlujoAutorizacion;
 using Infraestructura.Transversal.Plataforma;
+using Infraestructura.Transversal.Plataforma.Extensiones;
 
 namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
 {
-    public class ServicioAutorizacionBase<TInstanciaCondensada, TAutorizacion, TFlujo, TPaso> : IServicioAutorizacionBase<TInstanciaCondensada, TAutorizacion, TFlujo, TPaso>
+    public class ServicioAutorizacionBase<TSolicitudCondensada, TAutorizacion, TFlujo, TPaso> : IServicioAutorizacionBase<TSolicitudCondensada, TAutorizacion, TFlujo, TPaso>
         where TFlujo : class, IFlujo<TPaso>
         where TPaso : class, IPaso
         where TAutorizacion : class, IAutorizacion,new()
-        where TInstanciaCondensada : class, ISolicitudCondensada
+        where TSolicitudCondensada : class, ISolicitudCondensada
     {
 
         const string TAG = "Dominio.Nucleo.Servicios.ServicioAutorizacion";
 
-        public Respuesta AdministrarAutorizacion(List<TInstanciaCondensada> instanciaCondensadas, List<TInstanciaCondensada> instanciaCondensadasOriginales,
+        public Respuesta AdministrarAutorizacion(List<TSolicitudCondensada> instanciaCondensadas, List<TSolicitudCondensada> instanciaCondensadasOriginales,
             List<TAutorizacion> autorizaciones, List<TFlujo> flujos, int accion, string subjectId)
         {
             if (autorizaciones == null || autorizaciones.Count() <= 0)
@@ -162,15 +163,45 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
             return new Respuesta();
         }
 
-        public Respuesta<string> ObtenerCertificado(Stream certificado)
-        {
-            throw new NotImplementedException();
+
+
+
+        private Respuesta validarRecursosFirma(List<TSolicitudCondensada> solicitudesCondensadas) {
+
+            foreach (var item in solicitudesCondensadas)
+            {
+                if (item.AplicaFirma) {
+                    if (item.RecursosFirma?.Certificado?.Archivo is null || item.RecursosFirma?.Llave?.Archivo is null)
+                        return new Respuesta("Ha ocurrido un error inesperado", TAG);
+
+                    if (item.RecursosFirma.Certificado.Extension.IsNullOrEmptyOrWhiteSpace())
+                        return new Respuesta("La extension es obligatoria", TAG);
+
+                    if (item.RecursosFirma.Certificado.Archivo is FileStream fileStream && Path.GetExtension(fileStream.Name) != ".cer")
+                        return new Respuesta("", TAG);
+
+                    if (item.RecursosFirma.Certificado.Extension != ".cer")
+                        return new Respuesta("", TAG);
+
+                    if (item.RecursosFirma.Contrasena.IsNullOrEmptyOrWhiteSpace())
+                        return new Respuesta("", TAG);
+
+                    if (item.RecursosFirma?.Llave?.Archivo is null)
+                        return new Respuesta("", TAG);
+
+                    if (item.RecursosFirma.Llave.Extension.IsNullOrEmptyOrWhiteSpace())
+                        return new Respuesta("La extension es obligatoria", TAG);
+
+                    if (item.RecursosFirma.Llave.Extension != ".key")
+                        return new Respuesta("Solo se permite seleccionar en el campo Key un archivo con extension Key", TAG);
+
+                   
+                }
+            }
+            return new Respuesta();
         }
 
-        public Respuesta<byte[]> ObtenerLlave(Stream llave)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         private void ActualizarInstanciaActualizacion (TAutorizacion autorizacion,AccionSolicitud accion,string subjectId)
         {

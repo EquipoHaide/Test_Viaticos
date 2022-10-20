@@ -35,6 +35,9 @@ namespace Dominio.Viaticos.Entidades
 
         public DateTime FechaAfectacion { get; set; }
 
+        [Required]
+        public bool AplicaFirma { get; set; }
+
 
     }
 }
