@@ -44,14 +44,14 @@ namespace Aplicacion.Viaticos.Servicios.ConfiguracionFlujos
         {
 
 
-            var respuesta = Servicio.CompletarAdministracionFlujos(flujos, flujosOriginales, subjectId);
+            //var respuesta = Servicio.CompletarAdministracionFlujos(flujos, flujosOriginales, subjectId);
 
             //agregar la logica faltante para completar la administracion de los flujos.
 
 
-            return new Respuesta<List<FlujoViatico>>(respuesta.Contenido);
-
             //return new Respuesta<List<FlujoViatico>>(respuesta.Contenido);
+
+            return new Respuesta<List<FlujoViatico>>(flujos);
 
         }
 

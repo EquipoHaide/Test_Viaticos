@@ -66,7 +66,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             if (resumen.EsError)
                 return new Respuesta<ResumenInformacion>(resumen.Mensaje, resumen.TAG); 
 
-            if (resumenInformacion.EsExito && resumenInformacion.Contenido.RegistrosFallidos < 0)
+            if ((resumenInformacion.EsExito && resumenInformacion.Contenido.RegistrosFallidos <= 0) == true)
             {
                 var respuestaComplementaria = this.AdministracionFinalConfiguracionFlujo(flujos, flujosExistentes.Contenido, subjectId);
 
