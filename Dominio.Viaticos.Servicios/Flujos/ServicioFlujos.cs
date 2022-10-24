@@ -75,10 +75,10 @@ namespace Dominio.Viaticos.Servicios
             throw new NotImplementedException();
         }
 
-        public override Respuesta<ResumenInformacion> ValidacioConfiguracionFlujos(List<FlujoViatico> flujos, string subjectId)
+      
+        public override Respuesta ValidacioConfiguracionFlujos(List<FlujoViatico> flujos, ResumenInformacion resumenInfo, string subjectId)
         {
-
-            return new Respuesta<ResumenInformacion>("");
+            return new Respuesta();
         }
     }
 }

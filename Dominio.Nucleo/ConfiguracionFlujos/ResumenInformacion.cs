@@ -7,24 +7,39 @@ namespace Dominio.Nucleo
     {
         public int RegistrosExitosos { get; set; }
         public int RegistrosFallidos { get; set; }
-        public List<DetalleFlujo> DetalleFlujos { get; set; }
+        public List<DetalleConfiguracion> DetallesConfiguracion { get; set; }
     }
 
-    public class DetalleFlujo
+    public class DetalleConfiguracion
     {
-        public DetalleFlujo(int id, string nombre, string motivo)
+        //public DetalleConfiguracion(int id, string nombre, string motivo)
+        //{
+        //    this.Id = id;
+        //    //this.Nombre = nombre;
+        //    this.Motivo = motivo;
+        //}
+
+        //public int Id { get; set; }
+        ////public string Nombre { get; set; }
+        //public string Motivo { get; set; }
+        public List<DetallesFlujo> DetalleFlujo { get; set; }
+        public List<DetallePaso> DetallePasos { get; set; }
+
+
+    }
+
+    public class DetallesFlujo
+    {
+        public DetallesFlujo(int id, string nombre, string motivo)
         {
             this.Id = id;
-            //this.Nombre = nombre;
+            this.Nombre = nombre;
             this.Motivo = motivo;
         }
 
         public int Id { get; set; }
-        //public string Nombre { get; set; }
+        public string Nombre { get; set; }
         public string Motivo { get; set; }
-        public List<DetallePaso> DetallePasos { get; set; }
-
-
     }
 
     public class DetallePaso

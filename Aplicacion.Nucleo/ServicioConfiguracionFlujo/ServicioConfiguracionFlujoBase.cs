@@ -50,15 +50,23 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
             if (existeEntePublico.EsError)
                 return new Respuesta<ResumenInformacion>(existeEntePublico.Mensaje, TAG);
-            
-            var resumen = ServicioDominio.ValidacioConfiguracionFlujos(flujos, subjectId);
+          
+            var resumenErrores = new ResumenInformacion()
+            {
+                DetallesConfiguracion = new List<DetalleConfiguracion>(),
+                RegistrosExitosos = 0,
+                RegistrosFallidos = 0
+
+            };
+
+            var resumenInformacion = ServicioDominio.AdministrarFlujos(flujos, flujosExistentes.Contenido, resumenErrores, existeEntePublico.Contenido, subjectId);
+
+            var resumen = ServicioDominio.ValidacioConfiguracionFlujos(flujos, resumenInformacion.Contenido, subjectId);
 
             if (resumen.EsError)
-                return new Respuesta<ResumenInformacion>(resumen.Mensaje, resumen.TAG);
+                return new Respuesta<ResumenInformacion>(resumen.Mensaje, resumen.TAG); 
 
-            var resumenInformacion = ServicioDominio.AdministrarFlujos(flujos, flujosExistentes.Contenido, resumen.Contenido, existeEntePublico.Contenido, subjectId);
-
-            if (resumenInformacion.EsExito)
+            if (resumenInformacion.EsExito && resumenInformacion.Contenido.RegistrosFallidos < 0)
             {
                 var respuestaComplementaria = this.AdministracionFinalConfiguracionFlujo(flujos, flujosExistentes.Contenido, subjectId);
 
@@ -83,7 +91,7 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 return new Respuesta<ResumenInformacion>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
             
-            return new Respuesta<ResumenInformacion>(resumenInformacion.Mensaje,TAG);
+            return new Respuesta<ResumenInformacion>(resumenInformacion.Contenido);
         }
 
         public Respuesta<TFlujo> ObtenerConfiguracionFlujo(int idFlujo)

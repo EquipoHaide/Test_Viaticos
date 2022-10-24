@@ -16,7 +16,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         public Respuesta<TFlujo> ObtenerCofiguracionFlujo(TFlujo flujo);
 
-        public Respuesta<ResumenInformacion> ValidacioConfiguracionFlujos(List<TFlujo> flujos,string subjectId);
+        public Respuesta ValidacioConfiguracionFlujos(List<TFlujo> flujos, ResumenInformacion resumenInfo, string subjectId);
 
     }
 }

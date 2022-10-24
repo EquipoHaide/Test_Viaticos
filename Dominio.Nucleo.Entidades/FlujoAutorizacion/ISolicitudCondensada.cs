@@ -14,7 +14,7 @@ namespace Dominio.Nucleo.Entidades
         public DateTime FechaAfectacion { get; set; }
 
         public bool AplicaFirma { get; set; }
-
+        
         public RecursosFirma RecursosFirma { get; set; }
 
 

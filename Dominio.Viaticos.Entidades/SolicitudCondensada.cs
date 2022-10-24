@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Dominio.Nucleo.Entidades;
+using Dominio.Nucleo.Firma;
 
 namespace Dominio.Viaticos.Entidades
 {
@@ -38,6 +39,7 @@ namespace Dominio.Viaticos.Entidades
         [Required]
         public bool AplicaFirma { get; set; }
 
-
+        [NotMapped]
+        public RecursosFirma RecursosFirma{ get ; set ; }
     }
 }
