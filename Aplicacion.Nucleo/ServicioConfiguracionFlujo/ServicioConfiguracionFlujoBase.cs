@@ -64,9 +64,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
             var resumen = ServicioDominio.ValidacioConfiguracionFlujos(flujos, resumenInformacion.Contenido, subjectId);
 
             if (resumen.EsError)
-                return new Respuesta<ResumenInformacion>(resumen.Mensaje, resumen.TAG); 
+                return new Respuesta<ResumenInformacion>(resumen.Mensaje, resumen.TAG);
 
-            if ((resumenInformacion.EsExito && resumenInformacion.Contenido.RegistrosFallidos <= 0) == true)
+            if (resumenInformacion.EsExito && resumenInformacion.Contenido.RegistrosFallidos <= 0)
             {
                 var respuestaComplementaria = this.AdministracionFinalConfiguracionFlujo(flujos, flujosExistentes.Contenido, subjectId);
 
@@ -75,9 +75,9 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                     foreach (var item in flujosExistentes.Contenido)
                     {
                         if (item.Id == 0)
-                            Repositorio.Add(item); 
+                            Repositorio.Add(item);
                     }
-                    
+
                     var save = Repositorio.Try(r => r.Save());
 
                     if (save.EsError)
@@ -90,8 +90,12 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
 
                 return new Respuesta<ResumenInformacion>(respuestaComplementaria.Mensaje, respuestaComplementaria.TAG);
             }
+            else if (resumenInformacion.EsExito && resumenInformacion.Contenido.RegistrosFallidos > 0)
+            {
+                return new Respuesta<ResumenInformacion>(resumenInformacion.Contenido);
+            }
             
-            return new Respuesta<ResumenInformacion>(resumenInformacion.Contenido);
+            return new Respuesta<ResumenInformacion>(resumenInformacion.Mensaje, resumenInformacion.TAG);
         }
 
         public Respuesta<TFlujo> ObtenerConfiguracionFlujo(int idFlujo)

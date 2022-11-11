@@ -44,7 +44,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         }
 
 
-        [HttpPut("recursos")]
+        [HttpPut("administrar")]
         public object AdministrarFlujos([FromBody] ModeloConfiguracionFlujo<TFlujo, TPaso> config)
         {
             try

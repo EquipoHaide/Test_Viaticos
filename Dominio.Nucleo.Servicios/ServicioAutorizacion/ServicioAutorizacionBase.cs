@@ -181,10 +181,10 @@ namespace Dominio.Nucleo.Servicios.ServicioAutorizacion
                         return new Respuesta("", TAG);
 
                     if (item.RecursosFirma.Certificado.Extension != ".cer")
-                        return new Respuesta("", TAG);
+                        return new Respuesta("Solo se permite seleccionar en el campo Cer un archivo con extension Cer", TAG);
 
                     if (item.RecursosFirma.Contrasena.IsNullOrEmptyOrWhiteSpace())
-                        return new Respuesta("", TAG);
+                        return new Respuesta("La contraseña es obligatoria", TAG);
 
                     if (item.RecursosFirma?.Llave?.Archivo is null)
                         return new Respuesta("", TAG);
