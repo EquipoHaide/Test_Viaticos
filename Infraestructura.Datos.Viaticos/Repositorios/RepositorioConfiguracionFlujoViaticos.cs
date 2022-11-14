@@ -36,7 +36,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                              {
                                  Id = u.Id,
                                  IdTipoEnte = u.IdTipoEnte,
-                            
+                                 TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
                                  Pasos = u.Pasos,
                                  //TipoAutorizacion = u.IdTipoEnte
@@ -55,7 +55,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                              {
                                  Id = u.Id,
                                  IdTipoEnte = u.IdTipoEnte,
-                        
+                                 TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
                                  Pasos = u.Pasos
                                  //TipoAutorizacion = u.TipoAutorizacion
@@ -68,7 +68,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                              {
                                  Id = u.Id,
                                  IdTipoEnte = u.IdTipoEnte,
-                             
+                                 TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
                                  Pasos = u.Pasos,
                                  //TipoAutorizacion = u.TipoAutorizacion

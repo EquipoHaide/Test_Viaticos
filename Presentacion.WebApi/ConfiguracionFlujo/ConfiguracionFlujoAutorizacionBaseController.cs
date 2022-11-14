@@ -19,7 +19,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso,TQuery> ServicioConfiguracionFlujoBase { get; }
 
 
-        [HttpGet("recursos")]
+        [HttpGet("administrar")]
         public object ConsultarConfiguracionFlujo([FromQuery] TQuery filtro)
         {
             try
@@ -68,7 +68,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
             }
         }
 
-        [HttpGet("flujo")]
+        [HttpGet("administrar-flujo")]
         public object ObtenrConfiguracionFlujo([FromQuery] int idFlujo)
         {
             try
