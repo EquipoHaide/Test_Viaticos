@@ -19,7 +19,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         public virtual Aplicacion.Nucleo.ServicioConfiguracionFlujo.IServicioConfiguracionFlujoBase<TFlujo,TPaso,TQuery> ServicioConfiguracionFlujoBase { get; }
 
 
-        [HttpGet("administrar")]
+        [HttpGet("consultar")]
 
         public object ConsultarConfiguracionFlujo([FromQuery] TQuery filtro)
         {
