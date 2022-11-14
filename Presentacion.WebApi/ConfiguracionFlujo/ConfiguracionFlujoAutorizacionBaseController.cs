@@ -50,7 +50,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
         {
             try
             {
-                var GetSubjectId = "asdgasdghjas"; // this.GetSubjectId())
+                var GetSubjectId = this.GetSubjectId();
                 var resultado = ServicioConfiguracionFlujoBase.AdministrarFlujos(config.Flujos, GetSubjectId);
 
                 if (resultado.EsError)

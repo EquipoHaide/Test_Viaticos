@@ -100,9 +100,9 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
 
 
-        private Respuesta<TFlujo> AdministrarFlujo(TFlujo flujo, TFlujo flujoOriginal, ResumenInformacion resumenInfo, bool esPredeterminado, string subjectId)
+        private Respuesta<TFlujo> AdministrarFlujo(TFlujo flujo, TFlujo flujoOriginal, ResumenInformacion resumenInfo, bool existePredeterminado, string subjectId)
         { 
-            var respuesta = this.ValidarFlujo(flujo, flujoOriginal, resumenInfo, esPredeterminado);
+            var respuesta = this.ValidarFlujo(flujo, flujoOriginal, resumenInfo, existePredeterminado);
 
             if (respuesta.EsError)
                 return new Respuesta<TFlujo>(respuesta.Mensaje, TAG);
@@ -161,7 +161,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             return new Respuesta<List<TPaso>>(pasosOriginales);
         }
 
-        private Respuesta ValidarFlujo(TFlujo flujo, TFlujo flujoOriginal, ResumenInformacion resumenInfo, bool esPredeterminado)
+        private Respuesta ValidarFlujo(TFlujo flujo, TFlujo flujoOriginal, ResumenInformacion resumenInfo, bool existePredeterminado)
         {
             //validamos que los pasos que me envian coincidan con los pasos existen en la DB
             if (flujoOriginal != null) {
@@ -201,17 +201,17 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 }
             }
 
-            if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado && flujo.Id > 0)
-            {
-                fallidos++;
-                listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "Es obligatorio tener un flujo predeterminado, por lo tanto no se puede eliminar"));
-            }
+            //if (existePredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado && flujo.Id > 0 && flujo.Activo == false  )
+            //{
+            //    fallidos++;
+            //    listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "Es obligatorio tener un flujo predeterminado, por lo tanto no se puede eliminar"));
+            //}
 
-            if (esPredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
-            {
-                fallidos++;
-                listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "Solo se permite un flujo predeterminado"));
-            }
+            //if (existePredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
+            //{
+            //    fallidos++;
+            //    listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "Solo se permite un flujo predeterminado"));
+            //}
 
 
             //if (!esPredeterminado && flujo.TipoFlujo != (int)TipoFlujo.Predeterminado)
