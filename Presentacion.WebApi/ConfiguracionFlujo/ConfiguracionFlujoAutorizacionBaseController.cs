@@ -20,6 +20,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
 
 
         [HttpGet("administrar")]
+
         public object ConsultarConfiguracionFlujo([FromQuery] TQuery filtro)
         {
             try
