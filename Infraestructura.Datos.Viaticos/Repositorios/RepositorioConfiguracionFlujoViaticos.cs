@@ -38,7 +38,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                                  IdTipoEnte = u.IdTipoEnte,
                                  TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
-                                 Pasos = u.Pasos.OrderBy(x => x.Orden).ToList(),
+                                 Pasos = u.Pasos.OrderBy(x => x.Orden).Where(p => p.Activo == true).ToList(),
                                  //TipoAutorizacion = u.IdTipoEnte
                              };
 
@@ -57,7 +57,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                                  IdTipoEnte = u.IdTipoEnte,
                                  TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
-                                 Pasos = u.Pasos.OrderBy(x => x.Orden).ToList()
+                                 Pasos = u.Pasos.OrderBy(x => x.Orden).Where(p => p.Activo == true).ToList()
                                  //TipoAutorizacion = u.TipoAutorizacion
                              };
                 }
@@ -70,7 +70,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                                  IdTipoEnte = u.IdTipoEnte,
                                  TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
-                                 Pasos = u.Pasos.OrderBy(x => x.Orden).ToList()
+                                 Pasos = u.Pasos.OrderBy(x => x.Orden).Where(p => p.Activo == true).ToList()
                                  //TipoAutorizacion = u.TipoAutorizacion
                              };
                 }
