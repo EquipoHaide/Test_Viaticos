@@ -61,7 +61,7 @@ namespace Presentacion.WebApi.ConfiguracionFlujo
                     return this.ApiResult(resultado.Mensaje);
                 }
 
-                return this.ApiResult(new { resultado.Contenido });
+                return this.ApiResult(new { resultado });
             }
             catch (Exception e)
             {

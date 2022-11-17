@@ -42,6 +42,11 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 //Si se trata de la creacion de una nueva configuracion de flujo
                 if (itemFlujo.Id == 0)
                 {
+                    if (existeFlujoPredeterminado && itemFlujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
+                    {
+                        return new Respuesta<ResumenInformacion>("Solo se permite un unico flujo predeterminado", TAG);
+                    }
+                     
                     var flujoNuevo = this.AdministrarFlujo(itemFlujo,null, resumenInfo, existeFlujoPredeterminado, subjectId);
 
                     if(flujoNuevo.EsError)
@@ -66,11 +71,19 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                             return new Respuesta<ResumenInformacion>("No se permite cambiar el tipo de flujo", TAG);
                     }
                     //Si se trata de la eliminacion de una configuracion de flujo
+
+
                     if (itemFlujo.Id > 0 && !itemFlujo.Activo)
                     {
+                        if (existeFlujoPredeterminado && itemFlujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
+                        {
+                            return new Respuesta<ResumenInformacion>("Es obligatorio tener un flujo predeterminado, por lo tanto no se puede eliminar", TAG);
+                        }
                         flujoOriginal.Seguir(subjectId, false, true);
                     }
                     //Si se trata de la modificacion de una configuracion de flujo
+                    
+                   
                     if (itemFlujo.Id > 0)
                     {
 
@@ -171,8 +184,8 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 //obtengo todos los pasos existentes que coincidan con los ids de los pasos que me envian.
                 var encontrados = pasosExsitentesActivos.FindAll(pe => idsPasos.Contains(pe.Id));
                 //Si la cantidad de pasos encontrados es menor a la cantidad de pasos existentes activos en la db
-                if (encontrados.Count() < pasosExsitentesActivos.Count())
-                    return new Respuesta("La lista de pasos recibidos no coincide con lo existente", TAG);
+                //if (encontrados.Count() < pasosExsitentesActivos.Count())
+                //    return new Respuesta("La lista de pasos recibidos no coincide con lo existente", TAG);
             }
             DetalleConfiguracion detalleConfiguracion = new DetalleConfiguracion();
             var listaInfoConfiguracion = new List<DetallesFlujo>();

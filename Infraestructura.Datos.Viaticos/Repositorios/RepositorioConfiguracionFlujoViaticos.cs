@@ -31,13 +31,14 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
 
             
                 result = from u in Set
-                         //where u.NombreFlujo.Trim().ToLower() == parametro
+                         where u.Activo == true
                          select new FlujoViatico()
                              {
                                  Id = u.Id,
                                  IdTipoEnte = u.IdTipoEnte,
                                  TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
+                                 IdNivelEmpleado = u.IdNivelEmpleado,
                                  Pasos = u.Pasos.OrderBy(x => x.Orden).Where(p => p.Activo == true).ToList(),
                                  //TipoAutorizacion = u.IdTipoEnte
                              };
@@ -51,12 +52,14 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                 {
                     result = from u in Set
                              where u.IdTipoEnte == parametros.IdEntePublico
+                             &&  u.Activo == true
                              select new FlujoViatico()
                              {
                                  Id = u.Id,
                                  IdTipoEnte = u.IdTipoEnte,
                                  TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
+                                 IdNivelEmpleado = u.IdNivelEmpleado,
                                  Pasos = u.Pasos.OrderBy(x => x.Orden).Where(p => p.Activo == true).ToList()
                                  //TipoAutorizacion = u.TipoAutorizacion
                              };
@@ -64,12 +67,14 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                 else
                 {
                     result = from u in Set
+                             where u.Activo == true
                              select new FlujoViatico()
                              {
                                  Id = u.Id,
                                  IdTipoEnte = u.IdTipoEnte,
                                  TipoFlujo = u.TipoFlujo,
                                  Activo = u.Activo,
+                                 IdNivelEmpleado = u.IdNivelEmpleado,
                                  Pasos = u.Pasos.OrderBy(x => x.Orden).Where(p => p.Activo == true).ToList()
                                  //TipoAutorizacion = u.TipoAutorizacion
                              };
