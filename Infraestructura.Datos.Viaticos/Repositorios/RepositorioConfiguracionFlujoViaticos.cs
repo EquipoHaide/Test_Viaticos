@@ -48,7 +48,7 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
             {
                 
 
-                if (parametros.IdEntePublico > 0)
+                if (parametros.IdEntePublico > 0 && parametros.TipoFlujo == 0)
                 {
                     result = from u in Set
                              where u.IdTipoEnte == parametros.IdEntePublico
@@ -62,6 +62,23 @@ namespace Infraestructura.Datos.Viaticos.Repositorios
                                  IdNivelEmpleado = u.IdNivelEmpleado,
                                  Pasos = u.Pasos.OrderBy(x => x.Orden).Where(p => p.Activo == true).ToList()
                                  //TipoAutorizacion = u.TipoAutorizacion
+                             };
+                }else if (parametros.IdEntePublico >  0 && parametros.TipoFlujo > 0)
+                {
+            
+                    result = from u in Set
+                             where u.Activo == true
+                             && u.IdTipoEnte == parametros.IdEntePublico
+                             && u.TipoFlujo == parametros.TipoFlujo
+                             select new FlujoViatico()
+                             {
+                                 Id = u.Id,
+                                 IdTipoEnte = u.IdTipoEnte,
+                                 TipoFlujo = u.TipoFlujo,
+                                 Activo = u.Activo,
+                                 IdNivelEmpleado = u.IdNivelEmpleado,
+                                 Pasos = u.Pasos.OrderBy(x => x.Orden).Where(p => p.Activo == true).ToList(),
+                                 //TipoAutorizacion = u.IdTipoEnte
                              };
                 }
                 else

@@ -36,6 +36,8 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 return new Respuesta<ResumenInformacion>("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
 
             int exitosos = 0;
+            int fallidos = 0;
+            int index = 0;
             foreach (var itemFlujo in flujos.OrderBy(f=>f.TipoFlujo))
             {
             
@@ -92,18 +94,29 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                         if (flujoModificado.EsError)
                             return new Respuesta<ResumenInformacion>(flujoModificado.Mensaje, TAG);
 
-                        flujoOriginal = flujoModificado.Contenido;
+                        //flujoOriginal = flujoModificado.Contenido;
                         flujoOriginal.IdNivelEmpleado = flujoModificado.Contenido.IdNivelEmpleado;
+                        flujoOriginal.Pasos = flujoModificado.Contenido.Pasos;
                         
                         flujoOriginal.Seguir(subjectId, true, false);
                     }
                 }
 
-                exitosos++;
-            }
+                if(resumenInfo.DetallesConfiguracion[index].DetallePasos.Count() > 0 || resumenInfo.DetallesConfiguracion[index].DetalleFlujo.Count() > 0)
+                {
+                    fallidos++;
+                }
+                else
+                {
+                    exitosos++;
+                }
+
+                index++;
+            } 
 
             resumenInfo.RegistrosExitosos = exitosos;
-            
+            resumenInfo.RegistrosFallidos = fallidos;
+
 
             if (this.EsNivelRepetido(flujosOriginales))
                 return new Respuesta<ResumenInformacion>("Ya existe un flujo particular con el mismo nivel de empleado", TAG);
@@ -127,6 +140,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             if(administraPaso.EsError)
                 return new Respuesta<TFlujo>(administraPaso.Mensaje, administraPaso.TAG);
 
+            
             flujo.Pasos = administraPaso.Contenido;
             
             
@@ -176,6 +190,12 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         private Respuesta ValidarFlujo(TFlujo flujo, TFlujo flujoOriginal, ResumenInformacion resumenInfo, bool existePredeterminado)
         {
+            DetalleConfiguracion detalleConfiguracion = new DetalleConfiguracion();
+            var listaInfoConfiguracion = new List<DetallesFlujo>();
+
+            int fallidos = 0;
+
+
             //validamos que los pasos que me envian coincidan con los pasos existen en la DB
             if (flujoOriginal != null) {
                 var idsPasos = flujo.Pasos.Where(p => p.Id > 0).Select(p => p.Id).ToList();
@@ -184,14 +204,14 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 //obtengo todos los pasos existentes que coincidan con los ids de los pasos que me envian.
                 var encontrados = pasosExsitentesActivos.FindAll(pe => idsPasos.Contains(pe.Id));
                 //Si la cantidad de pasos encontrados es menor a la cantidad de pasos existentes activos en la db
-                //if (encontrados.Count() < pasosExsitentesActivos.Count())
+               if (encontrados.Count() < pasosExsitentesActivos.Count())
+               {
+                    fallidos++;
+                    listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "La lista de pasos recibidos no coincide con lo existente"));
+               }
                 //    return new Respuesta("La lista de pasos recibidos no coincide con lo existente", TAG);
             }
-            DetalleConfiguracion detalleConfiguracion = new DetalleConfiguracion();
-            var listaInfoConfiguracion = new List<DetallesFlujo>();
-
-            int fallidos = 0;
-
+    
             if (flujo?.IdTipoEnte == null || flujo.IdTipoEnte <= 0)
             {
                 fallidos++;
@@ -214,21 +234,24 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
                 }
             }
 
-            //if (existePredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado && flujo.Id > 0 && flujo.Activo == false  )
-            //{
-            //    fallidos++;
-            //    listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "Es obligatorio tener un flujo predeterminado, por lo tanto no se puede eliminar"));
-            //}
+            if (existePredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado && flujo.Id > 0 && flujo.Activo == false)
+            {
+                //fallidos++;
+                //listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "Es obligatorio tener un flujo predeterminado, por lo tanto no se puede eliminar"));
+                return new Respuesta("Es obligatorio tener un flujo predeterminado, por lo tanto no se puede eliminar", TAG);
+            }
 
-            //if (existePredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
-            //{
-            //    fallidos++;
-            //    listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "Solo se permite un flujo predeterminado"));
-            //}
+            if (existePredeterminado && flujo.TipoFlujo == (int)TipoFlujo.Predeterminado)
+            {
+                //fallidos++;
+                //listaInfoConfiguracion.Add(new DetallesFlujo(flujo.Id, null, "Solo se permite un flujo predeterminado"));
+                return new Respuesta("Solo se permite un flujo predeterminado", TAG);
+            }
+
 
 
             //if (!esPredeterminado && flujo.TipoFlujo != (int)TipoFlujo.Predeterminado)
-            //return new Respuesta("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
+                //return new Respuesta("Es necesario la creación de un flujo predeterminado, antes de un particular", TAG);
 
             var listaPasos = flujo.Pasos.Where(x => x.Activo).ToList();
 
@@ -250,7 +273,7 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
             var detallesPaso = new List<DetallePaso>();
             foreach (var item in listaPasos)
             {
-                var respuestaPaso = this.ValidarPaso(item, detallesPaso, flujoOriginal);
+                var respuestaPaso = this.ValidarPaso(item, detallesPaso, flujoOriginal, ref fallidos);
 
                 if (!respuestaPaso.Contenido)
                     return new Respuesta(respuestaPaso.Mensaje, TAG);
@@ -298,39 +321,38 @@ namespace Dominio.Nucleo.Servicios.ServicioConfiguracionFlujo
 
         private bool EsNivelRepetido(List<TFlujo> flujos)
         {
-            return flujos.Where(f=>f.TipoFlujo!=1).GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
+            return flujos.Where(f=>f.TipoFlujo!=1 && f.Activo == true).GroupBy(x => x.IdNivelEmpleado).Any(g => g.Count() > 1);
         }
 
-        private Respuesta<bool> ValidarPaso(TPaso paso, List<DetallePaso> listadetallePasos, TFlujo flujoOriginal)
+        private Respuesta<bool> ValidarPaso(TPaso paso, List<DetallePaso> listadetallePasos, TFlujo flujoOriginal, ref int fallidos)
         {
-            /*
+            
             var pasosExistentes = flujoOriginal.Pasos.Where(p=>p.Activo);
 
             if (paso.Id == 0) {
                 if (pasosExistentes.Any(p => p.Orden == paso.Orden))
+                    fallidos++;
                     return new Respuesta<bool>(String.Format("Error en el Paso: El numero de orden {0} se encuentra repetido", paso.Orden), TAG);
-            }*/
-
-          
+            }
 
             if (paso.Orden <= 0)
             {
-
-                listadetallePasos.Add(new DetallePaso(paso.Id, null, "El orden del paso debe ser mayor a 0"));
+                fallidos++;
+                listadetallePasos.Add(new DetallePaso(paso.Orden, null, "El orden del paso debe ser mayor a 0"));
             }
                 
 
             if (paso?.IdRolAutoriza == 0)
             {
-              
-                listadetallePasos.Add(new DetallePaso(paso.Id, null, "El rol que autoriza es requerido"));
+                fallidos++;
+                listadetallePasos.Add(new DetallePaso(paso.Orden, null, "El rol que autoriza es requerido"));
             }
                 
 
             if (paso.TipoRol <= 0)
             {
-              
-                listadetallePasos.Add(new DetallePaso(paso.Id, null, "El tipo rol es requerido"));
+                fallidos++;
+                listadetallePasos.Add(new DetallePaso(paso.Orden, null, "El tipo rol es requerido"));
             }
 
            

@@ -74,8 +74,10 @@ namespace Aplicacion.Nucleo.ServicioConfiguracionFlujo
                 {
                     foreach (var item in flujosExistentes.Contenido)
                     {
-                        if (item.Id == 0)
+                        if (item.Id == 0) {
                             Repositorio.Add(item);
+                        }
+                           
                     }
 
                     var save = Repositorio.Try(r => r.Save());
